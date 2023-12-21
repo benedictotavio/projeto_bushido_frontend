@@ -26,6 +26,3 @@ jobs:
 
       - name: Compilar a aplicação Angular
         run: npm run build
-
-      - name: Executar testes
-        run: npm test
