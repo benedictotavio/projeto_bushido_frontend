@@ -1,0 +1,31 @@
+name: Build e Teste do Angular
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: 
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Verificar repositório
+        uses: actions/checkout@v2
+
+      - name: Configurar o Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Instalar dependências do projeto
+        run: npm install
+
+      - name: Compilar a aplicação Angular
+        run: npm run build
+
+      - name: Executar testes
+        run: npm test
