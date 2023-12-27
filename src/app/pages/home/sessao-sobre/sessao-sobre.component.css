@@ -1,0 +1,11 @@
+.equipe-bushido{
+    width: 100%;
+}
+
+@media (max-width: 400px) {
+
+   .p{
+    text-align: center;
+   }
+    
+}

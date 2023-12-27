@@ -1,10 +1,10 @@
-import { Component } from '@angular/core'
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'projeto-bushido_front-end'
+  title = 'projeto-bushido_font-end';
 }
