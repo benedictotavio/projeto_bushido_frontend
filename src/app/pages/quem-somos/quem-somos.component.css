@@ -1,0 +1,11 @@
+@media (max-width:1200px) {
+
+    .voluntary{
+        width: 40%;
+    }
+
+    .voluntary img{
+        height: auto;
+    }
+    
+}
