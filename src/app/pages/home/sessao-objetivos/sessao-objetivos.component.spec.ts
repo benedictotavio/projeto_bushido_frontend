@@ -1,21 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { SessaoObjetivosComponent } from './sessao-objetivos.component';
+import { SessaoObjetivosComponent } from './sessao-objetivos.component'
 
 describe('SessaoObjetivosComponent', () => {
-  let component: SessaoObjetivosComponent;
-  let fixture: ComponentFixture<SessaoObjetivosComponent>;
+  let component: SessaoObjetivosComponent
+  let fixture: ComponentFixture<SessaoObjetivosComponent>
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SessaoObjetivosComponent]
-    });
-    fixture = TestBed.createComponent(SessaoObjetivosComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+      declarations: [SessaoObjetivosComponent],
+    })
+    fixture = TestBed.createComponent(SessaoObjetivosComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
