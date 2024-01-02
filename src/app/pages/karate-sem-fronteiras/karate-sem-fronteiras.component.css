@@ -1,0 +1,25 @@
+section{
+    color: black;
+    padding: 3.5rem .7rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+}
+section>h1{
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 2rem;
+}
+section>p{
+    text-align: justify;
+    font-size: 1.1rem;
+}
+section>a{
+    text-transform: uppercase;
+    font-style: italic;
+    text-decoration: none;
+    font-weight: 900;
+    transition: .5s;
+    display: flex;
+    width: 250px;
+}

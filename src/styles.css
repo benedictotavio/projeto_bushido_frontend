@@ -1,20 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap');
 *{
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
     list-style: none;
-
+    font-family: 'Roboto', sans-serif;
 }
 svg{
     color: white;
     transition: .5s;
 }
-
 @media (min-width:800px){
     svg:hover{
         color: rgba(113, 113, 187, 0.705);
         transform: scale(1.5);
     }
 }
-    
