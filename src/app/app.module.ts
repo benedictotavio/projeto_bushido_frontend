@@ -22,7 +22,9 @@ import { TransparenciaComponent } from './pages/transparencia/transparencia.comp
 import { KarateSfMainComponent } from './pages/karate-sem-fronteiras/karate-sf-main/karate-sf-main.component'
 import { KarateSfSobreComponent } from './pages/karate-sem-fronteiras/karate-sf-sobre/karate-sf-sobre.component'
 import { KarateSfBeneficiosComponent } from './pages/karate-sem-fronteiras/karate-sf-beneficios/karate-sf-beneficios.component'
-import { KarateSfOficinasComponent } from './pages/karate-sem-fronteiras/karate-sf-oficinas/karate-sf-oficinas.component'
+import { KarateSfOficinasComponent } from './pages/karate-sem-fronteiras/karate-sf-oficinas/karate-sf-oficinas.component';
+import { SaudeComponent } from './pages/blog/saude/saude.component';
+import { EsporteComponent } from './pages/blog/esporte/esporte.component'
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { KarateSfOficinasComponent } from './pages/karate-sem-fronteiras/karate-
     KarateSfSobreComponent,
     KarateSfBeneficiosComponent,
     KarateSfOficinasComponent,
+    SaudeComponent,
+    EsporteComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
