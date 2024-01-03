@@ -1,14 +1,16 @@
- <!---Header Global-->
+<!---Header Global-->
 
-<header class="">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3 ">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
         <div class="container">
             <a class="navbar-brand" routerLink="">Instituto Bushido</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse h5 " id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0  ">
+            <div class="collapse navbar-collapse h5" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link h1" routerLink="" routerLinkActive="active"
                             [routerLinkActiveOptions]="{exact: true}">Início</a>
@@ -16,9 +18,18 @@
                     <li class="nav-item">
                         <a class="nav-link h4 " routerLink="/quem-somos" routerLinkActive="active">Quem somos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link h4" routerLink="/karate-sem-fronteiras"
-                            routerLinkActive="active">Karatê Sem fronteiras</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Projetos Sociais
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" routerLink="/karate-sem-fronteiras"
+                                    routerLinkActive="active">Karatê sem
+                                    fronteiras</a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link h4" routerLink="/blog" routerLinkActive="active">Blog</a>
@@ -27,12 +38,10 @@
                         <a class="nav-link h4" routerLink="/contato" routerLinkActive="active">Contato</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link h4" routerLink="/seja-um-doador"
-                            routerLinkActive="active">Seja um Doador</a>
+                        <a class="nav-link h4" routerLink="/seja-um-doador" routerLinkActive="active">Seja um Doador</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link h4" routerLink="/transparencia"
-                            routerLinkActive="active">Transparência</a>
+                        <a class="nav-link h4" routerLink="/transparencia" routerLinkActive="active">Transparência</a>
                     </li>
                 </ul>
             </div>
