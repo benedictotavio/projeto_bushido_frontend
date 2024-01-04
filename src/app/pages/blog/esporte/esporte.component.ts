@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-esporte',
   templateUrl: './esporte.component.html',
-  styleUrls: ['./esporte.component.css']
+  styleUrls: ['./esporte.component.css'],
 })
-export class EsporteComponent {
-
-}
+export class EsporteComponent {}
