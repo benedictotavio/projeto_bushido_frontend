@@ -1,0 +1,30 @@
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+}
+.whatsapp-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    animation: pulse 2s infinite;
+}
+.whatsapp-btn img{
+    width: 2.8rem;
+} 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}

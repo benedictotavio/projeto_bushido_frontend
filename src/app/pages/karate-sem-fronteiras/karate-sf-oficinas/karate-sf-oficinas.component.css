@@ -1,5 +1,5 @@
-.contato{
-    margin: 1.5rem 0 3.5rem;
+section{
+    margin-bottom: 3.5rem;
 }
 span{
     font-weight: bold;
@@ -7,12 +7,4 @@ span{
 .destacado-text {
     color: #007bff;
     font-weight: bold;
-}
-.contato-links{
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-.contato img{
-    width: 15px;
 }
