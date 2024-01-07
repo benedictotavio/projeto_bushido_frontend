@@ -1,0 +1,13 @@
+@media (max-width:400px) {
+    
+    main{
+        padding: 5px;
+        text-align: center;
+    }
+
+    .sobre{
+        text-align: center;
+        padding: 10px;
+    }
+
+}
