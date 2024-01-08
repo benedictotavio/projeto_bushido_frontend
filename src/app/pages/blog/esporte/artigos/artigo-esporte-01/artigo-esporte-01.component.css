@@ -11,3 +11,17 @@
     }
 
 }
+
+ul{
+    padding: 0px;
+ }
+ li{
+     margin-right: 1em;
+ }
+
+svg{
+    width: 25px;
+    height: auto;
+    color: black;
+    
+}
