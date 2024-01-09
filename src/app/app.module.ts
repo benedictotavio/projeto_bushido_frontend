@@ -16,6 +16,8 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao
 import { QuemSomosComponent } from './pages/quem-somos/quem-somos.component'
 import { KarateSemFronteirasComponent } from './pages/karate-sem-fronteiras/karate-sem-fronteiras.component'
 import { BlogComponent } from './pages/blog/blog.component'
+import { SaudeComponent } from './pages/blog/saude/saude.component'
+import { EsporteComponent } from './pages/blog/esporte/esporte.component'
 import { ContatoComponent } from './pages/contato/contato.component'
 import { SejaUmDoadorComponent } from './pages/seja-um-doador/seja-um-doador.component'
 import { TransparenciaComponent } from './pages/transparencia/transparencia.component'
@@ -23,7 +25,7 @@ import { KarateSfMainComponent } from './pages/karate-sem-fronteiras/karate-sf-m
 import { KarateSfSobreComponent } from './pages/karate-sem-fronteiras/karate-sf-sobre/karate-sf-sobre.component'
 import { KarateSfBeneficiosComponent } from './pages/karate-sem-fronteiras/karate-sf-beneficios/karate-sf-beneficios.component'
 import { KarateSfOficinasComponent } from './pages/karate-sem-fronteiras/karate-sf-oficinas/karate-sf-oficinas.component'
-import { WhatsappButtonComponent } from './components/whatsapp-button/whatsapp-button.component'
+import { WhatsappButtonComponent } from './components/whatsapp-button/whatsapp-button.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { WhatsappButtonComponent } from './components/whatsapp-button/whatsapp-b
     QuemSomosComponent,
     KarateSemFronteirasComponent,
     BlogComponent,
+    SaudeComponent,
+    EsporteComponent,
     ContatoComponent,
     SejaUmDoadorComponent,
     TransparenciaComponent,
