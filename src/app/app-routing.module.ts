@@ -21,17 +21,44 @@ const routes: Routes = [
     component: KarateSemFronteirasComponent,
     title: 'Karatê Sem Fronteiras | Instituto Bushido',
   },
-  { path: 'blog', children: [
-    { path: '', component: BlogComponent, title: 'Blog Instituto Bushido', pathMatch: 'full' },
-    { path: 'saude', children: [
-      { path: '', component: SaudeComponent, title: 'Posts sobre Saúde | Blog Instituto Bushido', pathMatch: 'full' },
-      { path: 'janeiro-branco-conscientizacao-sobre-a-saude-mental', component: ArtigoSaude01Component, title: 'Janeiro Branco: Conscientização sobre a Saúde Mental | Blog Instituto Bushido' }
-    ] },
-    { path: 'esporte', children: [
-      { path: '', component: EsporteComponent, title: 'Posts sobre Esporte | Blog Instituto Bushido', pathMatch: 'full' },
-      { path: 'participamos-da-etapa-classificatoria-em-goiania', component: ArtigoEsporte01Component, title: 'Participamos da Etapa Classificatória em Goiânia | Blog Instituto Bushido' }
-    ] }
-  ] },
+  {
+    path: 'blog',
+    children: [
+      { path: '', component: BlogComponent, title: 'Blog Instituto Bushido', pathMatch: 'full' },
+      {
+        path: 'saude',
+        children: [
+          {
+            path: '',
+            component: SaudeComponent,
+            title: 'Posts sobre Saúde | Blog Instituto Bushido',
+            pathMatch: 'full',
+          },
+          {
+            path: 'janeiro-branco-conscientizacao-sobre-a-saude-mental',
+            component: ArtigoSaude01Component,
+            title: 'Janeiro Branco: Conscientização sobre a Saúde Mental | Blog Instituto Bushido',
+          },
+        ],
+      },
+      {
+        path: 'esporte',
+        children: [
+          {
+            path: '',
+            component: EsporteComponent,
+            title: 'Posts sobre Esporte | Blog Instituto Bushido',
+            pathMatch: 'full',
+          },
+          {
+            path: 'participamos-da-etapa-classificatoria-em-goiania',
+            component: ArtigoEsporte01Component,
+            title: 'Participamos da Etapa Classificatória em Goiânia | Blog Instituto Bushido',
+          },
+        ],
+      },
+    ],
+  },
   { path: 'contato', component: ContatoComponent, title: 'Contato | Instituto Bushido' },
   {
     path: 'seja-um-doador',

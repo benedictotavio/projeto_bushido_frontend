@@ -1,14 +1,30 @@
 @media (max-width:400px) {
     
     body{
-        text-align: center;
+     padding: 50px;
     }
 
-    .sobre{
-        text-align: center;
-        padding: 10px;
+
+}
+
+#carouselExampleAutoplaying2 img, #carouselExampleAutoplaying img{
+    width: 180px;
+    height: 250px;
+
+}
+
+/*Carrosel bootstrap */
+#carouselExampleAutoplaying2{
+    display: none;
+}
+@media (max-width:600px) {
+    #carouselExampleAutoplaying2{
+        display: block;
     }
 
+    #carouselExampleAutoplaying{
+        display: none;
+    }
 }
 
 ul{
@@ -23,21 +39,6 @@ svg{
     height: auto;
     color: black;
     
-}
-
-
-/*Carrosel bootstrap */
-#carouselExampleAutoplaying2{
-    display: none;
-}
-@media (max-width:600px) {
-    #carouselExampleAutoplaying2{
-        display: block;
-    }
-
-    #carouselExampleAutoplaying{
-        display: none;
-    }
 }
 
 
