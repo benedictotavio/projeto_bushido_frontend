@@ -45,7 +45,7 @@ svg{
 }
 
 
-@media (min-width:800px) and (max-width:850px) {
+@media (min-width:768px) and (max-width:850px) {
 
     #carouselExampleAutoplaying img{
         width: 20%;
