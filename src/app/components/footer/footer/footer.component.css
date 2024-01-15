@@ -1,0 +1,15 @@
+footer{
+    text-align: center;
+    padding: .8rem;
+    background-color: #000;
+}
+footer h4{
+    font-size: 1.2rem;
+    color: white;
+    font-weight: 300;
+}
+
+footer a{
+    color: #007bff;;
+    text-decoration: none;
+}
