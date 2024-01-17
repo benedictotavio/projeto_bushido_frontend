@@ -1,0 +1,19 @@
+@media (max-width:300px) {
+    
+    .saude{
+        text-align: center;
+    }
+    
+}
+ul{
+   padding: 0px;
+}
+li{
+    margin-right: 1em;
+}
+ svg{
+    width: 25px;
+    height: auto;
+    color: black;
+    
+}
