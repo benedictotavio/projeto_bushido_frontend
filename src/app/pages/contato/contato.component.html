@@ -1,12 +1,12 @@
 <main>
-    <section class="container-fluid">
+    <section class="container-fluid px-0">
 
-        <h1>CONTATO</h1>
+        <h1 class="bg-black  text-light p-4">CONTATO</h1>
 
-        <div class="row">
+        <div class="row m-0 mt-5">
 
-            <article class="col-md-6 py-5">
-                <p>Quer conhecer mais sobre o trabalho do Instituto Força Jovem Bushido? Preencha o formulário ou envie um e-mail para contato@institutobushido.org.br</p>
+            <article class="col-md-6 py-4">
+                <p>Quer conhecer mais sobre o trabalho do Instituto Força Jovem Bushido? Preencha o formulário ou envie um e-mail para <strong class="text-primary ">contato@institutobushido.org.br</strong></p>
 
                 <h2>Nossa Localização</h2>
 
@@ -16,12 +16,12 @@
 
                 <!---Maps-->
                 <div>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1875.3890842235426!2d-40.40537645186993!3d-19.933750728501266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb791e46cb58517%3A0x7830cea64611b20e!2sR.%20Interventor%20Santos%20Neves%2C%20125%20-%20A%20Definir%2C%20Fund%C3%A3o%20-%20ES%2C%2029185-000!5e0!3m2!1spt-BR!2sbr!4v1705622055225!5m2!1spt-BR!2sbr" width="100%" height="1%" style="border:0; width: 100%; height: 250px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1875.3890842235426!2d-40.40537645186993!3d-19.933750728501266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb791e46cb58517%3A0x7830cea64611b20e!2sR.%20Interventor%20Santos%20Neves%2C%20125%20-%20A%20Definir%2C%20Fund%C3%A3o%20-%20ES%2C%2029185-000!5e0!3m2!1spt-BR!2sbr!4v1705622055225!5m2!1spt-BR!2sbr" style="border:0; width: 100%; height: 250px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
 
             </article>
 
-            <article class="col-md-6 py-5">
+            <article class="col-md-5 py-4">
 
                 <h2 class="mb-3">Fale Conosco</h2>
 
@@ -29,23 +29,23 @@
 
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="nome" placeholder="Seu Nome Aqui" required>
+                        <input type="text" class="form-control" name="nomeb" id="nome" placeholder="Seu Nome Aqui" required>
                         <label for="nome">Nome*</label>
                       </div>
 
                       <div class="form-floating mb-3">
-                        <input type="tel" class="form-control" id="tel" placeholder="Telefone" required>
+                        <input type="tel" class="form-control" name="telb" id="tel" placeholder="Telefone" required>
                         <label for="tel">Telefone*</label>
                       </div>
 
                       <div class="form-floating mb-3">
-                        <input type="tel" class="form-control" id="email" placeholder="Telefone" required>
+                        <input type="email" class="form-control" name="emailb" id="email" placeholder="email" required>
                         <label for="email">Email*</label>
                       </div>
 
 
                       <div class="form-floating mb-3">
-                        <select class="form-select" id="doacao-sl" aria-label="Tipos de doações" required>
+                        <select class="form-select" name="doacaob" id="doacao-sl" aria-label="Tipos de doações" required>
                           <option selected value="voluntario">Voluntario</option>
                           <option value="Doacao">Doação</option>
                           <option value="comunicacao">Comunicação</option>
@@ -56,7 +56,7 @@
                       </div>
 
                       <div class="form-floating mb-3">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="comentario" required style="height: 100px"></textarea>
+                        <textarea class="form-control" placeholder="comentario" name="comentario" id="comentario" required style="height: 100px"></textarea>
                         <label for="comentario">Mensagem*</label>
                       </div>
 
