@@ -1,0 +1,38 @@
+.navbar-brand{
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .navbar-brand{
+        display: block;
+    }
+}
+
+header{
+    border: 2px solid white;
+}
+header a{
+    font-size: 1rem;
+    color: #fff; 
+}
+
+header nav{
+    padding: 0;
+}
+
+.navbar-nav:not(.dropdown-menu){
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: .4rem;
+}
+
+.nav-link:not(.dropdown-menu){
+    padding: 1rem;
+    /* background-color: #0879C0; */
+    transition: .5s;
+}
+
+.nav-link:not(.dropdown-menu):hover{
+    transform: scale(1.2);
+}
