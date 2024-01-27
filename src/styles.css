@@ -17,6 +17,6 @@ svg{
         transform: scale(1.5);
     }
 }
-.navbar-nav .nav-item .nav-link.router-active, .dropdown-item.active {
+.navbar-nav .nav-item .nav-link.active, .dropdown-item.active {
     background-color: #0879C0 !important;
 }
