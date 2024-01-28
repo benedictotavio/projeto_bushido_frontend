@@ -2,50 +2,52 @@ header a {
     font-size: 1rem;
     color: #fff;
 }
-
 header nav {
     padding: 0;
 }
-
 .navbar-nav:not(.dropdown-menu) {
     width: 100%;
     display: flex;
     justify-content: center;
 }
-
 .nav-link:not(.dropdown-menu, .dropdown-menu.show) {
     padding: 1rem 1rem;
     transition: .5s;
 }
-
 .dropdown-menu.show {
     background-color: #000;
     display: flex;
     flex-direction: column;
     gap: .5rem;
 }
-
 .dropdown-menu.show a {
     transition: .5s;
 }
-
 .dropdown-menu.show a:hover {
     background-color: inherit;
 }
-
-.navbar-toggler{
+.navbar-toggler {
     margin: .75rem 0;
 }
-
 @media (min-width: 992px) {
-    /* .nav-link:not(.dropdown-menu, a.nav-link.dropdown-toggle.show, a.nav-link.dropdown-toggle):hover {
-        transform: scale(1.15);
-    } */
     .nav-link:hover {
         transform: scale(1.15);
     }
-
     .navbar-brand {
         display: none;
+    }
+    .navbar-nav .nav-item:hover .dropdown-menu {
+        background-color: #000;
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+    .dropdown-menu a:hover {
+        background-color: inherit;
+    }
+}
+@media (max-width: 991px) {
+    .navbar-nav .nav-item.dropdown.show .dropdown-menu {
+        display: block;
     }
 }
