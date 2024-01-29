@@ -33,9 +33,6 @@ header nav {
     .nav-link:hover {
         transform: scale(1.15);
     }
-    .navbar-brand {
-        display: none;
-    }
     .navbar-nav .nav-item:hover .dropdown-menu {
         background-color: #000;
         display: flex;
@@ -44,10 +41,5 @@ header nav {
     }
     .dropdown-menu a:hover {
         background-color: inherit;
-    }
-}
-@media (max-width: 991px) {
-    .navbar-nav .nav-item.dropdown.show .dropdown-menu {
-        display: block;
     }
 }
