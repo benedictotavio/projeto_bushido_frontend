@@ -1,31 +1,21 @@
-section{
-    min-height: 100vh;
+section {
+  min-height: 90vh;
 }
 
-.doacoes{
-        
-    width: 399px;
-    height: 400px;
-
+.doacoes {
+  width: 399px;
+  height: 400px;
 }
 
-
-@media  (max-width: 400px){
-    .doacoes{
-        
-        width: 100%;
-
-    }
+@media (max-width: 400px) {
+  .doacoes {
+    width: 100%;
+  }
 }
 
-@media  (max-width: 281px){
-    .doacoes{
-        
-        width: 100%;
-        height: 500px;
-
-    }
+@media (max-width: 281px) {
+  .doacoes {
+    width: 100%;
+    height: 500px;
+  }
 }
-
-
-
