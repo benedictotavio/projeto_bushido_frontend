@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,8 @@ export class BlogService {
 
   constructor(private http: HttpClient) { }
 
-  public getAllPublishedPosts() {
-    const query = "{ allPosts(filter: {_status: {eq: published}}) { id, _updatedAt, titulo, corpo, capa{ url } } }"
-    return this.http.get<string>(`${this.url}?query=${encodeURIComponent(query)}`, this.httpOptions);
+  public getAllPublishedPosts(): Observable<any> {
+    const query = "{ allPosts(orderBy: _firstPublishedAt_DESC, filter: {_status: {eq: published}}) { id, categoria, _firstPublishedAt, titulo, corpo, capa{ url } } }"
+    return this.http.get<any>(`${this.url}?query=${encodeURIComponent(query)}`, this.httpOptions);
   }
 }
