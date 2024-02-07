@@ -25,7 +25,7 @@ export class BlogService {
   }
 
   public getPostsByCategory(categoria: string): Observable<any> {
-    const query = `{ allPosts(orderBy: _firstPublishedAt_DESC, filter: {_status: {eq: published}, categoria: {eq: "saúde"}}) { id, categoria, _firstPublishedAt, titulo, corpo, capa{ url } } }`
+    const query = `{ allPosts(orderBy: _firstPublishedAt_DESC, filter: {_status: {eq: published}, categoria: {eq: "${categoria}"}}) { id, categoria, _firstPublishedAt, titulo, corpo, capa{ url } } }`
 
     return this.http.get<any>(`${this.url}?query=${encodeURIComponent(query)}`, this.httpOptions);
   }
