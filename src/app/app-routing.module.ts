@@ -12,6 +12,7 @@ import { SaudeComponent } from './pages/blog/saude/saude.component'
 import { EsporteComponent } from './pages/blog/esporte/esporte.component'
 import { ArtigoSaude01Component } from './pages/blog/saude/artigos-saude/artigo-saude-01/artigo-saude-01.component'
 import { ArtigoEsporte01Component } from './pages/blog/esporte/artigos/artigo-esporte-01/artigo-esporte-01.component'
+import { ArtigoComponent } from './components/artigo/artigo.component'
 
 const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Home | Instituto Bushido' },
@@ -33,12 +34,7 @@ const routes: Routes = [
             component: SaudeComponent,
             title: 'Posts sobre Saúde | Blog Instituto Bushido',
             pathMatch: 'full',
-          },
-          {
-            path: 'janeiro-branco-conscientizacao-sobre-a-saude-mental',
-            component: ArtigoSaude01Component,
-            title: 'Janeiro Branco: Conscientização sobre a Saúde Mental | Blog Instituto Bushido',
-          },
+          }
         ],
       },
       {
@@ -49,14 +45,18 @@ const routes: Routes = [
             component: EsporteComponent,
             title: 'Posts sobre Esporte | Blog Instituto Bushido',
             pathMatch: 'full',
-          },
-          {
-            path: 'participamos-da-etapa-classificatoria-em-goiania',
-            component: ArtigoEsporte01Component,
-            title: 'Participamos da Etapa Classificatória em Goiânia | Blog Instituto Bushido',
-          },
+          }
         ],
       },
+      {
+        path: 'post',
+        children: [
+          {
+            path: ':id',
+            component: ArtigoComponent
+          }
+        ]
+      }
     ],
   },
   { path: 'contato', component: ContatoComponent, title: 'Contato | Instituto Bushido' },
