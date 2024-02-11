@@ -27,7 +27,8 @@ import { KarateSfBeneficiosComponent } from './pages/karate-sem-fronteiras/karat
 import { KarateSfOficinasComponent } from './pages/karate-sem-fronteiras/karate-sf-oficinas/karate-sf-oficinas.component'
 import { WhatsappButtonComponent } from './components/whatsapp-button/whatsapp-button.component'
 import { HttpClientModule } from '@angular/common/http';
-import { BlogCardComponent } from './components/blog-card/blog-card.component'
+import { BlogCardComponent } from './components/blog-card/blog-card.component';
+import { ArtigoComponent } from './components/artigo/artigo.component'
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { BlogCardComponent } from './components/blog-card/blog-card.component'
     KarateSfOficinasComponent,
     WhatsappButtonComponent,
     BlogCardComponent,
+    ArtigoComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
