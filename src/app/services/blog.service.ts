@@ -31,7 +31,7 @@ export class BlogService {
   }
 
   public getPostById(id: string): Observable<any> {
-    const query = `{ post(filter: {id: {eq: "${id}"}}) { id, categoria, _firstPublishedAt, titulo, corpo, capa{ url } } }`
+    const query = `{ post(filter: {id: {eq: "${id}"}}) { id, categoria, _firstPublishedAt, titulo, corpo, capa{ url }, autor{ nome, descricao, avatar{url}}} }`
 
     return this.http.get<any>(`${this.url}?query=${encodeURIComponent(query)}`, this.httpOptions);
   }

@@ -7,4 +7,11 @@ export interface BlogPost {
         url: string;
     }
     corpo: string;
+    autor: {
+        nome: string,
+        descricao: string,
+        avatar: {
+            url: string
+        }
+    }
 }
