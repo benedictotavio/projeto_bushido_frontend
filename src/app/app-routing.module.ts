@@ -10,8 +10,6 @@ import { TransparenciaComponent } from './pages/transparencia/transparencia.comp
 import { HomeComponent } from './pages/home/home.component'
 import { SaudeComponent } from './pages/blog/saude/saude.component'
 import { EsporteComponent } from './pages/blog/esporte/esporte.component'
-import { ArtigoSaude01Component } from './pages/blog/saude/artigos-saude/artigo-saude-01/artigo-saude-01.component'
-import { ArtigoEsporte01Component } from './pages/blog/esporte/artigos/artigo-esporte-01/artigo-esporte-01.component'
 import { ArtigoComponent } from './components/artigo/artigo.component'
 
 const routes: Routes = [
