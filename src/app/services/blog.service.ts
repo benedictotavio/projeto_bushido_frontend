@@ -20,18 +20,18 @@ export class BlogService {
   constructor(private http: HttpClient) { }
 
   public getAllPublishedPosts(): Observable<any> {
-    const query = "{ allPosts(orderBy: _firstPublishedAt_DESC, filter: {_status: {eq: published}}) { id, categoria, _firstPublishedAt, titulo, corpo, capa{ url } } }"
+    const query = "{ allPosts(orderBy: _firstPublishedAt_DESC, filter: {_status: {eq: published}}) { id, categoria, slug, _firstPublishedAt, titulo, corpo, capa{ url } } }"
     return this.http.get<any>(`${this.url}?query=${encodeURIComponent(query)}`, this.httpOptions);
   }
 
   public getPostsByCategory(categoria: string): Observable<any> {
-    const query = `{ allPosts(orderBy: _firstPublishedAt_DESC, filter: {_status: {eq: published}, categoria: {eq: "${categoria}"}}) { id, categoria, _firstPublishedAt, titulo, corpo, capa{ url } } }`
+    const query = `{ allPosts(orderBy: _firstPublishedAt_DESC, filter: {_status: {eq: published}, categoria: {eq: "${categoria}"}}) { id, slug, categoria, _firstPublishedAt, titulo, corpo, capa{ url } } }`
 
     return this.http.get<any>(`${this.url}?query=${encodeURIComponent(query)}`, this.httpOptions);
   }
 
-  public getPostById(id: string): Observable<any> {
-    const query = `{ post(filter: {id: {eq: "${id}"}}) { id, categoria, _firstPublishedAt, titulo, corpo, capa{ url }, autor{ nome, descricao, avatar{url}}} }`
+  public getPostBySlug(slug: string): Observable<any> {
+    const query = `{ post(filter: {slug: {eq: "${slug}"}}) { id, slug, categoria, _firstPublishedAt, titulo, corpo, capa{ url }, autor{ nome, descricao, avatar{url}}} }`
 
     return this.http.get<any>(`${this.url}?query=${encodeURIComponent(query)}`, this.httpOptions);
   }
