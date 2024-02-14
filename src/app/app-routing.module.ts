@@ -50,7 +50,7 @@ const routes: Routes = [
         path: 'post',
         children: [
           {
-            path: ':id',
+            path: ':slug',
             component: ArtigoComponent
           }
         ]

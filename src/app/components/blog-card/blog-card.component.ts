@@ -14,7 +14,7 @@ import { BlogPost } from 'src/app/models/blog-post';
 
             <p class="mt-3" [innerHTML]="post?.corpo?.substring(0, 500) + '...'"></p>
 
-            <a class="btn btn-primary" routerLink='../post/{{post?.id}}'>Leia Mais</a>
+            <a class="btn btn-primary" routerLink='/blog/post/{{post?.slug}}'>Leia Mais</a>
 
         </article>
   `,

@@ -1,5 +1,6 @@
 export interface BlogPost {
     id: string;
+    slug: string;
     categoria: string;
     titulo: string;
     _firstPublishedAt: string;
