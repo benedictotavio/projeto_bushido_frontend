@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
-import { BlogPost } from 'src/app/models/blog-post';
-import { BlogService } from 'src/app/services/blog.service';
+import { BlogPost } from 'src/app/models/blog-post'
+import { BlogService } from 'src/app/services/blog.service'
 
 @Component({
   selector: 'app-saude',
@@ -8,14 +8,14 @@ import { BlogService } from 'src/app/services/blog.service';
   styleUrls: ['./saude.component.css'],
 })
 export class SaudeComponent implements OnInit {
-  public posts: Array<BlogPost> = [];
+  public posts: Array<BlogPost> = []
 
   constructor(private blogService: BlogService) {}
 
   ngOnInit(): void {
-    this.blogService.getPostsByCategory("saúde").subscribe({
-      next: res => this.posts = res.data.allPosts,
-      error: error => console.log(error)
+    this.blogService.getPostsByCategory('saúde').subscribe({
+      next: res => (this.posts = res.data.allPosts),
+      error: error => console.log(error),
     })
   }
 }

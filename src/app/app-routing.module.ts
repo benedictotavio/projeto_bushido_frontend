@@ -32,7 +32,7 @@ const routes: Routes = [
             component: SaudeComponent,
             title: 'Posts sobre Saúde | Blog Instituto Bushido',
             pathMatch: 'full',
-          }
+          },
         ],
       },
       {
@@ -43,7 +43,7 @@ const routes: Routes = [
             component: EsporteComponent,
             title: 'Posts sobre Esporte | Blog Instituto Bushido',
             pathMatch: 'full',
-          }
+          },
         ],
       },
       {
@@ -51,10 +51,10 @@ const routes: Routes = [
         children: [
           {
             path: ':slug',
-            component: ArtigoComponent
-          }
-        ]
-      }
+            component: ArtigoComponent,
+          },
+        ],
+      },
     ],
   },
   { path: 'contato', component: ContatoComponent, title: 'Contato | Instituto Bushido' },
