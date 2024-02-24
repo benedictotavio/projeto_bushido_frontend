@@ -5,4 +5,6 @@ import { Component } from '@angular/core'
   templateUrl: './whatsapp-button.component.html',
   styleUrls: ['./whatsapp-button.component.css'],
 })
-export class WhatsappButtonComponent {}
+export class WhatsappButtonComponent {
+  
+}
