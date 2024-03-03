@@ -12,8 +12,11 @@ import { SaudeComponent } from './pages/blog/saude/saude.component'
 import { EsporteComponent } from './pages/blog/esporte/esporte.component'
 import { ArtigoSaude01Component } from './pages/blog/saude/artigos-saude/artigo-saude-01/artigo-saude-01.component'
 import { ArtigoEsporte01Component } from './pages/blog/esporte/artigos/artigo-esporte-01/artigo-esporte-01.component'
-
+import { RegistroComponent } from './pages/admin/registro/registro.component'
+import { AdminComponent } from './pages/admin/admin/admin.component'
 const routes: Routes = [
+  { path: 'admin',component: AdminComponent, title: ' Página do  Admin | Instituto Bushido', pathMatch: 'full' },
+  { path: 'registro',component: RegistroComponent, title: 'Registro de Admin | Instituto Bushido', pathMatch: 'full' },
   { path: '', component: HomeComponent, title: 'Home | Instituto Bushido' },
   { path: 'quem-somos', component: QuemSomosComponent, title: 'Quem Somos | Instituto Bushido' },
   {

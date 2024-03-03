@@ -1,0 +1,38 @@
+<main class="container-fluid py-2 d-flex justify-content-center">
+
+<article class="col-md-6">
+
+    <h1>ADMIN Registrar</h1>
+<form class="form-group" (ngSubmit)="register()">
+    <label for="nome" class="col-sm-2 col-form-label">Nome:</label>
+    <div class="col-sm-10">
+      <input type="text" id="nome" [(ngModel)]="user.nome" name="nome" class="form-control" required>
+    </div>
+  
+    <label for="email" class="col-sm-2 col-form-label">Email:</label>
+    <div class="col-sm-10">
+      <input type="email" id="email" [(ngModel)]="user.email" name="email" class="form-control" required>
+    </div>
+  
+    <label for="cargo" class="col-sm-2 col-form-label">Cargo:</label>
+    <div class="col-sm-10">
+      <input type="text" id="cargo" [(ngModel)]="user.cargo" name="cargo" class="form-control" required>
+    </div>
+  
+    <label for="senha" class="col-sm-2 col-form-label">Senha:</label>
+    <div class="col-sm-10">
+      <input type="password" id="senha" [(ngModel)]="user.senha" name="senha" class="form-control" required>
+    </div>
+  
+    <label for="role" class="col-sm-2 col-form-label">Função:</label>
+    <div class="col-sm-10">
+      <input type="text" id="role" [(ngModel)]="user.role" name="role" class="form-control" required>
+    </div>
+  
+    <div class="col-sm-12 mt-5">
+      <button type="submit" class="btn btn-primary">Registrar</button>
+    </div>
+  </form>
+
+</article>
+</main>
