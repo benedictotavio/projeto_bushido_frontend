@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'
+import { FormsModule } from '@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
@@ -27,8 +27,8 @@ import { KarateSfMainComponent } from './pages/karate-sem-fronteiras/karate-sf-m
 import { KarateSfSobreComponent } from './pages/karate-sem-fronteiras/karate-sf-sobre/karate-sf-sobre.component'
 import { KarateSfBeneficiosComponent } from './pages/karate-sem-fronteiras/karate-sf-beneficios/karate-sf-beneficios.component'
 import { KarateSfOficinasComponent } from './pages/karate-sem-fronteiras/karate-sf-oficinas/karate-sf-oficinas.component'
-import { WhatsappButtonComponent } from './components/whatsapp-button/whatsapp-button.component';
-import { RegistroComponent } from './pages/admin/registro/registro.component';
+import { WhatsappButtonComponent } from './components/whatsapp-button/whatsapp-button.component'
+import { RegistroComponent } from './pages/admin/registro/registro.component'
 import { AdminComponent } from './pages/admin/admin/admin.component'
 
 @NgModule({
@@ -60,8 +60,7 @@ import { AdminComponent } from './pages/admin/admin/admin.component'
     RegistroComponent,
     AdminComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule,
-    FormsModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
