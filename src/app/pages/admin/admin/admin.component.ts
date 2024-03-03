@@ -20,9 +20,9 @@ export class AdminComponent {
   Logar() {
     this.http.post<{ token: string }>(this.ApiBushido, this.login).subscribe(
       response => {
-        this.token = response.token
-        // Redirecionar para a página do painel aqui
         console.log('Logado')
+        this.token = response.token
+        // Redirecionar para a página do dashboard aqui
       },
       error => {
         console.error(error)

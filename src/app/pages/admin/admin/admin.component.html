@@ -4,7 +4,7 @@
         
       <h1>Admin login</h1>
       
-      <form class="form-group">
+      <form class="form-group" (ngSubmit)="Logar()">
         <label for="email" class="col-sm-2 col-form-label">Email:</label>
   
         <div class="col-sm-10">
@@ -18,7 +18,7 @@
         </div>
   
         <div class="col-sm-10 mt-5">
-          <button type="button" (click)="Logar()" class="btn btn-primary">Login</button>
+          <button type="submit"  class="btn btn-primary" [disabled]="!login.email || !login.senha">Login</button>
         </div>
         
       </form>
