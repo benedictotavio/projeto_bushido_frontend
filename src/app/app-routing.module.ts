@@ -17,7 +17,7 @@ import { AdminComponent } from './pages/admin/admin/admin.component'
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 import { AuthGuard } from '../app/pages/admin/auth.guard'
 const routes: Routes = [
-  { path: 'admin/:email', component: DashboardComponent, canActivate: [AuthGuard]}, // Rota dinâmica para o dashboard do usuário
+  { path: 'admin/:email', component: DashboardComponent, canActivate: [AuthGuard] }, // Rota dinâmica para o dashboard do usuário
   {
     path: 'admin',
     component: AdminComponent,
