@@ -14,7 +14,10 @@ import { ArtigoSaude01Component } from './pages/blog/saude/artigos-saude/artigo-
 import { ArtigoEsporte01Component } from './pages/blog/esporte/artigos/artigo-esporte-01/artigo-esporte-01.component'
 import { RegistroComponent } from './pages/admin/registro/registro.component'
 import { AdminComponent } from './pages/admin/admin/admin.component'
+import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
+import { AuthGuard } from '../app/pages/admin/auth.guard'
 const routes: Routes = [
+  { path: 'admin/:email', component: DashboardComponent, canActivate: [AuthGuard]}, // Rota dinâmica para o dashboard do usuário
   {
     path: 'admin',
     component: AdminComponent,
