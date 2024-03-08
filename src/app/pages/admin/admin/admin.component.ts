@@ -20,7 +20,7 @@ export class AdminComponent {
     private router: Router
   ) {}
 
-  ApiBushido = 'https://projeto-bushido-backend.onrender.com/api/admin/login'
+  ApiBushido = 'https://projeto-bushido-backend.onrender.com/api/V1/admin/login'
 
   Logar() {
     this.http.post<{ token: string }>(this.ApiBushido, this.login).subscribe(
