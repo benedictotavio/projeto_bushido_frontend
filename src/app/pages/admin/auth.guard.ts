@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
       return true // Permite o acesso à rota se o usuário estiver autenticado
     } else {
       this.router.navigate(['/admin']) // Redireciona para a página de login se o usuário não estiver autenticado
-      return false
+      return false;
     }
   }
 }

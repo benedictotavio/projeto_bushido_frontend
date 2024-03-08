@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { Login } from '../login.interface'
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
+import {environment} from "../../../../environments/environment"
 
 @Component({
   selector: 'app-admin',
@@ -20,20 +21,13 @@ export class AdminComponent {
     private router: Router
   ) {}
 
-  ApiBushido = 'https://projeto-bushido-backend.onrender.com/api/V1/admin/login'
+  ApiBushido =  environment.urlApi + '/admin/login'
 
   Logar() {
     this.http.post<{ token: string }>(this.ApiBushido, this.login).subscribe(
       response => {
-        this.token = response.token
-        // Redirecionar para a página do dashboard aqui se o login for autenticado
-        try{
-          this.router.navigate(['/admin', this.login.email])
-          localStorage.setItem('token', this.token)
-        }catch (e) {
-          console.log(e)
-        }
-
+        this.router.navigate(['/admin', this.login.email])
+        localStorage.setItem('token', response.token)
       },
       error => {
         console.error(error)

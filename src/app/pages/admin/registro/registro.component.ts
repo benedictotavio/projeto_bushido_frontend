@@ -1,6 +1,8 @@
 import { Component } from '@angular/core'
 import { User } from '../user.interface'
 import { HttpClient } from '@angular/common/http'
+import { environment } from '../../../../environments/environment'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-registro',
@@ -8,7 +10,7 @@ import { HttpClient } from '@angular/common/http'
   styleUrls: ['./registro.component.css'],
 })
 export class RegistroComponent {
-  ApiBushido = 'https://projeto-bushido-backend.onrender.com/api/V1//admin/signup'
+  ApiBushido = environment.urlApi + '/admin/signup'
   user: User = {
     nome: '',
     email: '',
@@ -16,6 +18,8 @@ export class RegistroComponent {
     senha: '',
     role: '',
   }
+
+  token = localStorage.getItem("token");
 
   constructor(private http: HttpClient) {}
 
