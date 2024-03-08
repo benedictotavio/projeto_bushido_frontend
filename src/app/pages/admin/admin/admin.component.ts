@@ -25,14 +25,19 @@ export class AdminComponent {
   Logar() {
     this.http.post<{ token: string }>(this.ApiBushido, this.login).subscribe(
       response => {
-        console.log('Logado')
         this.token = response.token
         // Redirecionar para a página do dashboard aqui se o login for autenticado
-        this.router.navigate(['/admin', this.login.email])
+        try{
+          this.router.navigate(['/admin', this.login.email])
+          localStorage.setItem('token', this.token)
+        }catch (e) {
+          console.log(e)
+        }
+
       },
       error => {
         console.error(error)
-        if (error.status === 403) {
+        if (error.status === 401) {
           window.alert('Email ou senha inválidos')
         }
       }
