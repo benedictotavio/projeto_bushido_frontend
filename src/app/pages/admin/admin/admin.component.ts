@@ -18,7 +18,8 @@ export class AdminComponent {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+
   ) {}
 
   ApiBushido =  environment.urlApi + '/admin/login'
@@ -32,7 +33,9 @@ export class AdminComponent {
       error => {
         console.error(error)
         if (error.status === 401) {
+          this.router.navigate(['/admin'])
           window.alert('Email ou senha inválidos')
+         
         }
       }
     )
