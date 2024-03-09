@@ -1,8 +1,8 @@
-<main class="container-fluid py-2 d-flex justify-content-center">
+<main class="container-fluid  d-flex justify-content-center">
 
-<article class="col-md-6">
+<article class="col-md-6 mt-5">
 
-    <h1>ADMIN Registrar</h1>
+    <h1>Registrar novos adms</h1>
 <form class="form-group" (ngSubmit)="register()">
     <label for="nome" class="col-sm-2 col-form-label">Nome:</label>
     <div class="col-sm-10">
@@ -30,7 +30,7 @@
     </div>
   
     <div class="col-sm-12 mt-5">
-      <button type="submit" class="btn btn-primary">Registrar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!user.email || !user.cargo || !user.nome || !user.role || !user.senha "Login >Registrar</button>
     </div>
   </form>
 
