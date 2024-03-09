@@ -2,7 +2,7 @@ import { Component } from '@angular/core'
 import { Login } from '../login.interface'
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
-import {environment} from "../../../../environments/environment"
+import { environment } from '../../../../environments/environment'
 
 @Component({
   selector: 'app-admin',
@@ -18,11 +18,10 @@ export class AdminComponent {
 
   constructor(
     private http: HttpClient,
-    private router: Router,
-
+    private router: Router
   ) {}
 
-  ApiBushido =  environment.urlApi + '/admin/login'
+  ApiBushido = environment.urlApi + '/admin/login'
 
   Logar() {
     this.http.post<{ token: string }>(this.ApiBushido, this.login).subscribe(
@@ -35,7 +34,6 @@ export class AdminComponent {
         if (error.status === 401) {
           this.router.navigate(['/admin'])
           window.alert('Email ou senha inválidos')
-         
         }
       }
     )

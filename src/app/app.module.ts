@@ -30,7 +30,7 @@ import { KarateSfOficinasComponent } from './pages/karate-sem-fronteiras/karate-
 import { WhatsappButtonComponent } from './components/whatsapp-button/whatsapp-button.component'
 import { RegistroComponent } from './pages/admin/registro/registro.component'
 import { AdminComponent } from './pages/admin/admin/admin.component'
-import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
+import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 
 @NgModule({
   declarations: [

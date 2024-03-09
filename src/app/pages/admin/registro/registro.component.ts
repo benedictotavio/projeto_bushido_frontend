@@ -2,7 +2,6 @@ import { Component } from '@angular/core'
 import { User } from '../user.interface'
 import { HttpClient } from '@angular/common/http'
 import { environment } from '../../../../environments/environment'
-import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-registro',
@@ -19,7 +18,7 @@ export class RegistroComponent {
     role: '',
   }
 
-  token = localStorage.getItem("token");
+  token = localStorage.getItem('token')
 
   constructor(private http: HttpClient) {}
 

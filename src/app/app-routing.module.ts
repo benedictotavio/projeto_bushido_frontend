@@ -26,15 +26,6 @@ const routes: Routes = [
     path: 'admin/:email',
     canActivate: [AuthGuard],
     component: DashboardComponent,
-    children: [
-      {
-        path: '',
-        canActivate: [AuthGuard],
-        component: DashboardComponent,
-        children: [
-        ]
-      },  
-    ]
   },
   {
     path: 'admin/:email/registro',

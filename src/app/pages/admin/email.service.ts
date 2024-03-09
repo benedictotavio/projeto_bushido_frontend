@@ -1,18 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EmailService {
-
-  private email = '';
-
+  private email = ''
 
   setEmail(email: string): void {
-    this.email = email;
+    this.email = email
   }
 
   getEmail(): string {
-    return this.email;
+    return this.email
   }
 }
