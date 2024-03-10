@@ -5,12 +5,15 @@ on:
     branches:
       - main
   pull_request:
-    branches: 
+    branches:
       - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    env:
+      token: ${{ vars.TOKEN }}
 
     steps:
       - name: Verificar repositório

@@ -10,12 +10,12 @@ import { TransparenciaComponent } from './pages/transparencia/transparencia.comp
 import { HomeComponent } from './pages/home/home.component'
 import { SaudeComponent } from './pages/blog/saude/saude.component'
 import { EsporteComponent } from './pages/blog/esporte/esporte.component'
-import { ArtigoSaude01Component } from './pages/blog/saude/artigos-saude/artigo-saude-01/artigo-saude-01.component'
-import { ArtigoEsporte01Component } from './pages/blog/esporte/artigos/artigo-esporte-01/artigo-esporte-01.component'
 import { AdminComponent } from './pages/admin/admin/admin.component'
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 import { RegistroComponent } from './pages/admin/registro/registro.component'
 import { AuthGuard } from '../app/pages/admin/auth.guard'
+import { ArtigoComponent } from './components/artigo/artigo.component'
+
 const routes: Routes = [
   {
     path: 'admin',
@@ -53,11 +53,6 @@ const routes: Routes = [
             title: 'Posts sobre Saúde | Blog Instituto Bushido',
             pathMatch: 'full',
           },
-          {
-            path: 'janeiro-branco-conscientizacao-sobre-a-saude-mental',
-            component: ArtigoSaude01Component,
-            title: 'Janeiro Branco: Conscientização sobre a Saúde Mental | Blog Instituto Bushido',
-          },
         ],
       },
       {
@@ -69,10 +64,14 @@ const routes: Routes = [
             title: 'Posts sobre Esporte | Blog Instituto Bushido',
             pathMatch: 'full',
           },
+        ],
+      },
+      {
+        path: 'post',
+        children: [
           {
-            path: 'participamos-da-etapa-classificatoria-em-goiania',
-            component: ArtigoEsporte01Component,
-            title: 'Participamos da Etapa Classificatória em Goiânia | Blog Instituto Bushido',
+            path: ':slug',
+            component: ArtigoComponent,
           },
         ],
       },

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule} from '@angular/common/http'
 import { FormsModule } from '@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module'
@@ -31,6 +31,8 @@ import { WhatsappButtonComponent } from './components/whatsapp-button/whatsapp-b
 import { RegistroComponent } from './pages/admin/registro/registro.component'
 import { AdminComponent } from './pages/admin/admin/admin.component'
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
+import { BlogCardComponent } from './components/blog-card/blog-card.component'
+import { ArtigoComponent } from './components/artigo/artigo.component'
 
 @NgModule({
   declarations: [
@@ -61,8 +63,11 @@ import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
     RegistroComponent,
     AdminComponent,
     DashboardComponent,
+    BlogCardComponent,
+    ArtigoComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule]
+  ,
   providers: [],
   bootstrap: [AppComponent],
 })
