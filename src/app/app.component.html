@@ -1,5 +1,5 @@
     
-    <header>
+    <header  *ngIf="(isAuthenticated | async) === false">
         <app-header></app-header>
     </header>
 

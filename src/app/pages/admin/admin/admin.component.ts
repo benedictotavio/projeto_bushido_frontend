@@ -3,6 +3,9 @@ import { Login } from '../login.interface'
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
 import { environment } from '../../../../environments/environment'
+import { LoadingService } from '../../../services/services-admin/service-loading.service';
+import { AuthService } from 'src/app/services/services-admin/authservice.service'
+
 
 @Component({
   selector: 'app-admin',
@@ -16,9 +19,12 @@ export class AdminComponent {
   }
   token = ''
 
+
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    public loadingService: LoadingService,
+    private authService : AuthService
   ) {}
 
   ApiBushido = environment.urlApi + '/admin/login'
@@ -26,6 +32,7 @@ export class AdminComponent {
   Logar() {
     this.http.post<{ token: string }>(this.ApiBushido, this.login).subscribe(
       response => {
+        this.authService.setAuthenticated(true)
         this.router.navigate(['/admin', this.login.email])
         localStorage.setItem('token', response.token)
       },
