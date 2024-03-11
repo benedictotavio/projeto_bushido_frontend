@@ -1,0 +1,9 @@
+main{
+    margin-bottom: 10px;
+}
+
+article{
+    padding: 50px 50px 30px 50px;
+    border: solid 2px rgba(0, 0, 0, 0.226);
+    border-radius: 10px;
+}

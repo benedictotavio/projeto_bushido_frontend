@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
+import { HttpClientModule } from '@angular/common/http'
+import { FormsModule } from '@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
@@ -26,7 +28,9 @@ import { KarateSfSobreComponent } from './pages/karate-sem-fronteiras/karate-sf-
 import { KarateSfBeneficiosComponent } from './pages/karate-sem-fronteiras/karate-sf-beneficios/karate-sf-beneficios.component'
 import { KarateSfOficinasComponent } from './pages/karate-sem-fronteiras/karate-sf-oficinas/karate-sf-oficinas.component'
 import { WhatsappButtonComponent } from './components/whatsapp-button/whatsapp-button.component'
-import { HttpClientModule } from '@angular/common/http'
+import { RegistroComponent } from './pages/admin/registro/registro.component'
+import { AdminComponent } from './pages/admin/admin/admin.component'
+import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 import { BlogCardComponent } from './components/blog-card/blog-card.component'
 import { ArtigoComponent } from './components/artigo/artigo.component'
 
@@ -56,10 +60,13 @@ import { ArtigoComponent } from './components/artigo/artigo.component'
     KarateSfBeneficiosComponent,
     KarateSfOficinasComponent,
     WhatsappButtonComponent,
+    RegistroComponent,
+    AdminComponent,
+    DashboardComponent,
     BlogCardComponent,
     ArtigoComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -10,9 +10,29 @@ import { TransparenciaComponent } from './pages/transparencia/transparencia.comp
 import { HomeComponent } from './pages/home/home.component'
 import { SaudeComponent } from './pages/blog/saude/saude.component'
 import { EsporteComponent } from './pages/blog/esporte/esporte.component'
+import { AdminComponent } from './pages/admin/admin/admin.component'
+import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
+import { RegistroComponent } from './pages/admin/registro/registro.component'
+import { AuthGuard } from '../app/pages/admin/auth.guard'
 import { ArtigoComponent } from './components/artigo/artigo.component'
 
 const routes: Routes = [
+  {
+    path: 'admin',
+    component: AdminComponent,
+    title: ' Página do  Admin | Instituto Bushido',
+  },
+  {
+    path: 'admin/:email',
+    canActivate: [AuthGuard],
+    component: DashboardComponent,
+  },
+  {
+    path: 'admin/:email/registro',
+    canActivate: [AuthGuard],
+    component: RegistroComponent,
+  },
+
   { path: '', component: HomeComponent, title: 'Home | Instituto Bushido' },
   { path: 'quem-somos', component: QuemSomosComponent, title: 'Quem Somos | Instituto Bushido' },
   {
