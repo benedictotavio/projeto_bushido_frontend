@@ -6,13 +6,16 @@ import { AuthService } from 'src/app/services/services-admin/authservice.service
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router, private  authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   canActivate(): boolean {
     const token = localStorage.getItem('token')
 
     if (token) {
-      this.authService.setAuthenticated(true);
+      this.authService.setAuthenticated(true)
       return true // Permite o acesso à rota se o usuário estiver autenticado
     } else {
       this.authService.setAuthenticated(false)

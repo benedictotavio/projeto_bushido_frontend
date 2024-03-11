@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
 
-import { ServiceLoadingService } from './service-loading.service';
+import { ServiceLoadingService } from './service-loading.service'
 
 describe('ServiceLoadingService', () => {
-  let service: ServiceLoadingService;
+  let service: ServiceLoadingService
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(ServiceLoadingService);
-  });
+    TestBed.configureTestingModule({})
+    service = TestBed.inject(ServiceLoadingService)
+  })
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+    expect(service).toBeTruthy()
+  })
+})

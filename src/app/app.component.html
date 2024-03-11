@@ -7,6 +7,6 @@
     
     <app-whatsapp-button></app-whatsapp-button>
 
-    <footer>
+    <footer *ngIf="(isAuthenticated | async) === false">
         <app-footer></app-footer>
     </footer>

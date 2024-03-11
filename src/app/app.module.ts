@@ -69,8 +69,10 @@ import { LoadingInterceptor } from './loading.interceptor'
     ArtigoComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [ LoadingService,
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }],
+  providers: [
+    LoadingService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
