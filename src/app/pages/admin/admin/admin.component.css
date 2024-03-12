@@ -1,12 +1,24 @@
-body{
-    position: relative;
-}
 
 main{
     height: 100vh;
+    
+}
+
+article{
+    position: relative;
 }
 
 .loading{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.623);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     position: absolute;
     top: 50%;
     left: 50%;

@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs'
 export class LoadingService {
   private loadingSubject = new BehaviorSubject<boolean>(false)
 
-  loading$ = this.loadingSubject.asObservable()
+  loading = this.loadingSubject.asObservable()
 
   show() {
     this.loadingSubject.next(true)

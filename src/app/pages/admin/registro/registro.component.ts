@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { User } from '../user.interface'
 import { HttpClient } from '@angular/common/http'
 import { environment } from '../../../../environments/environment'
+import { LoadingService } from '../../../services/services-admin/service-loading.service'
 
 @Component({
   selector: 'app-registro',
@@ -20,7 +21,7 @@ export class RegistroComponent {
 
   token = localStorage.getItem('token')
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,  public loadingService: LoadingService) {}
 
   register() {
     this.http.post(this.ApiBushido, this.user).subscribe(
