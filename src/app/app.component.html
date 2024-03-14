@@ -5,7 +5,7 @@
 
     <router-outlet></router-outlet>
     
-    <app-whatsapp-button></app-whatsapp-button>
+    <app-whatsapp-button *ngIf="(isAuthenticated | async) === false"></app-whatsapp-button>
 
     <footer *ngIf="(isAuthenticated | async) === false">
         <app-footer></app-footer>

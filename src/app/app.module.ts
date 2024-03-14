@@ -34,7 +34,7 @@ import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 import { BlogCardComponent } from './components/blog-card/blog-card.component'
 import { ArtigoComponent } from './components/artigo/artigo.component'
 import { LoadingService } from './services/services-admin/service-loading.service'
-import { LoadingInterceptor } from './loading.interceptor';
+import { LoadingInterceptor } from './loading.interceptor'
 import { LoadingComponent } from './components/loading/loading.component'
 
 @NgModule({

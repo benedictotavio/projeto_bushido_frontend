@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   }
 
   removeToken(): void {
-    localStorage.removeItem('token');
+    localStorage.removeItem('token')
     this.token = ''
   }
 }

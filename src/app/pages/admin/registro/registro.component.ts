@@ -3,7 +3,6 @@ import { User } from '../user.interface'
 import { HttpClient } from '@angular/common/http'
 import { environment } from '../../../../environments/environment'
 
-
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -21,9 +20,7 @@ export class RegistroComponent {
 
   token = localStorage.getItem('token')
 
-  constructor(
-    private http: HttpClient,
-  ) {}
+  constructor(private http: HttpClient) {}
 
   register() {
     this.http.post(this.ApiBushido, this.user).subscribe(
