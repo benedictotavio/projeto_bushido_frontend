@@ -1,9 +1,37 @@
-main{
-    margin-bottom: 10px;
+main {
+  min-height: 100vh;
 }
 
-article{
-    padding: 50px 50px 30px 50px;
-    border: solid 2px rgba(0, 0, 0, 0.226);
-    border-radius: 10px;
+article {
+  padding: 50px 25px;
+  border: solid 2px rgba(0, 0, 0, 0.226);
+  width: 50%;
+}
+
+@media (max-width: 850px) {
+  article {
+    width: 100%;
+  }
+}
+
+article > form .role-box-radio {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.226);
+}
+
+article > form .input-text-register {
+  min-width: 100%;
+  margin-bottom: 20px;
+}
+
+article > form .input-text-register input {
+  width: 100%;
+}
+
+article > form .register-box-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

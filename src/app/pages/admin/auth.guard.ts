@@ -11,9 +11,9 @@ export class AuthGuard implements CanActivate {
     const token = localStorage.getItem('token')
 
     if (token) {
-      return true // Permite o acesso à rota se o usuário estiver autenticado
+      return true
     } else {
-      this.router.navigate(['/admin']) // Redireciona para a página de login se o usuário não estiver autenticado
+      this.router.navigate(['/admin'])
       return false
     }
   }

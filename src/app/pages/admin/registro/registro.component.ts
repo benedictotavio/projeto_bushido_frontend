@@ -1,7 +1,8 @@
-import { Component } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { User } from '../user.interface'
 import { HttpClient } from '@angular/common/http'
 import { environment } from '../../../../environments/environment'
+import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
   selector: 'app-registro',
@@ -9,7 +10,7 @@ import { environment } from '../../../../environments/environment'
   styleUrls: ['./registro.component.css'],
 })
 export class RegistroComponent {
-  ApiBushido = environment.urlApi + '/admin/signup'
+  ApiBushido = environment.urlApi + 'admin/signup'
   user: User = {
     nome: '',
     email: '',
@@ -18,20 +19,35 @@ export class RegistroComponent {
     role: '',
   }
 
-  token = localStorage.getItem('token')
-
-  constructor(private http: HttpClient) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
   register() {
-    this.http.post(this.ApiBushido, this.user).subscribe(
-      response => {
-        console.log('Usuário registrado com sucesso', response)
-        // lidar com o registro bem-sucedido aqui
-      },
-      error => {
-        console.error('Erro ao registrar usuário', error)
-        // lidar com erro aqui
-      }
-    )
+    this.http
+      .post<{ email: string; nome: string }>(this.ApiBushido, this.user, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      .subscribe(
+        response => {
+          window.alert(`admin ${response.nome} foi registrado concluído com sucesso!`)
+          this.router.navigate([`/admin/${this.route.snapshot.paramMap.get('email')}`])
+        },
+        error => {
+          if (error.status === 403) {
+            localStorage.removeItem('token')
+            this.router.navigate(['/admin'])
+          } else if (error.status == 422) {
+            window.confirm('Todos os campos devem ser preenchidos corretamente')
+          } else if (error.status == 409) {
+            window.confirm('O email informado já foi registrado')
+          }
+        }
+      )
   }
 }
