@@ -1,6 +1,12 @@
 {
-  "name": "projeto-bushido-front-end",
-  "version": "0.0.0",
+  "name": "bushido",
+  "version": "1.0.0",
+  "repository": {
+    "url": "https://github.com/benedictotavio/projeto_bushido_frontend.git",
+    "type": "git",
+    "directory": "https://github.com/benedictotavio/projeto_bushido_frontend"
+  },
+  "proxy": "https://projeto-bushido-backend.onrender.com/api/V1/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

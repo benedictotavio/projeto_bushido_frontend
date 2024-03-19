@@ -21,7 +21,7 @@ export class AdminComponent {
     private router: Router
   ) {}
 
-  ApiBushido = environment.urlApi + '/admin/login'
+  ApiBushido = environment.urlApi + 'admin/login'
 
   Logar() {
     this.http.post<{ token: string }>(this.ApiBushido, this.login).subscribe(
