@@ -10,7 +10,6 @@ import { ActivatedRoute } from '@angular/router'
 export class DashboardComponent implements OnInit {
   token = localStorage.getItem('token')
   email = ''
-
   constructor(
     private router: Router,
     private route: ActivatedRoute
@@ -20,5 +19,10 @@ export class DashboardComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.email = params['email']
     })
+  }
+
+  removeToken(): void {
+    localStorage.removeItem('token')
+    this.token = ''
   }
 }

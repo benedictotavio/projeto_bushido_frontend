@@ -1,29 +1,17 @@
+
 main{
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 100vh;
+    
 }
 
-
-article > form{
-    padding: 50px;
-    border-radius: 10px;
+article{
+    padding: 50px 50px 50px 50px;
     border: solid 2px rgba(0, 0, 0, 0.226);
+    border-radius: 10px;
+    height: 450px;
+    position: relative;
 }
 
-article > form .img-box{
-    text-align: center;
-}
 
-article > form .input-text-login{
-    min-width: 100%;
-    margin-bottom: 20px;
-}
 
-article > form .login-box-button{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center
-}
+
