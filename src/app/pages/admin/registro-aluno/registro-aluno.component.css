@@ -1,0 +1,17 @@
+.register-student-content {
+    min-height: 100vh;
+    margin-top: 2.5%;
+}
+
+.gender-box-radio {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 850px) {
+  .gender-box-radio {
+    flex-direction: column;
+  }
+}

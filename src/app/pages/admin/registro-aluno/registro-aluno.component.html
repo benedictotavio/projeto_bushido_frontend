@@ -1,0 +1,124 @@
+<div class="register-student-content container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form>
+        <div class="mb-4">
+          <h2 class="fw-bold">Registrar Aluno</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input
+                type="text"
+                name="nome"
+                id="nome"
+                class="form-control"
+                placeholder="Nome"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="col-md-6 mt-2">
+            <div class="form-group">
+              <label for="sobrenome">Sobrenome</label>
+              <input
+                type="text"
+                name="sobrenome"
+                id="sobrenome"
+                class="form-control"
+                placeholder="Sobrenome"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="dataNascimento">Data de Nascimento</label>
+              <input
+                type="date"
+                class="form-control"
+                id="dataNascimento"
+                min="1980-01-01"
+                max="2024-12-31"
+                required
+              />
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label for="rg">RG</label>
+              <input type="text" class="form-control" id="rg" placeholder="RG*" required />
+            </div>
+          </div>
+        </div>
+
+        <div class="">
+          <h5>Endereço</h5>
+          <div class="row">
+            <div class="col-md-9 p-2">
+              <input type="text" name="cep" id="cep" class="form-control" placeholder="CEP*" />
+            </div>
+            <div class="col-md-3 p-2">
+              <input
+                type="number"
+                name="numero"
+                id="numero"
+                class="form-control"
+                placeholder="Numero*"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 p-2">
+              <input
+                type="text"
+                name="estado"
+                id="estado"
+                class="form-control"
+                placeholder="Estado"
+              />
+            </div>
+            <div class="col-md-6 p-2">
+              <input
+                type="text"
+                name="cidade"
+                id="cidade"
+                class="form-control"
+                placeholder="Cidade"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center my-4 mx-3 border rounded">
+          <div class="gender-box-radio">
+            <div>
+              <input type="radio" name="genero" value="M" />
+              <label class="p-2" for="html">Masculino</label><br />
+            </div>
+            <div>
+              <input type="radio" name="genero" value="F" />
+              <label class="p-2" for="css">Feminino</label><br />
+            </div>
+            <div>
+              <input type="radio" name="genero" value="OUTRO" />
+              <label class="p-2" for="css">Outro</label><br />
+            </div>
+          </div>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Registrar" />
+      </form>
+    </div>
+  </div>
+</div>
