@@ -1,12 +1,12 @@
     
-    <header>
+    <header  *ngIf="(isAuthenticated | async) === false">
         <app-header></app-header>
     </header>
 
     <router-outlet></router-outlet>
     
-    <app-whatsapp-button></app-whatsapp-button>
+    <app-whatsapp-button *ngIf="(isAuthenticated | async) === false"></app-whatsapp-button>
 
-    <footer>
+    <footer *ngIf="(isAuthenticated | async) === false">
         <app-footer></app-footer>
     </footer>
