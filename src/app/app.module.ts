@@ -33,6 +33,7 @@ import { AdminComponent } from './pages/admin/admin/admin.component'
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 import { BlogCardComponent } from './components/blog-card/blog-card.component'
 import { ArtigoComponent } from './components/artigo/artigo.component'
+import { RegistroAlunoComponent } from './pages/admin/registro-aluno/registro-aluno.component'
 import { LoadingService } from './services/services-admin/service-loading.service'
 import { LoadingInterceptor } from './loading.interceptor'
 import { LoadingComponent } from './components/loading/loading.component'
@@ -68,13 +69,11 @@ import { LoadingComponent } from './components/loading/loading.component'
     DashboardComponent,
     BlogCardComponent,
     ArtigoComponent,
+    RegistroAlunoComponent,
     LoadingComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [
-    LoadingService,
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-  ],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
