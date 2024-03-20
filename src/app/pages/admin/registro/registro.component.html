@@ -1,43 +1,80 @@
-<main class="container-fluid  d-flex justify-content-center">
+<main>
+  <div class="container-fluid d-flex justify-content-center">
+    <article class="col-md-6 mt-5">
+      <h3 class="text-center">Registro</h3>
 
-<article class="col-md-6 my-1">
+      <form class="form-group" (ngSubmit)="register()">
+        <div class="input-text-register col-sm-10">
+          <input
+            type="text"
+            id="nome"
+            [(ngModel)]="user.nome"
+            name="nome"
+            class="form-control"
+            placeholder="Nome"
+            required
+          />
+        </div>
 
-    <h1>Registrar novos adms</h1>
-<form class="form-group" (ngSubmit)="register()">
-    <label for="nome" class="col-sm-2 col-form-label">Nome:</label>
-    <div class="col-sm-10">
-      <input type="text" id="nome" [(ngModel)]="user.nome" name="nome" class="form-control" required>
-    </div>
-  
-    <label for="email" class="col-sm-2 col-form-label">Email:</label>
-    <div class="col-sm-10">
-      <input type="email" id="email" [(ngModel)]="user.email" name="email" class="form-control" required>
-    </div>
-  
-    <label for="cargo" class="col-sm-2 col-form-label">Cargo:</label>
-    <div class="col-sm-10">
-      <input type="text" id="cargo" [(ngModel)]="user.cargo" name="cargo" class="form-control" required>
-    </div>
-  
-    <label for="senha" class="col-sm-2 col-form-label">Senha:</label>
-    <div class="col-sm-10">
-      <input type="password" id="senha" [(ngModel)]="user.senha" name="senha" class="form-control" required>
-    </div>
-  
-    <label for="role" class="col-sm-2 col-form-label">Função:</label>
-    <div class="col-sm-10">
-      <input type="text" id="role" [(ngModel)]="user.role" name="role" class="form-control" required>
-    </div>
-  
-    <div class="col-sm-12 mt-5">
-      <button type="submit" class="btn btn-primary" [disabled]="!user.email || !user.cargo || !user.nome || !user.role || !user.senha "Login >Registrar</button>
-    </div>
-  </form>
+        <div class="input-text-register col-sm-10">
+          <input
+            type="email"
+            autocomplete="email"
+            id="email"
+            [(ngModel)]="user.email"
+            name="email"
+            class="form-control"
+            placeholder="Email"
+            required
+          />
+        </div>
 
-</article>
+        <div class="input-text-register col-sm-10">
+          <input
+            type="text"
+            id="cargo"
+            [(ngModel)]="user.cargo"
+            name="cargo"
+            class="form-control"
+            placeholder="Cargo"
+            required
+          />
+        </div>
 
- <app-loading></app-loading>
+        <div class="input-text-register col-sm-10">
+          <input
+            type="password"
+            id="senha"
+            [(ngModel)]="user.senha"
+            name="senha"
+            class="form-control"
+            placeholder="Senha"
+            required
+          />
+        </div>
 
+        <div class="role-box-radio col-sm-10 d-flex justify-content-between p-4">
+          <div>
+            <input type="radio" name="role" [(ngModel)]="user.role" value="USER" />
+            <label class="p-2" for="html">USER</label><br />
+          </div>
+          <div>
+            <input type="radio" name="role" [(ngModel)]="user.role" value="ADMIN" />
+            <label class="p-2" for="css">ADMIN</label><br />
+          </div>
+        </div>
 
-
+        <div class="register-box-button col-sm-12 mt-5">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!user.email || !user.cargo || !user.nome || !user.role || !user.senha"
+            Login
+          >
+            Registrar
+          </button>
+        </div>
+      </form>
+    </article>
+  </div>
 </main>
