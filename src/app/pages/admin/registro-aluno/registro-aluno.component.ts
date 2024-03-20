@@ -88,8 +88,8 @@ export class RegistroAlunoComponent {
 
   ApiBushido = environment.urlApi + 'aluno'
   private readonly token = localStorage.getItem('token')
-  private deficiencia = ''
-  private acompanhamentoSaude = ''
+  deficiencia = ''
+  acompanhamentoSaude = ''
   registrarAluno() {
     this.aluno.responsaveis.unshift(this.responsavel)
     console.log(this.aluno)

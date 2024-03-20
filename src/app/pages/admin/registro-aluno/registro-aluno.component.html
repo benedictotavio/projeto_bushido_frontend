@@ -489,12 +489,12 @@
               />
               <button (click)="adicionarDeficiencia()">Adicionar</button>
             </div>
-            <div *ngIf="arrayDeficiencia.length > 0">
+            <div *ngIf="historicoSaude.deficiencia.length > 0">
               <div class="panel panel-default">
                 <div class="panel-heading">Strings Added:</div>
                 <div class="panel-body">
                   <ul>
-                    <li *ngFor="let str of arrayDeficiencia">{{ str }}</li>
+                    <li *ngFor="let str of historicoSaude.deficiencia">{{ str }}</li>
                   </ul>
                 </div>
               </div>
@@ -514,12 +514,12 @@
               />
               <button (click)="adicionarAcompanhamento()">Adicionar</button>
             </div>
-            <div *ngIf="arrayAcompanhamentoSaude.length > 0">
+            <div *ngIf="historicoSaude.acompanhamentoSaude.length > 0">
               <div class="panel panel-default">
                 <div class="panel-heading">Strings Added:</div>
                 <div class="panel-body">
                   <ul>
-                    <li *ngFor="let str of arrayAcompanhamentoSaude">{{ str }}</li>
+                    <li *ngFor="let str of historicoSaude.acompanhamentoSaude">{{ str }}</li>
                   </ul>
                 </div>
               </div>
