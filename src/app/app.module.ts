@@ -32,7 +32,7 @@ import { RegistroComponent } from './pages/admin/registro/registro.component'
 import { AdminComponent } from './pages/admin/admin/admin.component'
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 import { BlogCardComponent } from './components/blog-card/blog-card.component'
-import { ArtigoComponent } from './components/artigo/artigo.component';
+import { ArtigoComponent } from './components/artigo/artigo.component'
 import { RegistroAlunoComponent } from './pages/admin/registro-aluno/registro-aluno.component'
 
 @NgModule({
