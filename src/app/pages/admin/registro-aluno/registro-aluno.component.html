@@ -249,80 +249,39 @@
           </div>
 
           <div class="mt-4">
-            <div class="row">
-              <p>Aluno contribui para a renda?</p>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="alunoContribuiParaRenda"
-                  id="sim"
-                  value="SIM"
-                  [(ngModel)]="aluno.dadosSociais.alunoContribuiParaRenda"
-                />
-                <label class="form-check-label" for="sim">Sim</label>
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  id="nao"
-                  value="NAO"
-                  name="alunoNãoContribuiParaRenda"
-                  [(ngModel)]="aluno.dadosSociais.alunoContribuiParaRenda"
-                />
-                <label class="form-check-label" for="nao">Não</label>
-              </div>
+            <div class="mb-3 form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="bolsaFamilia"
+                name="bolsaFamilia"
+                [(ngModel)]="aluno.dadosSociais.bolsaFamilia"
+              />
+              <label class="form-check-label" for="bolsaFamilia">Bolsa Família</label>
             </div>
-            <div class="row mt-4">
-              <p>Possui Bolsa Familia?</p>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  id="sim"
-                  value="SIM"
-                  [(ngModel)]="aluno.dadosSociais.bolsaFamilia"
-                  name="bolsaFamilia"
-                />
-                <label class="form-check-label" for="sim">Sim</label>
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="bolsaFamiliaNao"
-                  id="nao"
-                  value="NAO"
-                  [(ngModel)]="aluno.dadosSociais.bolsaFamilia"
-                />
-                <label class="form-check-label" for="nao">Não</label>
-              </div>
+
+            <div class="mb-3 form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="auxilioBrasil"
+                name="auxilioBrasil"
+                [(ngModel)]="aluno.dadosSociais.auxilioBrasil"
+              />
+              <label class="form-check-label" for="auxilioBrasil">Auxílio Brasil</label>
             </div>
-            <div class="row mt-4">
-              <p>Faz parte do programa Auxilio Brasil?</p>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="auxilioBrasil"
-                  id="sim"
-                  value="SIM"
-                  [(ngModel)]="aluno.dadosSociais.auxilioBrasil"
-                />
-                <label class="form-check-label" for="sim">Sim</label>
-              </div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="auxilioBrasilNao"
-                  id="nao"
-                  value="NAO"
-                  [(ngModel)]="aluno.dadosSociais.auxilioBrasil"
-                />
-                <label class="form-check-label" for="nao">Não</label>
-              </div>
+
+            <div class="mb-3 form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="alunoContribuiParaRenda"
+                name="alunoContribuiParaRenda"
+                [(ngModel)]="aluno.dadosSociais.alunoContribuiParaRenda"
+              />
+              <label class="form-check-label" for="alunoContribuiParaRenda"
+                >Aluno Contribui para Renda</label
+              >
             </div>
           </div>
         </div>

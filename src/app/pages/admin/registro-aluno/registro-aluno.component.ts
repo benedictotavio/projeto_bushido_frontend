@@ -62,7 +62,7 @@ export class RegistroAlunoComponent {
   dadosSociais: DadosSociaisProps = {
     bolsaFamilia: false,
     auxilioBrasil: false,
-    imovel: 'PRÓPRIO',
+    imovel: 'PROPRIO',
     numerosDePessoasNaCasa: 0,
     contribuintesDaRendaFamiliar: 0,
     alunoContribuiParaRenda: false,
@@ -114,9 +114,8 @@ export class RegistroAlunoComponent {
             localStorage.removeItem('token')
             this.router.navigate(['/admin'])
           }
-          if (error.status === 403) {
-            localStorage.removeItem('token')
-            this.router.navigate(['/admin'])
+          if (error.status === 403 || error.status === 422) {
+            window.alert('Todos os campos devem ser preenchidos corretamente')
           }
           console.error(error)
         }

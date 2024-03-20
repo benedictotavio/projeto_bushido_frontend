@@ -18,7 +18,7 @@ interface AlunoProps {
 interface DadosSociaisProps {
   bolsaFamilia: boolean
   auxilioBrasil: boolean
-  imovel: 'CEDIDO' | 'ALUGADO' | 'PRÓPRIO' // Enum for imovel
+  imovel: 'CEDIDO' | 'ALUGADO' | 'PROPRIO' // Enum for imovel
   numerosDePessoasNaCasa: number
   contribuintesDaRendaFamiliar: number
   alunoContribuiParaRenda: boolean
