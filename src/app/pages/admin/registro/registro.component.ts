@@ -27,7 +27,7 @@ export class RegistroComponent {
 
   register() {
     this.http
-      .post<{ email: string; nome: string }>(this.ApiBushido, this.user, {
+      .post<{ id: string; nome: string }>(this.ApiBushido, this.user, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -36,7 +36,10 @@ export class RegistroComponent {
       .subscribe(
         response => {
           window.alert(`admin ${response.nome} foi registrado concluído com sucesso!`)
-          this.router.navigate([`/admin/${this.route.snapshot.paramMap.get('email')}`])
+          this.router.navigate([
+            `/admin/${this.route.snapshot.paramMap.get('email')}/aluno`,
+            response.id,
+          ])
         },
         error => {
           if (error.status === 403) {

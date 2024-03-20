@@ -30,7 +30,6 @@ export class AdminComponent {
         localStorage.setItem('token', response.token)
       },
       error => {
-        console.error(error)
         if (error.status === 401) {
           this.router.navigate(['/admin'])
           window.alert('Email ou senha inválidos')
