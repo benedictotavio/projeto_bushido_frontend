@@ -85,13 +85,15 @@ export class RegistroAlunoComponent {
     },
     historicoSaude: this.historicoSaude,
   }
-
-  ApiBushido = environment.urlApi + 'aluno'
   private readonly token = localStorage.getItem('token')
+
+  email = this.route.snapshot.paramMap.get('email')
+  ApiBushido = environment.urlApi + 'aluno'
   deficiencia = ''
   acompanhamentoSaude = ''
   registrarAluno() {
     this.aluno.responsaveis.unshift(this.responsavel)
+    this.aluno.nome = this.aluno.nome + ' ' + this.aluno.sobrenome
     console.log(this.aluno)
     console.log(JSON.stringify(this.aluno))
     this.http
@@ -101,31 +103,29 @@ export class RegistroAlunoComponent {
           Authorization: `Bearer ${this.token}`,
         },
       })
-      .subscribe(
-        response => {
-          this.router.navigate([
-            `/admin/${this.route.snapshot.paramMap.get('email')}/aluno`,
-            this.aluno.rg,
-          ])
-          window.alert(response.message)
+      .subscribe({
+        next: res => {
+          window.alert(res.message)
+          this.router.navigate([`/admin/${this.email}/aluno`, res.id])
         },
-        error => {
-          if (error.status === 401) {
+        error: err => {
+          console.log(err)
+          if (err.status === 401) {
+            window.confirm('O token informado é inválido')
             localStorage.removeItem('token')
             this.router.navigate(['/admin'])
           }
-          if (error.status === 403) {
-            window.alert('Todos os campos devem ser preenchidos corretamente')
+          if (err.status === 403) {
+            window.confirm('Preencha todas as propriedades corretamente')
           }
-          if (error.status === 409) {
-            window.alert('O RG informado já foi registrado')
+          if (err.status === 422) {
+            window.confirm('Todos os campos devem ser preenchidos corretamente')
           }
-          if (error.status === 422) {
-            window.alert('Preencha todos os campos')
+          if (err.status === 409) {
+            window.confirm('O email informado já foi registrado')
           }
-          console.error(error)
-        }
-      )
+        },
+      })
   }
 
   adicionarAcompanhamento() {
