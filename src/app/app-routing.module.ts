@@ -15,7 +15,9 @@ import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 import { RegistroComponent } from './pages/admin/registro/registro.component'
 import { AuthGuard } from '../app/pages/admin/auth.guard'
 import { ArtigoComponent } from './components/artigo/artigo.component'
-import { RegistroAlunoComponent } from './pages/admin/registro-aluno/registro-aluno.component'
+
+import { SessaoAlunoComponent } from './pages/admin/aluno/sessao-aluno/sessao-aluno.component'
+import { RegistroAlunoComponent } from './pages/admin/aluno/registro-aluno/registro-aluno.component'
 
 const routes: Routes = [
   {
@@ -37,6 +39,11 @@ const routes: Routes = [
     path: 'admin/:email/aluno',
     canActivate: [AuthGuard],
     component: RegistroAlunoComponent,
+  },
+  {
+    path: 'admin/:email/aluno/:rg',
+    canActivate: [AuthGuard],
+    component: SessaoAlunoComponent,
   },
   { path: '', component: HomeComponent, title: 'Home | Instituto Bushido' },
   { path: 'quem-somos', component: QuemSomosComponent, title: 'Quem Somos | Instituto Bushido' },

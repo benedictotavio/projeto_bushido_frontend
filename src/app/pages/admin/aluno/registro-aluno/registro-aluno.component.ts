@@ -85,9 +85,10 @@ export class RegistroAlunoComponent {
     },
     historicoSaude: this.historicoSaude,
   }
-
-  ApiBushido = environment.urlApi + 'aluno'
   private readonly token = localStorage.getItem('token')
+
+  email = this.route.snapshot.paramMap.get('email')
+  ApiBushido = environment.urlApi + 'aluno'
   deficiencia = ''
   acompanhamentoSaude = ''
   registrarAluno() {
@@ -105,7 +106,7 @@ export class RegistroAlunoComponent {
       .subscribe({
         next: res => {
           window.alert(res.message)
-          this.router.navigate(['/admin', this.route.snapshot.paramMap.get('email')])
+          this.router.navigate([`/admin/${this.email}/aluno`, res.id])
         },
         error: err => {
           console.log(err)
