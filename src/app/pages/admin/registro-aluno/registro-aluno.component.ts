@@ -114,8 +114,14 @@ export class RegistroAlunoComponent {
             localStorage.removeItem('token')
             this.router.navigate(['/admin'])
           }
-          if (error.status === 403 || error.status === 422) {
+          if (error.status === 403) {
             window.alert('Todos os campos devem ser preenchidos corretamente')
+          }
+          if (error.status === 409) {
+            window.alert('O RG informado já foi registrado')
+          }
+          if (error.status === 422) {
+            window.alert('Preencha todos os campos')
           }
           console.error(error)
         }
