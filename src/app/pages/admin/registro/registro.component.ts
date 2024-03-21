@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component } from '@angular/core'
 import { User } from '../user.interface'
 import { HttpClient } from '@angular/common/http'
 import { environment } from '../../../../environments/environment'
@@ -33,15 +33,15 @@ export class RegistroComponent {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       })
-      .subscribe(
-        response => {
-          window.alert(`admin ${response.nome} foi registrado concluído com sucesso!`)
+      .subscribe({
+        next: response => {
+          window.alert(response)
           this.router.navigate([
             `/admin/${this.route.snapshot.paramMap.get('email')}/aluno`,
             response.id,
           ])
         },
-        error => {
+        error: error => {
           if (error.status === 403) {
             localStorage.removeItem('token')
             this.router.navigate(['/admin'])
@@ -50,7 +50,8 @@ export class RegistroComponent {
           } else if (error.status == 409) {
             window.confirm('O email informado já foi registrado')
           }
-        }
+        },
+      }
       )
   }
 }
