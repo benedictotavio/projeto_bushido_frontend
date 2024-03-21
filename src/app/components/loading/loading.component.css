@@ -15,3 +15,7 @@
   width: 200px;
   height: 200px;
 }
+
+.loading .sr-only {
+  display: none;
+}
