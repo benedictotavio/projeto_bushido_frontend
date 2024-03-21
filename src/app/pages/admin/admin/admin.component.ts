@@ -20,7 +20,7 @@ export class AdminComponent {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   ApiBushido = environment.urlApi + 'admin/login'
