@@ -51,7 +51,6 @@ export class RegistroComponent {
             window.confirm('O email informado já foi registrado')
           }
         },
-      }
-      )
+      })
   }
 }

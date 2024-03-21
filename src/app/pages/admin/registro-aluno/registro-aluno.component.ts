@@ -126,7 +126,7 @@ export class RegistroAlunoComponent {
         },
       })
   }
-  
+
   adicionarAcompanhamento() {
     if (this.acompanhamentoSaude.trim() !== '') {
       this.historicoSaude.acompanhamentoSaude.push(this.acompanhamentoSaude)
