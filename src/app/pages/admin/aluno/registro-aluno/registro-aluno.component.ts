@@ -94,8 +94,6 @@ export class RegistroAlunoComponent {
   registrarAluno() {
     this.aluno.responsaveis.unshift(this.responsavel)
     this.aluno.nome = this.aluno.nome + ' ' + this.aluno.sobrenome
-    console.log(this.aluno)
-    console.log(JSON.stringify(this.aluno))
     this.http
       .post<{ id: string; message: string }>(this.ApiBushido, this.aluno, {
         headers: {
