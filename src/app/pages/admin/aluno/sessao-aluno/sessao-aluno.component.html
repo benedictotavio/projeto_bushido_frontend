@@ -1,3 +1,49 @@
+<main class="container-fluid">
+  <div class="mt-1">
+    <a class="btn btn-primary" routerLink="/admin/{{email}}">Voltar para o Dashboard</a>
+  </div>
+  
+  <div class="row">
+
+    <article class="col d-flex mt-2 justify-content-center">
+      <!---Dados do aluno-->
+      <div *ngIf='aluno' class="border border-solid rounded-1  border-primary p-5">
+        <h2 class="text-center mb-3">Dados do Aluno</h2>
+        <hr>
+        <p>Nome: {{ aluno.nome }}</p>
+        <hr>
+        <p>Data de Nascimento: {{ aluno.dataNascimento }}</p>
+        <hr>
+        <p>Gênero: {{ aluno.genero }}</p>
+        <hr>
+        <p>Dados Sociais: {{aluno.dadosSociais}}</p>
+        <hr>
+        <p>dadosEscolares: {{aluno.dadosEscolares}}</p>
+        <hr>
+        <p>Data Preenchimento: {{aluno.dataPreenchimento}}</p>
+        <hr>
+        <p>Endereço: {{aluno.endereco}}</p>
+        <hr>
+        <p>RG: {{aluno.rg}}</p>
+        <hr>
+        <p>Responsaveis: {{aluno.responsaveis}}</p>
+        <hr>
+        <p>Graduação: {{aluno.graduacao}}</p>
+        <hr>
+        <p>Histórico de Saúde: {{aluno.historicoSaude}}</p>
+        <hr>
+      </div>
+    </article>
+  </div>
+</main>
+
+
+
+
+
+
+
+<!----
 <div class="container mt-4">
   <div>
     <a href="/admin/{{ email }}">Voltar para o dashboard</a>
@@ -8,3 +54,5 @@
     </div>
   </div>
 </div>
+
+-->
