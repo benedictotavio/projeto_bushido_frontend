@@ -52,7 +52,7 @@ interface Endereco {
   numero: string
 }
 
-export interface AlunoResponse{
+export interface AlunoResponse {
   nome: string
   dataNascimento: string
   genero: string
