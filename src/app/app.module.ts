@@ -37,7 +37,7 @@ import { LoadingService } from './services/services-admin/service-loading.servic
 import { LoadingInterceptor } from './loading.interceptor'
 import { LoadingComponent } from './components/loading/loading.component'
 import { SessaoAlunoComponent } from './pages/admin/aluno/sessao-aluno/sessao-aluno.component'
-import { RegistroAlunoComponent } from './pages/admin/aluno/registro-aluno/registro-aluno.component';
+import { RegistroAlunoComponent } from './pages/admin/aluno/registro-aluno/registro-aluno.component'
 import { BuscarAlunoComponent } from './pages/admin/buscar-aluno/buscar-aluno.component'
 
 @NgModule({
