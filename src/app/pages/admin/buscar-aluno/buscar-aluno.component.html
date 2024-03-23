@@ -13,7 +13,7 @@
              </form>
         </div>
     </div>
-    <div class="row" >
+    <div class="row" *ngIf="aluno">
             <div class="col-12">
                 <div class="card card-margin">
                     <div class="card-body">
@@ -96,7 +96,7 @@
                                                         
                                                         
                                                             <div class="widget-26-job-category">
-                                                                <a routerLink="admin/{{email}}/aluno/buscar/{{rg}}"  class="btn btn-primary">Ver todos os dados</a>
+                                                                <a routerLink="admin/{{email}}/aluno/{{rg}}"  class="btn btn-primary">Ver todos os dados</a>
                                                             </div>
                                         </div>
                                     </div>

@@ -42,6 +42,7 @@ const routes: Routes = [
   },
   {
     path: 'admin/:email/aluno/buscar',
+    canActivate: [AuthGuard],
     component: BuscarAlunoComponent,
   },
   {
