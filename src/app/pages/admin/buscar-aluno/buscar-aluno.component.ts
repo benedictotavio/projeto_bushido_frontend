@@ -13,7 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 export class BuscarAlunoComponent {
   email = this.route.snapshot.paramMap.get('email')
   rg!: string
-  aluno!: AlunoResponse | any
+  aluno: AlunoResponse |  undefined
 
   constructor(
     private http: HttpClient,
@@ -27,10 +27,11 @@ export class BuscarAlunoComponent {
 
     this.http.get(apiUrl).subscribe(
       response => {
-        this.aluno = response
+        this.aluno = response as AlunoResponse
         console.log('Aluno Encontrado')
+        console.log(this.aluno)
       },
-      (error)=> {
+      error => {
         window.alert('Rg Não existe')
         console.log(error)
       }

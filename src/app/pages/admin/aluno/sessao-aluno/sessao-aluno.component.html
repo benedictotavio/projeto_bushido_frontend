@@ -1,42 +1,93 @@
-<main class="container-fluid">
+<main class="container-fluid py-3">
   <div class="mt-1">
     <a class="btn btn-primary" routerLink="/admin/{{email}}">Voltar para o Dashboard</a>
   </div>
   
-  <div class="row">
+  <div class="row mt-3">
 
     <article class="col d-flex mt-2 justify-content-center">
       <!---Dados do aluno-->
-      <div *ngIf='aluno' class="border border-solid rounded-1  border-primary p-5">
-        <h2 class="text-center mb-3">Dados do Aluno</h2>
-        <hr>
-        <p>Nome: {{ aluno.nome }}</p>
-        <hr>
-        <p>Data de Nascimento: {{ aluno.dataNascimento }}</p>
-        <hr>
-        <p>Gênero: {{ aluno.genero }}</p>
-        <hr>
-        <p>Dados Sociais: {{aluno.dadosSociais}}</p>
-        <hr>
-        <p>Dados Escolares: {{aluno.dadosEscolares}}</p>
-        <hr>
-        <p>Data Preenchimento: {{aluno.dataPreenchimento}}</p>
-        <hr>
-        <p>Endereço: {{aluno.endereco}}</p>
-        <hr>
-        <p>RG: {{aluno.rg}}</p>
-        <hr>
-        <p>Responsáveis: {{aluno.responsaveis}}</p>
-        <hr>
-        <p>Graduação: {{aluno.graduacao}}</p>
-        <hr>
-        <p>Histórico de Saúde: {{aluno.historicoSaude}}</p>
-        <hr>
+      <div *ngIf='aluno' class=" aluno d-flex flex-wrap gap-5 justify-content-center  p-5">
+        <div>
+          <h2 class="text-center mb-3">Dados do Aluno</h2>
+          <ul>
+            <li>Nome: {{ aluno.nome }}</li>
+         
+          <li>Data de Nascimento: {{ aluno.dataNascimento | date: 'dd/MM/yyyy' }}</li>
+          <li>Gênero: {{ aluno.genero }}</li>
+          <li>Data Preenchimento: {{aluno.dataPreenchimento | date: 'dd/MM/yyyy'}}</li>
+          <li>RG: {{aluno.rg}}</li>
+          </ul>
+          
+        </div>
+        <div>
+          <h2 class="text-center">Dados Sociais </h2>
+          <ul class="mt-3">
+            <li>Bolsa Fámilia: {{ aluno.dadosSociais.bolsaFamilia ? 'Tem bolsa fámilia': 'Não tem Bolsa fámilia' }}</li>
+            <li>Auxílio Brasil: {{ aluno.dadosSociais.auxilioBrasil ? 'Possuí' : 'Não Possuí'}}</li>
+            <li>Contribuintes da Renda Familiar: {{ aluno.dadosSociais.contribuintesDaRendaFamiliar}} pessoas</li>
+            <li>Aluno contribuiu para renda: {{aluno.dadosSociais.alunoContribuiParaRenda ? 'Contribuí' : 'Não Contribuí' }}</li>
+            <li>Renda Familiar em salários Mínimos: R${{aluno.dadosSociais.rendaFamiliarEmSalariosMinimos}} Reais</li>
+          </ul>
+          
+        </div>
+        
+        <div>
+          <h2 class="text-center">Dados Escolares</h2>
+          <ul class="mt-3">
+           <li>Turno: {{aluno.dadosEscolares.turno}}</li>
+           <li>Escola: {{aluno.dadosEscolares.escola}}</li>
+           <li>Série: {{aluno.dadosEscolares.serie}}</li>
+          </ul>         
+        </div>
+       
+       <div>
+        <h2 class="text-center">Endereço</h2>
+        <ul>
+          <li>Cidade: {{aluno.endereco.cidade}}</li>
+          <li>Estado: {{aluno.endereco.estado}}</li>
+          <li>Cep: {{aluno.endereco.cep}}</li>
+        </ul>
+       </div>
+
+        <div>
+          <h2 class="text-center">Responsáveis</h2>
+          <ul *ngFor="let responsavel of aluno.responsaveis" class="mt-3">
+            <li>Nome: {{responsavel.nome}}</li>
+            <li>CPF: {{responsavel.cpf}}</li>
+            <li>Telefone: {{responsavel.telefone}}</li>
+            <li>Email: {{responsavel.email}}</li>
+            <li>Filiação: {{responsavel.filiacao}}</li>
+          </ul>
+          
+        </div>
+
+        <div>
+          <h2 class="text-center">Graduação</h2>
+          <ul class="mt-3">
+            <li>Kyu: {{aluno.graduacao.kyu}}</li>
+            <li>Frequência: {{aluno.graduacao.frequencia}}</li>
+          </ul>
+          
+        </div>
+        <div>
+          <h2 class="text-center">Histórico de Saúde</h2>
+          <ul class="mt-3">
+            <li>Tipo Sanguineo: {{aluno.historicoSaude.tipoSanguineo}}</li>
+            <li>Fator Rh: {{aluno.historicoSaude.fatorRh}}</li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="text-center">Uso de medicamentos</h2>
+          <ul>
+            <li>Resposta: {{aluno.historicoSaude.usoMedicamento.resposta}}</li>
+            <li>Medicamento: {{aluno.historicoSaude.usoMedicamento.tipo}}</li>
+          </ul>
+        </div>
       </div>
     </article>
   </div>
 </main>
-
 
 
 
