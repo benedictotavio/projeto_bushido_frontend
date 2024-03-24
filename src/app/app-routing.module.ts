@@ -17,7 +17,7 @@ import { AuthGuard } from '../app/pages/admin/auth.guard'
 import { ArtigoComponent } from './components/artigo/artigo.component'
 import { SessaoAlunoComponent } from './pages/admin/aluno/sessao-aluno/sessao-aluno.component'
 import { RegistroAlunoComponent } from './pages/admin/aluno/registro-aluno/registro-aluno.component'
-import { BuscarAlunoComponent } from './pages/admin/buscar-aluno/buscar-aluno.component'
+import { BuscarAlunoComponent } from './pages/admin/aluno/buscar-aluno/buscar-aluno.component'
 
 const routes: Routes = [
   {
