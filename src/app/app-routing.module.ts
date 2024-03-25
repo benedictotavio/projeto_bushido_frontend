@@ -15,9 +15,9 @@ import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 import { RegistroComponent } from './pages/admin/registro/registro.component'
 import { AuthGuard } from '../app/pages/admin/auth.guard'
 import { ArtigoComponent } from './components/artigo/artigo.component'
-
 import { SessaoAlunoComponent } from './pages/admin/aluno/sessao-aluno/sessao-aluno.component'
 import { RegistroAlunoComponent } from './pages/admin/aluno/registro-aluno/registro-aluno.component'
+import { BuscarAlunoComponent } from './pages/admin/aluno/buscar-aluno/buscar-aluno.component'
 
 const routes: Routes = [
   {
@@ -39,6 +39,11 @@ const routes: Routes = [
     path: 'admin/:email/aluno',
     canActivate: [AuthGuard],
     component: RegistroAlunoComponent,
+  },
+  {
+    path: 'admin/:email/aluno/buscar',
+    canActivate: [AuthGuard],
+    component: BuscarAlunoComponent,
   },
   {
     path: 'admin/:email/aluno/:rg',

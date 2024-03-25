@@ -38,6 +38,7 @@ import { LoadingInterceptor } from './loading.interceptor'
 import { LoadingComponent } from './components/loading/loading.component'
 import { SessaoAlunoComponent } from './pages/admin/aluno/sessao-aluno/sessao-aluno.component'
 import { RegistroAlunoComponent } from './pages/admin/aluno/registro-aluno/registro-aluno.component'
+import { BuscarAlunoComponent } from './pages/admin/aluno/buscar-aluno/buscar-aluno.component'
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { RegistroAlunoComponent } from './pages/admin/aluno/registro-aluno/regis
     SessaoAlunoComponent,
     RegistroAlunoComponent,
     LoadingComponent,
+    BuscarAlunoComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [
