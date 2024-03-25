@@ -25,20 +25,22 @@ export class BuscarAlunoComponent {
   buscarAluno() {
     const apiUrl = environment.urlApi + `aluno?rg=${this.rg}`
 
-    this.http.get(apiUrl,{
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      },
-    }).subscribe(
-      response => {
-        this.aluno = response as AlunoResponse
-        console.log('Aluno Encontrado')
-        console.log(this.aluno)
-      },
-      error => {
-        window.alert('Rg Não existe')
-        console.log(error)
-      }
-    )
+    this.http
+      .get(apiUrl, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      })
+      .subscribe(
+        response => {
+          this.aluno = response as AlunoResponse
+          console.log('Aluno Encontrado')
+          console.log(this.aluno)
+        },
+        error => {
+          window.alert('Rg Não existe')
+          console.log(error)
+        }
+      )
   }
 }
