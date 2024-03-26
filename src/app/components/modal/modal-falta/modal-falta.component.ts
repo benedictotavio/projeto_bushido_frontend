@@ -50,6 +50,12 @@ export class ModalFaltaComponent {
           if (error.status === 403) {
             window.confirm('Preencha todas as propriedades corretamente')
           }
+          if (error.status === 404) {
+            window.confirm('Aluno não encontrado')
+          }
+          if (error.status === 409) {
+            window.confirm('Falta ja existente nessa data')
+          }
           if (error.status === 422) {
             window.confirm('Todos os campos devem ser preenchidos corretamente')
           }
