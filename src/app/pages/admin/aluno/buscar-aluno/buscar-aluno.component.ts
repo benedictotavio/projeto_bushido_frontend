@@ -31,16 +31,20 @@ export class BuscarAlunoComponent {
           Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
       })
-      .subscribe(
-        response => {
-          this.aluno = response as AlunoResponse
-          console.log('Aluno Encontrado')
-          console.log(this.aluno)
+      .subscribe({
+        next: data => {
+          this.aluno = data as AlunoResponse
         },
-        error => {
-          window.alert('Rg Não existe')
-          console.log(error)
-        }
-      )
+        error: error => {
+          if (error.status === 401) {
+            window.alert('O token informado é inválido')
+            localStorage.removeItem('token')
+            this.router.navigate(['/admin'])
+          }
+          if (error.status === 404) {
+            window.alert('Aluno não encontrado')
+          }
+        },
+      })
   }
 }
