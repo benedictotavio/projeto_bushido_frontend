@@ -49,8 +49,11 @@ export class SessaoAlunoComponent implements OnInit {
         },
         error: error => {
           if (error.status === 401) {
-            window.confirm('O token informado é inválido')
+            window.confirm(
+              'O admin não esta mais autorizado. Faça o login para continuar a acessar o sistema'
+            )
             localStorage.removeItem('token')
+            this.router.navigate(['/admin'])
           }
           if (error.status === 404) {
             window.confirm('Aluno não encontrado')
@@ -158,6 +161,142 @@ export class SessaoAlunoComponent implements OnInit {
         })
       this.acompanhamentoSaude = ''
     }
+  }
+
+  protected removerFalta(falta: string) {
+    this.http
+      .delete(this.url + `/falta/${this.rg_aluno}?data=${falta}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + this.token,
+        },
+      })
+      .subscribe({
+        next: data => {
+          window.confirm('Falta removida com sucesso')
+          window.location.reload()
+          console.log(data)
+        },
+        error: error => {
+          if (error.status === 401) {
+            window.confirm(
+              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
+            )
+            localStorage.removeItem('token')
+          }
+          if (error.status === 404) {
+            window.confirm('Aluno não encontrado')
+          }
+          if (error.status === 403) {
+            console.error(error)
+            window.confirm('Aluno não possui falta')
+          } else {
+            console.error(error)
+          }
+        },
+      })
+  }
+
+  protected removerAcompanhamentoSaude(acompanhamento: string) {
+    this.http
+      .delete(this.url + `/acompanhamentoSaude/${this.rg_aluno}?acompanhamento=${acompanhamento}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + this.token,
+        },
+      })
+      .subscribe({
+        next: data => {
+          window.confirm('Acompanhamento removido com sucesso')
+          window.location.reload()
+          console.log(data)
+        },
+        error: error => {
+          if (error.status === 401) {
+            window.confirm(
+              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
+            )
+            localStorage.removeItem('token')
+          }
+          if (error.status === 404) {
+            window.confirm('Aluno não encontrado')
+          }
+          if (error.status === 403) {
+            console.error(error)
+            window.confirm('Aluno não possui acompanhamento')
+          } else {
+            console.error(error)
+          }
+        },
+      })
+  }
+
+  protected removerDeficiencia(id: string) {
+    this.http
+      .delete(this.url + `/deficiencia/${this.rg_aluno}?deficiencia=${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + this.token,
+        },
+      })
+      .subscribe({
+        next: data => {
+          window.confirm('Deficiência removida com sucesso')
+          window.location.reload()
+          console.log(data)
+        },
+        error: error => {
+          if (error.status === 401) {
+            window.confirm(
+              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
+            )
+            localStorage.removeItem('token')
+          }
+          if (error.status === 404) {
+            window.confirm('Aluno não encontrado')
+          }
+          if (error.status === 403) {
+            console.error(error)
+            window.confirm('Aluno não possui deficiência')
+          } else {
+            console.error(error)
+          }
+        },
+      })
+  }
+
+  protected removerResponsavel(cpf: string) {
+    console.log(cpf)
+    this.http
+      .delete(this.url + `/responsavel/${this.rg_aluno}?cpf=${cpf}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + this.token,
+        },
+      })
+      .subscribe({
+        next: data => {
+          window.confirm('Responsável removido com sucesso')
+          window.location.reload()
+          console.log(data)
+        },
+        error: error => {
+          if (error.status === 401) {
+            window.confirm(
+              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
+            )
+            localStorage.removeItem('token')
+            this.router.navigate(['/admin'])
+          }
+          if (error.status === 404) {
+            window.confirm('Aluno não encontrado')
+          }
+          if (error.status === 403) {
+            console.error(error)
+            window.confirm('Aluno não possui responsável')
+          }
+        },
+      })
   }
 
   protected setModoEdicao() {

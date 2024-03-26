@@ -1,290 +1,310 @@
 <div class="container rounded bg-white mt-5 mb-5">
-    <div *ngIf="aluno" class="row">
-      <div class="col-md-3 border-right">
-        <button class="btn btn-primary my-3">
-          <a class="text-white text-decoration-none" href="/admin/{{ email }}">Voltar</a>
-        </button>
-        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-          <img
-            class="rounded-circle mt-5"
-            width="150px"
-            src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-            alt="user profile"
-          />
-          <span class="font-weight-bold">
-            {{ aluno.nome }}
-          </span>
-          <span class="font-weight-bold">
-            <span>Inscrição: </span>
-            <b>
-              {{ aluno.dataPreenchimento }}
-            </b>
-          </span>
-          <span class="text-black-50">
-            {{ aluno.rg }}
-          </span>
-        </div>
+  <div *ngIf="aluno" class="row">
+    <div class="col-md-2 border-right">
+      <button class="btn btn-primary ms-2 mt-2">
+        <a class="text-white text-decoration-none" href="/admin/{{ email }}">Voltar</a>
+      </button>
+      <div class="d-flex flex-column align-items-center text-center p-3">
+        <img
+          class="rounded-circle mt-5"
+          src="../../../../../assets/aluno/karate_icon_124461.ico"
+          alt="user profile"
+        />
+        <span class="font-weight-bold">
+          {{ aluno.nome }}
+        </span>
+        <span class="font-weight-bold">
+          <span>Inscrição: </span>
+          <b>
+            {{ aluno.dataPreenchimento }}
+          </b>
+        </span>
+        <span class="text-black-50">
+          {{ aluno.rg }}
+        </span>
       </div>
-      <div class="col-md-5 border-right">
-        <div class="p-3 py-5">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="text-right">Informações de Aluno</h4>
+    </div>
+
+    <div class="col-md-6 border-right">
+      <div class="py-2">
+        <div class="row mt-2">
+          <div class="col-md-6">
+            <label for="nome" class="labels">Nome</label>
+            <input
+              [(ngModel)]="aluno.nome"
+              name="nome"
+              id="nome"
+              type="text"
+              class="form-control"
+              placeholder="Nome"
+            />
           </div>
-          <div class="row mt-2">
-            <div class="col-md-6">
-              <label for="nome" class="labels">Nome</label>
-              <input
-                [(ngModel)]="aluno.nome"
-                name="nome"
-                id="nome"
-                type="text"
-                class="form-control"
-                placeholder="Nome"
-              />
-            </div>
-            <div class="col-md-6">
-              <label for="dataNascimento" class="labels">Data nascimento</label>
-              <input
-                type="date"
-                name="dataNascimento"
-                class="form-control"
-                placeholder="Data de Nascimento"
-                [(ngModel)]="aluno.dataNascimento"
-              />
-            </div>
+          <div class="col-md-6">
+            <label for="dataNascimento" class="labels">Data nascimento</label>
+            <input
+              type="date"
+              name="dataNascimento"
+              class="form-control"
+              placeholder="Data de Nascimento"
+              [(ngModel)]="aluno.dataNascimento"
+            />
           </div>
-          <div class="row mt-3">
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <label for="cidade" class="labels">Cidade</label>
+            <input
+              type="text"
+              name="cidade"
+              id="cidade"
+              class="form-control"
+              placeholder="Cidade"
+              [(ngModel)]="aluno.endereco.cidade"
+            />
+          </div>
+          <div class="col-md-12">
+            <label for="estado" class="labels">Estado</label>
+            <input
+              type="text"
+              name="estado"
+              id="estado"
+              class="form-control"
+              placeholder="Estado"
+              [(ngModel)]="aluno.endereco.estado"
+            />
+          </div>
+          <div class="col-md-9">
+            <label for="cep" class="labels">CEP</label>
+            <input
+              type="text"
+              name="cep"
+              id="cep"
+              class="form-control"
+              placeholder="CEP"
+              [(ngModel)]="aluno.endereco.cep"
+            />
+          </div>
+          <div class="col-md-3">
+            <label for="numero" class="labels">Numero</label>
+            <input
+              type="text"
+              name="numero"
+              id="numero"
+              class="form-control"
+              placeholder="Nº"
+              [(ngModel)]="aluno.endereco.numero"
+            />
+          </div>
+        </div>
+        <div class="row mt-4">
+          <h4>Dados Escolares</h4>
+          <div class="col-md-6">
+            <label for="serie" class="labels">Serie</label>
+            <input
+              type="number"
+              name="serie"
+              id="serie"
+              class="form-control"
+              placeholder="Serie"
+              [(ngModel)]="aluno.dadosEscolares.serie"
+            />
+          </div>
+          <div class="col-md-6 d-flex align-items-end">
+            <select
+              class="turno w-100 my-3 rounded text-center"
+              aria-label="turno"
+              name="turno"
+              [(ngModel)]="aluno.dadosEscolares.turno"
+              id="turno"
+              required
+            >
+              <option value="MANHA">Matutino</option>
+              <option value="TARDE">Tarde</option>
+              <option value="NOITE">Noturno</option>
+            </select>
+          </div>
+          <div class="col-md-12">
+            <label for="escola" class="labels">Escola</label>
+            <input
+              type="text"
+              name="escola"
+              id="escola"
+              class="form-control"
+              placeholder="Escola"
+              [(ngModel)]="aluno.dadosEscolares.escola"
+            />
+          </div>
+        </div>
+        <div class="row mt-4">
+          <h4>Dados Sociais</h4>
+          <div class="col-md-12">
+            <label for="imovel" class="form-label">Imovel</label>
             <div class="col-md-12">
-              <label for="cidade" class="labels">Cidade</label>
-              <input
-                type="text"
-                name="cidade"
-                id="cidade"
-                class="form-control"
-                placeholder="Cidade"
-                [(ngModel)]="aluno.endereco.cidade"
-              />
-            </div>
-            <div class="col-md-12">
-              <label for="estado" class="labels">Estado</label>
-              <input
-                type="text"
-                name="estado"
-                id="estado"
-                class="form-control"
-                placeholder="Estado"
-                [(ngModel)]="aluno.endereco.estado"
-              />
-            </div>
-            <div class="col-md-9">
-              <label for="cep" class="labels">CEP</label>
-              <input
-                type="text"
-                name="cep"
-                id="cep"
-                class="form-control"
-                placeholder="CEP"
-                [(ngModel)]="aluno.endereco.cep"
-              />
-            </div>
-            <div class="col-md-3">
-              <label for="numero" class="labels">Numero</label>
-              <input
-                type="text"
-                name="numero"
-                id="numero"
-                class="form-control"
-                placeholder="Nº"
-                [(ngModel)]="aluno.endereco.numero"
-              />
-            </div>
-          </div>
-          <div class="row mt-4">
-            <h4>Dados Escolares</h4>
-            <div class="col-md-6">
-              <label for="serie" class="labels">Serie</label>
-              <input
-                type="number"
-                name="serie"
-                id="serie"
-                class="form-control"
-                placeholder="Serie"
-                [(ngModel)]="aluno.dadosEscolares.serie"
-              />
-            </div>
-            <div class="col-md-6 d-flex align-items-end">
               <select
-                class="turno h-50 w-100 rounded text-center"
-                aria-label="turno"
-                name="turno"
-                [(ngModel)]="aluno.dadosEscolares.turno"
-                id="turno"
+                class="imovel p-2 w-100"
+                aria-label="imovel"
+                name="imovel"
+                [(ngModel)]="aluno.dadosSociais.imovel"
                 required
               >
-                <option value="MANHA">Matutino</option>
-                <option value="TARDE">Tarde</option>
-                <option value="NOITE">Noturno</option>
+                <option value="CEDIDO">Cedido</option>
+                <option value="ALUGADO">Alugado</option>
+                <option value="PROPRIO">Proprio</option>
               </select>
             </div>
-            <div class="col-md-12">
-              <label for="escola" class="labels">Escola</label>
-              <input
-                type="text"
-                name="escola"
-                id="escola"
-                class="form-control"
-                placeholder="Escola"
-                [(ngModel)]="aluno.dadosEscolares.escola"
-              />
-            </div>
           </div>
-          <div class="row mt-4">
-            <h4>Dados Sociais</h4>
-            <div class="col-md-12">
-              <label for="imovel" class="form-label">Imovel</label>
-              <div class="col-md-12">
-                <select
-                  class="imovel p-2 w-100"
-                  aria-label="imovel"
-                  name="imovel"
-                  [(ngModel)]="aluno.dadosSociais.imovel"
-                  required
+        </div>
+        <div class="row mt-4 d-flex align-items-end">
+          <div class="col-md-3">
+            <label for="rendaFamiliar" class="form-label">Renda Familiar</label>
+            <input
+              name="rendaFamiliar"
+              id="rendaFamiliar"
+              type="text"
+              class="form-control"
+              [(ngModel)]="aluno.dadosSociais.rendaFamiliarEmSalariosMinimos"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="contribuintesDaRenda" class="form-label">Contribuintes da Renda</label>
+            <input
+              name="contribuintesDaRenda"
+              id="contribuintesDaRenda"
+              type="text"
+              class="form-control"
+              [(ngModel)]="aluno.dadosSociais.contribuintesDaRendaFamiliar"
+            />
+          </div>
+          <div class="col-md-3">
+            <label for="pessoasNaCasa" class="form-label">Pessoas na Casa</label>
+            <input
+              name="pessoasNaCasa"
+              id="pessoasNaCasa"
+              type="text"
+              class="form-control"
+              [(ngModel)]="aluno.dadosSociais.numerosDePessoasNaCasa"
+            />
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-12">
+            <h6>Informações socias para dados do aluno?</h6>
+            <div class="mt-4">
+              <div class="mb-3 form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="bolsaFamilia"
+                  name="bolsaFamilia"
+                  [(ngModel)]="aluno.dadosSociais.bolsaFamilia"
+                />
+                <label class="form-check-label" for="bolsaFamilia">Bolsa Família</label>
+              </div>
+
+              <div class="mb-3 form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="auxilioBrasil"
+                  name="auxilioBrasil"
+                  [(ngModel)]="aluno.dadosSociais.auxilioBrasil"
+                />
+                <label class="form-check-label" for="auxilioBrasil">Auxílio Brasil</label>
+              </div>
+
+              <div class="mb-3 form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="alunoContribuiParaRenda"
+                  name="alunoContribuiParaRenda"
+                  [(ngModel)]="aluno.dadosSociais.alunoContribuiParaRenda"
+                />
+                <label class="form-check-label" for="alunoContribuiParaRenda"
+                  >Aluno Contribui para Renda</label
                 >
-                  <option value="CEDIDO">Cedido</option>
-                  <option value="ALUGADO">Alugado</option>
-                  <option value="PROPRIO">Proprio</option>
-                </select>
               </div>
             </div>
           </div>
-          <div class="row mt-4 d-flex align-items-end">
-            <div class="col-md-3">
-              <label for="rendaFamiliar" class="form-label">Renda Familiar</label>
+        </div>
+        <div class="row mt-4">
+          <h4>Historico de Saude</h4>
+          <div class="row mt-4">
+            <div class="col-md-12">
+              <label for="alergia" class="form-label">Alergias</label>
               <input
-                name="rendaFamiliar"
-                id="rendaFamiliar"
+                name="alergia"
+                id="alergia"
                 type="text"
                 class="form-control"
-                [(ngModel)]="aluno.dadosSociais.rendaFamiliarEmSalariosMinimos"
+                [(ngModel)]="aluno.historicoSaude.alergia.tipo"
               />
             </div>
-            <div class="col-md-6">
-              <label for="contribuintesDaRenda" class="form-label">Contribuintes da Renda</label>
+            <div class="col-md-12">
+              <label for="usoMedicamentoContinuo" class="form-label"
+                >Uso de Medicamento Continuo</label
+              >
               <input
-                name="contribuintesDaRenda"
-                id="contribuintesDaRenda"
+                name="usoMedicamentoContinuo"
+                id="usoMedicamentoContinuo"
                 type="text"
                 class="form-control"
-                [(ngModel)]="aluno.dadosSociais.contribuintesDaRendaFamiliar"
+                [(ngModel)]="aluno.historicoSaude.usoMedicamento.tipo"
               />
             </div>
-            <div class="col-md-3">
-              <label for="pessoasNaCasa" class="form-label">Pessoas na Casa</label>
+            <div class="col-md-12">
+              <label for="cirurgia" class="form-label">Cirurgias</label>
               <input
-                name="pessoasNaCasa"
-                id="pessoasNaCasa"
+                name="cirurgia"
+                id="cirurgia"
                 type="text"
                 class="form-control"
-                [(ngModel)]="aluno.dadosSociais.numerosDePessoasNaCasa"
+                [(ngModel)]="aluno.historicoSaude.cirurgia.tipo"
+              />
+            </div>
+            <div class="col-md-12">
+              <label for="doencaCronica" class="form-label">Doenca cronica</label>
+              <input
+                name="doencaCronica"
+                id="doencaCronica"
+                type="text"
+                class="form-control"
+                [(ngModel)]="aluno.historicoSaude.doencaCronica.tipo"
               />
             </div>
           </div>
           <div class="row mt-4">
-            <div class="col-md-12">
-              <h6>Informações socias para dados do aluno?</h6>
-              <div class="mt-4">
-                <div class="mb-3 form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="bolsaFamilia"
-                    name="bolsaFamilia"
-                    [(ngModel)]="aluno.dadosSociais.bolsaFamilia"
-                  />
-                  <label class="form-check-label" for="bolsaFamilia">Bolsa Família</label>
+            <div class="row mt-4">
+              <div class="d-flex justify-content-end m-5" *ngIf="!modoEdicao">
+                <button
+                  (click)="setModoEdicao()"
+                  class="btn btn-primary profile-button"
+                  type="button"
+                >
+                  Editar
+                </button>
+              </div>
+              <div *ngIf="modoEdicao">
+                <div>
+                  <h5>Insire as novas Informações:</h5>
                 </div>
-  
-                <div class="mb-3 form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="auxilioBrasil"
-                    name="auxilioBrasil"
-                    [(ngModel)]="aluno.dadosSociais.auxilioBrasil"
-                  />
-                  <label class="form-check-label" for="auxilioBrasil">Auxílio Brasil</label>
-                </div>
-  
-                <div class="mb-3 form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="alunoContribuiParaRenda"
-                    name="alunoContribuiParaRenda"
-                    [(ngModel)]="aluno.dadosSociais.alunoContribuiParaRenda"
-                  />
-                  <label class="form-check-label" for="alunoContribuiParaRenda"
-                    >Aluno Contribui para Renda</label
+                <div class="d-flex justify-content-between my-5" v>
+                  <button
+                    (click)="setModoEdicao()"
+                    class="btn btn-primary profile-button"
+                    type="button"
                   >
+                    Cancelar
+                  </button>
+                  <button
+                    (click)="adicionarDeficiencia()"
+                    class="btn btn-primary profile-button"
+                    type="button"
+                  >
+                    Salvar
+                  </button>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="row mt-4">
-            <h4>Historico de Saude</h4>
-            <div class="row mt-4">
-              <div class="col-md-12">
-                <label for="alergia" class="form-label">Alergias</label>
-                <input
-                  name="alergia"
-                  id="alergia"
-                  type="text"
-                  class="form-control"
-                  [(ngModel)]="aluno.historicoSaude.alergia.tipo"
-                />
-              </div>
-              <div class="col-md-12">
-                <label for="usoMedicamentoContinuo" class="form-label"
-                  >Uso de Medicamento Continuo</label
-                >
-                <input
-                  name="usoMedicamentoContinuo"
-                  id="usoMedicamentoContinuo"
-                  type="text"
-                  class="form-control"
-                  [(ngModel)]="aluno.historicoSaude.usoMedicamento.tipo"
-                />
-              </div>
-              <div class="col-md-12">
-                <label for="cirurgia" class="form-label">Cirurgias</label>
-                <input
-                  name="cirurgia"
-                  id="cirurgia"
-                  type="text"
-                  class="form-control"
-                  [(ngModel)]="aluno.historicoSaude.cirurgia.tipo"
-                />
-              </div>
-              <div class="col-md-12">
-                <label for="doencaCronica" class="form-label">Doenca cronica</label>
-                <input
-                  name="doencaCronica"
-                  id="doencaCronica"
-                  type="text"
-                  class="form-control"
-                  [(ngModel)]="aluno.historicoSaude.doencaCronica.tipo"
-                />
-              </div>
-            </div>
-            <div class="row mt-4">
-              <div class="row mt-4">
-                <div class="d-flex justify-content-end m-5" *ngIf="!modoEdicao">
-                  <button (click)="setModoEdicao()" class="btn btn-primary profile-button" type="button">Editar</button>
-                </div>
-                <div class="d-flex justify-content-around m-5" *ngIf="modoEdicao">
-                  <button (click)="setModoEdicao()" class="btn btn-primary profile-button" type="button">Cancelar</button>
-                  <button (click)="adicionarDeficiencia()" class="btn btn-primary profile-button" type="button">Salvar</button>
-                </div>
               <div *ngIf="modoEdicao">
                 <input
                   class="w-75 m-1"
@@ -300,18 +320,37 @@
                   </button>
                 </div>
               </div>
-  
-              <div *ngIf="aluno.historicoSaude.deficiencias.length > 0">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h5>Deficiencias</h5>
-                  </div>
+
+              <div>
+                <div class="panel-heading">
+                  <h5>Deficiencias</h5>
+                </div>
+                <div
+                  class="panel panel-default"
+                  *ngIf="aluno.historicoSaude.deficiencias.length > 0"
+                >
                   <div class="panel-body">
                     <ul class="d-flex flex-wrap">
                       <li
                         class="bg-info rounded m-2 py-2 px-3 text-white"
                         *ngFor="let str of aluno.historicoSaude.deficiencias"
                       >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-x-circle text-white"
+                          viewBox="0 0 16 16"
+                          (click)="removerDeficiencia(str)"
+                        >
+                          <path
+                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
+                          />
+                          <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
+                          />
+                        </svg>
                         {{ str }}
                       </li>
                     </ul>
@@ -319,7 +358,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="row mt-4">
               <div *ngIf="modoEdicao">
                 <input
@@ -336,17 +375,36 @@
                   </button>
                 </div>
               </div>
-              <div *ngIf="aluno.historicoSaude.acompanhamentoSaude.length > 0">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h5>Acompanhamento de saúde</h5>
-                  </div>
+              <div>
+                <div class="panel-heading">
+                  <h5>Acompanhamento de saúde</h5>
+                </div>
+                <div
+                  class="panel panel-default"
+                  *ngIf="aluno.historicoSaude.acompanhamentoSaude.length > 0"
+                >
                   <div class="panel-body">
                     <ul class="d-flex flex-wrap">
                       <li
                         class="bg-info rounded m-2 py-2 px-3 text-white"
                         *ngFor="let str of aluno.historicoSaude.acompanhamentoSaude"
                       >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-x-circle text-white"
+                          viewBox="0 0 16 16"
+                          (click)="removerAcompanhamentoSaude(str)"
+                        >
+                          <path
+                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
+                          />
+                          <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
+                          />
+                        </svg>
                         {{ str }}
                       </li>
                     </ul>
@@ -354,56 +412,171 @@
                 </div>
               </div>
             </div>
-            </div>
-          <div class="mt-5 text-right">
-            <button (click)="editarAlunoPorRg()" class="btn btn-primary profile-button" type="button">
-              Save Profile
+          </div>
+          <div class="mt-5 d-flex justify-content-center">
+            <button
+              (click)="editarAlunoPorRg()"
+              class="btn btn-primary profile-button w-75 h-100"
+              type="button"
+            >
+              Salvar Aluno
             </button>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="p-3 py-5">
-          <div class="d-flex justify-content-between align-items-center experience">
-            <span>Edit Experience</span>
-            <span class="border px-3 p-1 add-experience"
-              ><i class="fa fa-plus"></i>&nbsp;Experience</span
-            >
-          </div>
-          <br />
-          <div class="col-md-12">
-            <h5>Responsaveis</h5>
-            <div *ngFor="let responsavel of aluno.responsaveis" class="card">
-              <div class="card-body row">
-                <div class="col-4 d-flex align-items-center">
-                  <img
-                    src="https://img.icons8.com/bubbles/100/000000/user.png"
-                    class="img-radius"
-                    alt="User-Profile"
-                  />
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <h5 class="card-title">Graduação</h5>
                 </div>
-                <div class="col-8">
+                <div *ngIf="aluno.graduacao.status">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-person-check text-success"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4"
+                    />
+                    <path
+                      d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"
+                    />
+                  </svg>
+                </div>
+                <div *ngIf="!aluno.graduacao.status">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-person-x text-danger"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"
+                    />
+                    <path
+                      d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <h6 class="card-subtitle mb-2 text-muted mb-4">1 Dan</h6>
+              <div class="card-text">
+                <div class="d-flex justify-content-between container">
                   <div>
-                    <span>{{ responsavel.filiacao }}</span>
-                    <h5 class="card-title">{{ responsavel.nome }}</h5>
+                    <h6>Faltas</h6>
                   </div>
                   <div>
-                    <div>
-                      <span class="card-text">{{ responsavel.cpf }}</span>
+                    <app-modal-falta></app-modal-falta>
+                  </div>
+                </div>
+                <ul class="list-group mb-3">
+                  <li
+                    *ngFor="let falta of aluno.graduacao.faltas"
+                    class="list-group-item container"
+                  >
+                    <div class="d-flex justify-content-between mb-3 mt-3 align-items-center">
+                      <h5>
+                        {{ falta.data }}
+                      </h5>
+
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-trash3 text-black me-3"
+                        viewBox="0 0 16 16"
+                        (click)="removerFalta(falta.data)"
+                      >
+                        <path
+                          d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"
+                        />
+                      </svg>
                     </div>
-                    <div>
-                      <span class="card-text">{{ responsavel.email }}</span>
-                    </div>
-                    <div>
-                      <span class="card-text">{{ responsavel.telefone }}</span>
-                    </div>
+
+                    <p>{{ falta.motivo }}</p>
+
+                    <p *ngIf="falta.observacao">
+                      <span class="badge bg-danger"> {{ falta.observacao }}</span>
+                    </p>
+                  </li>
+                </ul>
+                <p class="text-muted text-center mt-2 mb-5" *ngIf="!aluno.graduacao.faltas.length">
+                  O aluno não possui faltas
+                </p>
+                <p class="text-end">Frequência: {{ aluno.graduacao.frequencia }}</p>
+              </div>
+              <div class="card-footer">
+                <app-modal-historico-graduacao></app-modal-historico-graduacao>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 mt-4">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h5>Responsaveis</h5>
+            </div>
+            <div>
+              <app-janela-modal></app-janela-modal>
+            </div>
+          </div>
+          <div *ngFor="let responsavel of aluno.responsaveis" class="card">
+            <div *ngIf="aluno.responsaveis.length > 1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-trash3 text-black ms-2 mt-2"
+                viewBox="0 0 16 16"
+                (click)="removerResponsavel(responsavel.cpf)"
+              >
+                <path
+                  d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"
+                />
+              </svg>
+            </div>
+            <div class="card-body row">
+              <div class="col-4 d-flex align-items-center">
+                <img
+                  src="https://img.icons8.com/bubbles/100/000000/user.png"
+                  class="img-radius"
+                  alt="User-Profile"
+                />
+              </div>
+              <div class="col-8">
+                <div>
+                  <span>{{ responsavel.filiacao }}</span>
+                  <h5 class="card-title">{{ responsavel.nome }}</h5>
+                </div>
+                <div>
+                  <div>
+                    <span class="card-text">{{ responsavel.cpf }}</span>
+                  </div>
+                  <div>
+                    <span class="card-text">{{ responsavel.email }}</span>
+                  </div>
+                  <div>
+                    <span class="card-text">{{ responsavel.telefone }}</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <br />
         </div>
       </div>
     </div>
   </div>
+</div>

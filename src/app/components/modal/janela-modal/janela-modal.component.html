@@ -1,0 +1,112 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="currentColor"
+  class="bi bi-plus-circle text-black"
+  viewBox="0 0 16 16"
+  data-bs-toggle="modal"
+  data-bs-target="#modalResponsavel"
+>
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+  <path
+    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"
+  />
+</svg>
+
+<div
+  class="modal fade"
+  id="modalResponsavel"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Novo Responsável</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div>
+            <label for="nome" class="form-label">Nome</label>
+            <input
+              type="text"
+              name="nome"
+              [(ngModel)]="responsavel.nome"
+              id="nome"
+              class="form-control"
+              required
+            />
+          </div>
+          <div>
+            <label for="cpf" class="form-label">CPF</label>
+            <input
+              type="text"
+              name="cpf"
+              id="cpf"
+              class="form-control"
+              [(ngModel)]="responsavel.cpf"
+            />
+          </div>
+          <div>
+            <label for="telefone" class="form-label">Telefone</label>
+            <input
+              type="tel"
+              name="telefone"
+              id="telefone"
+              class="form-control"
+              [(ngModel)]="responsavel.telefone"
+            />
+          </div>
+          <div>
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              class="form-control"
+              [(ngModel)]="responsavel.email"
+            />
+          </div>
+          <div class="role-box-radio col-sm-10 d-flex justify-content-between p-4">
+            <div>
+              <input
+                type="radio"
+                name="filiacaoPai"
+                [(ngModel)]="responsavel.filiacao"
+                value="PAI"
+              />
+              <label class="p-2" for="filiacaoPai">Pai</label><br />
+            </div>
+            <div>
+              <input
+                type="radio"
+                name="filiacaoMae"
+                [(ngModel)]="responsavel.filiacao"
+                value="MAE"
+              />
+              <label class="p-2" for="filiacaoMae">Mãe</label><br />
+            </div>
+            <div>
+              <input
+                type="radio"
+                name="filiacaoOutro"
+                [(ngModel)]="responsavel.filiacao"
+                value="OUTRO"
+              />
+              <label class="p-2" for="filiacaoOutro">Outro</label><br />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button (click)="adicionarResponsavel()" type="button" class="btn btn-primary">
+          Adicionar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
