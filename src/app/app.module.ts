@@ -38,9 +38,9 @@ import { LoadingInterceptor } from './loading.interceptor'
 import { LoadingComponent } from './components/loading/loading.component'
 import { SessaoAlunoComponent } from './pages/admin/aluno/sessao-aluno/sessao-aluno.component'
 import { RegistroAlunoComponent } from './pages/admin/aluno/registro-aluno/registro-aluno.component'
-import { BuscarAlunoComponent } from './pages/admin/aluno/buscar-aluno/buscar-aluno.component';
-import { JanelaModalComponent } from './components/modal/janela-modal/janela-modal.component';
-import { ModalFaltaComponent } from './components/modal/modal-falta/modal-falta.component';
+import { BuscarAlunoComponent } from './pages/admin/aluno/buscar-aluno/buscar-aluno.component'
+import { JanelaModalComponent } from './components/modal/janela-modal/janela-modal.component'
+import { ModalFaltaComponent } from './components/modal/modal-falta/modal-falta.component'
 import { ModalHistoricoGraduacaoComponent } from './components/modal/modal-historico-graduacao/modal-historico-graduacao.component'
 
 @NgModule({
