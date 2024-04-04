@@ -17,7 +17,7 @@ export class SessaoAlunoComponent implements OnInit {
   ) {}
 
   private readonly token = localStorage.getItem('token')
-  ShowPlaceholder = true; // Mostrando o placeholder
+  ShowPlaceholder = true // Mostrando o placeholder
 
   aluno: AlunoResponse | undefined
   email = this.route.snapshot.paramMap.get('email')

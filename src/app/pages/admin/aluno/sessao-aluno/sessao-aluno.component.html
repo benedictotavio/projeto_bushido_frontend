@@ -592,8 +592,9 @@
       <div class="d-flex flex-column align-items-center text-center p-3">
         <img
           class="rounded-circle mt-5 placeholder"
-          src =""
-          alt="user profile"
+          src ="#"
+          alt="aluno"
+          style="width: 128px; height: 128px;"
         />
         <span class="font-weight-bold placeholder">
           {{ aluno?.nome }}
@@ -626,7 +627,6 @@
           <div class="col-md-6">
             <label for="dataNascimento"class="labels placeholder">Data nascimento</label>
             <input
-              type="date"
               name="dataNascimento"
               class="form-control placeholder"
               placeholder="Data de Nascimento"
@@ -692,17 +692,7 @@
             />
           </div>
           <div class="col-md-6 d-flex align-items-end">
-            <select
-              class="turno w-100 my-3 rounded text-center placeholder"
-              aria-label="turno"
-              name="turno"
-              id="turno"
-              required
-            >
-              <option value="MANHA">Matutino</option>
-              <option value="TARDE">Tarde</option>
-              <option value="NOITE">Noturno</option>
-            </select>
+            <input type="text" name="" id="" class=" form-control placeholder">
           </div>
           <div class="col-md-12">
             <label for="escola" class="labels placeholder">Escola</label>
@@ -720,16 +710,7 @@
           <div class="col-md-12">
             <label for="imovel" class="form-label placeholder">Imovel</label>
             <div class="col-md-12">
-              <select
-                class="imovel p-2 w-100 placeholder"
-                aria-label="imovel"
-                name="imovel"
-                required
-              >
-                <option value="CEDIDO">Cedido</option>
-                <option value="ALUGADO">Alugado</option>
-                <option value="PROPRIO">Proprio</option>
-              </select>
+              <input type="text" name="" id="" class="form-control placeholder">
             </div>
           </div>
         </div>
@@ -900,21 +881,21 @@
                   <div class="panel-body">
                     <ul class="d-flex flex-wrap">
                       <li
-                        class="bg-info rounded m-2 py-2 px-3 text-white placeholder"
+                        class="bg-dark rounded m-2 py-2 px-3 text-white placeholder"
                       >
                         <svg
-                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns=""
                           width="16"
                           height="16"
                           fill="currentColor"
-                          class="bi bi-x-circle text-white placeholder "
+                          class="bi bi-x-circle "
                           viewBox="0 0 16 16"
                         >
                           <path
-                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
+                            d="#"
                           />
                           <path
-                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
+                            d="#"
                           />
                         </svg>
                       </li>
@@ -950,22 +931,22 @@
                   <div class="panel-body">
                     <ul class="d-flex flex-wrap">
                       <li
-                        class="bg-info rounded m-2 py-2 px-3 text-white"
+                        class="bg-dark rounded m-2 py-2 px-3 text-white placeholder"
                         
                       >
                         <svg
-                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns="#"
                           width="16"
                           height="16"
                           fill="currentColor"
-                          class="bi bi-x-circle text-white"
+                          class=""
                           viewBox="0 0 16 16"
                         >
                           <path
-                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
+                            d="#"
                           />
                           <path
-                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
+                            d="#"
                           />
                         </svg>
                         
@@ -1003,7 +984,7 @@
                     width="16"
                     height="16"
                     fill="currentColor"
-                    class="bi bi-person-check text-success placeholder"
+                    class="bi bi-person-check text-dark placeholder"
                     viewBox="0 0 16 16"
                   >
                     <path
@@ -1020,7 +1001,7 @@
                     width="16"
                     height="16"
                     fill="currentColor"
-                    class="bi bi-person-x text-danger placeholder"
+                    class="bi bi-person-x text-dark placeholder"
                     viewBox="0 0 16 16"
                   >
                     <path
@@ -1033,14 +1014,14 @@
                 </div>
               </div>
 
-              <h6 class="card-subtitle mb-2 text-muted mb-4 placeholder">1 Dan</h6>
+              <h6 class="card-subtitle mb-2 text-muted mb-4 placeholder"> <span class="placeholder">1 Dan</span></h6>
               <div class="card-text">
                 <div class="d-flex justify-content-between container">
                   <div>
                     <h6 class="placeholder">Faltas</h6>
                   </div>
-                  <div>
-                    <app-modal-falta class="placeholder"></app-modal-falta>
+                  <div class="">
+                    <app-modal-falta class=" bg-black placeholder"></app-modal-falta>
                   </div>
                 </div>
                 <ul class="list-group mb-3">
@@ -1053,20 +1034,19 @@
                       </h5>
 
                       <svg
-                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns="#"
                         width="16"
                         height="16"
                         fill="currentColor"
-                        class="bi bi-trash3 text-black me-3 placeholder"
+                        class="text-black me-3 placeholder"
                         viewBox="0 0 16 16"
                       >
                         <path
-                          d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"
+                          d="#"
                         />
                       </svg>
                     </div>
 
-                    <p></p>
 
                     <p >
                       <span class="badge bg-danger"></span>
@@ -1074,7 +1054,7 @@
                   </li>
                 </ul>
                 <p class="text-muted text-center mt-2 mb-5 placeholder">
-                  O aluno não possui faltas
+                 <span class="placeholder">o aluno não possui falta</span>
                 </p>
                 <p class="text-end placeholder">Frequência:</p>
               </div>
@@ -1113,8 +1093,8 @@
                 <img
                   src="#"
                   class="rounded-circle placeholder"
-                  alt="Avatar carregando"
-                  aria-hidden="true"
+                  alt="aluno"
+                  style="width: 100px; height: 100px;"
                 />
               </div>
               <div class="col-8">
