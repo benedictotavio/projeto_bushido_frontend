@@ -10,7 +10,6 @@ interface AlunoProps {
   responsaveis: ResponsavelProps[]
   graduacao: {
     kyu: number
-    frequencia: number
   }
   historicoSaude: historicoSaudeProps
 }

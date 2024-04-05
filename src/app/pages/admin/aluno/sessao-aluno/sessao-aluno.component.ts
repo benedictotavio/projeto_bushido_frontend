@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { environment } from 'src/environments/environment'
-import { AlunoResponse } from 'src/app/pages/admin/aluno.interface'
+import { AlunoResponse, Graduacao } from 'src/app/pages/admin/aluno.interface'
 
 @Component({
   selector: 'app-sessao-aluno',
@@ -26,11 +26,23 @@ export class SessaoAlunoComponent implements OnInit {
   acompanhamentoSaude = ''
   url = environment.urlApi + 'aluno'
   modoEdicao = false
+  graduacaoAtual: Graduacao = {
+    kyu: 0,
+    faltas: [],
+    status: false,
+    inicioGraduacao: '',
+    fimGraduacao: '',
+    frequencia: 0,
+    aprovado: false,
+    cargaHoraria: 0,
+    dan: 0,
+  }
+
   ngOnInit(): void {
     this.buscarAlunoPorRg()
   }
 
-  buscarAlunoPorRg() {
+  protected buscarAlunoPorRg() {
     this.http
       .get<AlunoResponse>(this.url + `?rg=${this.rg_aluno}`, {
         headers: {
@@ -39,7 +51,6 @@ export class SessaoAlunoComponent implements OnInit {
       })
       .subscribe({
         next: data => {
-          console.log(data)
           this.aluno = data
           this.aluno.dataPreenchimento = new Date(this.aluno.dataPreenchimento).toLocaleDateString(
             'pt-BR'
@@ -47,6 +58,7 @@ export class SessaoAlunoComponent implements OnInit {
           this.aluno.dataNascimento = new Date(this.aluno.dataNascimento).toLocaleDateString(
             'pt-BR'
           )
+          this.graduacaoAtual = this.aluno.graduacao[this.aluno.graduacao.length - 1]
           this.ShowPlaceholder = false //Tirando o placeholder
         },
         error: error => {
@@ -65,7 +77,7 @@ export class SessaoAlunoComponent implements OnInit {
       })
   }
 
-  editarAlunoPorRg() {
+  protected editarAlunoPorRg() {
     console.log(this.aluno)
     console.log(this.aluno?.dataNascimento)
     const dataNascimento = this.aluno?.dataNascimento as string
@@ -96,7 +108,7 @@ export class SessaoAlunoComponent implements OnInit {
       })
   }
 
-  adicionarDeficiencia() {
+  protected adicionarDeficiencia() {
     if (this.deficiencia.trim() !== '') {
       this.http
         .post<{ id: string; message: string }>(
@@ -130,7 +142,7 @@ export class SessaoAlunoComponent implements OnInit {
     }
   }
 
-  adicionarAcompanhamentoSaude() {
+  protected adicionarAcompanhamentoSaude() {
     if (this.acompanhamentoSaude.trim() !== '') {
       this.http
         .post<{ id: string; message: string }>(
@@ -303,6 +315,80 @@ export class SessaoAlunoComponent implements OnInit {
 
   protected setModoEdicao() {
     this.modoEdicao = !this.modoEdicao
+  }
+
+  protected aprovarAluno() {
+    this.http
+      .post(
+        this.url + `/graduacao/${this.rg_aluno}/aprovar`,
+        {},
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + this.token,
+          },
+        }
+      )
+      .subscribe({
+        next: data => {
+          window.confirm('Aluno aprovado com sucesso')
+          window.location.reload()
+          console.log(data)
+        },
+        error: error => {
+          if (error.status === 401) {
+            window.confirm(
+              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
+            )
+            localStorage.removeItem('token')
+            this.router.navigate(['/admin'])
+          }
+          if (error.status === 404) {
+            window.confirm('Aluno não encontrado')
+          }
+          if (error.status === 403) {
+            console.error(error)
+            window.confirm('Aluno não possui responsável')
+          }
+        },
+      })
+  }
+
+  protected reprovarAluno() {
+    this.http
+      .post(
+        this.url + `/graduacao/${this.rg_aluno}/reprovar`,
+        {},
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + this.token,
+          },
+        }
+      )
+      .subscribe({
+        next: data => {
+          window.confirm('Aluno reprovado com sucesso')
+          window.location.reload()
+          console.log(data)
+        },
+        error: error => {
+          if (error.status === 401) {
+            window.confirm(
+              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
+            )
+            localStorage.removeItem('token')
+            this.router.navigate(['/admin'])
+          }
+          if (error.status === 404) {
+            window.confirm('Aluno não encontrado')
+          }
+          if (error.status === 403) {
+            console.error(error)
+            window.confirm('Aluno não possui responsável')
+          }
+        },
+      })
   }
 
   private setDataNascimento(dataNoFormatoAntigo: string): string {

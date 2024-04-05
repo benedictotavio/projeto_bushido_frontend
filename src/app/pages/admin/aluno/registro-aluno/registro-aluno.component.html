@@ -30,7 +30,7 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-5">
             <div class="form-group">
               <label for="nome">Nome</label>
               <input
@@ -45,7 +45,7 @@
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-5">
             <div class="form-group">
               <label for="sobrenome">Sobrenome</label>
               <input
@@ -55,6 +55,23 @@
                 id="sobrenome"
                 class="form-control"
                 placeholder="Sobrenome"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="kyu">Kyu</label>
+              <input
+                type="number"
+                min="1"
+                max="7"
+                name="kyu"
+                id="kyu"
+                class="form-control"
+                [(ngModel)]="aluno.graduacao.kyu"
+                placeholder="Kyu"
                 required
               />
             </div>

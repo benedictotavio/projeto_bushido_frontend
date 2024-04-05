@@ -81,7 +81,6 @@ export class RegistroAlunoComponent {
     responsaveis: [],
     graduacao: {
       kyu: 0,
-      frequencia: 0,
     },
     historicoSaude: this.historicoSaude,
   }
