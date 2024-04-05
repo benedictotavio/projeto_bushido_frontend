@@ -9,7 +9,6 @@ import { Graduacao } from 'src/app/pages/admin/aluno.interface'
 export class ModalHistoricoGraduacaoComponent {
   @Input()
   graduacao!: Graduacao[]
-  constructor() {}
 
   protected graduacaoFinal(index: number) {
     return index === this.graduacao.length - 1
