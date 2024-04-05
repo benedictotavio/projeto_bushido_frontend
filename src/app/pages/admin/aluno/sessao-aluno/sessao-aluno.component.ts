@@ -17,6 +17,7 @@ export class SessaoAlunoComponent implements OnInit {
   ) {}
 
   private readonly token = localStorage.getItem('token')
+  ShowPlaceholder = true // Mostrando o placeholder
 
   aluno: AlunoResponse | undefined
   email = this.route.snapshot.paramMap.get('email')
@@ -46,6 +47,7 @@ export class SessaoAlunoComponent implements OnInit {
           this.aluno.dataNascimento = new Date(this.aluno.dataNascimento).toLocaleDateString(
             'pt-BR'
           )
+          this.ShowPlaceholder = false //Tirando o placeholder
         },
         error: error => {
           if (error.status === 401) {

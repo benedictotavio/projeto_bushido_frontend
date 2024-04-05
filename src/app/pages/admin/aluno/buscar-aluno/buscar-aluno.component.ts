@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router'
   styleUrls: ['./buscar-aluno.component.css'],
 })
 export class BuscarAlunoComponent {
+  showPlaceholder = false
   email = this.route.snapshot.paramMap.get('email')
   rg!: string
   aluno: AlunoResponse | undefined
@@ -23,6 +24,7 @@ export class BuscarAlunoComponent {
   ) {}
 
   buscarAluno() {
+    this.showPlaceholder = true // Exibe o placeholder ao clicar no botão Buscar Aluno
     const apiUrl = environment.urlApi + `aluno?rg=${this.rg}`
 
     this.http
@@ -34,6 +36,7 @@ export class BuscarAlunoComponent {
       .subscribe({
         next: data => {
           this.aluno = data as AlunoResponse
+          this.showPlaceholder = false
         },
         error: error => {
           if (error.status === 401) {
