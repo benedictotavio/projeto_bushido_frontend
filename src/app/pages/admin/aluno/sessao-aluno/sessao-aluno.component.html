@@ -188,7 +188,7 @@
         </div>
         <div class="row mt-4">
           <div class="col-md-12">
-            <h6>Informações socias para dados do aluno?</h6>
+            <h6>Informações socias para dados do aluno</h6>
             <div class="mt-4">
               <div class="mb-3 form-check">
                 <input
@@ -436,9 +436,7 @@
                   <h6 class="card-subtitle mb-2 text-muted" *ngIf="graduacaoAtual.dan">
                     {{ graduacaoAtual.dan }} Dan
                   </h6>
-                  <h6 class="card-subtitle mb-2 text-muted">
-                    {{ graduacaoAtual.kyu }}º Kyu
-                  </h6>
+                  <h6 class="card-subtitle mb-2 text-muted">{{ graduacaoAtual.kyu }}º Kyu</h6>
                 </div>
                 <div *ngIf="graduacaoAtual.status">
                   <svg
@@ -523,7 +521,9 @@
               </div>
             </div>
             <div class="card-footer">
-              <app-modal-historico-graduacao [graduacao]="aluno.graduacao"></app-modal-historico-graduacao>
+              <app-modal-historico-graduacao
+                [graduacao]="aluno.graduacao"
+              ></app-modal-historico-graduacao>
             </div>
           </div>
           <div class="col-md-12 mt-4">
@@ -598,16 +598,16 @@
             style="width: 128px; height: 128px"
           />
           <span class="font-weight-bold placeholder">
-            {{ aluno?.nome }}
+            {{ aluno.nome }}
           </span>
           <span class="font-weight-bold placeholder">
             <span>Inscrição: </span>
             <b>
-              {{ aluno?.dataPreenchimento }}
+              {{ aluno.dataPreenchimento }}
             </b>
           </span>
           <span class="text-black-50 placeholder">
-            {{ aluno?.rg }}
+            {{ aluno.rg }}
           </span>
         </div>
       </div>
@@ -744,7 +744,7 @@
           </div>
           <div class="row mt-4">
             <div class="col-md-12">
-              <h6 class="placeholder">Informações socias para dados do aluno?</h6>
+              <h6 class="placeholder">Informações socias para dados do aluno</h6>
               <div class="mt-4">
                 <div class="mb-3 form-check">
                   <input
