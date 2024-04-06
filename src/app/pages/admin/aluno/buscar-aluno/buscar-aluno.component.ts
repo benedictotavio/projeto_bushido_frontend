@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { AlunoResponse } from '../../aluno.interface'
 import { HttpClient } from '@angular/common/http'
-import { environment } from 'src/environments/environment.development'
+import { environment } from 'src/environments/environment'
 import { ActivatedRoute } from '@angular/router'
 
 @Component({
