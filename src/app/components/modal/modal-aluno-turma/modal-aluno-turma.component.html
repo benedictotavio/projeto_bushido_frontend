@@ -1,0 +1,52 @@
+<div
+  class="modal fade"
+  id="modalAlunoTurma"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar Aluno</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="fecharModal()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="buscarAlunoPorRg()">
+          <div class="row">
+            <div class="col-md-8">
+              <label for="rg" class="visually-hidden">RG</label>
+              <input
+                type="text"
+                class="form-control"
+                id="rg"
+                name="rg"
+                placeholder="Digite o RG do Aluno"
+                [(ngModel)]="rg"
+                required
+              />
+            </div>
+            <div class="col-md-4">
+              <input type="submit" class="btn btn-primary mx-2" value="Buscar Aluno" />
+            </div>
+          </div>
+        </form>
+        <div *ngIf="aluno" class="row">
+          <div (click)="adicionarAlunoATurma()" class="col-md-12 card card-aluno">
+            <div class="card-body">
+              <h5 class="card-title">{{ aluno.nome }}</h5>
+              <p class="card-text">RG: {{ aluno.rg }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+.card-container {
+  min-width: 350px;
+  margin-top: 50px;
+}
+
+@media (max-width: 992px) {
+  .card-container {
+    min-width: 600px;
+  }
+}
+
+@media (max-width: 680px) {
+  .card-container {
+    min-width: 300px;
+  }
+}
+
+.card {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.c-details span {
+  font-weight: 300;
+  font-size: 13px;
+}
+
+.progress {
+  height: 10px;
+  border-radius: 10px;
+}
+
+.progress div {
+  background-color: red;
+}
+
+.text1 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.text2 {
+  color: #a5aec0;
+}

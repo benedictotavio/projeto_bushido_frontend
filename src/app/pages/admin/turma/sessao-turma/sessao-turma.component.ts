@@ -28,7 +28,7 @@ export class SessaoTurmaComponent implements OnInit {
   }
 
   protected deletarTurma() {
-    let confirmar = window.confirm('Tem certeza que deseja excluir esta turma?')
+    const confirmar = window.confirm('Tem certeza que deseja excluir esta turma?')
     if (confirmar) {
       this.removerTurma()
     }
@@ -89,7 +89,7 @@ export class SessaoTurmaComponent implements OnInit {
 
   protected adicionarFaltaAoAluno(rg: string) {
     this.http
-      .post(
+      .post<{ message: string }>(
         this.apiUrl + `aluno/falta/${rg}/${new Date().getTime()}`,
         {
           motivo: 'Nova Falta',
@@ -104,7 +104,7 @@ export class SessaoTurmaComponent implements OnInit {
       )
       .subscribe({
         next: data => {
-          window.confirm('Falta registrada com sucesso')
+          window.confirm(data.message)
         },
         error: error => {
           if (error.status === 401) {

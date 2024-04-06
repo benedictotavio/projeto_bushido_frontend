@@ -18,6 +18,8 @@ import { ArtigoComponent } from './components/artigo/artigo.component'
 import { SessaoAlunoComponent } from './pages/admin/aluno/sessao-aluno/sessao-aluno.component'
 import { RegistroAlunoComponent } from './pages/admin/aluno/registro-aluno/registro-aluno.component'
 import { BuscarAlunoComponent } from './pages/admin/aluno/buscar-aluno/buscar-aluno.component'
+import { TurmasComponent } from './pages/admin/turma/turmas/turmas.component'
+import { SessaoTurmaComponent } from './pages/admin/turma/sessao-turma/sessao-turma.component'
 
 const routes: Routes = [
   {
@@ -49,6 +51,16 @@ const routes: Routes = [
     path: 'admin/:email/aluno/:rg',
     canActivate: [AuthGuard],
     component: SessaoAlunoComponent,
+  },
+  {
+    path: 'admin/:email/turmas',
+    component: TurmasComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin/:email/turmas/:nomeTurma',
+    component: SessaoTurmaComponent,
+    canActivate: [AuthGuard],
   },
   { path: '', component: HomeComponent, title: 'Home | Instituto Bushido' },
   { path: 'quem-somos', component: QuemSomosComponent, title: 'Quem Somos | Instituto Bushido' },
