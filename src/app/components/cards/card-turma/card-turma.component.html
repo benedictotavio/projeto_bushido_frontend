@@ -1,0 +1,46 @@
+<div class="card p-3 mb-2 card-container">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex flex-row align-items-center">
+        <div class="ms-2 c-details">
+          <h5 class="mb-0">
+            <i>
+              {{ turma.nome }}
+            </i>
+          </h5>
+        </div>
+      </div>
+      <div class="badge bg-info text-dark rounded">
+        <span>
+          {{ turma.endereco }}
+        </span>
+      </div>
+    </div>
+    <div class="mt-5">
+      <p class="heading mb-0">Professor<br /></p>
+      <h3>{{ turma.tutor }}</h3>
+
+      <div class="mt-5">
+        <div class="progress">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            [style.width.%]="porcentagemDeAlunos()"
+            aria-valuenow="50"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
+        </div>
+        <div class="mt-3">
+          <span class="text1"
+            >{{ turma.alunos.length }} alunos
+            <span class="text2">de {{ totalDeAlunos }} vagas</span></span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="card-footer text-muted d-flex justify-content-end py-3">
+      <a href="/admin/{{ email }}/turmas/{{ turma.nome }}">
+        <button class="btn btn-primary">Ver turma</button>
+      </a>
+    </div>
+  </div>

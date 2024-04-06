@@ -31,7 +31,7 @@ import { WhatsappButtonComponent } from './components/whatsapp-button/whatsapp-b
 import { RegistroComponent } from './pages/admin/registro/registro.component'
 import { AdminComponent } from './pages/admin/admin/admin.component'
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
-import { BlogCardComponent } from './components/blog-card/blog-card.component'
+import { BlogCardComponent } from './components/cards/blog-card/blog-card.component'
 import { ArtigoComponent } from './components/artigo/artigo.component'
 import { LoadingService } from './services/services-admin/service-loading.service'
 import { LoadingInterceptor } from './loading.interceptor'
@@ -42,6 +42,11 @@ import { BuscarAlunoComponent } from './pages/admin/aluno/buscar-aluno/buscar-al
 import { JanelaModalComponent } from './components/modal/janela-modal/janela-modal.component'
 import { ModalFaltaComponent } from './components/modal/modal-falta/modal-falta.component'
 import { ModalHistoricoGraduacaoComponent } from './components/modal/modal-historico-graduacao/modal-historico-graduacao.component'
+import { TurmasComponent } from './pages/admin/turma/turmas/turmas.component'
+import { CardTurmaComponent } from './components/cards/card-turma/card-turma.component'
+import { SessaoTurmaComponent } from './pages/admin/turma/sessao-turma/sessao-turma.component'
+import { ModalAlunoTurmaComponent } from './components/modal/modal-aluno-turma/modal-aluno-turma.component'
+import { ModalNovaTurmaComponent } from './components/modal/modal-nova-turma/modal-nova-turma.component'
 
 @NgModule({
   declarations: [
@@ -81,6 +86,11 @@ import { ModalHistoricoGraduacaoComponent } from './components/modal/modal-histo
     JanelaModalComponent,
     ModalFaltaComponent,
     ModalHistoricoGraduacaoComponent,
+    TurmasComponent,
+    CardTurmaComponent,
+    SessaoTurmaComponent,
+    ModalAlunoTurmaComponent,
+    ModalNovaTurmaComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [

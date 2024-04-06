@@ -1,0 +1,11 @@
+div.card-aluno{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+div.card-aluno:hover{
+    background-color: rgba(0, 0, 0, 0.158);
+    cursor: pointer;
+}

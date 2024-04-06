@@ -58,8 +58,8 @@ interface HistoricoSaude {
   alergia: Alergia
   cirurgia: Cirurgia
   doencaCronica: DoencaCronica
-  deficiencias: any[] // Define the type of deficiencias as needed
-  acompanhamentoSaude: any[] // Define the type of acompanhamentoSaude as needed
+  deficiencias: string[] // Define the type of deficiencias as needed
+  acompanhamentoSaude: string[] // Define the type of acompanhamentoSaude as needed
 }
 
 interface DadosSociais {
