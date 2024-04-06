@@ -1,0 +1,64 @@
+<div class="container-fluid" *ngIf="turmaEncontrada" style="overflow-x: auto">
+  <div class="d-flex justify-content-between align-items-center mt-2">
+    <div>
+      <a href="admin/{{ email }}/turmas">
+        <button class="btn btn-primary">Voltar</button>
+      </a>
+    </div>
+    <div>
+      <button class="btn btn-danger" (click)="deletarTurma()">Deletar Turma</button>
+      <app-modal-aluno-turma></app-modal-aluno-turma>
+    </div>
+  </div>
+  <h4 class="my-4 text-center">
+    {{ turmaEncontrada.nome }}
+  </h4>
+  <div class="d-flex justify-content-start align-items-center my-3">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="currentColor"
+      class="bi bi-plus-circle text-dark mx-1"
+      viewBox="0 0 16 16"
+      data-bs-toggle="modal"
+      data-bs-target="#modalAlunoTurma"
+    >
+      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+      <path
+        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"
+      />
+    </svg>
+    <p class="mx-1 mb-0" data-bs-toggle="modal" data-bs-target="#modalAlunoTurma" style="cursor: pointer">
+      Adicionar aluno
+    </p>
+  </div>
+  <table class="table table-striped" aria-describedby="tabela turma">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Idade</th>
+        <th scope="col">Gênero</th>
+        <th scope="col">RG</th>
+        <th scope="col">Falta</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let aluno of turmaEncontrada.alunos; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td class="text-capitalize text-primary">
+          <a href="admin/{{ email }}/aluno/{{ aluno.rg }}" class="text-decoration-none">
+            {{ aluno.nome }}
+          </a>
+        </td>
+        <td>{{ definirIdadePorDataNascimento(aluno.dataNascimento) }}</td>
+        <td>{{ aluno.genero }}</td>
+        <td>{{ aluno.rg }}</td>
+        <td>
+          <button class="btn btn-danger" (click)="adicionarFaltaAoAluno(aluno.rg)">+</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
