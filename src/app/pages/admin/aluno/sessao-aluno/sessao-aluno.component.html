@@ -1,9 +1,9 @@
 <div class="container rounded bg-white mt-5 mb-5">
   <div *ngIf="aluno" class="row">
     <div class="col-md-2 border-right">
-      <button class="btn btn-primary ms-2 mt-2">
-        <a class="text-white text-decoration-none" href="/admin/{{ email }}">Voltar</a>
-      </button>
+      <a class="text-white text-decoration-none" href="/admin/{{ email }}">
+        <button class="btn btn-primary ms-2 mt-2">Dashboard</button>
+      </a>
       <div class="d-flex flex-column align-items-center text-center p-3">
         <img
           class="rounded-circle mt-5"
@@ -37,16 +37,29 @@
               type="text"
               class="form-control"
               placeholder="Nome"
+              readonly
             />
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label for="dataNascimento" class="labels">Data nascimento</label>
             <input
-              type="date"
+              type="text"
               name="dataNascimento"
               class="form-control"
               placeholder="Data de Nascimento"
               [(ngModel)]="aluno.dataNascimento"
+              readonly
+            />
+          </div>
+          <div class="col-md-2">
+            <label for="genero" class="labels">Genero</label>
+            <input
+              type="text"
+              name="genero"
+              class="form-control"
+              placeholder="Data de Nascimento"
+              [(ngModel)]="aluno.genero"
+              readonly
             />
           </div>
         </div>
@@ -432,11 +445,22 @@
             <div class="card-body">
               <div class="d-flex justify-content-between">
                 <div>
-                  <h5 class="card-title">Graduação Atual</h5>
-                  <h6 class="card-subtitle mb-2 text-muted" *ngIf="graduacaoAtual.dan">
-                    {{ graduacaoAtual.dan }} Dan
+                  <div class="card-title d-flex align-items-center mb-2">
+                    <div>
+                      <h3 class="mb-0">Graduação Atual</h3>
+                    </div>
+
+                    <div>
+                      <h6 class="card-subtitle text-muted badge">{{ graduacaoAtual.kyu }}º Kyu</h6>
+                      <h6 class="card-subtitle text-muted badge" *ngIf="graduacaoAtual.dan">
+                        {{ graduacaoAtual.dan }} Dan
+                      </h6>
+                    </div>
+                  </div>
+
+                  <h6 class="card-subtitle mb-4 text-muted">
+                    <b>Inicio:</b> {{ graduacaoAtual.inicioGraduacao }}
                   </h6>
-                  <h6 class="card-subtitle mb-2 text-muted">{{ graduacaoAtual.kyu }}º Kyu</h6>
                 </div>
                 <div *ngIf="graduacaoAtual.status">
                   <svg
