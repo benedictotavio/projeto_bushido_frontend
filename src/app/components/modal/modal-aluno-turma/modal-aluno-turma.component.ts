@@ -25,7 +25,7 @@ export class ModalAlunoTurmaComponent {
   protected adicionarAlunoATurma() {
     this.http
       .post<{ message: string }>(
-        `${this.url}turma/aluno/${this.nomeTurma}`,
+        `${this.url}turma/${this.nomeTurma}/aluno`,
         {
           nome: this.aluno?.nome,
           genero: this.aluno?.genero,

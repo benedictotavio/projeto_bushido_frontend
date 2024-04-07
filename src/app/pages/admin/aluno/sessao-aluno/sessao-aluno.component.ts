@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { environment } from 'src/environments/environment'
-import { AlunoResponse, Graduacao } from 'src/app/pages/admin/aluno.interface'
+import { AlunoEditado, AlunoResponse, Graduacao } from 'src/app/pages/admin/aluno.interface'
 
 @Component({
   selector: 'app-sessao-aluno',
@@ -17,15 +17,16 @@ export class SessaoAlunoComponent implements OnInit {
   ) {}
 
   private readonly token = localStorage.getItem('token')
-  ShowPlaceholder = true // Mostrando o placeholder
-
+  ShowPlaceholder = true
   aluno: AlunoResponse | undefined
+  alunoEditado: AlunoEditado | undefined
   email = this.route.snapshot.paramMap.get('email')
   rg_aluno = this.route.snapshot.paramMap.get('rg')
   deficiencia = ''
   acompanhamentoSaude = ''
   url = environment.urlApi + 'aluno'
   modoEdicao = false
+
   graduacaoAtual: Graduacao = {
     kyu: 0,
     faltas: [],
@@ -78,19 +79,17 @@ export class SessaoAlunoComponent implements OnInit {
   }
 
   protected editarAlunoPorRg() {
-    console.log(this.aluno)
-    console.log(this.aluno?.dataNascimento)
-    const dataNascimento = this.aluno?.dataNascimento as string
-    if (this.aluno) {
-      this.aluno.dataNascimento = this.setDataNascimento(dataNascimento)
-    }
     this.http
-      .put<{ id: string; message: string }>(this.url + '/' + this.rg_aluno, this.aluno, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + this.token,
-        },
-      })
+      .put<{ id: string; message: string }>(
+        this.url + '/' + this.rg_aluno,
+        this.adapterAlunoParaAlunoEditado(this.aluno as AlunoResponse),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + this.token,
+          },
+        }
+      )
       .subscribe({
         next: data => {
           window.confirm(data.message)
@@ -103,7 +102,6 @@ export class SessaoAlunoComponent implements OnInit {
           if (error.status === 404) {
             window.confirm('Aluno não encontrado')
           }
-          console.error(error)
         },
       })
   }
@@ -391,13 +389,28 @@ export class SessaoAlunoComponent implements OnInit {
       })
   }
 
-  private setDataNascimento(dataNoFormatoAntigo: string): string {
-    const [day, month, year] = dataNoFormatoAntigo.split('/')
-    const date = new Date(`${year}-${month}-${day}`)
-    const formattedYear = date.getFullYear()
-    const formattedMonth = String(date.getMonth() + 1).padStart(2, '0')
-    const formattedDay = String(date.getDate()).padStart(2, '0')
-    const formattedDate = `${formattedYear}-${formattedMonth}-${formattedDay}`
-    return formattedDate
+  private adapterAlunoParaAlunoEditado(aluno: AlunoResponse): AlunoEditado {
+    return {
+      dadosSociais: {
+        bolsaFamilia: aluno.dadosSociais.bolsaFamilia,
+        auxilioBrasil: aluno.dadosSociais.auxilioBrasil,
+        imovel: aluno.dadosSociais.imovel,
+        numerosDePessoasNaCasa: aluno.dadosSociais.numerosDePessoasNaCasa,
+        contribuintesDaRendaFamiliar: aluno.dadosSociais.contribuintesDaRendaFamiliar,
+        alunoContribuiParaRenda: aluno.dadosSociais.alunoContribuiParaRenda,
+        rendaFamiliarEmSalariosMinimos: aluno.dadosSociais.rendaFamiliarEmSalariosMinimos,
+      },
+      dadosEscolares: {
+        turno: aluno.dadosEscolares.turno,
+        escola: aluno.dadosEscolares.escola,
+        serie: aluno.dadosEscolares.serie,
+      },
+      endereco: {
+        cidade: aluno.endereco.cidade,
+        estado: aluno.endereco.estado,
+        cep: aluno.endereco.cep,
+        numero: aluno.endereco.numero,
+      },
+    }
   }
 }

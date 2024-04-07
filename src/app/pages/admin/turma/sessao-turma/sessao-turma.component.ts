@@ -27,6 +27,13 @@ export class SessaoTurmaComponent implements OnInit {
     this.buscarTurmaPorNome()
   }
 
+  protected removerAluno(rg: string) {
+    const confirmar = window.confirm('Tem certeza que deseja excluir este aluno?')
+    if (confirmar) {
+      this.removerAlunoDaTurma(rg)
+    }
+  }
+
   protected deletarTurma() {
     const confirmar = window.confirm('Tem certeza que deseja excluir esta turma?')
     if (confirmar) {
@@ -129,5 +136,35 @@ export class SessaoTurmaComponent implements OnInit {
     const anoNasc = dataNasc.getFullYear()
     const ano = new Date().getFullYear()
     return ano - anoNasc
+  }
+
+  private removerAlunoDaTurma(rg: string) {
+    this.http
+      .delete<{ message: string }>(this.apiUrl + `turma/${this.nomeTurma}/aluno/${rg}`, {
+        headers: {
+          Authorization: 'Bearer ' + this.token,
+        },
+      })
+      .subscribe({
+        next: data => {
+          window.confirm(data.message)
+          window.location.reload()
+        },
+        error: error => {
+          if (error.status === 401) {
+            window.confirm(
+              'O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema'
+            )
+            localStorage.removeItem('token')
+            this.router.navigate(['/admin'])
+          }
+          if (error.status === 404) {
+            window.confirm('Aluno não encontrado')
+          }
+          if (error.status === 403) {
+            window.confirm('Aluno não pode ser removido')
+          }
+        },
+      })
   }
 }

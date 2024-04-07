@@ -2,7 +2,7 @@ import { Component } from '@angular/core'
 import { AlunoResponse } from '../../aluno.interface'
 import { HttpClient } from '@angular/common/http'
 import { environment } from 'src/environments/environment'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
   selector: 'app-buscar-aluno',
@@ -17,7 +17,8 @@ export class BuscarAlunoComponent {
 
   constructor(
     private http: HttpClient,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   buscarAluno() {
@@ -36,12 +37,10 @@ export class BuscarAlunoComponent {
           this.showPlaceholder = false
         },
         error: error => {
-          console.log(error)
-
           if (error.status === 401) {
             window.alert('O token informado é inválido')
             localStorage.removeItem('token')
-            // this.router.navigate(['/admin'])
+            this.router.navigate(['/admin'])
           }
           if (error.status === 404) {
             window.alert('Aluno não encontrado')
