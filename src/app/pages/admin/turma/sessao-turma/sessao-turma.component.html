@@ -29,7 +29,12 @@
         d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"
       />
     </svg>
-    <p class="mx-1 mb-0" data-bs-toggle="modal" data-bs-target="#modalAlunoTurma" style="cursor: pointer">
+    <p
+      class="mx-1 mb-0"
+      data-bs-toggle="modal"
+      data-bs-target="#modalAlunoTurma"
+      style="cursor: pointer"
+    >
       Adicionar aluno
     </p>
   </div>
@@ -42,6 +47,7 @@
         <th scope="col">Gênero</th>
         <th scope="col">RG</th>
         <th scope="col">Falta</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -57,6 +63,9 @@
         <td>{{ aluno.rg }}</td>
         <td>
           <button class="btn btn-danger" (click)="adicionarFaltaAoAluno(aluno.rg)">+</button>
+        </td>
+        <td>
+          <button class="btn" (click)="removerAluno(aluno.rg)">X</button>
         </td>
       </tr>
     </tbody>

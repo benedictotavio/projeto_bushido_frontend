@@ -91,3 +91,9 @@ export interface AlunoResponse {
   graduacao: Graduacao[]
   historicoSaude: HistoricoSaude
 }
+
+export interface AlunoEditado {
+  dadosSociais: DadosSociais
+  dadosEscolares: DadosEscolares
+  endereco: Endereco
+}
