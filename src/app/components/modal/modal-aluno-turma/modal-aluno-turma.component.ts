@@ -73,6 +73,10 @@ export class ModalAlunoTurmaComponent {
       })
       .subscribe({
         next: data => {
+          if (data.length === 0) {
+            window.confirm('Aluno não encontrado')
+            return
+          }
           this.aluno = data[0]
         },
         error: error => {

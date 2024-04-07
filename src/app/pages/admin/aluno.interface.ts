@@ -52,7 +52,6 @@ interface DoencaCronica {
 }
 
 export interface HistoricoSaude {
-  fatorRh: string
   tipoSanguineo: string
   usoMedicamento: UsoMedicamento
   alergia: Alergia
@@ -93,7 +92,6 @@ export interface AlunoResponse {
 }
 
 interface HistoricoSaudeEditado {
-  fatorRh: string
   tipoSanguineo: string
   usoMedicamentoContinuo: UsoMedicamento
   alergia: Alergia
