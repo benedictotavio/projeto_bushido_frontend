@@ -99,8 +99,8 @@ export interface AlunoEditado {
 }
 
 export interface HistoricoSaudeEditado {
-  fatorRh: string,
-  tipoSanguineo: string,
+  fatorRh: string
+  tipoSanguineo: string
   usoMedicamentoContinuo: UsoMedicamento
   alergia: Alergia
   cirurgia: Cirurgia
