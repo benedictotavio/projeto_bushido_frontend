@@ -45,14 +45,14 @@ export class SessaoAlunoComponent implements OnInit {
 
   protected buscarAlunoPorRg() {
     this.http
-      .get<AlunoResponse>(this.url + `?rg=${this.rg_aluno}`, {
+      .get<AlunoResponse[]>(this.url + `?rg=${this.rg_aluno}`, {
         headers: {
           Authorization: 'Bearer ' + this.token,
         },
       })
       .subscribe({
         next: data => {
-          this.aluno = data
+          this.aluno = data[0]
           this.aluno.dataPreenchimento = new Date(this.aluno.dataPreenchimento).toLocaleDateString(
             'pt-BR'
           )

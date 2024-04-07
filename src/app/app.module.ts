@@ -47,6 +47,7 @@ import { CardTurmaComponent } from './components/cards/card-turma/card-turma.com
 import { SessaoTurmaComponent } from './pages/admin/turma/sessao-turma/sessao-turma.component'
 import { ModalAlunoTurmaComponent } from './components/modal/modal-aluno-turma/modal-aluno-turma.component'
 import { ModalNovaTurmaComponent } from './components/modal/modal-nova-turma/modal-nova-turma.component'
+import { CardBuscaAlunoComponent } from './components/cards/card-busca-aluno/card-busca-aluno.component'
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { ModalNovaTurmaComponent } from './components/modal/modal-nova-turma/mod
     SessaoTurmaComponent,
     ModalAlunoTurmaComponent,
     ModalNovaTurmaComponent,
+    CardBuscaAlunoComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [

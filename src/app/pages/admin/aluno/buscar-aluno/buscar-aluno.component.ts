@@ -11,29 +11,41 @@ import { ActivatedRoute, Router } from '@angular/router'
 })
 export class BuscarAlunoComponent {
   showPlaceholder = false
-  email = this.route.snapshot.paramMap.get('email')
-  rg!: string
-  aluno: AlunoResponse | undefined
-
+  protected alunos: AlunoResponse[] = []
+  protected pesquisarAluno = ''
+  private readonly token = localStorage.getItem('token')
+  private readonly apiUrl = environment.urlApi + `aluno`
+  protected readonly email = this.route.snapshot.paramMap.get('email')
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
-  buscarAluno() {
+  protected pesquisar() {
+    if (this.pesquisarAluno === '') {
+      window.alert('Preencha o campo para realizar a busca')
+      return
+    }
+
+    if (this.validarRG(this.pesquisarAluno.trim())) {
+      this.buscarAlunoPorRg()
+    }
+    this.buscarAlunoPorNome()
+  }
+
+  protected buscarAlunoPorRg() {
     this.showPlaceholder = true // Exibe o placeholder ao clicar no botão Buscar Aluno
-    const apiUrl = environment.urlApi + `aluno?rg=${this.rg}`
 
     this.http
-      .get(apiUrl, {
+      .get<AlunoResponse[]>(this.apiUrl + `?rg=${this.pesquisarAluno}`, {
         headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          Authorization: 'Bearer ' + this.token,
         },
       })
       .subscribe({
         next: data => {
-          this.aluno = data as AlunoResponse
+          this.alunos = data
           this.showPlaceholder = false
         },
         error: error => {
@@ -46,10 +58,44 @@ export class BuscarAlunoComponent {
           }
           if (error.status === 404) {
             window.alert('Aluno não encontrado')
-            this.rg = ''
+            this.pesquisarAluno = ''
             this.showPlaceholder = false
           }
         },
       })
+  }
+
+  protected buscarAlunoPorNome() {
+    this.http
+      .get<AlunoResponse[]>(this.apiUrl + `?nome=${this.pesquisarAluno}`, {
+        headers: {
+          Authorization: 'Bearer ' + this.token,
+        },
+      })
+      .subscribe({
+        next: data => {
+          this.alunos = data
+          this.showPlaceholder = false
+        },
+        error: error => {
+          if (error.status === 401) {
+            window.alert(
+              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
+            )
+            localStorage.removeItem('token')
+            this.router.navigate(['/admin'])
+          }
+          if (error.status === 404) {
+            window.alert('Aluno não encontrado')
+            this.pesquisarAluno = ''
+            this.showPlaceholder = false
+          }
+        },
+      })
+  }
+
+  private validarRG(rg: string) {
+    const rgPattern = /^\d{9}$/
+    return rgPattern.test(rg)
   }
 }

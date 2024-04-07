@@ -1,225 +1,27 @@
 <div class="container">
   <a class="text-white text-decoration-none" href="/admin/{{ email }}">
-    <button class="btn btn-primary ms-2 mt-2">Voltar</button>
+    <button class="btn btn-secondary ms-2 mt-2">Voltar</button>
   </a>
 
-  <div class="row">
-    <div class="col-lg-12 d-flex justify-content-center card-margin py-5">
-      <form (ngSubmit)="buscarAluno()">
-        <div class="d-flex">
-          <label for="rg" class="visually-hidden">RG</label>
-          <input
-            type="text"
-            class="form-control"
-            id="rg"
-            name="rg"
-            placeholder="Digite o RG do Aluno"
-            [(ngModel)]="rg"
-          />
-          <input type="submit" class="btn btn-primary mx-2" value="Buscar Aluno" />
-        </div>
-      </form>
-    </div>
-  </div>
+  <form class="d-flex my-4" (ngSubmit)="pesquisar()">
+    <input
+      type="search"
+      name="pesquisarAluno"
+      class="form-control"
+      placeholder="Pesquisar..."
+      aria-label="Search"
+      aria-describedby="search-addon"
+      [(ngModel)]="pesquisarAluno"
+      required
+    />
+    <input type="submit" value="Pesquisar" class="btn btn-primary">
+  </form>
+
   <!---Dados do aluno-->
 
-  <div class="row" *ngIf="aluno !== undefined">
-    <div class="col-12">
-      <div class="card card-margin">
-        <div class="card-body">
-          <div class="row search-body">
-            <div class="col-lg-12">
-              <div class="search-result">
-                <div class="result-header">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="result-actions">
-                        <div class="result-views">
-                          <button type="button" class="btn btn-soft-base btn-icon">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              class="feather feather-list"
-                            >
-                              <line x1="8" y1="6" x2="21" y2="6"></line>
-                              <line x1="8" y1="12" x2="21" y2="12"></line>
-                              <line x1="8" y1="18" x2="21" y2="18"></line>
-                              <line x1="3" y1="6" x2="3" y2="6"></line>
-                              <line x1="3" y1="12" x2="3" y2="12"></line>
-                              <line x1="3" y1="18" x2="3" y2="18"></line>
-                            </svg>
-                          </button>
-                          <button type="button" class="btn btn-soft-base btn-icon">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              class="feather feather-grid"
-                            >
-                              <rect x="3" y="3" width="7" height="7"></rect>
-                              <rect x="14" y="3" width="7" height="7"></rect>
-                              <rect x="14" y="14" width="7" height="7"></rect>
-                              <rect x="3" y="14" width="7" height="7"></rect>
-                            </svg>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="result-body">
-                  <div class="d-flex informacao-aluno justify-content-between align-items-center">
-                    <!---Foto do Aluno-->
-                    <div class="widget-26-job-emp-img">
-                      <img
-                        *ngIf="aluno.genero === 'M'"
-                        class="rounded-circle"
-                        src="https://bootdey.com/img/Content/avatar/avatar6.png"
-                        alt="Avatar masculino"
-                      />
-                      <img
-                        *ngIf="aluno.genero === 'F'"
-                        class="rounded-circle"
-                        src="https://bootdey.com/img/Content/avatar/avatar8.png"
-                        alt="Avatar feminino"
-                      />
-                    </div>
-
-                    <div class="widget-26-job-title">
-                      <p class="type m-0">Nome: {{ aluno.nome }}</p>
-                    </div>
-
-                    <div class="widget-26-job-info">
-                      <p class="type m-0">RG: {{ aluno.rg }}</p>
-                    </div>
-
-                    <div class="widget-26-job-info">
-                      <p class="type m-0">Gênero: {{ aluno.genero }}</p>
-                    </div>
-
-                    <div class="widget-26-job-category">
-                      <a href="admin/{{ email }}/aluno/{{ aluno.rg }}" class="btn btn-primary"
-                        >Ver todos os dados</a
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!---Buscando dados - MOSTRANDO PLACEHOLDER-->
-
-  <div class="row" *ngIf="showPlaceholder">
-    <div class="col-12">
-      <div class="card card-margin">
-        <div class="card-body">
-          <div class="row search-body">
-            <div class="col-lg-12">
-              <div class="search-result">
-                <div class="result-header">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="result-actions">
-                        <div class="result-views">
-                          <button type="button" class="btn btn-soft-base btn-icon">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              class="feather feather-list"
-                            >
-                              <line x1="8" y1="6" x2="21" y2="6"></line>
-                              <line x1="8" y1="12" x2="21" y2="12"></line>
-                              <line x1="8" y1="18" x2="21" y2="18"></line>
-                              <line x1="3" y1="6" x2="3" y2="6"></line>
-                              <line x1="3" y1="12" x2="3" y2="12"></line>
-                              <line x1="3" y1="18" x2="3" y2="18"></line>
-                            </svg>
-                          </button>
-                          <button type="button" class="btn btn-soft-base btn-icon">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              class="feather feather-grid"
-                            >
-                              <rect x="3" y="3" width="7" height="7"></rect>
-                              <rect x="14" y="3" width="7" height="7"></rect>
-                              <rect x="14" y="14" width="7" height="7"></rect>
-                              <rect x="3" y="14" width="7" height="7"></rect>
-                            </svg>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="result-body">
-                  <div class="d-flex informacao-aluno justify-content-between align-items-center">
-                    <!---Foto do Aluno-->
-                    <div class="widget-26-job-emp-img">
-                      <img
-                        class="rounded-circle placeholder"
-                        src="#"
-                        alt="Avatar carregando"
-                        aria-hidden="true"
-                      />
-                    </div>
-
-                    <div class="widget-26-job-title">
-                      <span class="placeholder" aria-hidden="true">Nome: Fulano de tal</span>
-                    </div>
-
-                    <div class="widget-26-job-info">
-                      <span class="placeholder" aria-hidden="true">RG: 3123412</span>
-                    </div>
-
-                    <div class="widget-26-job-info">
-                      <span class="placeholder" aria-hidden="true">Gênero: M</span>
-                    </div>
-
-                    <div class="widget-26-job-category">
-                      <span class="btn placeholder">Ver todos os alunos</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="row" *ngIf="alunos.length > 0">
+    <div class="col-12" *ngFor="let aluno of alunos">
+      <app-card-busca-aluno [aluno]="aluno" [showPlaceholder]="showPlaceholder"></app-card-busca-aluno>
     </div>
   </div>
 </div>

@@ -45,14 +45,13 @@ export class JanelaModalComponent {
             )
             localStorage.removeItem('token')
           }
-          if (error.status === 403) {
-            window.confirm('Preencha todas as propriedades corretamente')
-          }
-          if (error.status === 422) {
-            window.confirm('Todos os campos devem ser preenchidos corretamente')
-          }
-          if (error.status === 409) {
-            window.confirm('O email cpf já foi registrado')
+          if (
+            error.status === 403 ||
+            error.status === 404 ||
+            error.status === 409 ||
+            error.status === 411
+          ) {
+            window.confirm(error['error']['message'])
           }
         },
       })

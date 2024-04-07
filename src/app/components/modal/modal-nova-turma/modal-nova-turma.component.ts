@@ -40,22 +40,21 @@ export class ModalNovaTurmaComponent {
           window.confirm(data.message)
           this.router.navigate(['admin/turmas'])
         },
-        error: err => {
-          if (err.status === 401) {
+        error: error => {
+          if (error.status === 401) {
             window.confirm(
               'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
             )
             localStorage.removeItem('token')
             this.router.navigate(['/admin'])
           }
-          if (err.status === 403) {
-            window.confirm('Preencha todas as propriedades corretamente')
-          }
-          if (err.status === 409) {
-            window.confirm('Turma ja existente')
-          }
-          if (err.status === 404) {
-            window.confirm('Aluno não encontrado')
+          if (
+            error.status === 403 ||
+            error.status === 404 ||
+            error.status === 409 ||
+            error.status === 411
+          ) {
+            window.confirm(error['error']['message'])
           }
         },
       })
