@@ -241,8 +241,70 @@
           </div>
         </div>
         <div class="row mt-4">
-          <h4>Historico de Saude</h4>
+          <h5>Historico de Saude</h5>
+
+          <div class="col-md-12 d-flex justify-content-end">
+            <button
+              (click)="setModoEdicao()"
+              class="btn btn-primary profile-button"
+              type="button"
+              *ngIf="!modoEdicao"
+            >
+              Editar
+            </button>
+            <div
+              *ngIf="modoEdicao"
+              class="d-flex justify-content-around align-items-center"
+            >
+              <button
+                (click)="setModoEdicao()"
+                class="btn btn-primary profile-button"
+                type="button"
+              >
+                Cancelar
+              </button>
+              <button class="btn btn-secondary" type="button" (click)="editarHistoricoSaude()">Salvar</button>
+            </div>
+          </div>
+
           <div class="row mt-4">
+            <div class="row my-3">
+              <div class="col-md-6">
+                <label for="tipoSanguineo" class="form-label">Tipo Saguineo</label>
+                <select
+                  class="form-select"
+                  aria-label="Tipo sanguineo"
+                  id="tipoSanguineo"
+                  name="tipoSanguineo"
+                  [(ngModel)]="aluno.historicoSaude.tipoSanguineo"
+                >
+                  <option selected disabled>Tipo sanguineo</option>
+                  <option value="A_POSITIVO">A+</option>
+                  <option value="A_NEGATIVO">A-</option>
+                  <option value="B_POSITIVO">B+</option>
+                  <option value="B_NEGATIVO">B-</option>
+                  <option value="AB_POSITIVO">AB+</option>
+                  <option value="AB_NEGATIVO">AB-</option>
+                  <option value="O_POSITIVO">O+</option>
+                  <option value="O_NEGATIVO">O-</option>
+                </select>
+              </div>
+  
+              <div class="col-md-6">
+                <label for="fatorRH" class="form-label">Fator RH</label>
+                <select
+                  class="form-select"
+                  id="fatorRH"
+                  name="fatorRH"
+                  [(ngModel)]="aluno.historicoSaude.fatorRh"
+                >
+                  <option selected disabled>Fator RH</option>
+                  <option value="POSITIVO">+</option>
+                  <option value="NEGATIVO">-</option>
+                </select>
+              </div>
+            </div>
+
             <div class="col-md-12">
               <label for="alergia" class="form-label">Alergias</label>
               <input
@@ -288,34 +350,9 @@
           </div>
           <div class="row mt-4">
             <div class="row mt-4">
-              <div class="d-flex justify-content-end m-5" *ngIf="!modoEdicao">
-                <button
-                  (click)="setModoEdicao()"
-                  class="btn btn-primary profile-button"
-                  type="button"
-                >
-                  Editar
-                </button>
-              </div>
               <div *ngIf="modoEdicao">
                 <div>
                   <h5>Insire as novas Informações:</h5>
-                </div>
-                <div class="d-flex justify-content-between my-5" v>
-                  <button
-                    (click)="setModoEdicao()"
-                    class="btn btn-primary profile-button"
-                    type="button"
-                  >
-                    Cancelar
-                  </button>
-                  <button
-                    (click)="adicionarDeficiencia()"
-                    class="btn btn-primary profile-button"
-                    type="button"
-                  >
-                    Salvar
-                  </button>
                 </div>
               </div>
               <div *ngIf="modoEdicao">
@@ -851,39 +888,7 @@
                   <div>
                     <h5>Insire as novas Informações:</h5>
                   </div>
-                  <div class="d-flex justify-content-between my-5" v>
-                    <button
-                      (click)="setModoEdicao()"
-                      class="btn btn-primary profile-button"
-                      type="button"
-                    >
-                      Cancelar
-                    </button>
-                    <button
-                      (click)="adicionarDeficiencia()"
-                      class="btn btn-primary profile-button"
-                      type="button"
-                    >
-                      Salvar
-                    </button>
-                  </div>
                 </div>
-                <div *ngIf="modoEdicao">
-                  <input
-                    class="w-75 m-1"
-                    type="text"
-                    name="deficiencia"
-                    id="deficiencia"
-                    class="form-control"
-                    [(ngModel)]="deficiencia"
-                  />
-                  <div class="d-flex justify-content-end">
-                    <button class="btn btn-secondary m-2" (click)="adicionarDeficiencia()">
-                      Adicionar
-                    </button>
-                  </div>
-                </div>
-
                 <div>
                   <div class="panel-heading">
                     <h5 class="placeholder">Deficiencias</h5>

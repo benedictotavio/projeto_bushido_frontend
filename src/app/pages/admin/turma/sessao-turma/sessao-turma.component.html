@@ -62,10 +62,10 @@
         <td>{{ aluno.genero }}</td>
         <td>{{ aluno.rg }}</td>
         <td>
-          <button class="btn btn-danger" (click)="adicionarFaltaAoAluno(aluno.rg)">+</button>
+          <button class="btn btn-warning" (click)="adicionarFaltaAoAluno(aluno.rg)">+</button>
         </td>
         <td>
-          <button class="btn" (click)="removerAluno(aluno.rg)">X</button>
+          <button class="btn btn-danger" (click)="removerAluno(aluno.rg)">X</button>
         </td>
       </tr>
     </tbody>

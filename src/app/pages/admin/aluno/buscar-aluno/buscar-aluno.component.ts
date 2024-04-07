@@ -44,6 +44,8 @@ export class BuscarAlunoComponent {
           }
           if (error.status === 404) {
             window.alert('Aluno não encontrado')
+            this.rg = ''
+            this.showPlaceholder = false
           }
         },
       })
