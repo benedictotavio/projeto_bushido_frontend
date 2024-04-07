@@ -2,7 +2,13 @@ import { HttpClient } from '@angular/common/http'
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { environment } from 'src/environments/environment'
-import { AlunoEditado, AlunoResponse, Graduacao } from 'src/app/pages/admin/aluno.interface'
+import {
+  AlunoEditado,
+  AlunoResponse,
+  Graduacao,
+  HistoricoSaude,
+  HistoricoSaudeEditado,
+} from 'src/app/pages/admin/aluno.interface'
 
 @Component({
   selector: 'app-sessao-aluno',
@@ -24,8 +30,9 @@ export class SessaoAlunoComponent implements OnInit {
   rg_aluno = this.route.snapshot.paramMap.get('rg')
   deficiencia = ''
   acompanhamentoSaude = ''
-  url = environment.urlApi + 'aluno'
+  private readonly url = environment.urlApi + 'aluno'
   modoEdicao = false
+  private historicoSaudeEditado: HistoricoSaudeEditado | undefined
 
   graduacaoAtual: Graduacao = {
     kyu: 0,
@@ -72,6 +79,7 @@ export class SessaoAlunoComponent implements OnInit {
           }
           if (error.status === 404) {
             window.confirm('Aluno não encontrado')
+            this.router.navigate(['/admin', this.email, 'buscar'])
           }
           console.error(error)
         },
@@ -317,7 +325,7 @@ export class SessaoAlunoComponent implements OnInit {
 
   protected aprovarAluno() {
     this.http
-      .post(
+      .post<{ message: string }>(
         this.url + `/graduacao/${this.rg_aluno}/aprovar`,
         {},
         {
@@ -329,9 +337,8 @@ export class SessaoAlunoComponent implements OnInit {
       )
       .subscribe({
         next: data => {
-          window.confirm('Aluno aprovado com sucesso')
+          window.confirm(data.message)
           window.location.reload()
-          console.log(data)
         },
         error: error => {
           if (error.status === 401) {
@@ -341,12 +348,12 @@ export class SessaoAlunoComponent implements OnInit {
             localStorage.removeItem('token')
             this.router.navigate(['/admin'])
           }
-          if (error.status === 404) {
-            window.confirm('Aluno não encontrado')
-          }
           if (error.status === 403) {
             console.error(error)
-            window.confirm('Aluno não possui responsável')
+            window.confirm(error.error.message)
+          }
+          if (error.status === 404 || error.status === 409 || error.status === 411) {
+            window.confirm(error.error.message)
           }
         },
       })
@@ -354,7 +361,7 @@ export class SessaoAlunoComponent implements OnInit {
 
   protected reprovarAluno() {
     this.http
-      .post(
+      .post<{ message: string }>(
         this.url + `/graduacao/${this.rg_aluno}/reprovar`,
         {},
         {
@@ -366,9 +373,8 @@ export class SessaoAlunoComponent implements OnInit {
       )
       .subscribe({
         next: data => {
-          window.confirm('Aluno reprovado com sucesso')
+          window.confirm(data.message)
           window.location.reload()
-          console.log(data)
         },
         error: error => {
           if (error.status === 401) {
@@ -378,12 +384,52 @@ export class SessaoAlunoComponent implements OnInit {
             localStorage.removeItem('token')
             this.router.navigate(['/admin'])
           }
-          if (error.status === 404) {
-            window.confirm('Aluno não encontrado')
+          if (error.status === 403) {
+            console.error(error)
+            window.confirm('Aluno não possui responsável')
+          }
+          if (error.status === 404 || error.status === 409 || error.status === 411) {
+            window.confirm(error.error.message)
+          }
+        },
+      })
+  }
+
+  protected editarHistoricoSaude() {
+    this.historicoSaudeEditado = this.adapterHistoricoSaudeParaHistoricoSaudeEditado(
+      this.aluno?.historicoSaude as HistoricoSaude
+    )
+
+    console.log(this.historicoSaudeEditado)
+    this.http
+      .put<{ message: string }>(
+        this.url + `/historicoSaude/${this.rg_aluno}`,
+        this.historicoSaudeEditado,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + this.token,
+          },
+        }
+      )
+      .subscribe({
+        next: data => {
+          window.confirm(data.message)
+        },
+        error: error => {
+          if (error.status === 401) {
+            window.confirm(
+              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
+            )
+            localStorage.removeItem('token')
+            this.router.navigate(['/admin'])
           }
           if (error.status === 403) {
             console.error(error)
             window.confirm('Aluno não possui responsável')
+          }
+          if (error.status === 404 || error.status === 409 || error.status === 411) {
+            window.confirm(error.error.message)
           }
         },
       })
@@ -391,26 +437,22 @@ export class SessaoAlunoComponent implements OnInit {
 
   private adapterAlunoParaAlunoEditado(aluno: AlunoResponse): AlunoEditado {
     return {
-      dadosSociais: {
-        bolsaFamilia: aluno.dadosSociais.bolsaFamilia,
-        auxilioBrasil: aluno.dadosSociais.auxilioBrasil,
-        imovel: aluno.dadosSociais.imovel,
-        numerosDePessoasNaCasa: aluno.dadosSociais.numerosDePessoasNaCasa,
-        contribuintesDaRendaFamiliar: aluno.dadosSociais.contribuintesDaRendaFamiliar,
-        alunoContribuiParaRenda: aluno.dadosSociais.alunoContribuiParaRenda,
-        rendaFamiliarEmSalariosMinimos: aluno.dadosSociais.rendaFamiliarEmSalariosMinimos,
-      },
-      dadosEscolares: {
-        turno: aluno.dadosEscolares.turno,
-        escola: aluno.dadosEscolares.escola,
-        serie: aluno.dadosEscolares.serie,
-      },
-      endereco: {
-        cidade: aluno.endereco.cidade,
-        estado: aluno.endereco.estado,
-        cep: aluno.endereco.cep,
-        numero: aluno.endereco.numero,
-      },
+      dadosSociais: aluno.dadosSociais,
+      dadosEscolares: aluno.dadosEscolares,
+      endereco: aluno.endereco,
+    }
+  }
+
+  private adapterHistoricoSaudeParaHistoricoSaudeEditado(
+    historicoSaude: HistoricoSaude
+  ): HistoricoSaudeEditado {
+    return {
+      fatorRh: historicoSaude.fatorRh,
+      tipoSanguineo: historicoSaude.tipoSanguineo,
+      usoMedicamentoContinuo: historicoSaude.usoMedicamento,
+      cirurgia: historicoSaude.cirurgia,
+      alergia: historicoSaude.alergia,
+      doencaCronica: historicoSaude.doencaCronica,
     }
   }
 }

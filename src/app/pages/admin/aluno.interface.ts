@@ -51,15 +51,15 @@ interface DoencaCronica {
   tipo: string
 }
 
-interface HistoricoSaude {
+export interface HistoricoSaude {
   fatorRh: string
   tipoSanguineo: string
   usoMedicamento: UsoMedicamento
   alergia: Alergia
   cirurgia: Cirurgia
   doencaCronica: DoencaCronica
-  deficiencias: string[] // Define the type of deficiencias as needed
-  acompanhamentoSaude: string[] // Define the type of acompanhamentoSaude as needed
+  deficiencias: string[]
+  acompanhamentoSaude: string[]
 }
 
 interface DadosSociais {
@@ -96,4 +96,13 @@ export interface AlunoEditado {
   dadosSociais: DadosSociais
   dadosEscolares: DadosEscolares
   endereco: Endereco
+}
+
+export interface HistoricoSaudeEditado {
+  fatorRh: string
+  tipoSanguineo: string
+  usoMedicamentoContinuo: UsoMedicamento
+  alergia: Alergia
+  cirurgia: Cirurgia
+  doencaCronica: DoencaCronica
 }
