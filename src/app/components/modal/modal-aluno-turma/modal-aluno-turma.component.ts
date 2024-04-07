@@ -46,18 +46,19 @@ export class ModalAlunoTurmaComponent {
         },
         error: error => {
           if (error.status === 401) {
-            window.confirm('O token informado é inválido')
+            window.confirm(
+              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
+            )
             localStorage.removeItem('token')
             this.router.navigate(['/admin'])
           }
-          if (error.status === 403) {
-            window.confirm('Preencha todas as propriedades corretamente')
-          }
-          if (error.status === 404) {
-            window.confirm('Aluno não encontrado')
-          }
-          if (error.status === 409) {
-            window.confirm('Aluno ja pertence à turma')
+          if (
+            error.status === 403 ||
+            error.status === 404 ||
+            error.status === 409 ||
+            error.status === 411
+          ) {
+            window.confirm(error['error']['message'])
           }
         },
       })
@@ -65,18 +66,20 @@ export class ModalAlunoTurmaComponent {
 
   protected buscarAlunoPorRg() {
     this.http
-      .get<AlunoResponse>(this.url + 'aluno' + `?rg=${this.rg}`, {
+      .get<AlunoResponse[]>(this.url + 'aluno' + `?rg=${this.rg}`, {
         headers: {
           Authorization: 'Bearer ' + this.token,
         },
       })
       .subscribe({
         next: data => {
-          this.aluno = data
+          this.aluno = data[0]
         },
         error: error => {
           if (error.status === 401) {
-            window.confirm('O token informado é inválido')
+            window.confirm(
+              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
+            )
             localStorage.removeItem('token')
             this.router.navigate(['/admin'])
           }

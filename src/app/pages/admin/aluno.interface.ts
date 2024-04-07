@@ -92,17 +92,18 @@ export interface AlunoResponse {
   historicoSaude: HistoricoSaude
 }
 
-export interface AlunoEditado {
-  dadosSociais: DadosSociais
-  dadosEscolares: DadosEscolares
-  endereco: Endereco
-}
-
-export interface HistoricoSaudeEditado {
+interface HistoricoSaudeEditado {
   fatorRh: string
   tipoSanguineo: string
   usoMedicamentoContinuo: UsoMedicamento
   alergia: Alergia
   cirurgia: Cirurgia
   doencaCronica: DoencaCronica
+}
+
+export interface AlunoEditado {
+  dadosSociais: DadosSociais
+  dadosEscolares: DadosEscolares
+  endereco: Endereco
+  historicoDeSaude: HistoricoSaudeEditado
 }

@@ -105,21 +105,22 @@ export class RegistroAlunoComponent {
           window.alert(res.message)
           this.router.navigate([`/admin/${this.email}/aluno`, res.id])
         },
-        error: err => {
-          console.log(err)
-          if (err.status === 401) {
-            window.confirm('O token informado é inválido')
+        error: error => {
+          if (error.status === 401) {
+            window.confirm(
+              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
+            )
             localStorage.removeItem('token')
             this.router.navigate(['/admin'])
           }
-          if (err.status === 403) {
-            window.confirm('Preencha todas as propriedades corretamente')
-          }
-          if (err.status === 422) {
-            window.confirm('Todos os campos devem ser preenchidos corretamente')
-          }
-          if (err.status === 409) {
-            window.confirm('O email informado já foi registrado')
+          if (
+            error.status === 403 ||
+            error.status === 404 ||
+            error.status === 409 ||
+            error.status === 411 ||
+            error.status === 422
+          ) {
+            window.confirm(error['error']['message'])
           }
         },
       })
