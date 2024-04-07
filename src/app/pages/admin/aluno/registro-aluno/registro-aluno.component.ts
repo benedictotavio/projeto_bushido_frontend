@@ -108,7 +108,7 @@ export class RegistroAlunoComponent {
         error: err => {
           console.log(err)
           if (err.status === 401) {
-            window.confirm('O token informado é inválido')
+            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
             localStorage.removeItem('token')
             this.router.navigate(['/admin'])
           }

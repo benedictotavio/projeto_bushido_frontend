@@ -2,13 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { environment } from 'src/environments/environment'
-import {
-  AlunoEditado,
-  AlunoResponse,
-  Graduacao,
-  HistoricoSaude,
-  HistoricoSaudeEditado,
-} from 'src/app/pages/admin/aluno.interface'
+import { AlunoEditado, AlunoResponse, Graduacao } from 'src/app/pages/admin/aluno.interface'
 
 @Component({
   selector: 'app-sessao-aluno',
@@ -32,7 +26,6 @@ export class SessaoAlunoComponent implements OnInit {
   acompanhamentoSaude = ''
   private readonly url = environment.urlApi + 'aluno'
   modoEdicao = false
-  private historicoSaudeEditado: HistoricoSaudeEditado | undefined
 
   graduacaoAtual: Graduacao = {
     kyu: 0,
@@ -101,10 +94,11 @@ export class SessaoAlunoComponent implements OnInit {
       .subscribe({
         next: data => {
           window.confirm(data.message)
+
         },
         error: error => {
           if (error.status === 401) {
-            window.confirm('O token informado é inválido')
+            window.confirm('')
             localStorage.removeItem('token')
           }
           if (error.status === 404) {
@@ -133,7 +127,7 @@ export class SessaoAlunoComponent implements OnInit {
           },
           error: error => {
             if (error.status === 401) {
-              window.confirm('O token informado é inválido')
+              window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
               console.error(error)
               setInterval(() => {
                 localStorage.removeItem('token')
@@ -168,7 +162,7 @@ export class SessaoAlunoComponent implements OnInit {
           },
           error: error => {
             if (error.status === 401) {
-              window.confirm('O token informado é inválido')
+              window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
               console.error(error)
               setInterval(() => {
                 localStorage.removeItem('token')
@@ -395,64 +389,19 @@ export class SessaoAlunoComponent implements OnInit {
       })
   }
 
-  protected editarHistoricoSaude() {
-    this.historicoSaudeEditado = this.adapterHistoricoSaudeParaHistoricoSaudeEditado(
-      this.aluno?.historicoSaude as HistoricoSaude
-    )
-
-    console.log(this.historicoSaudeEditado)
-    this.http
-      .put<{ message: string }>(
-        this.url + `/historicoSaude/${this.rg_aluno}`,
-        this.historicoSaudeEditado,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + this.token,
-          },
-        }
-      )
-      .subscribe({
-        next: data => {
-          window.confirm(data.message)
-        },
-        error: error => {
-          if (error.status === 401) {
-            window.confirm(
-              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
-            )
-            localStorage.removeItem('token')
-            this.router.navigate(['/admin'])
-          }
-          if (error.status === 403) {
-            console.error(error)
-            window.confirm('Aluno não possui responsável')
-          }
-          if (error.status === 404 || error.status === 409 || error.status === 411) {
-            window.confirm(error.error.message)
-          }
-        },
-      })
-  }
-
   private adapterAlunoParaAlunoEditado(aluno: AlunoResponse): AlunoEditado {
     return {
       dadosSociais: aluno.dadosSociais,
       dadosEscolares: aluno.dadosEscolares,
       endereco: aluno.endereco,
-    }
-  }
-
-  private adapterHistoricoSaudeParaHistoricoSaudeEditado(
-    historicoSaude: HistoricoSaude
-  ): HistoricoSaudeEditado {
-    return {
-      fatorRh: historicoSaude.fatorRh,
-      tipoSanguineo: historicoSaude.tipoSanguineo,
-      usoMedicamentoContinuo: historicoSaude.usoMedicamento,
-      cirurgia: historicoSaude.cirurgia,
-      alergia: historicoSaude.alergia,
-      doencaCronica: historicoSaude.doencaCronica,
+      historicoDeSaude: {
+        fatorRh: aluno.historicoSaude.fatorRh,
+        tipoSanguineo: aluno.historicoSaude.tipoSanguineo,
+        usoMedicamentoContinuo: aluno.historicoSaude.usoMedicamento,
+        alergia: aluno.historicoSaude.alergia,
+        cirurgia: aluno.historicoSaude.cirurgia,
+        doencaCronica: aluno.historicoSaude.doencaCronica,
+      },
     }
   }
 }

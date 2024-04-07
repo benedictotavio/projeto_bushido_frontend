@@ -242,31 +242,6 @@
         </div>
         <div class="row mt-4">
           <h5>Historico de Saude</h5>
-
-          <div class="col-md-12 d-flex justify-content-end">
-            <button
-              (click)="setModoEdicao()"
-              class="btn btn-primary profile-button"
-              type="button"
-              *ngIf="!modoEdicao"
-            >
-              Editar
-            </button>
-            <div
-              *ngIf="modoEdicao"
-              class="d-flex justify-content-around align-items-center"
-            >
-              <button
-                (click)="setModoEdicao()"
-                class="btn btn-primary profile-button"
-                type="button"
-              >
-                Cancelar
-              </button>
-              <button class="btn btn-secondary" type="button" (click)="editarHistoricoSaude()">Salvar</button>
-            </div>
-          </div>
-
           <div class="row mt-4">
             <div class="row my-3">
               <div class="col-md-6">
@@ -350,6 +325,28 @@
           </div>
           <div class="row mt-4">
             <div class="row mt-4">
+              <div class="col-md-12 d-flex justify-content-end">
+                <button
+                  (click)="setModoEdicao()"
+                  class="btn btn-primary profile-button"
+                  type="button"
+                  *ngIf="!modoEdicao"
+                >
+                  Editar
+                </button>
+                <div
+                  *ngIf="modoEdicao"
+                  class="d-flex justify-content-around align-items-center"
+                >
+                  <button
+                    (click)="setModoEdicao()"
+                    class="btn btn-primary profile-button"
+                    type="button"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
               <div *ngIf="modoEdicao">
                 <div>
                   <h5>Insire as novas Informações:</h5>

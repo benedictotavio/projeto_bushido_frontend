@@ -38,7 +38,7 @@ export class BuscarAlunoComponent {
         },
         error: error => {
           if (error.status === 401) {
-            window.alert('O token informado é inválido')
+            window.alert('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
             localStorage.removeItem('token')
             this.router.navigate(['/admin'])
           }
