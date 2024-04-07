@@ -34,7 +34,6 @@ interface historicoSaudeProps {
     | 'AB_NEGATIVO'
     | 'O_POSITIVO'
     | 'O_NEGATIVO'
-  fatorRh: 'POSITIVO' | 'NEGATIVO'
   usoMedicamentoContinuo: {
     resposta: string
     tipo: string

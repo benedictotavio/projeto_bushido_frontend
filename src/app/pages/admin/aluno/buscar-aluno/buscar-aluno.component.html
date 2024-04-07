@@ -24,4 +24,11 @@
       <app-card-busca-aluno [aluno]="aluno" [showPlaceholder]="showPlaceholder"></app-card-busca-aluno>
     </div>
   </div>
+
+  <div class="row" *ngIf="alunos.length === 0">
+    <div class="col-12">
+
+    </div>
+  </div>
+
 </div>

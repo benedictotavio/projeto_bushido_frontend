@@ -264,20 +264,6 @@
                   <option value="O_NEGATIVO">O-</option>
                 </select>
               </div>
-  
-              <div class="col-md-6">
-                <label for="fatorRH" class="form-label">Fator RH</label>
-                <select
-                  class="form-select"
-                  id="fatorRH"
-                  name="fatorRH"
-                  [(ngModel)]="aluno.historicoSaude.fatorRh"
-                >
-                  <option selected disabled>Fator RH</option>
-                  <option value="POSITIVO">+</option>
-                  <option value="NEGATIVO">-</option>
-                </select>
-              </div>
             </div>
 
             <div class="col-md-12">
@@ -334,10 +320,7 @@
                 >
                   Editar
                 </button>
-                <div
-                  *ngIf="modoEdicao"
-                  class="d-flex justify-content-around align-items-center"
-                >
+                <div *ngIf="modoEdicao" class="d-flex justify-content-around align-items-center">
                   <button
                     (click)="setModoEdicao()"
                     class="btn btn-primary profile-button"
@@ -460,7 +443,7 @@
               </div>
             </div>
           </div>
-          <div class="mt-5 d-flex justify-content-center">
+          <div class="my-5 d-flex justify-content-center">
             <button
               (click)="editarAlunoPorRg()"
               class="btn btn-primary profile-button w-75 h-100"
@@ -475,7 +458,10 @@
     <div class="col-md-4">
       <div class="row">
         <div class="col-md-12">
-          <div class="card">
+          <div class="card mt-3">
+            <div class="card-header d-flex justify-content-end">
+              <button class="btn btn-primary" (click)="vincularAlunoAUmaTurma()">+ Turma</button>
+            </div>
             <div class="card-body">
               <div class="d-flex justify-content-between">
                 <div>

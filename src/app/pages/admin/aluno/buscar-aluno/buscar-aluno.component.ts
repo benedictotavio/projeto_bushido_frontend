@@ -57,7 +57,7 @@ export class BuscarAlunoComponent {
             this.router.navigate(['/admin'])
           }
           if (error.status === 404) {
-            window.alert('Aluno não encontrado')
+            window.alert(error['error']['message'])
             this.pesquisarAluno = ''
             this.showPlaceholder = false
           }

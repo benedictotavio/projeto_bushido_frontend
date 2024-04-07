@@ -43,6 +43,11 @@ export class SessaoAlunoComponent implements OnInit {
     this.buscarAlunoPorRg()
   }
 
+  protected vincularAlunoAUmaTurma() {
+    const nomeTurma = window.prompt('Digite o nome da turma')
+    this.adicionarAlunoATurma(nomeTurma as string)
+  }
+
   protected buscarAlunoPorRg() {
     this.http
       .get<AlunoResponse[]>(this.url + `?rg=${this.rg_aluno}`, {
@@ -52,6 +57,10 @@ export class SessaoAlunoComponent implements OnInit {
       })
       .subscribe({
         next: data => {
+          if (data.length === 0) {
+            window.confirm('Aluno não encontrado')
+            this.router.navigate(['/admin', this.email, 'buscar'])
+          }
           this.aluno = data[0]
           this.aluno.dataPreenchimento = new Date(this.aluno.dataPreenchimento).toLocaleDateString(
             'pt-BR'
@@ -392,13 +401,62 @@ export class SessaoAlunoComponent implements OnInit {
       })
   }
 
+  private adicionarAlunoATurma(nomeTurma: string) {
+    console.log(this.aluno?.dataNascimento)
+
+    this.http
+      .post<{ message: string }>(
+        `${environment.urlApi}turma/${nomeTurma}/aluno`,
+        {
+          nome: this.aluno?.nome,
+          genero: this.aluno?.genero,
+          dataNascimento: this.dateToLocalDateString(this.aluno?.dataNascimento as string),
+          rg: this.aluno?.rg,
+        },
+        {
+          headers: {
+            Authorization: 'Bearer ' + this.token,
+          },
+        }
+      )
+      .subscribe({
+        next: data => {
+          window.confirm(data.message)
+          window.location.reload()
+        },
+        error: error => {
+          if (error.status === 401) {
+            window.confirm(
+              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
+            )
+            localStorage.removeItem('token')
+            this.router.navigate(['/admin'])
+          }
+          if (
+            error.status === 403 ||
+            error.status === 404 ||
+            error.status === 409 ||
+            error.status === 411
+          ) {
+            window.confirm(error['error']['message'])
+          }
+        },
+      })
+  }
+
+  private dateToLocalDateString(dateString: string): string {
+    const parts = dateString.split('/')
+    const formattedDate =
+      parts[2] + '-' + parts[1].padStart(2, '0') + '-' + parts[0].padStart(2, '0')
+    return formattedDate
+  }
+
   private adapterAlunoParaAlunoEditado(aluno: AlunoResponse): AlunoEditado {
     return {
       dadosSociais: aluno.dadosSociais,
       dadosEscolares: aluno.dadosEscolares,
       endereco: aluno.endereco,
       historicoDeSaude: {
-        fatorRh: aluno.historicoSaude.fatorRh,
         tipoSanguineo: aluno.historicoSaude.tipoSanguineo,
         usoMedicamentoContinuo: aluno.historicoSaude.usoMedicamento,
         alergia: aluno.historicoSaude.alergia,

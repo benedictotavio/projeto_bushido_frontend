@@ -17,7 +17,6 @@ export class RegistroAlunoComponent {
 
   historicoSaude: historicoSaudeProps = {
     tipoSanguineo: 'A_POSITIVO',
-    fatorRh: 'POSITIVO',
     usoMedicamentoContinuo: {
       resposta: '',
       tipo: '',
@@ -84,6 +83,7 @@ export class RegistroAlunoComponent {
     },
     historicoSaude: this.historicoSaude,
   }
+
   private readonly token = localStorage.getItem('token')
 
   email = this.route.snapshot.paramMap.get('email')
@@ -127,6 +127,12 @@ export class RegistroAlunoComponent {
   }
 
   adicionarAcompanhamento() {
+    if (this.valorNoArray(this.historicoSaude.acompanhamentoSaude, this.acompanhamentoSaude)) {
+      window.confirm('Acompanhamento ja adicionado')
+      this.acompanhamentoSaude = ''
+      return
+    }
+
     if (this.acompanhamentoSaude.trim() !== '') {
       this.historicoSaude.acompanhamentoSaude.push(this.acompanhamentoSaude)
       this.acompanhamentoSaude = ''
@@ -134,9 +140,19 @@ export class RegistroAlunoComponent {
   }
 
   adicionarDeficiencia() {
+    if (this.valorNoArray(this.historicoSaude.deficiencia, this.deficiencia)) {
+      window.confirm('Deficiência ja adicionada')
+      this.deficiencia = ''
+      return
+    }
+
     if (this.deficiencia.trim() !== '') {
       this.historicoSaude.deficiencia.push(this.deficiencia)
       this.deficiencia = ''
     }
+  }
+
+  private valorNoArray(arrStrings: string[], valor: string) {
+    return arrStrings.includes(valor)
   }
 }
