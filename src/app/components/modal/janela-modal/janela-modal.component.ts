@@ -40,7 +40,9 @@ export class JanelaModalComponent {
         },
         error: error => {
           if (error.status === 401) {
-            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
+            window.confirm(
+              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
+            )
             localStorage.removeItem('token')
           }
           if (error.status === 403) {

@@ -94,7 +94,6 @@ export class SessaoAlunoComponent implements OnInit {
       .subscribe({
         next: data => {
           window.confirm(data.message)
-
         },
         error: error => {
           if (error.status === 401) {
@@ -127,7 +126,9 @@ export class SessaoAlunoComponent implements OnInit {
           },
           error: error => {
             if (error.status === 401) {
-              window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
+              window.confirm(
+                'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
+              )
               console.error(error)
               setInterval(() => {
                 localStorage.removeItem('token')
@@ -162,7 +163,9 @@ export class SessaoAlunoComponent implements OnInit {
           },
           error: error => {
             if (error.status === 401) {
-              window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
+              window.confirm(
+                'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
+              )
               console.error(error)
               setInterval(() => {
                 localStorage.removeItem('token')
