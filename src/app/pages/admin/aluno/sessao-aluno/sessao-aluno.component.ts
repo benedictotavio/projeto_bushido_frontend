@@ -191,7 +191,7 @@ export class SessaoAlunoComponent implements OnInit {
 
   protected removerFalta(falta: string) {
     this.http
-      .delete(this.url + `/falta/${this.rg_aluno}?data=${falta}`, {
+      .delete<{ message: string }>(this.url + `/falta/${this.rg_aluno}?data=${falta}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + this.token,
@@ -199,9 +199,8 @@ export class SessaoAlunoComponent implements OnInit {
       })
       .subscribe({
         next: data => {
-          window.confirm('Falta removida com sucesso')
+          window.confirm(data['message'])
           window.location.reload()
-          console.log(data)
         },
         error: error => {
           if (error.status === 401) {
@@ -216,8 +215,6 @@ export class SessaoAlunoComponent implements OnInit {
           if (error.status === 403) {
             console.error(error)
             window.confirm('Aluno não possui falta')
-          } else {
-            console.error(error)
           }
         },
       })
@@ -225,17 +222,19 @@ export class SessaoAlunoComponent implements OnInit {
 
   protected removerAcompanhamentoSaude(acompanhamento: string) {
     this.http
-      .delete(this.url + `/acompanhamentoSaude/${this.rg_aluno}?acompanhamento=${acompanhamento}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + this.token,
-        },
-      })
+      .delete<{ message: string }>(
+        this.url + `/acompanhamentoSaude/${this.rg_aluno}?acompanhamento=${acompanhamento}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + this.token,
+          },
+        }
+      )
       .subscribe({
         next: data => {
-          window.confirm('Acompanhamento removido com sucesso')
+          window.confirm(data['message'])
           window.location.reload()
-          console.log(data)
         },
         error: error => {
           if (error.status === 401) {
@@ -250,8 +249,6 @@ export class SessaoAlunoComponent implements OnInit {
           if (error.status === 403) {
             console.error(error)
             window.confirm('Aluno não possui acompanhamento')
-          } else {
-            console.error(error)
           }
         },
       })
@@ -259,7 +256,7 @@ export class SessaoAlunoComponent implements OnInit {
 
   protected removerDeficiencia(id: string) {
     this.http
-      .delete(this.url + `/deficiencia/${this.rg_aluno}?deficiencia=${id}`, {
+      .delete<{ message: string }>(this.url + `/deficiencia/${this.rg_aluno}?deficiencia=${id}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + this.token,
@@ -267,9 +264,8 @@ export class SessaoAlunoComponent implements OnInit {
       })
       .subscribe({
         next: data => {
-          window.confirm('Deficiência removida com sucesso')
+          window.confirm(data.message)
           window.location.reload()
-          console.log(data)
         },
         error: error => {
           if (error.status === 401) {
@@ -284,17 +280,14 @@ export class SessaoAlunoComponent implements OnInit {
           if (error.status === 403) {
             console.error(error)
             window.confirm('Aluno não possui deficiência')
-          } else {
-            console.error(error)
           }
         },
       })
   }
 
   protected removerResponsavel(cpf: string) {
-    console.log(cpf)
     this.http
-      .delete(this.url + `/responsavel/${this.rg_aluno}?cpf=${cpf}`, {
+      .delete<{ message: string }>(this.url + `/responsavel/${this.rg_aluno}?cpf=${cpf}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + this.token,
@@ -302,9 +295,8 @@ export class SessaoAlunoComponent implements OnInit {
       })
       .subscribe({
         next: data => {
-          window.confirm('Responsável removido com sucesso')
+          window.confirm(data.message)
           window.location.reload()
-          console.log(data)
         },
         error: error => {
           if (error.status === 401) {
@@ -402,8 +394,6 @@ export class SessaoAlunoComponent implements OnInit {
   }
 
   private adicionarAlunoATurma(nomeTurma: string) {
-    console.log(this.aluno?.dataNascimento)
-
     this.http
       .post<{ message: string }>(
         `${environment.urlApi}turma/${nomeTurma}/aluno`,

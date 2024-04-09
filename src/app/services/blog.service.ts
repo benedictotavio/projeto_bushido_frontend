@@ -16,9 +16,7 @@ export class BlogService {
     }),
   }
 
-  constructor(private http: HttpClient) {
-    console.log(environment)
-  }
+  constructor(private http: HttpClient) {}
 
   public getAllPublishedPosts(): Observable<any> {
     const query =

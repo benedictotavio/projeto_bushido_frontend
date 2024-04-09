@@ -36,7 +36,6 @@ export class TurmasComponent implements OnInit {
       .subscribe({
         next: data => {
           this.turmas = data
-          console.log(this.turmas)
         },
         error: error => {
           if (error.status === 401) {

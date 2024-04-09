@@ -15,7 +15,7 @@ export class EsporteComponent implements OnInit {
   ngOnInit(): void {
     this.blogService.getPostsByCategory('esporte').subscribe({
       next: res => (this.posts = res.data.allPosts),
-      error: error => console.log(error),
+      error: error => console.error(error),
     })
   }
 }

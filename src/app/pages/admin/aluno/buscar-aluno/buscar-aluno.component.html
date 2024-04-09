@@ -14,20 +14,36 @@
       [(ngModel)]="pesquisarAluno"
       required
     />
-    <input type="submit" value="Pesquisar" class="btn btn-primary">
+    <input type="submit" value="Pesquisar" class="btn btn-primary" />
   </form>
+
+  <div class="pagination d-flex justify-content-center align-items-center w-100" *ngIf="showPagination">
+    <button (click)="onPageChange(currentPage - 1)" class="page-link" [class.disabled]="currentPage === 1">Anterior</button>
+    <span class="page-item mx-5">Page {{ currentPage }} of {{ alunos.length }}</span>
+    <button
+      (click)="onPageChange(currentPage + 1)"
+      class="page-link"
+      [class.disabled]="currentPage >= alunos.length"
+    >
+      Proximo
+    </button>
+  </div>
+  
 
   <!---Dados do aluno-->
 
   <div class="row" *ngIf="alunos.length > 0">
     <div class="col-12" *ngFor="let aluno of alunos">
-      <app-card-busca-aluno [aluno]="aluno" [showPlaceholder]="showPlaceholder"></app-card-busca-aluno>
+      <app-card-busca-aluno
+        [aluno]="aluno"
+        [showPlaceholder]="showPlaceholder"
+      ></app-card-busca-aluno>
     </div>
   </div>
 
   <div class="row" *ngIf="alunos.length === 0">
     <div class="col-12">
-
+      
     </div>
   </div>
 

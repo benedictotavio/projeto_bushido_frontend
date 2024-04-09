@@ -21,7 +21,7 @@ export class ArtigoComponent implements OnInit {
           this.router.navigate(['404'])
         }
       },
-      error: error => console.log(error),
+      error: error => console.error(error),
     })
   }
 

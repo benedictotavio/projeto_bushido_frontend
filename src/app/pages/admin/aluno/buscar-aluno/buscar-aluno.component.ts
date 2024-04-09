@@ -16,6 +16,10 @@ export class BuscarAlunoComponent {
   private readonly token = localStorage.getItem('token')
   private readonly apiUrl = environment.urlApi + `aluno`
   protected readonly email = this.route.snapshot.paramMap.get('email')
+  protected readonly itemsPerPage = 5
+  protected currentPage = 1
+  protected showPagination = false
+
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
@@ -30,7 +34,10 @@ export class BuscarAlunoComponent {
 
     if (this.validarRG(this.pesquisarAluno.trim())) {
       this.buscarAlunoPorRg()
+      return
     }
+
+    this.showPagination = true
     this.buscarAlunoPorNome()
   }
 
@@ -67,11 +74,15 @@ export class BuscarAlunoComponent {
 
   protected buscarAlunoPorNome() {
     this.http
-      .get<AlunoResponse[]>(this.apiUrl + `?nome=${this.pesquisarAluno}`, {
-        headers: {
-          Authorization: 'Bearer ' + this.token,
-        },
-      })
+      .get<AlunoResponse[]>(
+        this.apiUrl +
+          `?nome=${this.pesquisarAluno}&page=${this.currentPage - 1}&size=${this.itemsPerPage - 1}`,
+        {
+          headers: {
+            Authorization: 'Bearer ' + this.token,
+          },
+        }
+      )
       .subscribe({
         next: data => {
           this.alunos = data
@@ -97,5 +108,10 @@ export class BuscarAlunoComponent {
   private validarRG(rg: string) {
     const rgPattern = /^\d{9}$/
     return rgPattern.test(rg)
+  }
+
+  onPageChange(page: number) {
+    this.currentPage = page
+    this.pesquisar()
   }
 }
