@@ -93,7 +93,6 @@ export class ModalAlunoTurmaComponent {
           if (error.status === 404) {
             window.confirm('Aluno não encontrado')
           }
-          console.log(error)
         },
       })
   }

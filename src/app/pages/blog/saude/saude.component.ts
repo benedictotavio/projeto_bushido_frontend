@@ -15,7 +15,7 @@ export class SaudeComponent implements OnInit {
   ngOnInit(): void {
     this.blogService.getPostsByCategory('saúde').subscribe({
       next: res => (this.posts = res.data.allPosts),
-      error: error => console.log(error),
+      error: error => console.error(error),
     })
   }
 }

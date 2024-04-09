@@ -24,7 +24,7 @@ export class BlogComponent implements OnInit {
   ngOnInit(): void {
     this.blogService.getAllPublishedPosts().subscribe({
       next: res => (this.posts = res.data.allPosts),
-      error: err => console.log(err),
+      error: err => console.error(err),
     })
   }
 }
