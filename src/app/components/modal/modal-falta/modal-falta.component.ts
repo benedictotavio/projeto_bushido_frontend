@@ -50,6 +50,7 @@ export class ModalFaltaComponent {
           if (
             error.status === 403 ||
             error.status === 404 ||
+            error.status === 406 ||
             error.status === 409 ||
             error.status === 411
           ) {
