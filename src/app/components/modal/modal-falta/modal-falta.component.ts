@@ -48,6 +48,7 @@ export class ModalFaltaComponent {
             this.router.navigate(['admin'])
           }
           if (
+            error.status === 400 ||
             error.status === 403 ||
             error.status === 404 ||
             error.status === 406 ||
@@ -61,6 +62,11 @@ export class ModalFaltaComponent {
   }
 
   private dateToMilliseconds(dateString: string): string {
+    if (!dateString) {
+      window.confirm('Data inválida')
+      throw new Error('Data inválida')
+    }
+
     const date = new Date(dateString)
     console.log(date)
     const timezoneOffsetMilliseconds = date.getTimezoneOffset() * 60 * 1000

@@ -4,9 +4,12 @@
   "repository": {
     "url": "https://github.com/benedictotavio/projeto_bushido_frontend.git",
     "type": "git",
-    "directory": "https://github.com/benedictotavio/projeto_bushido_frontend"
+    "directory": "https://github.com/benedictotavio/projeto_bushido_frontend.git"
   },
   "proxy": "https://projeto-bushido-backend.onrender.com/api/V1/",
+  "author": "benedictotavio",
+  "license": "MIT",
+  "description": "Projeto bushido frontend, para processo social com intuito de distribuir aulas de karate.",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -27,7 +30,7 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.12",
-    "bootstrap": "^5.3.2",
+    "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "dotenv": "^16.4.5",
     "rxjs": "~7.8.0",

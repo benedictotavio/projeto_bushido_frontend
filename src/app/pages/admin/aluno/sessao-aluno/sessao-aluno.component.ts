@@ -112,6 +112,15 @@ export class SessaoAlunoComponent implements OnInit {
           if (error.status === 404) {
             window.confirm('Aluno não encontrado')
           }
+          if (
+            error.status === 400 ||
+            error.status === 403 ||
+            error.status === 404 ||
+            error.status === 409 ||
+            error.status === 411
+          ) {
+            window.confirm(error['error']['message'])
+          }
         },
       })
   }
@@ -145,6 +154,15 @@ export class SessaoAlunoComponent implements OnInit {
             }
             if (error.status === 404) {
               window.confirm('Aluno não encontrado')
+            }
+            if (
+              error.status === 400 ||
+              error.status === 403 ||
+              error.status === 404 ||
+              error.status === 409 ||
+              error.status === 411
+            ) {
+              window.confirm(error['error']['message'])
             }
           },
         })
@@ -182,6 +200,15 @@ export class SessaoAlunoComponent implements OnInit {
             }
             if (error.status === 404) {
               window.confirm('Aluno não encontrado')
+            }
+            if (
+              error.status === 400 ||
+              error.status === 403 ||
+              error.status === 404 ||
+              error.status === 409 ||
+              error.status === 411
+            ) {
+              window.confirm(error['error']['message'])
             }
           },
         })
@@ -395,6 +422,7 @@ export class SessaoAlunoComponent implements OnInit {
             this.router.navigate(['/admin'])
           }
           if (
+            error.status === 400 ||
             error.status === 403 ||
             error.status === 404 ||
             error.status === 409 ||
@@ -436,6 +464,7 @@ export class SessaoAlunoComponent implements OnInit {
             this.router.navigate(['/admin'])
           }
           if (
+            error.status === 400 ||
             error.status === 403 ||
             error.status === 404 ||
             error.status === 409 ||

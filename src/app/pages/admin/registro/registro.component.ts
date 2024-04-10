@@ -42,13 +42,21 @@ export class RegistroComponent {
           ])
         },
         error: error => {
-          if (error.status === 403) {
+          if (error.status === 401) {
+            window.confirm(
+              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
+            )
             localStorage.removeItem('token')
-            this.router.navigate(['/admin'])
-          } else if (error.status == 422) {
-            window.confirm('Todos os campos devem ser preenchidos corretamente')
-          } else if (error.status == 409) {
-            window.confirm('O email informado já foi registrado')
+          }
+
+          if (
+            error.status === 400 ||
+            error.status === 403 ||
+            error.status === 404 ||
+            error.status === 409 ||
+            error.status === 411
+          ) {
+            window.confirm(error['error']['message'])
           }
         },
       })
