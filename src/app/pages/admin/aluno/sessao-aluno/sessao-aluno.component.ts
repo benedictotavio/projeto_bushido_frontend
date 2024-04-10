@@ -322,6 +322,11 @@ export class SessaoAlunoComponent implements OnInit {
   }
 
   protected aprovarAluno() {
+    const confirmar = window.confirm('Tem certeza que deseja aprovar este aluno?')
+    if (!confirmar) {
+      return
+    }
+
     this.http
       .post<{ message: string }>(
         this.url + `/graduacao/${this.rg_aluno}/aprovar`,
@@ -358,6 +363,11 @@ export class SessaoAlunoComponent implements OnInit {
   }
 
   protected reprovarAluno() {
+    const confirmar = window.confirm('Tem certeza que deseja reprovar este aluno?')
+    if (!confirmar) {
+      return
+    }
+
     this.http
       .post<{ message: string }>(
         this.url + `/graduacao/${this.rg_aluno}/reprovar`,
