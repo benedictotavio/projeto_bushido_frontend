@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http'
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { environment } from 'src/environments/environment'
+import { Turma } from '../../turma.interface'
 
 @Component({
   selector: 'app-registro-aluno',
   templateUrl: './registro-aluno.component.html',
   styleUrls: ['./registro-aluno.component.css'],
 })
-export class RegistroAlunoComponent {
+export class RegistroAlunoComponent implements OnInit {
   constructor(
     private readonly http: HttpClient,
     private readonly router: Router,
@@ -92,12 +93,65 @@ export class RegistroAlunoComponent {
     historicoSaude: this.historicoSaude,
   }
 
+  protected turmas: Turma[] = []
+
   private readonly token = localStorage.getItem('token')
 
   email = this.route.snapshot.paramMap.get('email')
   ApiBushido = environment.urlApi + 'aluno'
   deficiencia = ''
   acompanhamentoSaude = ''
+
+  ngOnInit(): void {
+    this.listarTurmas()
+  }
+
+  private buscarTurmaPorNome() {
+    this.http
+      .get<Turma>(environment.urlApi + `turma/${this.aluno.turma}`, {
+        headers: {
+          Authorization: 'Bearer ' + this.token,
+        },
+      })
+      .subscribe({
+        next: data => {
+          this.turmas.push(data)
+        },
+        error: error => {
+          if (error.status === 401) {
+            window.confirm(
+              'O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema'
+            )
+            localStorage.removeItem('token')
+            this.router.navigate(['/admin'])
+          }
+        },
+      })
+  }
+
+  private listarTurmas() {
+    this.http
+      .get<Turma[]>(environment.urlApi + 'turma', {
+        headers: {
+          Authorization: 'Bearer ' + this.token,
+        },
+      })
+      .subscribe({
+        next: data => {
+          this.turmas = data
+        },
+        error: error => {
+          if (error.status === 401) {
+            window.confirm(
+              'O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema'
+            )
+            localStorage.removeItem('token')
+            this.router.navigate(['/admin'])
+          }
+        },
+      })
+  }
+
   registrarAluno() {
     this.aluno.nome = this.aluno.nome + ' ' + this.aluno.sobrenome
     this.aluno.responsaveis = this.responsavel

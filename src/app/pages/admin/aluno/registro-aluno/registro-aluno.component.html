@@ -46,15 +46,16 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="turma">Turma</label>
-              <input
-                type="text"
-                name="turma"
+              <select
+                id="kyu"
+                name="kyu"
                 [(ngModel)]="aluno.turma"
-                id="turma"
-                class="form-control"
-                placeholder="Turma"
+                *ngFor="let turma of turmas; let i = index"
+                class="form-select"
                 required
-              />
+              >
+                <option [value]="turma.nome" selected>{{ turma.nome }}</option>
+              </select>
             </div>
           </div>
           <div class="col-md-3">
@@ -72,7 +73,7 @@
             </div>
           </div>
           <div class="col-md-3">
-            <div class="form-group" *ngIf="aluno.graduacao.kyu === 1">
+            <div class="form-group" *ngIf="aluno.graduacao.kyu <= 1">
               <label for="dan">Dan</label>
               <input
                 type="number"
