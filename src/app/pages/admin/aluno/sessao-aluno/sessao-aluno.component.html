@@ -7,7 +7,7 @@
       <div class="d-flex flex-column align-items-center text-center p-3">
         <img
           class="rounded-circle mt-5"
-          src="../../../../../assets/aluno/karate_icon_124461.ico"
+          src="../../../../../assets/aluno/karate_icon_124461.webp"
           alt="user profile"
         />
         <span class="font-weight-bold">
@@ -577,7 +577,7 @@
                 <h5>Responsaveis</h5>
               </div>
               <div>
-                <app-janela-modal></app-janela-modal>
+                <app-modal-responsavel></app-modal-responsavel>
               </div>
             </div>
             <div *ngFor="let responsavel of aluno.responsaveis" class="card">
@@ -596,15 +596,28 @@
                   />
                 </svg>
               </div>
-              <div class="card-body row">
-                <div class="col-4 d-flex align-items-center">
+              <div class="card-body d-lg-flex align-items-center justify-content-around text-lg-start d-block text-center">
+                <div>
                   <img
-                    src="https://img.icons8.com/bubbles/100/000000/user.png"
+                    src="../../../../../assets/aluno/men_responsable.webp"
                     class="img-radius"
                     alt="User-Profile"
+                    *ngIf="responsavel.filiacao === 'PAI'"
+                  />
+                  <img
+                    src="../../../../../assets/aluno/woman_responsable.webp"
+                    class="img-radius"
+                    alt="User-Profile"
+                    *ngIf="responsavel.filiacao === 'MAE'"
+                  />
+                  <img
+                    src="../../../../../assets/aluno/other_responsable.png"
+                    class="img-radius"
+                    alt="User-Profile"
+                    *ngIf="responsavel.filiacao === 'OUTRO'"
                   />
                 </div>
-                <div class="col-8">
+                <div class="ms-lg-4">
                   <div>
                     <span>{{ responsavel.filiacao }}</span>
                     <h5 class="card-title">{{ responsavel.nome }}</h5>
@@ -1047,7 +1060,7 @@
                 <h5 class="placeholder">Responsaveis</h5>
               </div>
               <div class="placeholder">
-                <app-janela-modal class="placeholder"></app-janela-modal>
+                <app-modal-responsavel class="placeholder"></app-modal-responsavel>
               </div>
             </div>
             <div class="card">

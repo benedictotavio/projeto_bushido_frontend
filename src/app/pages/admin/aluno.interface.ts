@@ -10,7 +10,7 @@ interface Responsavel {
   cpf: string
   telefone: string
   email: string
-  filiacao: string
+  filiacao: 'PAI' | 'MAE' | 'OUTRO'
 }
 
 interface Faltas {

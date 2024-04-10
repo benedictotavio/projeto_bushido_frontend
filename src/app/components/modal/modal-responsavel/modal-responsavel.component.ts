@@ -4,11 +4,11 @@ import { ActivatedRoute } from '@angular/router'
 import { environment } from 'src/environments/environment'
 
 @Component({
-  selector: 'app-janela-modal',
-  templateUrl: './janela-modal.component.html',
-  styleUrls: ['./janela-modal.component.css'],
+  selector: 'app-modal-responsavel',
+  templateUrl: './modal-responsavel.component.html',
+  styleUrls: ['./modal-responsavel.component.css'],
 })
-export class JanelaModalComponent {
+export class ModalResponsavelComponent {
   constructor(
     private readonly http: HttpClient,
     private route: ActivatedRoute
@@ -46,6 +46,7 @@ export class JanelaModalComponent {
             localStorage.removeItem('token')
           }
           if (
+            error.status === 400 ||
             error.status === 403 ||
             error.status === 404 ||
             error.status === 409 ||

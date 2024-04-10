@@ -68,6 +68,9 @@ export class TurmasComponent implements OnInit {
             localStorage.removeItem('token')
             this.router.navigate(['/admin'])
           }
+          if (error.status === 404) {
+            window.confirm('Turma não encontrada')
+          }
         },
       })
   }

@@ -39,7 +39,6 @@ import { LoadingComponent } from './components/loading/loading.component'
 import { SessaoAlunoComponent } from './pages/admin/aluno/sessao-aluno/sessao-aluno.component'
 import { RegistroAlunoComponent } from './pages/admin/aluno/registro-aluno/registro-aluno.component'
 import { BuscarAlunoComponent } from './pages/admin/aluno/buscar-aluno/buscar-aluno.component'
-import { JanelaModalComponent } from './components/modal/janela-modal/janela-modal.component'
 import { ModalFaltaComponent } from './components/modal/modal-falta/modal-falta.component'
 import { ModalHistoricoGraduacaoComponent } from './components/modal/modal-historico-graduacao/modal-historico-graduacao.component'
 import { TurmasComponent } from './pages/admin/turma/turmas/turmas.component'
@@ -48,6 +47,7 @@ import { SessaoTurmaComponent } from './pages/admin/turma/sessao-turma/sessao-tu
 import { ModalAlunoTurmaComponent } from './components/modal/modal-aluno-turma/modal-aluno-turma.component'
 import { ModalNovaTurmaComponent } from './components/modal/modal-nova-turma/modal-nova-turma.component'
 import { CardBuscaAlunoComponent } from './components/cards/card-busca-aluno/card-busca-aluno.component'
+import { ModalResponsavelComponent } from './components/modal/modal-responsavel/modal-responsavel.component'
 
 @NgModule({
   declarations: [
@@ -84,7 +84,6 @@ import { CardBuscaAlunoComponent } from './components/cards/card-busca-aluno/car
     RegistroAlunoComponent,
     LoadingComponent,
     BuscarAlunoComponent,
-    JanelaModalComponent,
     ModalFaltaComponent,
     ModalHistoricoGraduacaoComponent,
     TurmasComponent,
@@ -93,6 +92,7 @@ import { CardBuscaAlunoComponent } from './components/cards/card-busca-aluno/car
     ModalAlunoTurmaComponent,
     ModalNovaTurmaComponent,
     CardBuscaAlunoComponent,
+    ModalResponsavelComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [

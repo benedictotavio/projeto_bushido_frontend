@@ -49,6 +49,7 @@ export class ModalNovaTurmaComponent {
             this.router.navigate(['/admin'])
           }
           if (
+            error.status === 400 ||
             error.status === 403 ||
             error.status === 404 ||
             error.status === 409 ||

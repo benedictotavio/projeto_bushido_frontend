@@ -121,11 +121,14 @@ export class SessaoTurmaComponent implements OnInit {
             localStorage.removeItem('token')
             this.router.navigate(['/admin'])
           }
-          if (error.status === 404) {
-            window.confirm('Aluno não encontrado')
-          }
-          if (error.status === 409) {
-            window.confirm('Falta ja existente nessa data')
+          if (
+            error.status === 400 ||
+            error.status === 403 ||
+            error.status === 404 ||
+            error.status === 409 ||
+            error.status === 411
+          ) {
+            window.confirm(error['error']['message'])
           }
         },
       })
