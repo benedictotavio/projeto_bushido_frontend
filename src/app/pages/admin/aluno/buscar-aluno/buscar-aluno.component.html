@@ -19,11 +19,10 @@
 
   <div class="pagination d-flex justify-content-center align-items-center w-100" *ngIf="showPagination">
     <button (click)="onPageChange(currentPage - 1)" class="page-link" [class.disabled]="currentPage === 1">Anterior</button>
-    <span class="page-item mx-5">Page {{ currentPage }} of {{ alunos.length }}</span>
     <button
       (click)="onPageChange(currentPage + 1)"
       class="page-link"
-      [class.disabled]="currentPage >= alunos.length"
+      [class.disabled]="itemsPerPage > alunos.length"
     >
       Proximo
     </button>

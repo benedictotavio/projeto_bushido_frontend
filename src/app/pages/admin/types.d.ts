@@ -1,15 +1,17 @@
 interface AlunoProps {
   nome: string
   sobrenome: string
+  turma: string
   genero: 'M' | 'F' | 'OUTRO'
   dataNascimento: string // Assuming date format is "dd-MM-yyyy"
   dadosSociais: DadosSociaisProps
   dadosEscolares: DadosEscolaresProps // Assuming date format is "yyyy-MM-ddTHH:mm:ss"
   endereco: EnderecoProps
   rg: string
-  responsaveis: ResponsavelProps[]
+  responsaveis: ResponsavelProps
   graduacao: {
     kyu: number
+    dan: number
   }
   historicoSaude: historicoSaudeProps
 }

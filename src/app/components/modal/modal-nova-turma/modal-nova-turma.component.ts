@@ -38,7 +38,7 @@ export class ModalNovaTurmaComponent {
       .subscribe({
         next: data => {
           window.confirm(data.message)
-          this.router.navigate(['admin/turmas'])
+          window.location.reload()
         },
         error: error => {
           if (error.status === 401) {

@@ -285,7 +285,7 @@
                 id="usoMedicamentoContinuo"
                 type="text"
                 class="form-control"
-                [(ngModel)]="aluno.historicoSaude.usoMedicamento.tipo"
+                [(ngModel)]="aluno.historicoSaude.usoMedicamentoContinuo.tipo"
               />
             </div>
             <div class="col-md-12">
@@ -459,8 +459,9 @@
       <div class="row">
         <div class="col-md-12">
           <div class="card mt-3">
-            <div class="card-header d-flex justify-content-end">
-              <button class="btn btn-primary" (click)="vincularAlunoAUmaTurma()">+ Turma</button>
+            <div class="card-header d-flex justify-content-end align-items-center">
+              <button class="btn btn-primary" (click)="vincularAlunoAUmaTurma()" *ngIf="!aluno.turma">+ Turma</button>
+              <span class="badge bg-info py-2 px-4" *ngIf="aluno.turma">{{aluno.turma}}</span>
             </div>
             <div class="card-body">
               <div class="d-flex justify-content-between">
