@@ -16,7 +16,7 @@ export class BuscarAlunoComponent {
   private readonly token = localStorage.getItem('token')
   private readonly apiUrl = environment.urlApi + `aluno`
   protected readonly email = this.route.snapshot.paramMap.get('email')
-  protected readonly itemsPerPage = 5
+  protected readonly itemsPerPage = 10
   protected currentPage = 1
   protected showPagination = false
 
@@ -37,6 +37,7 @@ export class BuscarAlunoComponent {
       return
     }
 
+    this.currentPage = 1
     this.showPagination = true
     this.buscarAlunoPorNome()
   }
@@ -76,7 +77,7 @@ export class BuscarAlunoComponent {
     this.http
       .get<AlunoResponse[]>(
         this.apiUrl +
-          `?nome=${this.pesquisarAluno}&page=${this.currentPage - 1}&size=${this.itemsPerPage - 1}`,
+          `?nome=${this.pesquisarAluno}&page=${this.currentPage - 1}&size=${this.itemsPerPage}`,
         {
           headers: {
             Authorization: 'Bearer ' + this.token,
@@ -112,6 +113,7 @@ export class BuscarAlunoComponent {
 
   onPageChange(page: number) {
     this.currentPage = page
-    this.pesquisar()
+    this.buscarAlunoPorNome()
+    console.log(this.itemsPerPage, this.alunos.length, this.currentPage - 1)
   }
 }

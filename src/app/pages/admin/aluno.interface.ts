@@ -53,7 +53,7 @@ interface DoencaCronica {
 
 export interface HistoricoSaude {
   tipoSanguineo: string
-  usoMedicamento: UsoMedicamento
+  usoMedicamentoContinuo: UsoMedicamento
   alergia: Alergia
   cirurgia: Cirurgia
   doencaCronica: DoencaCronica
@@ -81,6 +81,7 @@ export interface AlunoResponse {
   nome: string
   dataNascimento: string
   genero: string
+  turma: string
   dadosSociais: DadosSociais
   dadosEscolares: DadosEscolares
   dataPreenchimento: string

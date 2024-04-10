@@ -11,7 +11,7 @@
         </div>
 
         <div class="row">
-          <div class="col-md-5">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="nome">Nome</label>
               <input
@@ -26,7 +26,7 @@
             </div>
           </div>
 
-          <div class="col-md-5">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="sobrenome">Sobrenome</label>
               <input
@@ -40,19 +40,49 @@
               />
             </div>
           </div>
+        </div>
 
-          <div class="col-md-2">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="turma">Turma</label>
+              <input
+                type="text"
+                name="turma"
+                [(ngModel)]="aluno.turma"
+                id="turma"
+                class="form-control"
+                placeholder="Turma"
+                required
+              />
+            </div>
+          </div>
+          <div class="col-md-3">
             <div class="form-group">
               <label for="kyu">Kyu</label>
+              <select id="kyu" name="kyu" [(ngModel)]="aluno.graduacao.kyu" class="form-select">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group" *ngIf="aluno.graduacao.kyu === 1">
+              <label for="dan">Dan</label>
               <input
                 type="number"
                 min="1"
-                max="7"
-                name="kyu"
-                id="kyu"
+                max="20"
+                name="dan"
+                id="dan"
                 class="form-control"
-                [(ngModel)]="aluno.graduacao.kyu"
-                placeholder="Kyu"
+                [(ngModel)]="aluno.graduacao.dan"
+                placeholder="Dan"
                 required
               />
             </div>
@@ -186,11 +216,11 @@
                 required
               />
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 p-2">
+              <label for="turno" class="form-label">Turno*</label>
               <select
-                class="turno h-100 w-100 rounded text-center"
-                aria-label="turno"
                 name="turno"
+                class="form-select"
                 [(ngModel)]="aluno.dadosEscolares.turno"
                 id="turno"
                 required

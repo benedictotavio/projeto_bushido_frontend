@@ -72,14 +72,22 @@ export class RegistroAlunoComponent {
     nome: '',
     sobrenome: '',
     genero: 'OUTRO',
+    turma: '',
     dataNascimento: '',
     dadosSociais: this.dadosSociais,
     dadosEscolares: this.dadosEscolares,
     endereco: this.endereco,
     rg: '',
-    responsaveis: [],
+    responsaveis: {
+      nome: '',
+      cpf: '',
+      telefone: '',
+      email: '',
+      filiacao: 'OUTRO',
+    },
     graduacao: {
-      kyu: 0,
+      kyu: 7,
+      dan: 1,
     },
     historicoSaude: this.historicoSaude,
   }
@@ -91,8 +99,8 @@ export class RegistroAlunoComponent {
   deficiencia = ''
   acompanhamentoSaude = ''
   registrarAluno() {
-    this.aluno.responsaveis.unshift(this.responsavel)
     this.aluno.nome = this.aluno.nome + ' ' + this.aluno.sobrenome
+    this.aluno.responsaveis = this.responsavel
     this.http
       .post<{ id: string; message: string }>(this.ApiBushido, this.aluno, {
         headers: {

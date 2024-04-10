@@ -191,7 +191,7 @@ export class SessaoAlunoComponent implements OnInit {
 
   protected removerFalta(falta: string) {
     this.http
-      .delete<{ message: string }>(this.url + `/falta/${this.rg_aluno}?data=${falta}`, {
+      .delete<{ message: string }>(this.url + `/falta/${this.rg_aluno}/${falta}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + this.token,
@@ -448,7 +448,7 @@ export class SessaoAlunoComponent implements OnInit {
       endereco: aluno.endereco,
       historicoDeSaude: {
         tipoSanguineo: aluno.historicoSaude.tipoSanguineo,
-        usoMedicamentoContinuo: aluno.historicoSaude.usoMedicamento,
+        usoMedicamentoContinuo: aluno.historicoSaude.usoMedicamentoContinuo,
         alergia: aluno.historicoSaude.alergia,
         cirurgia: aluno.historicoSaude.cirurgia,
         doencaCronica: aluno.historicoSaude.doencaCronica,

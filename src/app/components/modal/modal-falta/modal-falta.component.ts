@@ -47,17 +47,13 @@ export class ModalFaltaComponent {
             localStorage.removeItem('token')
             this.router.navigate(['admin'])
           }
-          if (error.status === 403) {
-            window.confirm('Preencha todas as propriedades corretamente')
-          }
-          if (error.status === 404) {
-            window.confirm('Aluno não encontrado')
-          }
-          if (error.status === 409) {
-            window.confirm('Falta ja existente nessa data')
-          }
-          if (error.status === 422) {
-            window.confirm('Todos os campos devem ser preenchidos corretamente')
+          if (
+            error.status === 403 ||
+            error.status === 404 ||
+            error.status === 409 ||
+            error.status === 411
+          ) {
+            window.confirm(error.error.message)
           }
         },
       })
@@ -65,6 +61,7 @@ export class ModalFaltaComponent {
 
   private dateToMilliseconds(dateString: string): string {
     const date = new Date(dateString)
+    console.log(date)
     const timezoneOffsetMilliseconds = date.getTimezoneOffset() * 60 * 1000
     return (date.getTime() + timezoneOffsetMilliseconds).toString()
   }
