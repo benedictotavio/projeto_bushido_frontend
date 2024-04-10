@@ -351,11 +351,13 @@ export class SessaoAlunoComponent implements OnInit {
             localStorage.removeItem('token')
             this.router.navigate(['/admin'])
           }
-          if (error.status === 403) {
-            console.error(error)
-            window.confirm(error.error.message)
-          }
-          if (error.status === 404 || error.status === 409 || error.status === 411) {
+          if (
+            error.status === 403 ||
+            error.status === 404 ||
+            error.status === 406 ||
+            error.status === 409 ||
+            error.status === 411
+          ) {
             window.confirm(error.error.message)
           }
         },
