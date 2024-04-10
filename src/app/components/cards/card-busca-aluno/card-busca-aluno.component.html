@@ -52,30 +52,33 @@
                 <img
                   *ngIf="aluno.genero === 'M'"
                   class="rounded-circle"
-                  src="https://bootdey.com/img/Content/avatar/avatar6.png"
+                  src="../../../../assets/aluno/boy_icon.webp"
                   alt="Avatar masculino"
                 />
                 <img
                   *ngIf="aluno.genero === 'F'"
                   class="rounded-circle"
-                  src="https://bootdey.com/img/Content/avatar/avatar8.png"
+                  src="../../../../assets/aluno/girl_icon.webp"
                   alt="Avatar feminino"
                 />
               </div>
 
-              <div class="widget-26-job-title">
-                <p class="type m-0">Nome: {{ aluno.nome }}</p>
+              <div class="mx-3 w-75 text-lg-start text-center">
+                <div class="">
+                  <p class="type m-0">
+                    Nome: {{ aluno.nome }}</p>
+                </div>
+
+                <div class="">
+                  <p class="type m-0">RG: {{ aluno.rg }}</p>
+                </div>
+
+                <div class="">
+                  <p class="type m-0">Gênero: {{ aluno.genero }}</p>
+                </div>
               </div>
 
-              <div class="widget-26-job-info">
-                <p class="type m-0">RG: {{ aluno.rg }}</p>
-              </div>
-
-              <div class="widget-26-job-info">
-                <p class="type m-0">Gênero: {{ aluno.genero }}</p>
-              </div>
-
-              <div class="widget-26-job-category">
+              <div>
                 <a href="admin/{{ email }}/aluno/{{ aluno.rg }}" class="btn btn-primary"
                   >Ver todos os dados</a
                 >
@@ -120,7 +123,7 @@
                     />
                   </div>
 
-                  <div class="widget-26-job-title">
+                  <div class="">
                     <span class="placeholder" aria-hidden="true">Nome: Fulano de tal</span>
                   </div>
 

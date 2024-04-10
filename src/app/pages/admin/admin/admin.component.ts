@@ -26,18 +26,17 @@ export class AdminComponent {
   ApiBushido = environment.urlApi + 'admin/login'
 
   Logar() {
-    this.http.post<{ token: string }>(this.ApiBushido, this.login).subscribe(
-      response => {
+    this.http.post<{ token: string }>(this.ApiBushido, this.login).subscribe({
+      next: data => {
         this.authService.setAuthenticated(true)
         this.router.navigate(['/admin', this.login.email])
-        localStorage.setItem('token', response.token)
+        localStorage.setItem('token', data.token)
       },
-      error => {
+      error: error => {
         if (error.status === 401) {
-          this.router.navigate(['/admin'])
           window.alert('Email ou senha inválidos')
         }
-      }
-    )
+      },
+    })
   }
 }
