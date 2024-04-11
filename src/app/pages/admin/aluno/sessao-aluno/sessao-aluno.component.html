@@ -481,6 +481,12 @@
 
                   <h6 class="card-subtitle mb-4 text-muted">
                     <b>Inicio:</b> {{ graduacaoAtual.inicioGraduacao }}
+                    <small class="my-2"><br>
+                      <b>Frequência:</b> {{ graduacaoAtual.frequencia }} %
+                    </small><br>
+                    <small class="my-2">
+                      <b>Carga Horária:</b> {{ graduacaoAtual.cargaHoraria }} h
+                    </small>
                   </h6>
                 </div>
                 <div *ngIf="graduacaoAtual.status">
