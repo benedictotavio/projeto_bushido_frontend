@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http'
-import { Component, OnInit } from '@angular/core'
+import { Component, HostListener, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { environment } from 'src/environments/environment'
 import { Turma } from '../../turma.interface'
@@ -71,7 +71,6 @@ export class RegistroAlunoComponent implements OnInit {
 
   aluno: AlunoProps = {
     nome: '',
-    sobrenome: '',
     genero: 'OUTRO',
     turma: '',
     dataNascimento: '',
@@ -89,12 +88,12 @@ export class RegistroAlunoComponent implements OnInit {
 
   protected turmas: Turma[] = []
 
+  protected readonly today = new Date()
   private readonly token = localStorage.getItem('token')
-
   protected readonly email = this.route.snapshot.paramMap.get('email')
-  ApiBushido = environment.urlApi + 'aluno'
-  deficiencia = ''
-  acompanhamentoSaude = ''
+  private readonly ApiBushido = environment.urlApi + 'aluno'
+  protected deficiencia = ''
+  protected acompanhamentoSaude = ''
 
   ngOnInit(): void {
     this.listarTurmas()
@@ -147,7 +146,6 @@ export class RegistroAlunoComponent implements OnInit {
   }
 
   registrarAluno() {
-    this.aluno.nome = this.aluno.nome + ' ' + this.aluno.sobrenome
     this.http
       .post<{ id: string; message: string }>(this.ApiBushido, this.aluno, {
         headers: {
@@ -212,4 +210,35 @@ export class RegistroAlunoComponent implements OnInit {
   private valorNoArray(arrStrings: string[], valor: string) {
     return arrStrings.includes(valor)
   }
+
+  protected buscarEnderecoPeloCep() {
+    if (this.endereco.cep.length !== 8) {
+      return
+    }
+
+    this.http
+      .get<EnderecoViaCepResponse>(`https://viacep.com.br/ws/${this.endereco.cep}/json/`)
+      .subscribe({
+        next: data => {
+          if (data.cep) {
+            this.endereco.cep = data.cep
+            this.endereco.cidade = data.localidade
+            this.endereco.estado = data.uf
+            return
+          }
+          window.confirm('Endereço nao encontrado')
+        },
+        error: error => {
+          if (error.status === 400) {
+            window.confirm('CEP inválido')
+            this.aluno.endereco.cep = ''
+          }
+          if (error.status === 404) {
+            window.confirm('CEP inválido')
+            this.aluno.endereco.cep = ''
+          }
+        },
+      })
+  }
+
 }

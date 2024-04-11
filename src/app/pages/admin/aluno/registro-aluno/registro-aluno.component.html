@@ -11,7 +11,7 @@
         </div>
 
         <div class="row mt-4">
-          <div class="col-md-6 mt-2">
+          <div class="col-md-12 mt-2">
             <div class="form-group">
               <label for="nome">Nome</label>
               <input
@@ -21,21 +21,6 @@
                 id="nome"
                 class="form-control"
                 placeholder="Nome"
-                required
-              />
-            </div>
-          </div>
-
-          <div class="col-md-6 mt-2">
-            <div class="form-group">
-              <label for="sobrenome">Sobrenome</label>
-              <input
-                type="text"
-                name="sobrenome"
-                [(ngModel)]="aluno.sobrenome"
-                id="sobrenome"
-                class="form-control"
-                placeholder="Sobrenome"
                 required
               />
             </div>
@@ -102,13 +87,13 @@
                 id="dataNascimento"
                 min="1980-01-01"
                 max="2024-12-31"
-                pattern="\d{1,2}-\d{1,2}-\d{4}"
+                pattern="\d{2}-\d{2}-\d{4}"
                 placeholder="dd-MM-yyyy"
                 required
               />
             </div>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-8 mt-2">
             <div class="form-group">
               <label for="rg">RG</label>
               <input
@@ -134,7 +119,7 @@
                 name="cep"
                 id="cep"
                 class="form-control"
-                placeholder="CEP*"
+                placeholder="CEP*: 00000000"
               />
             </div>
             <div class="col-md-3 p-2">
@@ -142,6 +127,7 @@
                 type="number"
                 name="numero"
                 [(ngModel)]="aluno.endereco.numero"
+                (click)="buscarEnderecoPeloCep()"
                 id="numero"
                 class="form-control"
                 placeholder="Numero*"

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { Login } from '../login.interface'
+import { Login } from '../auth.interface'
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
 import { environment } from '../../../../environments/environment'
@@ -15,7 +15,6 @@ export class AdminComponent {
     email: '',
     senha: '',
   }
-  token = ''
 
   constructor(
     private http: HttpClient,

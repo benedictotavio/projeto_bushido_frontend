@@ -1,8 +1,8 @@
 import { Component } from '@angular/core'
-import { User } from '../user.interface'
 import { HttpClient } from '@angular/common/http'
 import { environment } from '../../../../environments/environment'
 import { ActivatedRoute, Router } from '@angular/router'
+import { SignUp } from '../auth.interface'
 
 @Component({
   selector: 'app-registro',
@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 })
 export class RegistroComponent {
   ApiBushido = environment.urlApi + 'admin/signup'
-  user: User = {
+  user: SignUp = {
     nome: '',
     email: '',
     cargo: '',
