@@ -44,6 +44,7 @@ export class AdminComponent {
           error.status === 411
         ) {
           window.confirm(error['error']['message'])
+          window.location.reload()
         }
       },
     })
