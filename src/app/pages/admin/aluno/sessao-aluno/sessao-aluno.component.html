@@ -330,7 +330,7 @@
                   </button>
                 </div>
               </div>
-              <div *ngIf="modoEdicao">
+              <div *ngIf="modoEdicao" class="d-flex justify-content-end my-5">
                 <div>
                   <h5>Insire as novas Informações:</h5>
                 </div>
@@ -343,6 +343,7 @@
                   id="deficiencia"
                   class="form-control"
                   [(ngModel)]="deficiencia"
+                  placeholder="Adicionar deficiencia"
                 />
                 <div class="d-flex justify-content-end">
                   <button class="btn btn-secondary m-2" (click)="adicionarDeficiencia()">
@@ -398,6 +399,7 @@
                   id="acompanhamentoSaude"
                   class="form-control"
                   [(ngModel)]="acompanhamentoSaude"
+                  placeholder="Adicionar acompanhamento"
                 />
                 <div class="d-flex justify-content-end">
                   <button class="btn btn-secondary m-2" (click)="adicionarAcompanhamentoSaude()">
@@ -460,8 +462,14 @@
         <div class="col-md-12">
           <div class="card mt-3">
             <div class="card-header d-flex justify-content-end align-items-center">
-              <button class="btn btn-primary" (click)="vincularAlunoAUmaTurma()" *ngIf="!aluno.turma">+ Turma</button>
-              <span class="badge bg-info py-2 px-4" *ngIf="aluno.turma">{{aluno.turma}}</span>
+              <button
+                class="btn btn-primary"
+                (click)="vincularAlunoAUmaTurma()"
+                *ngIf="!aluno.turma"
+              >
+                + Turma
+              </button>
+              <span class="badge bg-info py-2 px-4" *ngIf="aluno.turma">{{ aluno.turma }}</span>
             </div>
             <div class="card-body">
               <div class="d-flex justify-content-between">
@@ -472,8 +480,10 @@
                     </div>
 
                     <div>
-                      <h6 class="card-subtitle text-muted badge">{{ graduacaoAtual.kyu }}º Kyu</h6>
-                      <h6 class="card-subtitle text-muted badge" *ngIf="graduacaoAtual.dan">
+                      <h6 class="card-subtitle text-muted badge" *ngIf="graduacaoAtual.kyu > 1">
+                        {{ graduacaoAtual.kyu }}º Kyu
+                      </h6>
+                      <h6 class="card-subtitle text-muted badge" *ngIf="graduacaoAtual.dan > 0">
                         {{ graduacaoAtual.dan }} Dan
                       </h6>
                     </div>
@@ -481,9 +491,10 @@
 
                   <h6 class="card-subtitle mb-4 text-muted">
                     <b>Inicio:</b> {{ graduacaoAtual.inicioGraduacao }}
-                    <small class="my-2"><br>
-                      <b>Frequência:</b> {{ graduacaoAtual.frequencia }} %
-                    </small><br>
+                    <small class="my-2"
+                      ><br />
+                      <b>Frequência:</b> {{ graduacaoAtual.frequencia }} % </small
+                    ><br />
                     <small class="my-2">
                       <b>Carga Horária:</b> {{ graduacaoAtual.cargaHoraria }} h
                     </small>
@@ -565,8 +576,17 @@
                 <p class="text-muted text-center mt-2 mb-5" *ngIf="!graduacaoAtual.faltas.length">
                   O aluno não possui faltas
                 </p>
-                <div class="d-flex justify-content-between">
-                  <button (click)="aprovarAluno()" class="btn btn-success">Aprovar Aluno</button>
+                <div
+                  class="d-flex justify-content-between"
+                  *ngIf="graduacaoAtual.cargaHoraria > 25"
+                >
+                  <button
+                    (click)="aprovarAluno()"
+                    class="btn btn-success"
+                    *ngIf="graduacaoAtual.status"
+                  >
+                    Aprovar Aluno
+                  </button>
                   <button (click)="reprovarAluno()" class="btn btn-danger">Reprovar Aluno</button>
                 </div>
               </div>
@@ -602,7 +622,9 @@
                   />
                 </svg>
               </div>
-              <div class="card-body d-lg-flex align-items-center justify-content-around text-lg-start d-block text-center">
+              <div
+                class="card-body d-lg-flex align-items-center justify-content-around text-lg-start d-block text-center"
+              >
                 <div>
                   <img
                     src="../../../../../assets/aluno/men_responsable.webp"

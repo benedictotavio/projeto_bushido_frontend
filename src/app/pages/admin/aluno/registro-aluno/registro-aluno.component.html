@@ -10,8 +10,8 @@
           <p>Preencha os dados abaixo para registrar um novo aluno</p>
         </div>
 
-        <div class="row">
-          <div class="col-md-6">
+        <div class="row mt-4">
+          <div class="col-md-6 mt-2">
             <div class="form-group">
               <label for="nome">Nome</label>
               <input
@@ -26,7 +26,7 @@
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-6 mt-2">
             <div class="form-group">
               <label for="sobrenome">Sobrenome</label>
               <input
@@ -42,7 +42,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row mt-4">
           <div class="col-md-6">
             <div class="form-group">
               <label for="turma">Turma</label>
@@ -102,7 +102,8 @@
                 id="dataNascimento"
                 min="1980-01-01"
                 max="2024-12-31"
-                pattern="\d{2}-\d{2}-\d{4}"
+                pattern="\d{1,2}-\d{1,2}-\d{4}"
+                placeholder="dd-MM-yyyy"
                 required
               />
             </div>
@@ -175,16 +176,16 @@
         <div class="text-center my-4 mx-3 border rounded">
           <div class="gender-box-radio">
             <div>
+              <input type="radio" name="genero" value="OUTRO" [(ngModel)]="aluno.genero" />
+              <label class="p-2" for="css">Outro</label><br />
+            </div>
+            <div>
               <input type="radio" name="genero" value="M" [(ngModel)]="aluno.genero" />
               <label class="p-2" for="html">Masculino</label><br />
             </div>
             <div>
               <input type="radio" name="genero" value="F" [(ngModel)]="aluno.genero" />
               <label class="p-2" for="css">Feminino</label><br />
-            </div>
-            <div>
-              <input type="radio" name="genero" value="OUTRO" [(ngModel)]="aluno.genero" />
-              <label class="p-2" for="css">Outro</label><br />
             </div>
           </div>
         </div>
@@ -393,9 +394,9 @@
               id="filiacao"
             >
               <option selected disabled>Filiação do responsável</option>
+              <option value="OUTRO">Outro</option>
               <option value="PAI">Pai</option>
               <option value="MAE">Mãe</option>
-              <option value="OUTRO">Outro</option>
             </select>
           </div>
         </div>

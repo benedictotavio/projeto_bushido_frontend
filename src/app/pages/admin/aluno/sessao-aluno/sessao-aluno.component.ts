@@ -26,6 +26,8 @@ export class SessaoAlunoComponent implements OnInit {
   acompanhamentoSaude = ''
   private readonly url = environment.urlApi + 'aluno'
   modoEdicao = false
+  protected readonly umaSemanaEmSegundos = 604800000
+  protected readonly tresMesesEmSegundos = 7776000000
 
   graduacaoAtual: Graduacao = {
     kyu: 0,
@@ -496,5 +498,15 @@ export class SessaoAlunoComponent implements OnInit {
         doencaCronica: aluno.historicoSaude.doencaCronica,
       },
     }
+  }
+
+  protected avaliacaoDisponive(): boolean {
+    return (
+      (this.graduacaoAtual.cargaHoraria >= 30 &&
+        new Date(this.graduacaoAtual.inicioGraduacao).getTime() <
+          new Date(this.graduacaoAtual.inicioGraduacao).getTime() + this.umaSemanaEmSegundos) ||
+      new Date(this.graduacaoAtual.inicioGraduacao).getTime() <
+        new Date(this.graduacaoAtual.inicioGraduacao).getTime() + this.tresMesesEmSegundos
+    )
   }
 }

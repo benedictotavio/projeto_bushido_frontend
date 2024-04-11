@@ -79,13 +79,7 @@ export class RegistroAlunoComponent implements OnInit {
     dadosEscolares: this.dadosEscolares,
     endereco: this.endereco,
     rg: '',
-    responsaveis: {
-      nome: '',
-      cpf: '',
-      telefone: '',
-      email: '',
-      filiacao: 'OUTRO',
-    },
+    responsaveis: this.responsavel,
     graduacao: {
       kyu: 7,
       dan: 1,
@@ -97,7 +91,7 @@ export class RegistroAlunoComponent implements OnInit {
 
   private readonly token = localStorage.getItem('token')
 
-  email = this.route.snapshot.paramMap.get('email')
+  protected readonly email = this.route.snapshot.paramMap.get('email')
   ApiBushido = environment.urlApi + 'aluno'
   deficiencia = ''
   acompanhamentoSaude = ''
@@ -154,7 +148,6 @@ export class RegistroAlunoComponent implements OnInit {
 
   registrarAluno() {
     this.aluno.nome = this.aluno.nome + ' ' + this.aluno.sobrenome
-    this.aluno.responsaveis = this.responsavel
     this.http
       .post<{ id: string; message: string }>(this.ApiBushido, this.aluno, {
         headers: {
@@ -179,6 +172,7 @@ export class RegistroAlunoComponent implements OnInit {
             error.status === 400 ||
             error.status === 403 ||
             error.status === 404 ||
+            error.status === 406 ||
             error.status === 409 ||
             error.status === 411 ||
             error.status === 422
