@@ -1,0 +1,9 @@
+.card-tutor-selected{
+    color: #000;
+    cursor: pointer;
+}
+
+.card-tutor-selected:hover{
+    background-color: #a7e9af;
+    color: #000;
+}

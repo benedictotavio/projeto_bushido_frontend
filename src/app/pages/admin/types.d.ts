@@ -2,7 +2,7 @@ interface AlunoProps {
   nome: string
   turma: string
   genero: 'M' | 'F' | 'OUTRO'
-  dataNascimento: string // Assuming date format is "dd-MM-yyyy"
+  dataNascimento: number
   dadosSociais: DadosSociaisProps
   dadosEscolares: DadosEscolaresProps // Assuming date format is "yyyy-MM-ddTHH:mm:ss"
   endereco: EnderecoProps

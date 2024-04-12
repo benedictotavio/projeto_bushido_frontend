@@ -51,7 +51,7 @@ export class SessaoTurmaComponent implements OnInit {
       .subscribe({
         next: data => {
           window.confirm(data.message)
-          this.router.navigate(['/admin/turmas'])
+          this.router.navigate(['/admin', this.email, 'turmas'])
         },
         error: error => {
           if (error.status === 401) {

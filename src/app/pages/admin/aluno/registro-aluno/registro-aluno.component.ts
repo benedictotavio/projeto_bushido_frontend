@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http'
-import { Component, HostListener, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { environment } from 'src/environments/environment'
 import { Turma } from '../../turma.interface'
@@ -73,7 +73,7 @@ export class RegistroAlunoComponent implements OnInit {
     nome: '',
     genero: 'OUTRO',
     turma: '',
-    dataNascimento: '',
+    dataNascimento: new Date().getTime(),
     dadosSociais: this.dadosSociais,
     dadosEscolares: this.dadosEscolares,
     endereco: this.endereco,
@@ -87,8 +87,6 @@ export class RegistroAlunoComponent implements OnInit {
   }
 
   protected turmas: Turma[] = []
-
-  protected readonly today = new Date()
   private readonly token = localStorage.getItem('token')
   protected readonly email = this.route.snapshot.paramMap.get('email')
   private readonly ApiBushido = environment.urlApi + 'aluno'
@@ -146,6 +144,7 @@ export class RegistroAlunoComponent implements OnInit {
   }
 
   registrarAluno() {
+    this.aluno.dataNascimento = new Date(this.aluno.dataNascimento).getTime()
     this.http
       .post<{ id: string; message: string }>(this.ApiBushido, this.aluno, {
         headers: {
@@ -212,12 +211,14 @@ export class RegistroAlunoComponent implements OnInit {
   }
 
   protected buscarEnderecoPeloCep() {
-    if (this.endereco.cep.length !== 8) {
+    if (this.removeSpecialCharacters(this.endereco.cep).length !== 8) {
       return
     }
 
     this.http
-      .get<EnderecoViaCepResponse>(`https://viacep.com.br/ws/${this.endereco.cep}/json/`)
+      .get<EnderecoViaCepResponse>(
+        `https://viacep.com.br/ws/${this.removeSpecialCharacters(this.endereco.cep)}/json/`
+      )
       .subscribe({
         next: data => {
           if (data.cep) {
@@ -241,4 +242,7 @@ export class RegistroAlunoComponent implements OnInit {
       })
   }
 
+  private removeSpecialCharacters(inputString: string): string {
+    return inputString.replace(/[-.]/g, '')
+  }
 }

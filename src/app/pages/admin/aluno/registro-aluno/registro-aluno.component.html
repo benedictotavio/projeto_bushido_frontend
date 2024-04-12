@@ -93,7 +93,7 @@
               />
             </div>
           </div>
-          <div class="col-md-8 mt-2">
+          <div class="col-md-8">
             <div class="form-group">
               <label for="rg">RG</label>
               <input
@@ -110,7 +110,6 @@
         </div>
 
         <div class="mt-4">
-          <h5>Endereço</h5>
           <div class="row">
             <div class="col-md-9 p-2">
               <input
@@ -119,7 +118,8 @@
                 name="cep"
                 id="cep"
                 class="form-control"
-                placeholder="CEP*: 00000000"
+                placeholder="CEP"
+                (blur)="buscarEnderecoPeloCep()"
               />
             </div>
             <div class="col-md-3 p-2">
@@ -127,7 +127,6 @@
                 type="number"
                 name="numero"
                 [(ngModel)]="aluno.endereco.numero"
-                (click)="buscarEnderecoPeloCep()"
                 id="numero"
                 class="form-control"
                 placeholder="Numero*"
@@ -176,9 +175,9 @@
           </div>
         </div>
 
-        <div class="mt-4">
-          <h5>Dados Escolares</h5>
-          <div class="row">
+        <div>
+          <div class="row mt-5">
+            <h5>Dados Escolares</h5>
             <div class="col-md-7 p-2">
               <label for="escola" class="form-label">Escola*</label>
               <input
@@ -221,7 +220,7 @@
           </div>
         </div>
 
-        <div class="mt-4">
+        <div class="my-4">
           <h5>Dados Sociais</h5>
 
           <div class="row mt-3">
@@ -286,7 +285,7 @@
 
           <div class="mt-4">
             <div class="mb-3 form-check">
-              <h6 class="text-center">Marque algumas informações do aluno</h6>
+              <h6 class="mb-4">Marque algumas informações do aluno</h6>
               <input
                 type="checkbox"
                 class="form-check-input"
@@ -323,7 +322,7 @@
           </div>
         </div>
 
-        <div class="mt-4">
+        <div class="my-5">
           <h5>Responsavel</h5>
           <div class="row mt-2">
             <div class="col-md-6">

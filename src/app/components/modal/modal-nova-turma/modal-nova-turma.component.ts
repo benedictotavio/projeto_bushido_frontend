@@ -3,6 +3,7 @@ import { Component } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Turma } from 'src/app/pages/admin/turma.interface'
 import { environment } from 'src/environments/environment'
+import { AdminResponse } from './turma'
 
 @Component({
   selector: 'app-modal-nova-turma',
@@ -16,6 +17,7 @@ export class ModalNovaTurmaComponent {
     private readonly router: Router
   ) {}
 
+  protected buscarTutor = ''
   private readonly url = environment.urlApi
   private readonly token = localStorage.getItem('token')
   protected nomeTurma = this.route.snapshot.paramMap.get('nomeTurma')
@@ -26,8 +28,42 @@ export class ModalNovaTurmaComponent {
     endereco: '',
     alunos: [],
   }
+  protected adminsEncontrados: AdminResponse[] | undefined
+  protected buscarAdminPorNome(nome: string) {
+    if (nome === '') {
+      return
+    }
+
+    this.http
+      .get<AdminResponse[]>(environment.urlApi + `admin/users?nome=${nome}`, {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      })
+      .subscribe({
+        next: data => {
+          console.log(data)
+          if (data.length === 0) {
+            window.confirm('Tutor não encontrado')
+            return
+          }
+          this.adminsEncontrados = data
+        },
+        error: error => {
+          if (error.status === 401) {
+            window.confirm(
+              'O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema'
+            )
+            localStorage.removeItem('token')
+            this.router.navigate(['/admin'])
+          }
+        },
+      })
+  }
 
   protected adicionarTurma() {
+    console.log(this.novaTurma)
+
     this.http
       .post<{ message: string }>(this.url + 'turma', this.novaTurma, {
         headers: {
@@ -56,6 +92,14 @@ export class ModalNovaTurmaComponent {
             error.status === 411
           ) {
             window.confirm(error['error']['message'])
+          }
+        },
+        complete: () => {
+          this.novaTurma = {
+            nome: '',
+            tutor: '',
+            endereco: '',
+            alunos: [],
           }
         },
       })
