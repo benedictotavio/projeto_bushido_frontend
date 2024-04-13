@@ -14,7 +14,7 @@ import { BlogService } from 'src/app/services/blog.service'
       </section>
     </main>
   `,
-  styles: [''],
+  styles: ['']
 })
 export class BlogComponent implements OnInit {
   public posts: Array<BlogPost> | undefined
@@ -23,8 +23,8 @@ export class BlogComponent implements OnInit {
 
   ngOnInit(): void {
     this.blogService.getAllPublishedPosts().subscribe({
-      next: res => (this.posts = res.data.allPosts),
-      error: err => console.error(err),
+      next: (res) => (this.posts = res.data.allPosts),
+      error: (err) => console.error(err)
     })
   }
 }

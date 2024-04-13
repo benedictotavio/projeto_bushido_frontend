@@ -4,11 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Turma } from 'src/app/pages/admin/turma.interface'
 import { environment } from 'src/environments/environment'
 import { AdminResponse } from './turma'
+import { removeAdminLocalStorage } from 'src/app/pages/admin/local-storage.handler'
 
 @Component({
   selector: 'app-modal-nova-turma',
   templateUrl: './modal-nova-turma.component.html',
-  styleUrls: ['./modal-nova-turma.component.css'],
+  styleUrls: ['./modal-nova-turma.component.css']
 })
 export class ModalNovaTurmaComponent {
   constructor(
@@ -25,8 +26,7 @@ export class ModalNovaTurmaComponent {
   protected novaTurma: Turma = {
     nome: '',
     tutor: '',
-    endereco: '',
-    alunos: [],
+    endereco: ''
   }
   protected adminsEncontrados: AdminResponse[] | undefined
   protected buscarAdminPorNome(nome: string) {
@@ -37,11 +37,11 @@ export class ModalNovaTurmaComponent {
     this.http
       .get<AdminResponse[]>(environment.urlApi + `admin/users?nome=${nome}`, {
         headers: {
-          Authorization: `Bearer ${this.token}`,
-        },
+          Authorization: `Bearer ${this.token}`
+        }
       })
       .subscribe({
-        next: data => {
+        next: (data) => {
           console.log(data)
           if (data.length === 0) {
             window.confirm('Tutor não encontrado')
@@ -49,15 +49,13 @@ export class ModalNovaTurmaComponent {
           }
           this.adminsEncontrados = data
         },
-        error: error => {
+        error: (error) => {
           if (error.status === 401) {
-            window.confirm(
-              'O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema'
-            )
-            localStorage.removeItem('token')
+            window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
+            removeAdminLocalStorage()
             this.router.navigate(['/admin'])
           }
-        },
+        }
       })
   }
 
@@ -68,20 +66,18 @@ export class ModalNovaTurmaComponent {
       .post<{ message: string }>(this.url + 'turma', this.novaTurma, {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${this.token}`,
-        },
+          Authorization: `Bearer ${this.token}`
+        }
       })
       .subscribe({
-        next: data => {
+        next: (data) => {
           window.confirm(data.message)
           window.location.reload()
         },
-        error: error => {
+        error: (error) => {
           if (error.status === 401) {
-            window.confirm(
-              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
-            )
-            localStorage.removeItem('token')
+            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
+            removeAdminLocalStorage()
             this.router.navigate(['/admin'])
           }
           if (
@@ -98,10 +94,9 @@ export class ModalNovaTurmaComponent {
           this.novaTurma = {
             nome: '',
             tutor: '',
-            endereco: '',
-            alunos: [],
+            endereco: ''
           }
-        },
+        }
       })
   }
 
@@ -109,8 +104,7 @@ export class ModalNovaTurmaComponent {
     this.novaTurma = {
       nome: '',
       tutor: '',
-      endereco: '',
-      alunos: [],
+      endereco: ''
     }
   }
 }

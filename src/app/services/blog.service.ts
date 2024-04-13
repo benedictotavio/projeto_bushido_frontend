@@ -4,7 +4,7 @@ import { environment } from '../../../src/environments/environment'
 import { Observable } from 'rxjs'
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class BlogService {
   public url = 'https://graphql.datocms.com'
@@ -12,8 +12,8 @@ export class BlogService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      Authorization: `Bearer ${environment.datoToken}`,
-    }),
+      Authorization: `Bearer ${environment.datoToken}`
+    })
   }
 
   constructor(private http: HttpClient) {}

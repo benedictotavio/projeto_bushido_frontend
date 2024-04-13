@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { Turma } from '../../turma.interface'
 import { environment } from 'src/environments/environment'
+import { removeAdminLocalStorage } from '../../local-storage.handler'
 
 @Component({
   selector: 'app-turmas',
   templateUrl: './turmas.component.html',
-  styleUrls: ['./turmas.component.css'],
+  styleUrls: ['./turmas.component.css']
 })
 export class TurmasComponent implements OnInit {
   constructor(
@@ -18,6 +19,7 @@ export class TurmasComponent implements OnInit {
   protected readonly email = this.route.snapshot.paramMap.get('email')
   private readonly apiUrl = environment.urlApi + 'turma'
   private readonly token = localStorage.getItem('token')
+  private readonly role = localStorage.getItem('role')
   protected nomeTurma = ''
 
   turmas: Turma[] = []
@@ -30,22 +32,20 @@ export class TurmasComponent implements OnInit {
     this.http
       .get<Turma[]>(this.apiUrl, {
         headers: {
-          Authorization: 'Bearer ' + this.token,
-        },
+          Authorization: 'Bearer ' + this.token
+        }
       })
       .subscribe({
-        next: data => {
+        next: (data) => {
           this.turmas = data
         },
-        error: error => {
+        error: (error) => {
           if (error.status === 401) {
-            window.confirm(
-              'O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema'
-            )
-            localStorage.removeItem('token')
+            window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
+            removeAdminLocalStorage()
             this.router.navigate(['/admin'])
           }
-        },
+        }
       })
   }
 
@@ -53,25 +53,27 @@ export class TurmasComponent implements OnInit {
     this.http
       .get<Turma>(this.apiUrl + `/${nomeTurma}`, {
         headers: {
-          Authorization: 'Bearer ' + this.token,
-        },
+          Authorization: 'Bearer ' + this.token
+        }
       })
       .subscribe({
-        next: data => {
+        next: (data) => {
           this.turmaEncontrada = data
         },
-        error: error => {
+        error: (error) => {
           if (error.status === 401) {
-            window.confirm(
-              'O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema'
-            )
-            localStorage.removeItem('token')
+            window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
+            removeAdminLocalStorage()
             this.router.navigate(['/admin'])
           }
           if (error.status === 404) {
             window.confirm('Turma não encontrada')
           }
-        },
+        }
       })
+  }
+
+  isAdmin(): boolean {
+    return this.role?.toUpperCase() === 'ADMIN'
   }
 }

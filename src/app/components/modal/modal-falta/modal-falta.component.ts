@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http'
 import { Component } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
+import { removeAdminLocalStorage } from 'src/app/pages/admin/local-storage.handler'
 import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-modal-falta',
   templateUrl: './modal-falta.component.html',
-  styleUrls: ['./modal-falta.component.css'],
+  styleUrls: ['./modal-falta.component.css']
 })
 export class ModalFaltaComponent {
   constructor(
@@ -22,7 +23,7 @@ export class ModalFaltaComponent {
   novaFalta = {
     data: '',
     motivo: '',
-    observacao: '',
+    observacao: ''
   }
 
   protected adicionarFalta() {
@@ -31,20 +32,18 @@ export class ModalFaltaComponent {
       .post<{ message: string }>(this.url + `/${this.rg}/${this.novaFalta.data}`, this.novaFalta, {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + this.token,
-        },
+          Authorization: 'Bearer ' + this.token
+        }
       })
       .subscribe({
-        next: data => {
+        next: (data) => {
           window.confirm(data['message'])
           window.location.reload()
         },
-        error: error => {
+        error: (error) => {
           if (error.status === 401) {
-            window.confirm(
-              'O admin não esta autorizado a realizar esta ação. Faça o login novamente'
-            )
-            localStorage.removeItem('token')
+            window.confirm('O admin não esta autorizado a realizar esta ação. Faça o login novamente')
+            removeAdminLocalStorage()
             this.router.navigate(['admin'])
           }
           if (
@@ -57,7 +56,7 @@ export class ModalFaltaComponent {
           ) {
             window.confirm(error.error.message)
           }
-        },
+        }
       })
   }
 

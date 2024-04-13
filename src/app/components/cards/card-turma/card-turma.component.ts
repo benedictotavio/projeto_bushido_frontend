@@ -5,7 +5,7 @@ import { Turma } from 'src/app/pages/admin/turma.interface'
 @Component({
   selector: 'app-card-turma',
   templateUrl: './card-turma.component.html',
-  styleUrls: ['./card-turma.component.css'],
+  styleUrls: ['./card-turma.component.css']
 })
 export class CardTurmaComponent {
   @Input()
@@ -16,11 +16,4 @@ export class CardTurmaComponent {
   protected readonly totalDeAlunos = 30
   protected porcetagemDeAlunos = 0
   protected readonly email = this.route.snapshot.params['email']
-
-  protected porcentagemDeAlunos() {
-    this.porcetagemDeAlunos = Number(
-      ((this.turma.alunos.length / this.totalDeAlunos) * 100).toFixed(0)
-    )
-    return this.porcetagemDeAlunos
-  }
 }

@@ -2,22 +2,15 @@
   <a href="admin/{{ email }}"><button class="btn btn-primary ms-2 mb-4">Voltar</button></a>
   <div class="d-flex justify-content-center mb-5">
     <label for="nomeTurma" class="visually-hidden">Nome da Turma</label>
-    <input
-      type="text"
-      class="form-control"
-      id="nomeTurma"
-      name="nomeTurma"
-      placeholder="Digite o nome da Turma"
-      [(ngModel)]="nomeTurma"
-    />
-    <input
-      type="submit"
-      class="btn btn-primary mx-2"
-      value="Buscar"
-      (click)="buscarTurmaPorNome(nomeTurma)"
-    />
+    <input type="text" class="form-control" id="nomeTurma" name="nomeTurma" placeholder="Digite o nome da Turma"
+      [(ngModel)]="nomeTurma" />
+    <input type="submit" class="btn btn-primary mx-2" value="Buscar" (click)="buscarTurmaPorNome(nomeTurma)" />
   </div>
-  <app-modal-nova-turma></app-modal-nova-turma>
+  
+  <div *ngIf="isAdmin()">
+    <app-modal-nova-turma></app-modal-nova-turma>
+  </div>
+
   <div *ngIf="!turmaEncontrada" class="d-flex justify-content-evenly flex-wrap">
     <div *ngFor="let turma of turmas">
       <app-card-turma [turma]="turma"></app-card-turma>

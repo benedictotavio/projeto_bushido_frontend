@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { environment } from 'src/environments/environment'
 import { Turma } from '../../turma.interface'
+import { removeAdminLocalStorage } from '../../local-storage.handler'
 
 @Component({
   selector: 'app-registro-aluno',
   templateUrl: './registro-aluno.component.html',
-  styleUrls: ['./registro-aluno.component.css'],
+  styleUrls: ['./registro-aluno.component.css']
 })
 export class RegistroAlunoComponent implements OnInit {
   constructor(
@@ -20,22 +21,22 @@ export class RegistroAlunoComponent implements OnInit {
     tipoSanguineo: 'A_POSITIVO',
     usoMedicamentoContinuo: {
       resposta: '',
-      tipo: '',
+      tipo: ''
     },
     cirurgia: {
       resposta: false,
-      tipo: '',
+      tipo: ''
     },
     alergia: {
       resposta: false,
-      tipo: '',
+      tipo: ''
     },
     doencaCronica: {
       resposta: false,
-      tipo: '',
+      tipo: ''
     },
     deficiencia: [],
-    acompanhamentoSaude: [],
+    acompanhamentoSaude: []
   }
 
   responsavel: ResponsavelProps = {
@@ -43,20 +44,20 @@ export class RegistroAlunoComponent implements OnInit {
     cpf: '',
     telefone: '',
     email: '',
-    filiacao: 'OUTRO',
+    filiacao: 'OUTRO'
   }
 
   dadosEscolares: DadosEscolaresProps = {
     turno: 'MANHA',
     escola: '',
-    serie: 0,
+    serie: 0
   }
 
   endereco: EnderecoProps = {
     estado: '',
     cidade: '',
     cep: '',
-    numero: '',
+    numero: ''
   }
 
   dadosSociais: DadosSociaisProps = {
@@ -66,7 +67,7 @@ export class RegistroAlunoComponent implements OnInit {
     numerosDePessoasNaCasa: 0,
     contribuintesDaRendaFamiliar: 0,
     alunoContribuiParaRenda: false,
-    rendaFamiliarEmSalariosMinimos: 0,
+    rendaFamiliarEmSalariosMinimos: 0
   }
 
   aluno: AlunoProps = {
@@ -81,9 +82,9 @@ export class RegistroAlunoComponent implements OnInit {
     responsaveis: this.responsavel,
     graduacao: {
       kyu: 7,
-      dan: 1,
+      dan: 1
     },
-    historicoSaude: this.historicoSaude,
+    historicoSaude: this.historicoSaude
   }
 
   protected turmas: Turma[] = []
@@ -101,22 +102,20 @@ export class RegistroAlunoComponent implements OnInit {
     this.http
       .get<Turma>(environment.urlApi + `turma/${this.aluno.turma}`, {
         headers: {
-          Authorization: 'Bearer ' + this.token,
-        },
+          Authorization: 'Bearer ' + this.token
+        }
       })
       .subscribe({
-        next: data => {
+        next: (data) => {
           this.turmas.push(data)
         },
-        error: error => {
+        error: (error) => {
           if (error.status === 401) {
-            window.confirm(
-              'O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema'
-            )
-            localStorage.removeItem('token')
+            window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
+            removeAdminLocalStorage()
             this.router.navigate(['/admin'])
           }
-        },
+        }
       })
   }
 
@@ -124,22 +123,20 @@ export class RegistroAlunoComponent implements OnInit {
     this.http
       .get<Turma[]>(environment.urlApi + 'turma', {
         headers: {
-          Authorization: 'Bearer ' + this.token,
-        },
+          Authorization: 'Bearer ' + this.token
+        }
       })
       .subscribe({
-        next: data => {
+        next: (data) => {
           this.turmas = data
         },
-        error: error => {
+        error: (error) => {
           if (error.status === 401) {
-            window.confirm(
-              'O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema'
-            )
-            localStorage.removeItem('token')
+            window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
+            removeAdminLocalStorage()
             this.router.navigate(['/admin'])
           }
-        },
+        }
       })
   }
 
@@ -149,20 +146,18 @@ export class RegistroAlunoComponent implements OnInit {
       .post<{ id: string; message: string }>(this.ApiBushido, this.aluno, {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${this.token}`,
-        },
+          Authorization: `Bearer ${this.token}`
+        }
       })
       .subscribe({
-        next: res => {
+        next: (res) => {
           window.alert(res.message)
           this.router.navigate([`/admin/${this.email}/aluno`, res.id])
         },
-        error: error => {
+        error: (error) => {
           if (error.status === 401) {
-            window.confirm(
-              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
-            )
-            localStorage.removeItem('token')
+            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
+            removeAdminLocalStorage()
             this.router.navigate(['/admin'])
           }
           if (
@@ -176,7 +171,7 @@ export class RegistroAlunoComponent implements OnInit {
           ) {
             window.confirm(error['error']['message'])
           }
-        },
+        }
       })
   }
 
@@ -216,20 +211,17 @@ export class RegistroAlunoComponent implements OnInit {
     }
 
     this.http
-      .get<EnderecoViaCepResponse>(
-        `https://viacep.com.br/ws/${this.removeSpecialCharacters(this.endereco.cep)}/json/`
-      )
+      .get<EnderecoViaCepResponse>(`https://viacep.com.br/ws/${this.removeSpecialCharacters(this.endereco.cep)}/json/`)
       .subscribe({
-        next: data => {
+        next: (data) => {
           if (data.cep) {
             this.endereco.cep = data.cep
             this.endereco.cidade = data.localidade
             this.endereco.estado = data.uf
             return
           }
-          window.confirm('Endereço nao encontrado')
         },
-        error: error => {
+        error: (error) => {
           if (error.status === 400) {
             window.confirm('CEP inválido')
             this.aluno.endereco.cep = ''
@@ -238,7 +230,7 @@ export class RegistroAlunoComponent implements OnInit {
             window.confirm('CEP inválido')
             this.aluno.endereco.cep = ''
           }
-        },
+        }
       })
   }
 
