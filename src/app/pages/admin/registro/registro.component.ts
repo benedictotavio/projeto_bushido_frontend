@@ -1,22 +1,23 @@
 import { Component } from '@angular/core'
-import { User } from '../user.interface'
 import { HttpClient } from '@angular/common/http'
 import { environment } from '../../../../environments/environment'
 import { ActivatedRoute, Router } from '@angular/router'
+import { SignUp } from '../auth.interface'
+import { removeAdminLocalStorage } from '../local-storage.handler'
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
-  styleUrls: ['./registro.component.css'],
+  styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent {
-  ApiBushido = environment.urlApi + 'admin/signup'
-  user: User = {
+  private readonly ApiBushido = environment.urlApi + 'admin/signup'
+  user: SignUp = {
     nome: '',
     email: '',
     cargo: '',
     senha: '',
-    role: '',
+    role: ''
   }
 
   constructor(
@@ -25,28 +26,23 @@ export class RegistroComponent {
     private http: HttpClient
   ) {}
 
-  register() {
+  registrarNovoAdmin() {
     this.http
       .post<{ id: string; nome: string }>(this.ApiBushido, this.user, {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
       })
       .subscribe({
-        next: response => {
+        next: (response) => {
           window.alert(response)
-          this.router.navigate([
-            `/admin/${this.route.snapshot.paramMap.get('email')}/aluno`,
-            response.id,
-          ])
+          this.router.navigate([`/admin/${this.route.snapshot.paramMap.get('email')}/aluno`, response.id])
         },
-        error: error => {
+        error: (error) => {
           if (error.status === 401) {
-            window.confirm(
-              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
-            )
-            localStorage.removeItem('token')
+            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
+            removeAdminLocalStorage()
           }
 
           if (
@@ -58,7 +54,7 @@ export class RegistroComponent {
           ) {
             window.confirm(error['error']['message'])
           }
-        },
+        }
       })
   }
 }

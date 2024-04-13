@@ -1,7 +1,6 @@
-export interface User {
+export interface AdminResponse {
   nome: string
   email: string
   cargo: string
-  senha: string
   role: string
 }

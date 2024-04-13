@@ -1,27 +1,25 @@
-import { Component, OnInit } from '@angular/core'
-import { Router, ActivatedRoute } from '@angular/router'
+import { Component } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
+import { AuthService } from 'src/app/services/services-admin/auth.service'
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
-  token = localStorage.getItem('token')
-  email = ''
+export class DashboardComponent {
   constructor(
-    private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private readonly authService: AuthService
   ) {}
+  private readonly role = localStorage.getItem('role')
+  protected readonly email = this.route.snapshot.paramMap.get('email')
 
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.email = params['email']
-    })
+  isAdmin(): boolean {
+    return this.role?.toUpperCase() === 'ADMIN'
   }
 
   removeToken(): void {
-    localStorage.removeItem('token')
-    this.token = ''
+    this.authService.removeToken()
   }
 }

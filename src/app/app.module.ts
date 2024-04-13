@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { FormsModule } from '@angular/forms'
-
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { HeaderComponent } from './components/header/header/header.component'
@@ -48,6 +47,7 @@ import { ModalAlunoTurmaComponent } from './components/modal/modal-aluno-turma/m
 import { ModalNovaTurmaComponent } from './components/modal/modal-nova-turma/modal-nova-turma.component'
 import { CardBuscaAlunoComponent } from './components/cards/card-busca-aluno/card-busca-aluno.component'
 import { ModalResponsavelComponent } from './components/modal/modal-responsavel/modal-responsavel.component'
+import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt'
 
 @NgModule({
   declarations: [
@@ -92,13 +92,15 @@ import { ModalResponsavelComponent } from './components/modal/modal-responsavel/
     ModalAlunoTurmaComponent,
     ModalNovaTurmaComponent,
     CardBuscaAlunoComponent,
-    ModalResponsavelComponent,
+    ModalResponsavelComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [
     LoadingService,
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

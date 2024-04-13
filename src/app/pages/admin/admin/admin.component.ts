@@ -1,21 +1,21 @@
 import { Component } from '@angular/core'
-import { Login } from '../login.interface'
+import { Login } from '../auth.interface'
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
 import { environment } from '../../../../environments/environment'
-import { AuthService } from 'src/app/services/services-admin/authservice.service'
+import { AuthService } from 'src/app/services/services-admin/auth.service'
+import { setAdminLocalStorage } from '../local-storage.handler'
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css'],
+  styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
   login: Login = {
     email: '',
-    senha: '',
+    senha: ''
   }
-  token = ''
 
   constructor(
     private http: HttpClient,
@@ -26,13 +26,13 @@ export class AdminComponent {
   ApiBushido = environment.urlApi + 'admin/login'
 
   Logar() {
-    this.http.post<{ token: string }>(this.ApiBushido, this.login).subscribe({
-      next: data => {
+    this.http.post<{ token: string; role: string }>(this.ApiBushido, this.login).subscribe({
+      next: (data) => {
         this.authService.setAuthenticated(true)
         this.router.navigate(['/admin', this.login.email])
-        localStorage.setItem('token', data.token)
+        setAdminLocalStorage(data.role, data.token)
       },
-      error: error => {
+      error: (error) => {
         if (error.status === 401) {
           window.alert('Email ou senha inválidos')
         }
@@ -46,7 +46,7 @@ export class AdminComponent {
           window.confirm(error['error']['message'])
           window.location.reload()
         }
-      },
+      }
     })
   }
 }

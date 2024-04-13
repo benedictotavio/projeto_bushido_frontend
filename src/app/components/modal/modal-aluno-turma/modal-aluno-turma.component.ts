@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http'
 import { Component } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AlunoResponse } from 'src/app/pages/admin/aluno.interface'
+import { removeAdminLocalStorage } from 'src/app/pages/admin/local-storage.handler'
 import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-modal-aluno-turma',
   templateUrl: './modal-aluno-turma.component.html',
-  styleUrls: ['./modal-aluno-turma.component.css'],
+  styleUrls: ['./modal-aluno-turma.component.css']
 })
 export class ModalAlunoTurmaComponent {
   constructor(
@@ -30,26 +31,24 @@ export class ModalAlunoTurmaComponent {
           nome: this.aluno?.nome,
           genero: this.aluno?.genero,
           dataNascimento: this.dateToLocalDateString(this.aluno?.dataNascimento as string),
-          rg: this.aluno?.rg,
+          rg: this.aluno?.rg
         },
         {
           headers: {
-            Authorization: 'Bearer ' + this.token,
-          },
+            Authorization: 'Bearer ' + this.token
+          }
         }
       )
       .subscribe({
-        next: data => {
+        next: (data) => {
           window.confirm(data.message)
           this.fecharModal()
           window.location.reload()
         },
-        error: error => {
+        error: (error) => {
           if (error.status === 401) {
-            window.confirm(
-              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
-            )
-            localStorage.removeItem('token')
+            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
+            removeAdminLocalStorage()
             this.router.navigate(['/admin'])
           }
           if (
@@ -61,7 +60,7 @@ export class ModalAlunoTurmaComponent {
           ) {
             window.confirm(error['error']['message'])
           }
-        },
+        }
       })
   }
 
@@ -69,23 +68,21 @@ export class ModalAlunoTurmaComponent {
     this.http
       .get<AlunoResponse[]>(this.url + 'aluno' + `?rg=${this.rg}`, {
         headers: {
-          Authorization: 'Bearer ' + this.token,
-        },
+          Authorization: 'Bearer ' + this.token
+        }
       })
       .subscribe({
-        next: data => {
+        next: (data) => {
           if (data.length === 0) {
             window.confirm('Aluno não encontrado')
             return
           }
           this.aluno = data[0]
         },
-        error: error => {
+        error: (error) => {
           if (error.status === 401) {
-            window.confirm(
-              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
-            )
-            localStorage.removeItem('token')
+            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
+            removeAdminLocalStorage()
             this.router.navigate(['/admin'])
           }
           if (error.status === 403) {
@@ -94,7 +91,7 @@ export class ModalAlunoTurmaComponent {
           if (error.status === 404) {
             window.confirm('Aluno não encontrado')
           }
-        },
+        }
       })
   }
 

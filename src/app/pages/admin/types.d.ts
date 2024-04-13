@@ -1,9 +1,8 @@
 interface AlunoProps {
   nome: string
-  sobrenome: string
   turma: string
   genero: 'M' | 'F' | 'OUTRO'
-  dataNascimento: string // Assuming date format is "dd-MM-yyyy"
+  dataNascimento: number
   dadosSociais: DadosSociaisProps
   dadosEscolares: DadosEscolaresProps // Assuming date format is "yyyy-MM-ddTHH:mm:ss"
   endereco: EnderecoProps
@@ -75,4 +74,17 @@ interface EnderecoProps {
   estado: string
   cep: string
   numero: string
+}
+
+interface EnderecoViaCepResponse {
+  cep: string
+  logradouro: string
+  complemento: string
+  bairro: string
+  localidade: string
+  uf: string
+  ibge: string
+  gia: string
+  ddd: string
+  siafi: string
 }

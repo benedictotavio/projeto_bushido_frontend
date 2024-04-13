@@ -1,38 +1,29 @@
-<main class="container-fluid py-2 d-flex justify-content-center">
-  <article class="col-md-6 p-4 text-center">
-    <form class="form-group" (ngSubmit)="Logar()">
-      <h3 class="text-center my-3">Login</h3>
-      <div class="input-text-login col-sm-10">
-        <input
-          type="email"
-          id="email"
-          [(ngModel)]="login.email"
-          name="email"
-          class="form-control"
-          placeholder="Email"
-          required
-        />
-      </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card my-5">
+        <form class="card-body cardbody-color p-lg-5 form-group" (ngSubmit)="Logar()" autocomplete="on">
+          <div class="text-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/6024/6024190.png"
+              class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3" alt="profile" />
+          </div>
 
-      <div class="input-text-login col-sm-10">
-        <input
-          type="password"
-          id="senha"
-          [(ngModel)]="login.senha"
-          name="senha"
-          class="form-control"
-          placeholder="Senha"
-          required
-        />
+          <div class="mb-3">
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email"
+              [(ngModel)]="login.email" name="email" required />
+          </div>
+          <div class="mb-3">
+            <input type="password" class="form-control" id="password" placeholder="Senha" [(ngModel)]="login.senha"
+              name="password" required />
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary px-5 mb-5 w-100"
+              [class.disabled]="!login.email || !login.senha">Login</button>
+          </div>
+        </form>
       </div>
-
-      <div class="login-box-button col-sm-10 mt-5">
-        <button type="submit" class="btn btn-primary" [disabled]="!login.email || !login.senha">
-          Login
-        </button>
-      </div>
-    </form>
-  </article>
-</main>
+    </div>
+  </div>
+</div>
 
 <app-loading></app-loading>

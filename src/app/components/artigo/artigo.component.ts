@@ -7,13 +7,13 @@ import { BlogService } from 'src/app/services/blog.service'
 @Component({
   selector: 'app-artigo',
   templateUrl: './artigo.component.html',
-  styleUrls: ['./artigo.component.css'],
+  styleUrls: ['./artigo.component.css']
 })
 export class ArtigoComponent implements OnInit {
   ngOnInit(): void {
     const postSlug = this.activatedRoute.snapshot.params['slug']
     this.blogService.getPostBySlug(postSlug).subscribe({
-      next: res => {
+      next: (res) => {
         if (res.data.post != null) {
           this.post = res.data.post
           this.title.setTitle(this.post?.titulo + ' | Blog Bushido')
@@ -21,7 +21,7 @@ export class ArtigoComponent implements OnInit {
           this.router.navigate(['404'])
         }
       },
-      error: error => console.error(error),
+      error: (error) => console.error(error)
     })
   }
 

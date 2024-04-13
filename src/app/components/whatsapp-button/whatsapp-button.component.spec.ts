@@ -8,7 +8,7 @@ describe('WhatsappButtonComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [WhatsappButtonComponent],
+      declarations: [WhatsappButtonComponent]
     })
     fixture = TestBed.createComponent(WhatsappButtonComponent)
     component = fixture.componentInstance

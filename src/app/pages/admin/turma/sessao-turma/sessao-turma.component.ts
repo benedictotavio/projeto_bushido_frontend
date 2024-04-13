@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http'
 import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { environment } from 'src/environments/environment'
-import { Turma } from '../../turma.interface'
+import { AlunoTurma } from '../../turma.interface'
+import { removeAdminLocalStorage } from '../../local-storage.handler'
 
 @Component({
   selector: 'app-sessao-turma',
   templateUrl: './sessao-turma.component.html',
-  styleUrls: ['./sessao-turma.component.css'],
+  styleUrls: ['./sessao-turma.component.css']
 })
 export class SessaoTurmaComponent implements OnInit {
   constructor(
@@ -18,13 +19,14 @@ export class SessaoTurmaComponent implements OnInit {
 
   private readonly apiUrl = environment.urlApi
   private readonly token = localStorage.getItem('token')
-  private readonly nomeTurma = this.route.snapshot.paramMap.get('nomeTurma')
+  protected readonly nomeTurma = this.route.snapshot.paramMap.get('nomeTurma')
+  private readonly role = localStorage.getItem('role')
   protected readonly email = this.route.snapshot.paramMap.get('email')
-  protected turmaEncontrada: Turma | undefined
+  protected alunosDaTurma: AlunoTurma[] = []
   protected idade: number | undefined
 
   ngOnInit(): void {
-    this.buscarTurmaPorNome()
+    this.buscarAlunosDaTurma()
   }
 
   protected removerAluno(rg: string) {
@@ -45,20 +47,18 @@ export class SessaoTurmaComponent implements OnInit {
     this.http
       .delete<{ message: string }>(this.apiUrl + `turma/${this.nomeTurma}`, {
         headers: {
-          Authorization: 'Bearer ' + this.token,
-        },
+          Authorization: 'Bearer ' + this.token
+        }
       })
       .subscribe({
-        next: data => {
+        next: (data) => {
           window.confirm(data.message)
-          this.router.navigate(['/admin/turmas'])
+          this.router.navigate(['/admin', this.email, 'turmas'])
         },
-        error: error => {
+        error: (error) => {
           if (error.status === 401) {
-            window.confirm(
-              'O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema'
-            )
-            localStorage.removeItem('token')
+            window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
+            removeAdminLocalStorage()
             this.router.navigate(['/admin'])
           }
           if (error.status === 404) {
@@ -67,30 +67,7 @@ export class SessaoTurmaComponent implements OnInit {
           if (error.status === 403) {
             window.confirm('Turma não pode ser excluída')
           }
-        },
-      })
-  }
-
-  protected buscarTurmaPorNome() {
-    this.http
-      .get<Turma>(this.apiUrl + `turma/${this.nomeTurma}`, {
-        headers: {
-          Authorization: 'Bearer ' + this.token,
-        },
-      })
-      .subscribe({
-        next: data => {
-          this.turmaEncontrada = data
-        },
-        error: error => {
-          if (error.status === 401) {
-            window.confirm(
-              'O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema'
-            )
-            localStorage.removeItem('token')
-            this.router.navigate(['/admin'])
-          }
-        },
+        }
       })
   }
 
@@ -100,25 +77,23 @@ export class SessaoTurmaComponent implements OnInit {
         this.apiUrl + `aluno/falta/${rg}/${new Date().getTime()}`,
         {
           motivo: 'Nova Falta',
-          observacao: 'Falta automatica',
+          observacao: 'Falta automatica'
         },
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + this.token,
-          },
+            Authorization: 'Bearer ' + this.token
+          }
         }
       )
       .subscribe({
-        next: data => {
+        next: (data) => {
           window.confirm(data.message)
         },
-        error: error => {
+        error: (error) => {
           if (error.status === 401) {
-            window.confirm(
-              'O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema'
-            )
-            localStorage.removeItem('token')
+            window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
+            removeAdminLocalStorage()
             this.router.navigate(['/admin'])
           }
           if (
@@ -130,7 +105,7 @@ export class SessaoTurmaComponent implements OnInit {
           ) {
             window.confirm(error['error']['message'])
           }
-        },
+        }
       })
   }
 
@@ -145,20 +120,18 @@ export class SessaoTurmaComponent implements OnInit {
     this.http
       .delete<{ message: string }>(this.apiUrl + `turma/${this.nomeTurma}/aluno/${rg}`, {
         headers: {
-          Authorization: 'Bearer ' + this.token,
-        },
+          Authorization: 'Bearer ' + this.token
+        }
       })
       .subscribe({
-        next: data => {
+        next: (data) => {
           window.confirm(data.message)
           window.location.reload()
         },
-        error: error => {
+        error: (error) => {
           if (error.status === 401) {
-            window.confirm(
-              'O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema'
-            )
-            localStorage.removeItem('token')
+            window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
+            removeAdminLocalStorage()
             this.router.navigate(['/admin'])
           }
           if (error.status === 404) {
@@ -167,7 +140,32 @@ export class SessaoTurmaComponent implements OnInit {
           if (error.status === 403) {
             window.confirm('Aluno não pode ser removido')
           }
+        }
+      })
+  }
+
+  isAdmin(): boolean {
+    return this.role?.toUpperCase() === 'ADMIN'
+  }
+
+  buscarAlunosDaTurma() {
+    this.http
+      .get<AlunoTurma[]>(this.apiUrl + `turma/${this.nomeTurma}/alunos`, {
+        headers: {
+          Authorization: 'Bearer ' + this.token
+        }
+      })
+      .subscribe({
+        next: (data) => {
+          this.alunosDaTurma = data
         },
+        error: (error) => {
+          if (error.status === 401) {
+            window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
+            removeAdminLocalStorage()
+            this.router.navigate(['/admin'])
+          }
+        }
       })
   }
 }

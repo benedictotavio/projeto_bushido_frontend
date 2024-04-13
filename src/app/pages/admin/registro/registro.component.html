@@ -3,7 +3,7 @@
     <article class="col-md-6 mt-5">
       <h3 class="text-center">Registro</h3>
 
-      <form class="form-group" (ngSubmit)="register()">
+      <form class="form-group" (ngSubmit)="registrarNovoAdmin()">
         <div class="input-text-register col-sm-10">
           <input
             type="text"
@@ -53,10 +53,10 @@
           />
         </div>
 
-        <div class="role-box-radio col-sm-10 d-flex justify-content-between p-4">
+        <div class="role-box-radio col-sm-10 d-flex justify-content-around p-4">
           <div>
-            <input type="radio" name="role" [(ngModel)]="user.role" value="USER" />
-            <label class="p-2" for="html">USER</label><br />
+            <input type="radio" name="role" [(ngModel)]="user.role" value="TUTOR" />
+            <label class="p-2" for="html">TUTOR</label><br />
           </div>
           <div>
             <input type="radio" name="role" [(ngModel)]="user.role" value="ADMIN" />

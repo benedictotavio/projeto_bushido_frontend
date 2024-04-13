@@ -3,11 +3,12 @@ import { AlunoResponse } from '../../aluno.interface'
 import { HttpClient } from '@angular/common/http'
 import { environment } from 'src/environments/environment'
 import { ActivatedRoute, Router } from '@angular/router'
+import { removeAdminLocalStorage } from '../../local-storage.handler'
 
 @Component({
   selector: 'app-buscar-aluno',
   templateUrl: './buscar-aluno.component.html',
-  styleUrls: ['./buscar-aluno.component.css'],
+  styleUrls: ['./buscar-aluno.component.css']
 })
 export class BuscarAlunoComponent {
   showPlaceholder = false
@@ -48,20 +49,18 @@ export class BuscarAlunoComponent {
     this.http
       .get<AlunoResponse[]>(this.apiUrl + `?rg=${this.pesquisarAluno}`, {
         headers: {
-          Authorization: 'Bearer ' + this.token,
-        },
+          Authorization: 'Bearer ' + this.token
+        }
       })
       .subscribe({
-        next: data => {
+        next: (data) => {
           this.alunos = data
           this.showPlaceholder = false
         },
-        error: error => {
+        error: (error) => {
           if (error.status === 401) {
-            window.alert(
-              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
-            )
-            localStorage.removeItem('token')
+            window.alert('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
+            removeAdminLocalStorage()
             this.router.navigate(['/admin'])
           }
           if (error.status === 404) {
@@ -69,32 +68,29 @@ export class BuscarAlunoComponent {
             this.pesquisarAluno = ''
             this.showPlaceholder = false
           }
-        },
+        }
       })
   }
 
   protected buscarAlunoPorNome() {
     this.http
       .get<AlunoResponse[]>(
-        this.apiUrl +
-          `?nome=${this.pesquisarAluno}&page=${this.currentPage - 1}&size=${this.itemsPerPage}`,
+        this.apiUrl + `?nome=${this.pesquisarAluno}&page=${this.currentPage - 1}&size=${this.itemsPerPage}`,
         {
           headers: {
-            Authorization: 'Bearer ' + this.token,
-          },
+            Authorization: 'Bearer ' + this.token
+          }
         }
       )
       .subscribe({
-        next: data => {
+        next: (data) => {
           this.alunos = data
           this.showPlaceholder = false
         },
-        error: error => {
+        error: (error) => {
           if (error.status === 401) {
-            window.alert(
-              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
-            )
-            localStorage.removeItem('token')
+            window.alert('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
+            removeAdminLocalStorage()
             this.router.navigate(['/admin'])
           }
           if (error.status === 404) {
@@ -102,7 +98,7 @@ export class BuscarAlunoComponent {
             this.pesquisarAluno = ''
             this.showPlaceholder = false
           }
-        },
+        }
       })
   }
 

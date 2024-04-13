@@ -5,7 +5,7 @@ import { BlogService } from 'src/app/services/blog.service'
 @Component({
   selector: 'app-saude',
   templateUrl: './saude.component.html',
-  styleUrls: ['./saude.component.css'],
+  styleUrls: ['./saude.component.css']
 })
 export class SaudeComponent implements OnInit {
   public posts: Array<BlogPost> = []
@@ -14,8 +14,8 @@ export class SaudeComponent implements OnInit {
 
   ngOnInit(): void {
     this.blogService.getPostsByCategory('saúde').subscribe({
-      next: res => (this.posts = res.data.allPosts),
-      error: error => console.error(error),
+      next: (res) => (this.posts = res.data.allPosts),
+      error: (error) => console.error(error)
     })
   }
 }

@@ -12,7 +12,7 @@ import { Component } from '@angular/core'
       div {
         padding: 200px 0;
       }
-    `,
-  ],
+    `
+  ]
 })
 export class PaginaNaoEncontradaComponent {}

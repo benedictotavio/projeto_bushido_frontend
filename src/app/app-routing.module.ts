@@ -13,61 +13,62 @@ import { EsporteComponent } from './pages/blog/esporte/esporte.component'
 import { AdminComponent } from './pages/admin/admin/admin.component'
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 import { RegistroComponent } from './pages/admin/registro/registro.component'
-import { AuthGuard } from '../app/pages/admin/auth.guard'
+import { isAuthenticated } from './guards/auth.guard'
 import { ArtigoComponent } from './components/artigo/artigo.component'
 import { SessaoAlunoComponent } from './pages/admin/aluno/sessao-aluno/sessao-aluno.component'
 import { RegistroAlunoComponent } from './pages/admin/aluno/registro-aluno/registro-aluno.component'
 import { BuscarAlunoComponent } from './pages/admin/aluno/buscar-aluno/buscar-aluno.component'
 import { TurmasComponent } from './pages/admin/turma/turmas/turmas.component'
 import { SessaoTurmaComponent } from './pages/admin/turma/sessao-turma/sessao-turma.component'
+import { isAdmin } from './guards/admin.guard'
 
 const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    title: ' Página do  Admin | Instituto Bushido',
+    title: ' Página do  Admin | Instituto Bushido'
   },
   {
     path: 'admin/:email',
-    canActivate: [AuthGuard],
-    component: DashboardComponent,
+    canActivate: [isAuthenticated],
+    component: DashboardComponent
   },
   {
     path: 'admin/:email/registro',
-    canActivate: [AuthGuard],
-    component: RegistroComponent,
+    canActivate: [isAuthenticated, isAdmin],
+    component: RegistroComponent
   },
   {
     path: 'admin/:email/aluno',
-    canActivate: [AuthGuard],
-    component: RegistroAlunoComponent,
+    canActivate: [isAuthenticated, isAdmin],
+    component: RegistroAlunoComponent
   },
   {
     path: 'admin/:email/aluno/buscar',
-    canActivate: [AuthGuard],
-    component: BuscarAlunoComponent,
+    canActivate: [isAuthenticated],
+    component: BuscarAlunoComponent
   },
   {
     path: 'admin/:email/aluno/:rg',
-    canActivate: [AuthGuard],
-    component: SessaoAlunoComponent,
+    canActivate: [isAuthenticated],
+    component: SessaoAlunoComponent
   },
   {
     path: 'admin/:email/turmas',
     component: TurmasComponent,
-    canActivate: [AuthGuard],
+    canActivate: [isAuthenticated]
   },
   {
     path: 'admin/:email/turmas/:nomeTurma',
     component: SessaoTurmaComponent,
-    canActivate: [AuthGuard],
+    canActivate: [isAuthenticated]
   },
   { path: '', component: HomeComponent, title: 'Home | Instituto Bushido' },
   { path: 'quem-somos', component: QuemSomosComponent, title: 'Quem Somos | Instituto Bushido' },
   {
     path: 'karate-sem-fronteiras',
     component: KarateSemFronteirasComponent,
-    title: 'Karatê Sem Fronteiras | Instituto Bushido',
+    title: 'Karatê Sem Fronteiras | Instituto Bushido'
   },
   {
     path: 'blog',
@@ -80,9 +81,9 @@ const routes: Routes = [
             path: '',
             component: SaudeComponent,
             title: 'Posts sobre Saúde | Blog Instituto Bushido',
-            pathMatch: 'full',
-          },
-        ],
+            pathMatch: 'full'
+          }
+        ]
       },
       {
         path: 'esporte',
@@ -91,41 +92,41 @@ const routes: Routes = [
             path: '',
             component: EsporteComponent,
             title: 'Posts sobre Esporte | Blog Instituto Bushido',
-            pathMatch: 'full',
-          },
-        ],
+            pathMatch: 'full'
+          }
+        ]
       },
       {
         path: 'post',
         children: [
           {
             path: ':slug',
-            component: ArtigoComponent,
-          },
-        ],
-      },
-    ],
+            component: ArtigoComponent
+          }
+        ]
+      }
+    ]
   },
   { path: 'contato', component: ContatoComponent, title: 'Contato | Instituto Bushido' },
   {
     path: 'seja-um-doador',
     component: SejaUmDoadorComponent,
-    title: 'Seja Um Doador | Instituto Bushido',
+    title: 'Seja Um Doador | Instituto Bushido'
   },
   {
     path: 'transparencia',
     component: TransparenciaComponent,
-    title: 'Transparência | Instituto Bushido',
+    title: 'Transparência | Instituto Bushido'
   },
   {
     path: '**',
     component: PaginaNaoEncontradaComponent,
-    title: 'Página Não Encontrada | Instituto Bushido',
-  },
+    title: 'Página Não Encontrada | Instituto Bushido'
+  }
 ]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http'
 import { Component } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
+import { removeAdminLocalStorage } from 'src/app/pages/admin/local-storage.handler'
 import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-modal-responsavel',
   templateUrl: './modal-responsavel.component.html',
-  styleUrls: ['./modal-responsavel.component.css'],
+  styleUrls: ['./modal-responsavel.component.css']
 })
 export class ModalResponsavelComponent {
   constructor(
@@ -15,14 +16,13 @@ export class ModalResponsavelComponent {
   ) {}
 
   private readonly token = localStorage.getItem('token')
-  private readonly url =
-    environment.urlApi + `aluno/responsavel/${this.route.snapshot.paramMap.get('rg')}`
+  private readonly url = environment.urlApi + `aluno/responsavel/${this.route.snapshot.paramMap.get('rg')}`
   responsavel = {
     nome: '',
     cpf: '',
     telefone: '',
     filiacao: '',
-    email: '',
+    email: ''
   }
 
   protected adicionarResponsavel() {
@@ -30,20 +30,18 @@ export class ModalResponsavelComponent {
       .post<{ id: string; message: string }>(this.url, this.responsavel, {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + this.token,
-        },
+          Authorization: 'Bearer ' + this.token
+        }
       })
       .subscribe({
-        next: data => {
+        next: (data) => {
           window.confirm(data['message'])
           window.location.reload()
         },
-        error: error => {
+        error: (error) => {
           if (error.status === 401) {
-            window.confirm(
-              'O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema'
-            )
-            localStorage.removeItem('token')
+            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
+            removeAdminLocalStorage()
           }
           if (
             error.status === 400 ||
@@ -54,7 +52,7 @@ export class ModalResponsavelComponent {
           ) {
             window.confirm(error['error']['message'])
           }
-        },
+        }
       })
   }
 }
