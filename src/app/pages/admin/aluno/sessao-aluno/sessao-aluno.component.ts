@@ -19,7 +19,6 @@ export class SessaoAlunoComponent implements OnInit {
   ) {}
 
   private readonly token = localStorage.getItem('token')
-  ShowPlaceholder = true
   aluno: AlunoResponse | undefined
   alunoEditado: AlunoEditado | undefined
   email = this.route.snapshot.paramMap.get('email')
@@ -27,9 +26,10 @@ export class SessaoAlunoComponent implements OnInit {
   deficiencia = ''
   acompanhamentoSaude = ''
   private readonly url = environment.urlApi + 'aluno'
-  modoEdicao = false
+  protected modoEdicao = false
   protected readonly umaSemanaEmSegundos = 604800000
   protected readonly tresMesesEmSegundos = 7776000000
+  protected readonly role = localStorage.getItem('role')
 
   graduacaoAtual: Graduacao = {
     kyu: 0,
@@ -69,7 +69,6 @@ export class SessaoAlunoComponent implements OnInit {
           this.aluno.dataPreenchimento = new Date(this.aluno.dataPreenchimento).toLocaleDateString('pt-BR')
           this.aluno.dataNascimento = new Date(this.aluno.dataNascimento).toLocaleDateString('pt-BR')
           this.graduacaoAtual = this.aluno.graduacao[this.aluno.graduacao.length - 1]
-          this.ShowPlaceholder = false //Tirando o placeholder
         },
         error: (error) => {
           if (error.status === 401) {
@@ -481,5 +480,9 @@ export class SessaoAlunoComponent implements OnInit {
       new Date(this.graduacaoAtual.inicioGraduacao).getTime() <
         new Date(this.graduacaoAtual.inicioGraduacao).getTime() + this.tresMesesEmSegundos
     )
+  }
+
+  protected isAdmin(): boolean {
+    return this.role?.toUpperCase() === 'ADMIN'
   }
 }
