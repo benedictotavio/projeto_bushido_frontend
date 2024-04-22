@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { environment } from 'src/environments/environment'
 import { AlunoTurma } from '../../turma.interface'
-import { removeAdminLocalStorage } from '../../local-storage.handler'
+import { AuthService } from 'src/app/services/services-admin/auth.service'
 
 @Component({
   selector: 'app-sessao-turma',
@@ -14,7 +14,8 @@ export class SessaoTurmaComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   private readonly apiUrl = environment.urlApi
@@ -58,7 +59,7 @@ export class SessaoTurmaComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
           if (error.status === 404) {
@@ -93,7 +94,7 @@ export class SessaoTurmaComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
           if (
@@ -131,7 +132,7 @@ export class SessaoTurmaComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
           if (error.status === 404) {
@@ -162,7 +163,7 @@ export class SessaoTurmaComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
         }

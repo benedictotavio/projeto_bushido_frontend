@@ -3,7 +3,7 @@ import { AlunoResponse } from '../../aluno.interface'
 import { HttpClient } from '@angular/common/http'
 import { environment } from 'src/environments/environment'
 import { ActivatedRoute, Router } from '@angular/router'
-import { removeAdminLocalStorage } from '../../local-storage.handler'
+import { AuthService } from 'src/app/services/services-admin/auth.service'
 
 @Component({
   selector: 'app-buscar-aluno',
@@ -24,7 +24,8 @@ export class BuscarAlunoComponent {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   protected pesquisar() {
@@ -60,7 +61,7 @@ export class BuscarAlunoComponent {
         error: (error) => {
           if (error.status === 401) {
             window.alert('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
           if (error.status === 404) {
@@ -90,7 +91,7 @@ export class BuscarAlunoComponent {
         error: (error) => {
           if (error.status === 401) {
             window.alert('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
           if (error.status === 404) {

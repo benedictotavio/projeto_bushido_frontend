@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Turma } from 'src/app/pages/admin/turma.interface'
 import { environment } from 'src/environments/environment'
 import { AdminResponse } from './turma'
-import { removeAdminLocalStorage } from 'src/app/pages/admin/local-storage.handler'
+import { AuthService } from 'src/app/services/services-admin/auth.service'
 
 @Component({
   selector: 'app-modal-nova-turma',
@@ -15,7 +15,8 @@ export class ModalNovaTurmaComponent {
   constructor(
     private readonly http: HttpClient,
     private readonly route: ActivatedRoute,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly authService: AuthService
   ) {}
 
   protected buscarTutor = ''
@@ -23,6 +24,8 @@ export class ModalNovaTurmaComponent {
   private readonly token = localStorage.getItem('token')
   protected nomeTurma = this.route.snapshot.paramMap.get('nomeTurma')
   private readonly rg = this.route.snapshot.paramMap.get('rg')
+  protected selectedAdmin = false
+
   protected novaTurma: Turma = {
     nome: '',
     tutor: '',
@@ -52,7 +55,7 @@ export class ModalNovaTurmaComponent {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
         }
@@ -60,8 +63,6 @@ export class ModalNovaTurmaComponent {
   }
 
   protected adicionarTurma() {
-    console.log(this.novaTurma)
-
     this.http
       .post<{ message: string }>(this.url + 'turma', this.novaTurma, {
         headers: {
@@ -77,7 +78,7 @@ export class ModalNovaTurmaComponent {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
           if (
@@ -106,5 +107,13 @@ export class ModalNovaTurmaComponent {
       tutor: '',
       endereco: ''
     }
+  }
+
+  protected selecionarAdmin(admin: string) {
+    console.log(admin)
+    console.log(this.selectedAdmin)
+
+    this.selectedAdmin = true
+    this.novaTurma.tutor = admin
   }
 }

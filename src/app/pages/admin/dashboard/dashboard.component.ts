@@ -14,6 +14,7 @@ export class DashboardComponent {
   ) {}
   private readonly role = localStorage.getItem('role')
   protected readonly email = this.route.snapshot.paramMap.get('email')
+  protected showDropDown = false
 
   isAdmin(): boolean {
     return this.role?.toUpperCase() === 'ADMIN'
@@ -21,5 +22,9 @@ export class DashboardComponent {
 
   removeToken(): void {
     this.authService.removeToken()
+  }
+
+  protected setShowDropDown() {
+    this.showDropDown = !this.showDropDown
   }
 }

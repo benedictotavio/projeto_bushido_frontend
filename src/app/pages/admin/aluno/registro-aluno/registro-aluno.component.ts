@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { environment } from 'src/environments/environment'
 import { Turma } from '../../turma.interface'
-import { removeAdminLocalStorage } from '../../local-storage.handler'
+import { AuthService } from 'src/app/services/services-admin/auth.service'
 
 @Component({
   selector: 'app-registro-aluno',
@@ -14,7 +14,8 @@ export class RegistroAlunoComponent implements OnInit {
   constructor(
     private readonly http: HttpClient,
     private readonly router: Router,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly authService: AuthService
   ) {}
 
   historicoSaude: historicoSaudeProps = {
@@ -67,7 +68,7 @@ export class RegistroAlunoComponent implements OnInit {
     numerosDePessoasNaCasa: 0,
     contribuintesDaRendaFamiliar: 0,
     alunoContribuiParaRenda: false,
-    rendaFamiliarEmSalariosMinimos: 0
+    rendaFamiliar: 0
   }
 
   aluno: AlunoProps = {
@@ -112,7 +113,7 @@ export class RegistroAlunoComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
         }
@@ -133,7 +134,7 @@ export class RegistroAlunoComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
         }
@@ -157,7 +158,7 @@ export class RegistroAlunoComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
           if (
@@ -218,7 +219,6 @@ export class RegistroAlunoComponent implements OnInit {
             this.endereco.cep = data.cep
             this.endereco.cidade = data.localidade
             this.endereco.estado = data.uf
-            return
           }
         },
         error: (error) => {

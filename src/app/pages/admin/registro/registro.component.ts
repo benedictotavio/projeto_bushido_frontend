@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { environment } from '../../../../environments/environment'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SignUp } from '../auth.interface'
-import { removeAdminLocalStorage } from '../local-storage.handler'
+import { AuthService } from 'src/app/services/services-admin/auth.service'
 
 @Component({
   selector: 'app-registro',
@@ -23,7 +23,8 @@ export class RegistroComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) {}
 
   registrarNovoAdmin() {
@@ -42,7 +43,7 @@ export class RegistroComponent {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
           }
 
           if (

@@ -22,7 +22,7 @@ interface DadosSociaisProps {
   numerosDePessoasNaCasa: number
   contribuintesDaRendaFamiliar: number
   alunoContribuiParaRenda: boolean
-  rendaFamiliarEmSalariosMinimos: number
+  rendaFamiliar: number
 }
 
 interface historicoSaudeProps {

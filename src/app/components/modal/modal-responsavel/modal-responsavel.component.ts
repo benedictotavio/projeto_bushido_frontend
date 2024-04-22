@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Component } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { removeAdminLocalStorage } from 'src/app/pages/admin/local-storage.handler'
+import { AuthService } from 'src/app/services/services-admin/auth.service'
 import { environment } from 'src/environments/environment'
 
 @Component({
@@ -12,7 +12,8 @@ import { environment } from 'src/environments/environment'
 export class ModalResponsavelComponent {
   constructor(
     private readonly http: HttpClient,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   private readonly token = localStorage.getItem('token')
@@ -41,7 +42,7 @@ export class ModalResponsavelComponent {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
           }
           if (
             error.status === 400 ||
