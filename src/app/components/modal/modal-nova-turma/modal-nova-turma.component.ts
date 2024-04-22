@@ -49,7 +49,6 @@ export class ModalNovaTurmaComponent {
       })
       .subscribe({
         next: (data) => {
-          console.log(data)
           if (data.length === 0) {
             window.confirm('Tutor não encontrado')
             return
@@ -122,10 +121,7 @@ export class ModalNovaTurmaComponent {
     }
   }
 
-  protected selecionarAdmin(admin: {nome: string, email: string}) {
-    console.log(admin)
-    console.log(this.selectedAdmin)
-
+  protected selecionarAdmin(admin: { nome: string; email: string }) {
     this.selectedAdmin = true
     this.novaTurma.tutor = {
       nome: admin.nome,

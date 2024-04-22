@@ -52,9 +52,8 @@ export class BuscarAlunoComponent {
         }
       })
       .subscribe({
-        next: (data) =>{
+        next: (data) => {
           this.alunos = data
-          console.log(this.alunos);
         },
         error: (error) => {
           if (error.status === 401) {
@@ -106,6 +105,5 @@ export class BuscarAlunoComponent {
   onPageChange(page: number) {
     this.currentPage = page
     this.buscarAlunoPorNome()
-    console.log(this.itemsPerPage, this.alunos.length, this.currentPage - 1)
   }
 }

@@ -81,7 +81,6 @@ export class SessaoAlunoComponent implements OnInit {
             window.confirm('Aluno não encontrado')
             this.router.navigate(['/admin', this.email, 'buscar'])
           }
-          console.error(error)
         }
       })
   }
@@ -143,7 +142,6 @@ export class SessaoAlunoComponent implements OnInit {
           error: (error) => {
             if (error.status === 401) {
               window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-              console.error(error)
               setInterval(() => {
                 this.authService.removeToken()
               }, 3000)
@@ -186,7 +184,6 @@ export class SessaoAlunoComponent implements OnInit {
           error: (error) => {
             if (error.status === 401) {
               window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-              console.error(error)
               setInterval(() => {
                 this.authService.removeToken()
               }, 3000)
@@ -231,7 +228,6 @@ export class SessaoAlunoComponent implements OnInit {
             window.confirm('Aluno não encontrado')
           }
           if (error.status === 403) {
-            console.error(error)
             window.confirm('Aluno não possui falta')
           }
         }
@@ -263,7 +259,6 @@ export class SessaoAlunoComponent implements OnInit {
             window.confirm('Aluno não encontrado')
           }
           if (error.status === 403) {
-            console.error(error)
             window.confirm('Aluno não possui acompanhamento')
           }
         }
@@ -292,7 +287,6 @@ export class SessaoAlunoComponent implements OnInit {
             window.confirm('Aluno não encontrado')
           }
           if (error.status === 403) {
-            console.error(error)
             window.confirm('Aluno não possui deficiência')
           }
         }
@@ -322,7 +316,6 @@ export class SessaoAlunoComponent implements OnInit {
             window.confirm('Aluno não encontrado')
           }
           if (error.status === 403) {
-            console.error(error)
             window.confirm('Aluno não possui responsável')
           }
         }

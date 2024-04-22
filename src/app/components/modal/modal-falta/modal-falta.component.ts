@@ -68,7 +68,6 @@ export class ModalFaltaComponent {
     }
 
     const date = new Date(dateString)
-    console.log(date)
     const timezoneOffsetMilliseconds = date.getTimezoneOffset() * 60 * 1000
     return (date.getTime() + timezoneOffsetMilliseconds).toString()
   }

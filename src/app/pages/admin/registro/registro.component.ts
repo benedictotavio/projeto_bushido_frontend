@@ -29,7 +29,7 @@ export class RegistroComponent {
 
   registrarNovoAdmin() {
     this.http
-      .post<{ id: string; nome: string, message: string }>(this.ApiBushido, this.user, {
+      .post<{ id: string; nome: string; message: string }>(this.ApiBushido, this.user, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('token')}`
