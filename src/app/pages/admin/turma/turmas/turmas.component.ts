@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { Turma } from '../../turma.interface'
 import { environment } from 'src/environments/environment'
-import { removeAdminLocalStorage } from '../../local-storage.handler'
+import { AuthService } from 'src/app/services/services-admin/auth.service'
 
 @Component({
   selector: 'app-turmas',
@@ -14,7 +14,8 @@ export class TurmasComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) {}
   protected readonly email = this.route.snapshot.paramMap.get('email')
   private readonly apiUrl = environment.urlApi + 'turma'
@@ -23,8 +24,15 @@ export class TurmasComponent implements OnInit {
   protected nomeTurma = ''
 
   turmas: Turma[] = []
-  turmaEncontrada: Turma | undefined
+  protected readonly minhasTurmas = JSON.parse(localStorage.getItem('turmas') ?? '[]')
+  protected turmaEncontrada: Turma | undefined
+  protected activeTab = '#tab1'
+
   ngOnInit(): void {
+    if (this.role?.toUpperCase() !== 'ADMIN') {
+      this.turmas = this.minhasTurmas
+      return
+    }
     this.listarTurmas()
   }
 
@@ -42,7 +50,7 @@ export class TurmasComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
         }
@@ -63,7 +71,7 @@ export class TurmasComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
           if (error.status === 404) {
@@ -71,6 +79,10 @@ export class TurmasComponent implements OnInit {
           }
         }
       })
+  }
+
+  handleTabClick(tabId: string) {
+    this.activeTab = tabId
   }
 
   isAdmin(): boolean {

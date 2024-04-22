@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Component } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { removeAdminLocalStorage } from 'src/app/pages/admin/local-storage.handler'
+import { AuthService } from 'src/app/services/services-admin/auth.service'
 import { environment } from 'src/environments/environment'
 
 @Component({
@@ -13,7 +13,8 @@ export class ModalFaltaComponent {
   constructor(
     private readonly http: HttpClient,
     private readonly router: Router,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly authService: AuthService
   ) {}
 
   private readonly url = environment.urlApi + 'aluno/falta'
@@ -43,7 +44,7 @@ export class ModalFaltaComponent {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O admin não esta autorizado a realizar esta ação. Faça o login novamente')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['admin'])
           }
           if (
@@ -67,7 +68,6 @@ export class ModalFaltaComponent {
     }
 
     const date = new Date(dateString)
-    console.log(date)
     const timezoneOffsetMilliseconds = date.getTimezoneOffset() * 60 * 1000
     return (date.getTime() + timezoneOffsetMilliseconds).toString()
   }

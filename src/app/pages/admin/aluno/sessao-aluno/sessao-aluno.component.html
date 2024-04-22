@@ -1,15 +1,12 @@
 <div class="container rounded bg-white mt-5 mb-5">
+  <app-loading></app-loading>
   <div *ngIf="aluno" class="row">
     <div class="col-md-2 border-right">
       <a class="text-white text-decoration-none" href="/admin/{{ email }}">
         <button class="btn btn-primary ms-2 mt-2">Dashboard</button>
       </a>
       <div class="d-flex flex-column align-items-center text-center p-3">
-        <img
-          class="rounded-circle mt-5"
-          src="../../../../../assets/aluno/karate_icon_124461.webp"
-          alt="user profile"
-        />
+        <img class="rounded-circle mt-5" src="../../../../../assets/aluno/karate_icon_124461.webp" alt="user profile" />
         <span class="font-weight-bold">
           {{ aluno.nome }}
         </span>
@@ -30,107 +27,55 @@
         <div class="row mt-2">
           <div class="col-md-6">
             <label for="nome" class="labels">Nome</label>
-            <input
-              [(ngModel)]="aluno.nome"
-              name="nome"
-              id="nome"
-              type="text"
-              class="form-control"
-              placeholder="Nome"
-              readonly
-            />
+            <input [(ngModel)]="aluno.nome" name="nome" id="nome" type="text" class="form-control" placeholder="Nome" />
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <label for="dataNascimento" class="labels">Data nascimento</label>
-            <input
-              type="text"
-              name="dataNascimento"
-              class="form-control"
-              placeholder="Data de Nascimento"
-              [(ngModel)]="aluno.dataNascimento"
-              readonly
-            />
+            <input type="text" name="dataNascimento" class="form-control" placeholder="Data de Nascimento"
+              [(ngModel)]="aluno.dataNascimento" readonly />
           </div>
-          <div class="col-md-2">
+          <div class="col-md-3">
             <label for="genero" class="labels">Genero</label>
-            <input
-              type="text"
-              name="genero"
-              class="form-control"
-              placeholder="Data de Nascimento"
-              [(ngModel)]="aluno.genero"
-              readonly
-            />
+            <select type="text" name="genero" class="form-control" placeholder="Data de Nascimento"
+              [(ngModel)]="aluno.genero" >
+              <option value="M">Masculino</option>
+              <option value="F">Feminino</option>
+              <option value="OUTRO">Outro</option>
+            </select>
           </div>
         </div>
         <div class="row mt-3">
           <div class="col-md-12">
             <label for="cidade" class="labels">Cidade</label>
-            <input
-              type="text"
-              name="cidade"
-              id="cidade"
-              class="form-control"
-              placeholder="Cidade"
-              [(ngModel)]="aluno.endereco.cidade"
-            />
+            <input type="text" name="cidade" id="cidade" class="form-control" placeholder="Cidade"
+              [(ngModel)]="aluno.endereco.cidade" />
           </div>
           <div class="col-md-12">
             <label for="estado" class="labels">Estado</label>
-            <input
-              type="text"
-              name="estado"
-              id="estado"
-              class="form-control"
-              placeholder="Estado"
-              [(ngModel)]="aluno.endereco.estado"
-            />
+            <input type="text" name="estado" id="estado" class="form-control" placeholder="Estado"
+              [(ngModel)]="aluno.endereco.estado" />
           </div>
           <div class="col-md-9">
             <label for="cep" class="labels">CEP</label>
-            <input
-              type="text"
-              name="cep"
-              id="cep"
-              class="form-control"
-              placeholder="CEP"
-              [(ngModel)]="aluno.endereco.cep"
-            />
+            <input type="text" name="cep" id="cep" class="form-control" placeholder="CEP"
+              [(ngModel)]="aluno.endereco.cep" />
           </div>
           <div class="col-md-3">
             <label for="numero" class="labels">Numero</label>
-            <input
-              type="text"
-              name="numero"
-              id="numero"
-              class="form-control"
-              placeholder="Nº"
-              [(ngModel)]="aluno.endereco.numero"
-            />
+            <input type="text" name="numero" id="numero" class="form-control" placeholder="Nº"
+              [(ngModel)]="aluno.endereco.numero" />
           </div>
         </div>
         <div class="row mt-4">
           <h4>Dados Escolares</h4>
           <div class="col-md-6">
             <label for="serie" class="labels">Serie</label>
-            <input
-              type="number"
-              name="serie"
-              id="serie"
-              class="form-control"
-              placeholder="Serie"
-              [(ngModel)]="aluno.dadosEscolares.serie"
-            />
+            <input type="number" name="serie" id="serie" class="form-control" placeholder="Serie"
+              [(ngModel)]="aluno.dadosEscolares.serie" />
           </div>
           <div class="col-md-6 d-flex align-items-end">
-            <select
-              class="turno w-100 my-3 rounded text-center"
-              aria-label="turno"
-              name="turno"
-              [(ngModel)]="aluno.dadosEscolares.turno"
-              id="turno"
-              required
-            >
+            <select class="turno w-100 my-3 rounded text-center" aria-label="turno" name="turno"
+              [(ngModel)]="aluno.dadosEscolares.turno" id="turno" required>
               <option value="MANHA">Matutino</option>
               <option value="TARDE">Tarde</option>
               <option value="NOITE">Noturno</option>
@@ -138,14 +83,8 @@
           </div>
           <div class="col-md-12">
             <label for="escola" class="labels">Escola</label>
-            <input
-              type="text"
-              name="escola"
-              id="escola"
-              class="form-control"
-              placeholder="Escola"
-              [(ngModel)]="aluno.dadosEscolares.escola"
-            />
+            <input type="text" name="escola" id="escola" class="form-control" placeholder="Escola"
+              [(ngModel)]="aluno.dadosEscolares.escola" />
           </div>
         </div>
         <div class="row mt-4">
@@ -153,13 +92,8 @@
           <div class="col-md-12">
             <label for="imovel" class="form-label">Imovel</label>
             <div class="col-md-12">
-              <select
-                class="imovel p-2 w-100"
-                aria-label="imovel"
-                name="imovel"
-                [(ngModel)]="aluno.dadosSociais.imovel"
-                required
-              >
+              <select class="imovel p-2 w-100" aria-label="imovel" name="imovel" [(ngModel)]="aluno.dadosSociais.imovel"
+                required>
                 <option value="CEDIDO">Cedido</option>
                 <option value="ALUGADO">Alugado</option>
                 <option value="PROPRIO">Proprio</option>
@@ -170,33 +104,18 @@
         <div class="row mt-4 d-flex align-items-end">
           <div class="col-md-3">
             <label for="rendaFamiliar" class="form-label">Renda Familiar</label>
-            <input
-              name="rendaFamiliar"
-              id="rendaFamiliar"
-              type="text"
-              class="form-control"
-              [(ngModel)]="aluno.dadosSociais.rendaFamiliarEmSalariosMinimos"
-            />
+            <input name="rendaFamiliar" id="rendaFamiliar" type="text" class="form-control"
+              [(ngModel)]="aluno.dadosSociais.rendaFamiliar" />
           </div>
           <div class="col-md-6">
             <label for="contribuintesDaRenda" class="form-label">Contribuintes da Renda</label>
-            <input
-              name="contribuintesDaRenda"
-              id="contribuintesDaRenda"
-              type="text"
-              class="form-control"
-              [(ngModel)]="aluno.dadosSociais.contribuintesDaRendaFamiliar"
-            />
+            <input name="contribuintesDaRenda" id="contribuintesDaRenda" type="text" class="form-control"
+              [(ngModel)]="aluno.dadosSociais.contribuintesDaRendaFamiliar" />
           </div>
           <div class="col-md-3">
             <label for="pessoasNaCasa" class="form-label">Pessoas na Casa</label>
-            <input
-              name="pessoasNaCasa"
-              id="pessoasNaCasa"
-              type="text"
-              class="form-control"
-              [(ngModel)]="aluno.dadosSociais.numerosDePessoasNaCasa"
-            />
+            <input name="pessoasNaCasa" id="pessoasNaCasa" type="text" class="form-control"
+              [(ngModel)]="aluno.dadosSociais.numerosDePessoasNaCasa" />
           </div>
         </div>
         <div class="row mt-4">
@@ -204,38 +123,21 @@
             <h6>Informações socias para dados do aluno</h6>
             <div class="mt-4">
               <div class="mb-3 form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="bolsaFamilia"
-                  name="bolsaFamilia"
-                  [(ngModel)]="aluno.dadosSociais.bolsaFamilia"
-                />
+                <input type="checkbox" class="form-check-input" id="bolsaFamilia" name="bolsaFamilia"
+                  [(ngModel)]="aluno.dadosSociais.bolsaFamilia" />
                 <label class="form-check-label" for="bolsaFamilia">Bolsa Família</label>
               </div>
 
               <div class="mb-3 form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="auxilioBrasil"
-                  name="auxilioBrasil"
-                  [(ngModel)]="aluno.dadosSociais.auxilioBrasil"
-                />
+                <input type="checkbox" class="form-check-input" id="auxilioBrasil" name="auxilioBrasil"
+                  [(ngModel)]="aluno.dadosSociais.auxilioBrasil" />
                 <label class="form-check-label" for="auxilioBrasil">Auxílio Brasil</label>
               </div>
 
               <div class="mb-3 form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="alunoContribuiParaRenda"
-                  name="alunoContribuiParaRenda"
-                  [(ngModel)]="aluno.dadosSociais.alunoContribuiParaRenda"
-                />
-                <label class="form-check-label" for="alunoContribuiParaRenda"
-                  >Aluno Contribui para Renda</label
-                >
+                <input type="checkbox" class="form-check-input" id="alunoContribuiParaRenda"
+                  name="alunoContribuiParaRenda" [(ngModel)]="aluno.dadosSociais.alunoContribuiParaRenda" />
+                <label class="form-check-label" for="alunoContribuiParaRenda">Aluno Contribui para Renda</label>
               </div>
             </div>
           </div>
@@ -246,13 +148,8 @@
             <div class="row my-3">
               <div class="col-md-6">
                 <label for="tipoSanguineo" class="form-label">Tipo Saguineo</label>
-                <select
-                  class="form-select"
-                  aria-label="Tipo sanguineo"
-                  id="tipoSanguineo"
-                  name="tipoSanguineo"
-                  [(ngModel)]="aluno.historicoSaude.tipoSanguineo"
-                >
+                <select class="form-select" aria-label="Tipo sanguineo" id="tipoSanguineo" name="tipoSanguineo"
+                  [(ngModel)]="aluno.historicoSaude.tipoSanguineo">
                   <option selected disabled>Tipo sanguineo</option>
                   <option value="A_POSITIVO">A+</option>
                   <option value="A_NEGATIVO">A-</option>
@@ -268,64 +165,34 @@
 
             <div class="col-md-12">
               <label for="alergia" class="form-label">Alergias</label>
-              <input
-                name="alergia"
-                id="alergia"
-                type="text"
-                class="form-control"
-                [(ngModel)]="aluno.historicoSaude.alergia.tipo"
-              />
+              <input name="alergia" id="alergia" type="text" class="form-control"
+                [(ngModel)]="aluno.historicoSaude.alergia.tipo" />
             </div>
             <div class="col-md-12">
-              <label for="usoMedicamentoContinuo" class="form-label"
-                >Uso de Medicamento Continuo</label
-              >
-              <input
-                name="usoMedicamentoContinuo"
-                id="usoMedicamentoContinuo"
-                type="text"
-                class="form-control"
-                [(ngModel)]="aluno.historicoSaude.usoMedicamentoContinuo.tipo"
-              />
+              <label for="usoMedicamentoContinuo" class="form-label">Uso de Medicamento Continuo</label>
+              <input name="usoMedicamentoContinuo" id="usoMedicamentoContinuo" type="text" class="form-control"
+                [(ngModel)]="aluno.historicoSaude.usoMedicamentoContinuo.tipo" />
             </div>
             <div class="col-md-12">
               <label for="cirurgia" class="form-label">Cirurgias</label>
-              <input
-                name="cirurgia"
-                id="cirurgia"
-                type="text"
-                class="form-control"
-                [(ngModel)]="aluno.historicoSaude.cirurgia.tipo"
-              />
+              <input name="cirurgia" id="cirurgia" type="text" class="form-control"
+                [(ngModel)]="aluno.historicoSaude.cirurgia.tipo" />
             </div>
             <div class="col-md-12">
               <label for="doencaCronica" class="form-label">Doenca cronica</label>
-              <input
-                name="doencaCronica"
-                id="doencaCronica"
-                type="text"
-                class="form-control"
-                [(ngModel)]="aluno.historicoSaude.doencaCronica.tipo"
-              />
+              <input name="doencaCronica" id="doencaCronica" type="text" class="form-control"
+                [(ngModel)]="aluno.historicoSaude.doencaCronica.tipo" />
             </div>
           </div>
           <div class="row mt-4">
             <div class="row mt-4">
               <div class="col-md-12 d-flex justify-content-end">
-                <button
-                  (click)="setModoEdicao()"
-                  class="btn btn-primary profile-button"
-                  type="button"
-                  *ngIf="!modoEdicao"
-                >
+                <button (click)="setModoEdicao()" class="btn btn-primary profile-button" type="button"
+                  *ngIf="!modoEdicao">
                   Editar
                 </button>
                 <div *ngIf="modoEdicao" class="d-flex justify-content-around align-items-center">
-                  <button
-                    (click)="setModoEdicao()"
-                    class="btn btn-primary profile-button"
-                    type="button"
-                  >
+                  <button (click)="setModoEdicao()" class="btn btn-primary profile-button" type="button">
                     Cancelar
                   </button>
                 </div>
@@ -336,15 +203,8 @@
                 </div>
               </div>
               <div *ngIf="modoEdicao">
-                <input
-                  class="w-75 m-1"
-                  type="text"
-                  name="deficiencia"
-                  id="deficiencia"
-                  class="form-control"
-                  [(ngModel)]="deficiencia"
-                  placeholder="Adicionar deficiencia"
-                />
+                <input class="w-75 m-1" type="text" name="deficiencia" id="deficiencia" class="form-control"
+                  [(ngModel)]="deficiencia" placeholder="Adicionar deficiencia" />
                 <div class="d-flex justify-content-end">
                   <button class="btn btn-secondary m-2" (click)="adicionarDeficiencia()">
                     Adicionar
@@ -356,31 +216,16 @@
                 <div class="panel-heading">
                   <h5>Deficiencias</h5>
                 </div>
-                <div
-                  class="panel panel-default"
-                  *ngIf="aluno.historicoSaude.deficiencias.length > 0"
-                >
+                <div class="panel panel-default" *ngIf="aluno.historicoSaude.deficiencias.length > 0">
                   <div class="panel-body">
                     <ul class="d-flex flex-wrap">
-                      <li
-                        class="bg-info rounded m-2 py-2 px-3 text-white"
-                        *ngFor="let str of aluno.historicoSaude.deficiencias"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          class="bi bi-x-circle text-white"
-                          viewBox="0 0 16 16"
-                          (click)="removerDeficiencia(str)"
-                        >
+                      <li class="bg-info rounded m-2 py-2 px-3 text-white"
+                        *ngFor="let str of aluno.historicoSaude.deficiencias">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                          class="bi bi-x-circle text-white" viewBox="0 0 16 16" (click)="removerDeficiencia(str)">
+                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                           <path
-                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
-                          />
-                          <path
-                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
-                          />
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                         </svg>
                         {{ str }}
                       </li>
@@ -392,15 +237,8 @@
 
             <div class="row mt-4">
               <div *ngIf="modoEdicao">
-                <input
-                  class="w-75 m-1"
-                  type="text"
-                  name="acompanhamentoSaude"
-                  id="acompanhamentoSaude"
-                  class="form-control"
-                  [(ngModel)]="acompanhamentoSaude"
-                  placeholder="Adicionar acompanhamento"
-                />
+                <input class="w-75 m-1" type="text" name="acompanhamentoSaude" id="acompanhamentoSaude"
+                  class="form-control" [(ngModel)]="acompanhamentoSaude" placeholder="Adicionar acompanhamento" />
                 <div class="d-flex justify-content-end">
                   <button class="btn btn-secondary m-2" (click)="adicionarAcompanhamentoSaude()">
                     Adicionar
@@ -411,31 +249,17 @@
                 <div class="panel-heading">
                   <h5>Acompanhamento de saúde</h5>
                 </div>
-                <div
-                  class="panel panel-default"
-                  *ngIf="aluno.historicoSaude.acompanhamentoSaude.length > 0"
-                >
+                <div class="panel panel-default" *ngIf="aluno.historicoSaude.acompanhamentoSaude.length > 0">
                   <div class="panel-body">
                     <ul class="d-flex flex-wrap">
-                      <li
-                        class="bg-info rounded m-2 py-2 px-3 text-white"
-                        *ngFor="let str of aluno.historicoSaude.acompanhamentoSaude"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          class="bi bi-x-circle text-white"
-                          viewBox="0 0 16 16"
-                          (click)="removerAcompanhamentoSaude(str)"
-                        >
+                      <li class="bg-info rounded m-2 py-2 px-3 text-white"
+                        *ngFor="let str of aluno.historicoSaude.acompanhamentoSaude">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                          class="bi bi-x-circle text-white" viewBox="0 0 16 16"
+                          (click)="removerAcompanhamentoSaude(str)">
+                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                           <path
-                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
-                          />
-                          <path
-                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
-                          />
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                         </svg>
                         {{ str }}
                       </li>
@@ -446,11 +270,7 @@
             </div>
           </div>
           <div class="my-5 d-flex justify-content-center">
-            <button
-              (click)="editarAlunoPorRg()"
-              class="btn btn-primary profile-button w-75 h-100"
-              type="button"
-            >
+            <button (click)="editarAlunoPorRg()" class="btn btn-primary profile-button w-75 h-100" type="button">
               Salvar Aluno
             </button>
           </div>
@@ -462,11 +282,7 @@
         <div class="col-md-12">
           <div class="card mt-3">
             <div class="card-header d-flex justify-content-end align-items-center">
-              <button
-                class="btn btn-primary"
-                (click)="vincularAlunoAUmaTurma()"
-                *ngIf="!aluno.turma"
-              >
+              <button class="btn btn-primary" (click)="vincularAlunoAUmaTurma()" *ngIf="!aluno.turma">
                 + Turma
               </button>
               <span class="badge bg-info py-2 px-4" *ngIf="aluno.turma">{{ aluno.turma }}</span>
@@ -491,47 +307,29 @@
 
                   <h6 class="card-subtitle mb-4 text-muted">
                     <b>Inicio:</b> {{ graduacaoAtual.inicioGraduacao }}
-                    <small class="my-2"
-                      ><br />
-                      <b>Frequência:</b> {{ graduacaoAtual.frequencia }} % </small
-                    ><br />
+                    <small class="my-2"><br />
+                      <b>Frequência:</b> {{ graduacaoAtual.frequencia }} % </small><br />
                     <small class="my-2">
                       <b>Carga Horária:</b> {{ graduacaoAtual.cargaHoraria }} h
                     </small>
                   </h6>
                 </div>
                 <div *ngIf="graduacaoAtual.status">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-person-check text-success"
-                    viewBox="0 0 16 16"
-                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-person-check text-success" viewBox="0 0 16 16">
                     <path
-                      d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4"
-                    />
+                      d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
                     <path
-                      d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"
-                    />
+                      d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z" />
                   </svg>
                 </div>
                 <div *ngIf="!graduacaoAtual.status">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-person-x text-danger"
-                    viewBox="0 0 16 16"
-                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-person-x text-danger" viewBox="0 0 16 16">
                     <path
-                      d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"
-                    />
+                      d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z" />
                     <path
-                      d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708"
-                    />
+                      d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708" />
                   </svg>
                 </div>
               </div>
@@ -551,18 +349,10 @@
                         {{ falta.data }}
                       </h5>
 
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-trash3 text-black me-3"
-                        viewBox="0 0 16 16"
-                        (click)="removerFalta(falta.data)"
-                      >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-trash3 text-black me-3" viewBox="0 0 16 16" (click)="removerFalta(falta.data)">
                         <path
-                          d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"
-                        />
+                          d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
                       </svg>
                     </div>
 
@@ -576,15 +366,8 @@
                 <p class="text-muted text-center mt-2 mb-5" *ngIf="!graduacaoAtual.faltas.length">
                   O aluno não possui faltas
                 </p>
-                <div
-                  class="d-flex justify-content-between"
-                  *ngIf="graduacaoAtual.cargaHoraria > 25"
-                >
-                  <button
-                    (click)="aprovarAluno()"
-                    class="btn btn-success"
-                    *ngIf="graduacaoAtual.status"
-                  >
+                <div class="d-flex justify-content-between" *ngIf="graduacaoAtual.cargaHoraria > 25">
+                  <button (click)="aprovarAluno()" class="btn btn-success" *ngIf="graduacaoAtual.status">
                     Aprovar Aluno
                   </button>
                   <button (click)="reprovarAluno()" class="btn btn-danger">Reprovar Aluno</button>
@@ -592,9 +375,7 @@
               </div>
             </div>
             <div class="card-footer">
-              <app-modal-historico-graduacao
-                [graduacao]="aluno.graduacao"
-              ></app-modal-historico-graduacao>
+              <app-modal-historico-graduacao [graduacao]="aluno.graduacao"></app-modal-historico-graduacao>
             </div>
           </div>
           <div class="col-md-12 mt-4">
@@ -608,42 +389,22 @@
             </div>
             <div *ngFor="let responsavel of aluno.responsaveis" class="card">
               <div *ngIf="aluno.responsaveis.length > 1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-trash3 text-black ms-2 mt-2"
-                  viewBox="0 0 16 16"
-                  (click)="removerResponsavel(responsavel.cpf)"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-trash3 text-black ms-2 mt-2" viewBox="0 0 16 16"
+                  (click)="removerResponsavel(responsavel.cpf)">
                   <path
-                    d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"
-                  />
+                    d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
                 </svg>
               </div>
               <div
-                class="card-body d-lg-flex align-items-center justify-content-around text-lg-start d-block text-center"
-              >
+                class="card-body d-lg-flex align-items-center justify-content-around text-lg-start d-block text-center">
                 <div>
-                  <img
-                    src="../../../../../assets/aluno/men_responsable.webp"
-                    class="img-radius"
-                    alt="User-Profile"
-                    *ngIf="responsavel.filiacao === 'PAI'"
-                  />
-                  <img
-                    src="../../../../../assets/aluno/woman_responsable.webp"
-                    class="img-radius"
-                    alt="User-Profile"
-                    *ngIf="responsavel.filiacao === 'MAE'"
-                  />
-                  <img
-                    src="../../../../../assets/aluno/other_responsable.png"
-                    class="img-radius"
-                    alt="User-Profile"
-                    *ngIf="responsavel.filiacao === 'OUTRO'"
-                  />
+                  <img src="../../../../../assets/aluno/men_responsable.webp" class="img-radius" alt="User-Profile"
+                    *ngIf="responsavel.filiacao === 'PAI'" />
+                  <img src="../../../../../assets/aluno/woman_responsable.webp" class="img-radius" alt="User-Profile"
+                    *ngIf="responsavel.filiacao === 'MAE'" />
+                  <img src="../../../../../assets/aluno/other_responsable.png" class="img-radius" alt="User-Profile"
+                    *ngIf="responsavel.filiacao === 'OUTRO'" />
                 </div>
                 <div class="ms-lg-4">
                   <div>
@@ -677,12 +438,7 @@
           <a class="text-white text-decoration-none" href="/admin/{{ email }}">Voltar</a>
         </button>
         <div class="d-flex flex-column align-items-center text-center p-3">
-          <img
-            class="rounded-circle mt-5 placeholder"
-            src="#"
-            alt="aluno"
-            style="width: 128px; height: 128px"
-          />
+          <img class="rounded-circle mt-5 placeholder" src="#" alt="aluno" style="width: 128px; height: 128px" />
           <span class="font-weight-bold placeholder">
             {{ aluno.nome }}
           </span>
@@ -703,89 +459,43 @@
           <div class="row mt-2">
             <div class="col-md-6">
               <label for="nome" class="labels placeholder">Nome</label>
-              <input
-                name="nome"
-                id="nome"
-                type="text"
-                class="form-control placeholder"
-                placeholder="Nome"
-              />
+              <input name="nome" id="nome" type="text" class="form-control placeholder" placeholder="Nome" />
             </div>
             <div class="col-md-6">
               <label for="dataNascimento" class="labels placeholder">Data nascimento</label>
-              <input
-                name="dataNascimento"
-                class="form-control placeholder"
-                placeholder="Data de Nascimento"
-              />
+              <input name="dataNascimento" class="form-control placeholder" placeholder="Data de Nascimento" />
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-md-12">
               <label for="cidade" class="labels placeholder">Cidade</label>
-              <input
-                type="text"
-                name="cidade"
-                id="cidade"
-                class="form-control placeholder"
-                placeholder="Cidade "
-              />
+              <input type="text" name="cidade" id="cidade" class="form-control placeholder" placeholder="Cidade " />
             </div>
             <div class="col-md-12">
               <label for="estado" class="labels placeholder">Estado</label>
-              <input
-                type="text"
-                name="estado"
-                id="estado"
-                class="form-control placeholder"
-                placeholder="Estado"
-              />
+              <input type="text" name="estado" id="estado" class="form-control placeholder" placeholder="Estado" />
             </div>
             <div class="col-md-9">
               <label for="cep" class="labels placeholder">CEP</label>
-              <input
-                type="text"
-                name="cep"
-                id="cep"
-                class="form-control placeholder"
-                placeholder="CEP"
-              />
+              <input type="text" name="cep" id="cep" class="form-control placeholder" placeholder="CEP" />
             </div>
             <div class="col-md-3">
               <label for="numero" class="labels placeholder">Numero</label>
-              <input
-                type="text"
-                name="numero"
-                id="numero"
-                class="form-control placeholder"
-                placeholder="Nº"
-              />
+              <input type="text" name="numero" id="numero" class="form-control placeholder" placeholder="Nº" />
             </div>
           </div>
           <div class="row mt-4">
             <h4 class="placeholder">Dados Escolares</h4>
             <div class="col-md-6">
               <label for="serie" class="labels placeholder">Serie</label>
-              <input
-                type="number"
-                name="serie"
-                id="serie"
-                class="form-control placeholder"
-                placeholder="Serie"
-              />
+              <input type="number" name="serie" id="serie" class="form-control placeholder" placeholder="Serie" />
             </div>
             <div class="col-md-6 d-flex align-items-end">
               <input type="text" name="" id="" class="form-control placeholder" />
             </div>
             <div class="col-md-12">
               <label for="escola" class="labels placeholder">Escola</label>
-              <input
-                type="text"
-                name="escola"
-                id="escola"
-                class="form-control placeholder"
-                placeholder="Escola"
-              />
+              <input type="text" name="escola" id="escola" class="form-control placeholder" placeholder="Escola" />
             </div>
           </div>
           <div class="row mt-4">
@@ -800,32 +510,16 @@
           <div class="row mt-4 d-flex align-items-end">
             <div class="col-md-3">
               <label for="rendaFamiliar" class="form-label placeholder">Renda Familiar</label>
-              <input
-                name="rendaFamiliar"
-                id="rendaFamiliar"
-                type="text"
-                class="form-control placeholder"
-              />
+              <input name="rendaFamiliar" id="rendaFamiliar" type="text" class="form-control placeholder" />
             </div>
             <div class="col-md-6">
-              <label for="contribuintesDaRenda" class="form-label placeholder"
-                >Contribuintes da Renda</label
-              >
-              <input
-                name="contribuintesDaRenda"
-                id="contribuintesDaRenda"
-                type="text"
-                class="form-control placeholder"
-              />
+              <label for="contribuintesDaRenda" class="form-label placeholder">Contribuintes da Renda</label>
+              <input name="contribuintesDaRenda" id="contribuintesDaRenda" type="text"
+                class="form-control placeholder" />
             </div>
             <div class="col-md-3">
               <label for="pessoasNaCasa" class="form-label placeholder">Pessoas na Casa</label>
-              <input
-                name="pessoasNaCasa"
-                id="pessoasNaCasa"
-                type="text"
-                class="form-control placeholder"
-              />
+              <input name="pessoasNaCasa" id="pessoasNaCasa" type="text" class="form-control placeholder" />
             </div>
           </div>
           <div class="row mt-4">
@@ -833,39 +527,20 @@
               <h6 class="placeholder">Informações socias para dados do aluno</h6>
               <div class="mt-4">
                 <div class="mb-3 form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input placeholder"
-                    id="bolsaFamilia"
-                    name="bolsaFamilia"
-                  />
-                  <label class="form-check-label placeholder" for="bolsaFamilia"
-                    >Bolsa Família</label
-                  >
+                  <input type="checkbox" class="form-check-input placeholder" id="bolsaFamilia" name="bolsaFamilia" />
+                  <label class="form-check-label placeholder" for="bolsaFamilia">Bolsa Família</label>
                 </div>
 
                 <div class="mb-3 form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input placeholder"
-                    id="auxilioBrasil"
-                    name="auxilioBrasil"
-                  />
-                  <label class="form-check-label placeholder" for="auxilioBrasil"
-                    >Auxílio Brasil</label
-                  >
+                  <input type="checkbox" class="form-check-input placeholder" id="auxilioBrasil" name="auxilioBrasil" />
+                  <label class="form-check-label placeholder" for="auxilioBrasil">Auxílio Brasil</label>
                 </div>
 
                 <div class="mb-3 form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input placeholder"
-                    id="alunoContribuiParaRenda"
-                    name="alunoContribuiParaRenda"
-                  />
-                  <label class="form-check-label placeholder" for="alunoContribuiParaRenda"
-                    >Aluno Contribui para Renda</label
-                  >
+                  <input type="checkbox" class="form-check-input placeholder" id="alunoContribuiParaRenda"
+                    name="alunoContribuiParaRenda" />
+                  <label class="form-check-label placeholder" for="alunoContribuiParaRenda">Aluno Contribui para
+                    Renda</label>
                 </div>
               </div>
             </div>
@@ -878,15 +553,9 @@
                 <input name="alergia" id="alergia" type="text" class="form-control placeholder" />
               </div>
               <div class="col-md-12">
-                <label for="usoMedicamentoContinuo" class="form-label placeholder"
-                  >Uso de Medicamento Continuo</label
-                >
-                <input
-                  name="usoMedicamentoContinuo"
-                  id="usoMedicamentoContinuo"
-                  type="text"
-                  class="form-control placeholder"
-                />
+                <label for="usoMedicamentoContinuo" class="form-label placeholder">Uso de Medicamento Continuo</label>
+                <input name="usoMedicamentoContinuo" id="usoMedicamentoContinuo" type="text"
+                  class="form-control placeholder" />
               </div>
               <div class="col-md-12">
                 <label for="cirurgia" class="form-label placeholder">Cirurgias</label>
@@ -894,12 +563,7 @@
               </div>
               <div class="col-md-12">
                 <label for="doencaCronica" class="form-label placeholder">Doenca cronica</label>
-                <input
-                  name="doencaCronica"
-                  id="doencaCronica"
-                  type="text"
-                  class="form-control placeholder"
-                />
+                <input name="doencaCronica" id="doencaCronica" type="text" class="form-control placeholder" />
               </div>
             </div>
             <div class="row mt-4">
@@ -922,14 +586,8 @@
                     <div class="panel-body">
                       <ul class="d-flex flex-wrap">
                         <li class="bg-dark rounded m-2 py-2 px-3 text-white placeholder">
-                          <svg
-                            xmlns=""
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            class="bi bi-x-circle"
-                            viewBox="0 0 16 16"
-                          >
+                          <svg xmlns="" width="16" height="16" fill="currentColor" class="bi bi-x-circle"
+                            viewBox="0 0 16 16">
                             <path d="#" />
                             <path d="#" />
                           </svg>
@@ -942,14 +600,8 @@
 
               <div class="row mt-4">
                 <div *ngIf="modoEdicao">
-                  <input
-                    class="w-75 m-1"
-                    type="text"
-                    name="acompanhamentoSaude"
-                    id="acompanhamentoSaude"
-                    class="form-control"
-                    [(ngModel)]="acompanhamentoSaude"
-                  />
+                  <input class="w-75 m-1" type="text" name="acompanhamentoSaude" id="acompanhamentoSaude"
+                    class="form-control" [(ngModel)]="acompanhamentoSaude" />
                   <div class="d-flex justify-content-end">
                     <button class="btn btn-secondary m-2" (click)="adicionarAcompanhamentoSaude()">
                       Adicionar
@@ -964,14 +616,7 @@
                     <div class="panel-body">
                       <ul class="d-flex flex-wrap">
                         <li class="bg-dark rounded m-2 py-2 px-3 text-white placeholder">
-                          <svg
-                            xmlns="#"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            class=""
-                            viewBox="0 0 16 16"
-                          >
+                          <svg xmlns="#" width="16" height="16" fill="currentColor" class="" viewBox="0 0 16 16">
                             <path d="#" />
                             <path d="#" />
                           </svg>
@@ -1000,37 +645,21 @@
                     <h5 class="card-title placeholder">Graduação</h5>
                   </div>
                   <div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-person-check text-dark placeholder"
-                      viewBox="0 0 16 16"
-                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-person-check text-dark placeholder" viewBox="0 0 16 16">
                       <path
-                        d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4"
-                      />
+                        d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
                       <path
-                        d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"
-                      />
+                        d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z" />
                     </svg>
                   </div>
                   <div *ngIf="!aluno">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-person-x text-dark placeholder"
-                      viewBox="0 0 16 16"
-                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-person-x text-dark placeholder" viewBox="0 0 16 16">
                       <path
-                        d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"
-                      />
+                        d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z" />
                       <path
-                        d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708"
-                      />
+                        d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708" />
                     </svg>
                   </div>
                 </div>
@@ -1052,14 +681,8 @@
                       <div class="d-flex justify-content-between mb-3 mt-3 align-items-center">
                         <h5 class="placeholder">Faltas</h5>
 
-                        <svg
-                          xmlns="#"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          class="text-black me-3 placeholder"
-                          viewBox="0 0 16 16"
-                        >
+                        <svg xmlns="#" width="16" height="16" fill="currentColor" class="text-black me-3 placeholder"
+                          viewBox="0 0 16 16">
                           <path d="#" />
                         </svg>
                       </div>
@@ -1075,9 +698,7 @@
                   <p class="text-end placeholder">Frequência:</p>
                 </div>
                 <div class="card-footer">
-                  <app-modal-historico-graduacao
-                    class="placeholder"
-                  ></app-modal-historico-graduacao>
+                  <app-modal-historico-graduacao class="placeholder"></app-modal-historico-graduacao>
                 </div>
               </div>
             </div>
@@ -1093,27 +714,15 @@
             </div>
             <div class="card">
               <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-trash3 text-black ms-2 mt-2 placeholder"
-                  viewBox="0 0 16 16"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-trash3 text-black ms-2 mt-2 placeholder" viewBox="0 0 16 16">
                   <path
-                    d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"
-                  />
+                    d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
                 </svg>
               </div>
               <div class="card-body row">
                 <div class="col-4 d-flex align-items-center">
-                  <img
-                    src="#"
-                    class="rounded-circle placeholder"
-                    alt="aluno"
-                    style="width: 100px; height: 100px"
-                  />
+                  <img src="#" class="rounded-circle placeholder" alt="aluno" style="width: 100px; height: 100px" />
                 </div>
                 <div class="col-8">
                   <div>

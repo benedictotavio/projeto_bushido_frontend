@@ -6,15 +6,39 @@
       [(ngModel)]="nomeTurma" />
     <input type="submit" class="btn btn-primary mx-2" value="Buscar" (click)="buscarTurmaPorNome(nomeTurma)" />
   </div>
-  
+
   <div *ngIf="isAdmin()">
     <app-modal-nova-turma></app-modal-nova-turma>
   </div>
 
-  <div *ngIf="!turmaEncontrada" class="d-flex justify-content-evenly flex-wrap">
-    <div *ngFor="let turma of turmas">
-      <app-card-turma [turma]="turma"></app-card-turma>
+  <div *ngIf="!turmaEncontrada">
+    <ul class="nav nav-tabs my-2 justify-content-end" *ngIf="isAdmin()">
+      <li class="nav-item" style="cursor: pointer;">
+        <a class="nav-link" [class.active]="activeTab === '#tab1'" (click)="handleTabClick('#tab1')"
+          (keyup.enter)="handleTabClick('#tab1')" (keyup.space)="handleTabClick('#tab1')" role="tab"
+          tabindex="0">Turmas</a>
+      </li>
+
+      <li class="nav-item" style="cursor: pointer;">
+        <a class="nav-link" [class.active]="activeTab === '#tab2'" (click)="handleTabClick('#tab2')"
+          (keyup.enter)="handleTabClick('#tab2')" (keyup.space)="handleTabClick('#tab2')" role="tab" tabindex="0">Minhas
+          Turmas</a>
+      </li>
+
+    </ul>
+
+    <div *ngIf="activeTab === '#tab1'; else minhasTurmasBlock" class="d-flex justify-content-evenly flex-wrap mt-3">
+      <div *ngFor="let turma of turmas">
+        <app-card-turma [turma]="turma"></app-card-turma>
+      </div>
     </div>
+
+    <ng-template #minhasTurmasBlock>
+      <div *ngFor="let turma of minhasTurmas" class="d-flex justify-content-evenly flex-wrap mt-3">
+        <app-card-turma [turma]="turma"></app-card-turma>
+      </div>
+    </ng-template>
+
 
     <div *ngIf="!turmas.length">
       <h5>Nenhuma turma encontrada</h5>
@@ -26,6 +50,5 @@
     <br />
     <app-card-turma [turma]="turmaEncontrada"></app-card-turma>
   </div>
-</div>
 
-<app-loading></app-loading>
+  <app-loading></app-loading>

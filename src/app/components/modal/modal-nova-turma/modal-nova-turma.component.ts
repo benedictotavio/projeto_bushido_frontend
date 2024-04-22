@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Turma } from 'src/app/pages/admin/turma.interface'
 import { environment } from 'src/environments/environment'
 import { AdminResponse } from './turma'
-import { removeAdminLocalStorage } from 'src/app/pages/admin/local-storage.handler'
+import { AuthService } from 'src/app/services/services-admin/auth.service'
 
 @Component({
   selector: 'app-modal-nova-turma',
@@ -15,7 +15,8 @@ export class ModalNovaTurmaComponent {
   constructor(
     private readonly http: HttpClient,
     private readonly route: ActivatedRoute,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly authService: AuthService
   ) {}
 
   protected buscarTutor = ''
@@ -23,11 +24,17 @@ export class ModalNovaTurmaComponent {
   private readonly token = localStorage.getItem('token')
   protected nomeTurma = this.route.snapshot.paramMap.get('nomeTurma')
   private readonly rg = this.route.snapshot.paramMap.get('rg')
+  protected selectedAdmin = false
+
   protected novaTurma: Turma = {
     nome: '',
-    tutor: '',
+    tutor: {
+      nome: '',
+      email: ''
+    },
     endereco: ''
   }
+
   protected adminsEncontrados: AdminResponse[] | undefined
   protected buscarAdminPorNome(nome: string) {
     if (nome === '') {
@@ -42,7 +49,6 @@ export class ModalNovaTurmaComponent {
       })
       .subscribe({
         next: (data) => {
-          console.log(data)
           if (data.length === 0) {
             window.confirm('Tutor não encontrado')
             return
@@ -52,18 +58,19 @@ export class ModalNovaTurmaComponent {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
+          }
+          if (error.status === 404) {
+            window.confirm(error['error']['message'])
           }
         }
       })
   }
 
   protected adicionarTurma() {
-    console.log(this.novaTurma)
-
     this.http
-      .post<{ message: string }>(this.url + 'turma', this.novaTurma, {
+      .post<{ message: string }>(this.url + `turma`, this.novaTurma, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${this.token}`
@@ -77,7 +84,7 @@ export class ModalNovaTurmaComponent {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
           if (
@@ -93,7 +100,10 @@ export class ModalNovaTurmaComponent {
         complete: () => {
           this.novaTurma = {
             nome: '',
-            tutor: '',
+            tutor: {
+              nome: '',
+              email: ''
+            },
             endereco: ''
           }
         }
@@ -103,8 +113,19 @@ export class ModalNovaTurmaComponent {
   protected fecharModal() {
     this.novaTurma = {
       nome: '',
-      tutor: '',
+      tutor: {
+        nome: '',
+        email: ''
+      },
       endereco: ''
+    }
+  }
+
+  protected selecionarAdmin(admin: { nome: string; email: string }) {
+    this.selectedAdmin = true
+    this.novaTurma.tutor = {
+      nome: admin.nome,
+      email: admin.email
     }
   }
 }

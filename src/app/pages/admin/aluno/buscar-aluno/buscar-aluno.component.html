@@ -17,7 +17,7 @@
     <input type="submit" value="Pesquisar" class="btn btn-primary" />
   </form>
 
-  <div class="pagination d-flex justify-content-center align-items-center w-100" *ngIf="showPagination">
+  <div class="pagination d-flex justify-content-center align-items-center w-100">
     <button (click)="onPageChange(currentPage - 1)" class="page-link" [class.disabled]="currentPage === 1">Anterior</button>
     <button
       (click)="onPageChange(currentPage + 1)"
@@ -31,19 +31,23 @@
 
   <!---Dados do aluno-->
 
-  <div class="row" *ngIf="alunos.length > 0">
-    <div class="col-12" *ngFor="let aluno of alunos">
-      <app-card-busca-aluno
-        [aluno]="aluno"
-        [showPlaceholder]="showPlaceholder"
-      ></app-card-busca-aluno>
+  <div class="row" *ngIf="searchBy">
+
+    <div *ngIf="alunos.length > 0; else noAlunoFound" class="row">
+      <div class="col-12" *ngFor="let aluno of alunos">
+        <app-card-busca-aluno
+          [aluno]="aluno"
+        ></app-card-busca-aluno>
+      </div>
     </div>
+
+    <ng-template #noAlunoFound>
+      <div class="alert alert-warning mt-3" role="alert">
+        Nenhum aluno encontrado
+      </div>
+    </ng-template>
+
   </div>
 
-  <div class="row" *ngIf="alunos.length === 0">
-    <div class="col-12">
-      
-    </div>
-  </div>
-
+  <app-loading></app-loading>
 </div>

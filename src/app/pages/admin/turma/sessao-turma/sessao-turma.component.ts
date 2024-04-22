@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { environment } from 'src/environments/environment'
 import { AlunoTurma } from '../../turma.interface'
-import { removeAdminLocalStorage } from '../../local-storage.handler'
+import { AuthService } from 'src/app/services/services-admin/auth.service'
 
 @Component({
   selector: 'app-sessao-turma',
@@ -14,7 +14,8 @@ export class SessaoTurmaComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   private readonly apiUrl = environment.urlApi
@@ -29,13 +30,6 @@ export class SessaoTurmaComponent implements OnInit {
     this.buscarAlunosDaTurma()
   }
 
-  protected removerAluno(rg: string) {
-    const confirmar = window.confirm('Tem certeza que deseja excluir este aluno?')
-    if (confirmar) {
-      this.removerAlunoDaTurma(rg)
-    }
-  }
-
   protected deletarTurma() {
     const confirmar = window.confirm('Tem certeza que deseja excluir esta turma?')
     if (confirmar) {
@@ -45,7 +39,7 @@ export class SessaoTurmaComponent implements OnInit {
 
   private removerTurma() {
     this.http
-      .delete<{ message: string }>(this.apiUrl + `turma/${this.nomeTurma}`, {
+      .delete<{ message: string }>(this.apiUrl + `turma/${this.nomeTurma}/${this.email}`, {
         headers: {
           Authorization: 'Bearer ' + this.token
         }
@@ -58,14 +52,11 @@ export class SessaoTurmaComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
-          if (error.status === 404) {
-            window.confirm('Turma não encontrada')
-          }
-          if (error.status === 403) {
-            window.confirm('Turma não pode ser excluída')
+          if (error.status === 403 || error.status === 411 || error.status === 404 || error.status === 411) {
+            window.confirm(error['error']['message'])
           }
         }
       })
@@ -93,7 +84,7 @@ export class SessaoTurmaComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
           if (
@@ -116,34 +107,6 @@ export class SessaoTurmaComponent implements OnInit {
     return ano - anoNasc
   }
 
-  private removerAlunoDaTurma(rg: string) {
-    this.http
-      .delete<{ message: string }>(this.apiUrl + `turma/${this.nomeTurma}/aluno/${rg}`, {
-        headers: {
-          Authorization: 'Bearer ' + this.token
-        }
-      })
-      .subscribe({
-        next: (data) => {
-          window.confirm(data.message)
-          window.location.reload()
-        },
-        error: (error) => {
-          if (error.status === 401) {
-            window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
-            this.router.navigate(['/admin'])
-          }
-          if (error.status === 404) {
-            window.confirm('Aluno não encontrado')
-          }
-          if (error.status === 403) {
-            window.confirm('Aluno não pode ser removido')
-          }
-        }
-      })
-  }
-
   isAdmin(): boolean {
     return this.role?.toUpperCase() === 'ADMIN'
   }
@@ -162,7 +125,7 @@ export class SessaoTurmaComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
         }

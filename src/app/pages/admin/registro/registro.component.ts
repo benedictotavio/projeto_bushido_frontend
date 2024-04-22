@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { environment } from '../../../../environments/environment'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SignUp } from '../auth.interface'
-import { removeAdminLocalStorage } from '../local-storage.handler'
+import { AuthService } from 'src/app/services/services-admin/auth.service'
 
 @Component({
   selector: 'app-registro',
@@ -23,12 +23,13 @@ export class RegistroComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) {}
 
   registrarNovoAdmin() {
     this.http
-      .post<{ id: string; nome: string }>(this.ApiBushido, this.user, {
+      .post<{ id: string; nome: string; message: string }>(this.ApiBushido, this.user, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -36,13 +37,13 @@ export class RegistroComponent {
       })
       .subscribe({
         next: (response) => {
-          window.alert(response)
-          this.router.navigate([`/admin/${this.route.snapshot.paramMap.get('email')}/aluno`, response.id])
+          window.alert(response['message'])
+          this.router.navigate([`/admin/${this.route.snapshot.paramMap.get('email')}`])
         },
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
           }
 
           if (

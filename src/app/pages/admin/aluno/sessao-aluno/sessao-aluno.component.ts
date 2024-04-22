@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { environment } from 'src/environments/environment'
 import { AlunoEditado, AlunoResponse, Graduacao } from 'src/app/pages/admin/aluno.interface'
-import { removeAdminLocalStorage } from '../../local-storage.handler'
+import { AuthService } from 'src/app/services/services-admin/auth.service'
 
 @Component({
   selector: 'app-sessao-aluno',
@@ -14,7 +14,8 @@ export class SessaoAlunoComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   private readonly token = localStorage.getItem('token')
@@ -73,14 +74,13 @@ export class SessaoAlunoComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O admin não esta mais autorizado. Faça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
           if (error.status === 404) {
             window.confirm('Aluno não encontrado')
             this.router.navigate(['/admin', this.email, 'buscar'])
           }
-          console.error(error)
         }
       })
   }
@@ -104,7 +104,7 @@ export class SessaoAlunoComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
           }
           if (error.status === 404) {
             window.confirm('Aluno não encontrado')
@@ -142,9 +142,8 @@ export class SessaoAlunoComponent implements OnInit {
           error: (error) => {
             if (error.status === 401) {
               window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-              console.error(error)
               setInterval(() => {
-                removeAdminLocalStorage()
+                this.authService.removeToken()
               }, 3000)
             }
             if (error.status === 404) {
@@ -185,9 +184,8 @@ export class SessaoAlunoComponent implements OnInit {
           error: (error) => {
             if (error.status === 401) {
               window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-              console.error(error)
               setInterval(() => {
-                removeAdminLocalStorage()
+                this.authService.removeToken()
               }, 3000)
             }
             if (error.status === 404) {
@@ -224,13 +222,12 @@ export class SessaoAlunoComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
           }
           if (error.status === 404) {
             window.confirm('Aluno não encontrado')
           }
           if (error.status === 403) {
-            console.error(error)
             window.confirm('Aluno não possui falta')
           }
         }
@@ -256,13 +253,12 @@ export class SessaoAlunoComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
           }
           if (error.status === 404) {
             window.confirm('Aluno não encontrado')
           }
           if (error.status === 403) {
-            console.error(error)
             window.confirm('Aluno não possui acompanhamento')
           }
         }
@@ -285,13 +281,12 @@ export class SessaoAlunoComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
           }
           if (error.status === 404) {
             window.confirm('Aluno não encontrado')
           }
           if (error.status === 403) {
-            console.error(error)
             window.confirm('Aluno não possui deficiência')
           }
         }
@@ -314,14 +309,13 @@ export class SessaoAlunoComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
           if (error.status === 404) {
             window.confirm('Aluno não encontrado')
           }
           if (error.status === 403) {
-            console.error(error)
             window.confirm('Aluno não possui responsável')
           }
         }
@@ -357,7 +351,7 @@ export class SessaoAlunoComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
           if (
@@ -398,7 +392,7 @@ export class SessaoAlunoComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
           if (
@@ -438,7 +432,7 @@ export class SessaoAlunoComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
           if (
@@ -462,6 +456,10 @@ export class SessaoAlunoComponent implements OnInit {
 
   private adapterAlunoParaAlunoEditado(aluno: AlunoResponse): AlunoEditado {
     return {
+      nome: aluno.nome,
+      // dataNascimento: aluno.dataNascimento,
+      genero: aluno.genero,
+      turma: aluno.turma,
       dadosSociais: aluno.dadosSociais,
       dadosEscolares: aluno.dadosEscolares,
       endereco: aluno.endereco,

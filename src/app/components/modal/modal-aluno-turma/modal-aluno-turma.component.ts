@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Component } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AlunoResponse } from 'src/app/pages/admin/aluno.interface'
-import { removeAdminLocalStorage } from 'src/app/pages/admin/local-storage.handler'
+import { AuthService } from 'src/app/services/services-admin/auth.service'
 import { environment } from 'src/environments/environment'
 
 @Component({
@@ -14,7 +14,8 @@ export class ModalAlunoTurmaComponent {
   constructor(
     private readonly http: HttpClient,
     private readonly route: ActivatedRoute,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly authService: AuthService
   ) {}
 
   private readonly url = environment.urlApi
@@ -48,7 +49,7 @@ export class ModalAlunoTurmaComponent {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
           if (
@@ -82,7 +83,7 @@ export class ModalAlunoTurmaComponent {
         error: (error) => {
           if (error.status === 401) {
             window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            removeAdminLocalStorage()
+            this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
           if (error.status === 403) {

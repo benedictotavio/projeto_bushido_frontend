@@ -9,27 +9,15 @@
           </h5>
         </div>
       </div>
-      <div class="badge bg-info text-dark rounded">
+      <div class="badge bg-info text-dark rounded" *ngIf="turma.tutor">
         <span>
-          {{ turma.endereco }}
+          {{ turma.tutor.nome }}
         </span>
       </div>
     </div>
     <div class="mt-5">
-      <p class="heading mb-0">Professor<br /></p>
-      <h3>{{ turma.tutor }}</h3>
-
-      <div class="mt-5">
-        <div class="progress">
-          <div
-            class="progress-bar"
-            role="progressbar"
-            aria-valuenow="50"
-            aria-valuemin="0"
-            aria-valuemax="100"
-          ></div>
-        </div>
-      </div>
+      <p class="heading mb-0">Endereço<br /></p>
+      <h3>{{ turma.endereco }}</h3>
     </div>
     <div class="card-footer text-muted d-flex justify-content-end py-3">
       <a href="/admin/{{ email }}/turmas/{{ turma.nome }}">

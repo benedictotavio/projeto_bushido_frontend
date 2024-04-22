@@ -27,6 +27,13 @@ export class AuthService {
   public removeToken() {
     localStorage.removeItem('token')
     localStorage.removeItem('role')
+    localStorage.removeItem('turmas')
+  }
+
+  public setAdminLocalStorage(role: string, token: string, turmas: { endereco: string; nome: string }[]) {
+    localStorage.setItem('token', token)
+    localStorage.setItem('role', role)
+    localStorage.setItem('turmas', JSON.stringify(turmas))
   }
 
   public isAdmin(): boolean {

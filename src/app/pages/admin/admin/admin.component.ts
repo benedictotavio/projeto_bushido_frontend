@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
 import { environment } from '../../../../environments/environment'
 import { AuthService } from 'src/app/services/services-admin/auth.service'
-import { setAdminLocalStorage } from '../local-storage.handler'
 
 @Component({
   selector: 'app-admin',
@@ -23,30 +22,32 @@ export class AdminComponent {
     private authService: AuthService
   ) {}
 
-  ApiBushido = environment.urlApi + 'admin/login'
+  private readonly ApiBushido = environment.urlApi + 'admin/login'
 
   Logar() {
-    this.http.post<{ token: string; role: string }>(this.ApiBushido, this.login).subscribe({
-      next: (data) => {
-        this.authService.setAuthenticated(true)
-        this.router.navigate(['/admin', this.login.email])
-        setAdminLocalStorage(data.role, data.token)
-      },
-      error: (error) => {
-        if (error.status === 401) {
-          window.alert('Email ou senha inválidos')
+    this.http
+      .post<{ token: string; role: string; turmas: { endereco: string; nome: string }[] }>(this.ApiBushido, this.login)
+      .subscribe({
+        next: (data) => {
+          this.authService.setAuthenticated(true)
+          this.router.navigate(['/admin', this.login.email])
+          this.authService.setAdminLocalStorage(data.role, data.token, data.turmas)
+        },
+        error: (error) => {
+          if (error.status === 401) {
+            window.alert('Email ou senha inválidos')
+          }
+          if (
+            error.status === 400 ||
+            error.status === 403 ||
+            error.status === 404 ||
+            error.status === 409 ||
+            error.status === 411
+          ) {
+            window.confirm(error['error']['message'])
+            window.location.reload()
+          }
         }
-        if (
-          error.status === 400 ||
-          error.status === 403 ||
-          error.status === 404 ||
-          error.status === 409 ||
-          error.status === 411
-        ) {
-          window.confirm(error['error']['message'])
-          window.location.reload()
-        }
-      }
-    })
+      })
   }
 }
