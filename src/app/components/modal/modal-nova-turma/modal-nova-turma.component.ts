@@ -28,9 +28,13 @@ export class ModalNovaTurmaComponent {
 
   protected novaTurma: Turma = {
     nome: '',
-    tutor: '',
+    tutor: {
+      nome: '',
+      email: ''
+    },
     endereco: ''
   }
+
   protected adminsEncontrados: AdminResponse[] | undefined
   protected buscarAdminPorNome(nome: string) {
     if (nome === '') {
@@ -58,13 +62,16 @@ export class ModalNovaTurmaComponent {
             this.authService.removeToken()
             this.router.navigate(['/admin'])
           }
+          if (error.status === 404) {
+            window.confirm(error['error']['message'])
+          }
         }
       })
   }
 
   protected adicionarTurma() {
     this.http
-      .post<{ message: string }>(this.url + 'turma', this.novaTurma, {
+      .post<{ message: string }>(this.url + `turma`, this.novaTurma, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${this.token}`
@@ -94,7 +101,10 @@ export class ModalNovaTurmaComponent {
         complete: () => {
           this.novaTurma = {
             nome: '',
-            tutor: '',
+            tutor: {
+              nome: '',
+              email: ''
+            },
             endereco: ''
           }
         }
@@ -104,16 +114,22 @@ export class ModalNovaTurmaComponent {
   protected fecharModal() {
     this.novaTurma = {
       nome: '',
-      tutor: '',
+      tutor: {
+        nome: '',
+        email: ''
+      },
       endereco: ''
     }
   }
 
-  protected selecionarAdmin(admin: string) {
+  protected selecionarAdmin(admin: {nome: string, email: string}) {
     console.log(admin)
     console.log(this.selectedAdmin)
 
     this.selectedAdmin = true
-    this.novaTurma.tutor = admin
+    this.novaTurma.tutor = {
+      nome: admin.nome,
+      email: admin.email
+    }
   }
 }

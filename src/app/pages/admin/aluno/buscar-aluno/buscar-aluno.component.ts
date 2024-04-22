@@ -11,7 +11,6 @@ import { AuthService } from 'src/app/services/services-admin/auth.service'
   styleUrls: ['./buscar-aluno.component.css']
 })
 export class BuscarAlunoComponent {
-  showPlaceholder = false
   protected alunos: AlunoResponse[] = []
   protected pesquisarAluno = ''
   private readonly token = localStorage.getItem('token')
@@ -19,7 +18,7 @@ export class BuscarAlunoComponent {
   protected readonly email = this.route.snapshot.paramMap.get('email')
   protected readonly itemsPerPage = 10
   protected currentPage = 1
-  protected showPagination = false
+  protected searchBy = false
 
   constructor(
     private http: HttpClient,
@@ -36,17 +35,16 @@ export class BuscarAlunoComponent {
 
     if (this.validarRG(this.pesquisarAluno.trim())) {
       this.buscarAlunoPorRg()
+      this.searchBy = true
       return
     }
 
     this.currentPage = 1
-    this.showPagination = true
     this.buscarAlunoPorNome()
+    this.searchBy = true
   }
 
   protected buscarAlunoPorRg() {
-    this.showPlaceholder = true // Exibe o placeholder ao clicar no botão Buscar Aluno
-
     this.http
       .get<AlunoResponse[]>(this.apiUrl + `?rg=${this.pesquisarAluno}`, {
         headers: {
@@ -54,9 +52,9 @@ export class BuscarAlunoComponent {
         }
       })
       .subscribe({
-        next: (data) => {
+        next: (data) =>{
           this.alunos = data
-          this.showPlaceholder = false
+          console.log(this.alunos);
         },
         error: (error) => {
           if (error.status === 401) {
@@ -67,7 +65,6 @@ export class BuscarAlunoComponent {
           if (error.status === 404) {
             window.alert(error['error']['message'])
             this.pesquisarAluno = ''
-            this.showPlaceholder = false
           }
         }
       })
@@ -86,7 +83,6 @@ export class BuscarAlunoComponent {
       .subscribe({
         next: (data) => {
           this.alunos = data
-          this.showPlaceholder = false
         },
         error: (error) => {
           if (error.status === 401) {
@@ -97,7 +93,6 @@ export class BuscarAlunoComponent {
           if (error.status === 404) {
             window.alert('Aluno não encontrado')
             this.pesquisarAluno = ''
-            this.showPlaceholder = false
           }
         }
       })

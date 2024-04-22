@@ -1,6 +1,9 @@
 export interface Turma {
   nome: string
-  tutor: string
+  tutor: {
+    nome: string
+    email: string
+  }
   endereco: string
 }
 

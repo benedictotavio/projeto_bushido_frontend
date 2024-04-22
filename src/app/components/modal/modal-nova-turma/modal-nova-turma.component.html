@@ -1,10 +1,10 @@
-<div class="d-flex justify-content-start align-items-center w-25">
+<div class="d-flex justify-content-start align-items-center m-2">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
     class="bi bi-plus-circle text-dark mx-1" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#modalTurma">
     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
   </svg>
-  <p class="w-100 my-3" data-bs-toggle="modal" data-bs-target="#modalTurma" style="cursor: pointer">
+  <p class="m-0" data-bs-toggle="modal" data-bs-target="#modalTurma" style="cursor: pointer">
     Adicionar turna
   </p>
 </div>
@@ -31,11 +31,11 @@
 
           <div class="d-flex align-items-center">
             <div class="w-75">
-              <input type="text" name="tutor" [(ngModel)]="novaTurma.tutor" id="tutor"
+              <input type="text" name="tutor" [(ngModel)]="novaTurma.tutor.nome" id="tutor"
                 class="form-control border-dark rounded" placeholder="Digite o nome do tutor" required>
             </div>
             <div class="w-25 text-center">
-              <button class="btn btn-primary" (click)="buscarAdminPorNome(novaTurma.tutor)">
+              <button class="btn btn-primary" (click)="buscarAdminPorNome(novaTurma.tutor.nome)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                   class="bi bi-search text-white" viewBox="0 0 16 16">
                   <path
@@ -45,7 +45,8 @@
             </div>
           </div>
           <ul class="list-group my-3" *ngFor="let admin of adminsEncontrados">
-            <li class="list-group-item card-tutor-selected" [class.active]="selectedAdmin" (click)="selecionarAdmin(admin.nome)">
+            <li class="list-group-item card-tutor-selected" [class.active]="selectedAdmin"
+              (click)="selecionarAdmin(admin)">
               <i>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                   class="bi bi-person-circle text-dark" viewBox="0 0 16 16">
@@ -68,7 +69,8 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="fecharModal()">
           Cancelar
         </button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="adicionarTurma()" [disabled]="!novaTurma.nome || !novaTurma.tutor || !novaTurma.endereco && adminsEncontrados?.length">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="adicionarTurma()"
+          [disabled]="!novaTurma.nome || !novaTurma.tutor || !novaTurma.endereco && adminsEncontrados?.length">
           Adicionar
         </button>
       </div>
