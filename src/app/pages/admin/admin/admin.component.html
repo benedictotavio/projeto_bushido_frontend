@@ -1,13 +1,9 @@
 <div class="container" id="content-login">
   <div class="row">
     <div class="col-md-6 offset-md-3">
-      <div class="card my-5">
+      <div class="card">
         <form class="card-body cardbody-color p-lg-5 form-group" (ngSubmit)="Logar()" autocomplete="on">
-          <div class="text-center">
-            <img src="https://cdn-icons-png.flaticon.com/512/6024/6024190.png"
-              class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3" alt="profile" />
-          </div>
-
+          <h5 class="text-center">Login</h5>
           <div class="mb-3">
             <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email"
               [(ngModel)]="login.email" name="email" required />

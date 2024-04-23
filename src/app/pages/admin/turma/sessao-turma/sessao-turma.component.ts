@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { environment } from 'src/environments/environment'
-import { AlunoTurma } from '../../turma.interface'
+import { AlunoTurma, Turma } from '../../turma.interface'
 import { AuthService } from 'src/app/services/services-admin/auth.service'
 
 @Component({
@@ -24,9 +24,11 @@ export class SessaoTurmaComponent implements OnInit {
   private readonly role = localStorage.getItem('role')
   protected readonly email = this.route.snapshot.paramMap.get('email')
   protected alunosDaTurma: AlunoTurma[] = []
+  protected turmaEncontrada: Turma | undefined
   protected idade: number | undefined
 
   ngOnInit(): void {
+    this.buscarTurmaPorNome()
     this.buscarAlunosDaTurma()
   }
 
@@ -39,7 +41,7 @@ export class SessaoTurmaComponent implements OnInit {
 
   private removerTurma() {
     this.http
-      .delete<{ message: string }>(this.apiUrl + `turma/${this.nomeTurma}/${this.email}`, {
+      .delete<{ message: string }>(this.apiUrl + `turma/${this.nomeTurma}/${this.turmaEncontrada?.tutor.email}`, {
         headers: {
           Authorization: 'Bearer ' + this.token
         }
@@ -111,7 +113,7 @@ export class SessaoTurmaComponent implements OnInit {
     return this.role?.toUpperCase() === 'ADMIN'
   }
 
-  buscarAlunosDaTurma() {
+  private buscarAlunosDaTurma() {
     this.http
       .get<AlunoTurma[]>(this.apiUrl + `turma/${this.nomeTurma}/alunos`, {
         headers: {
@@ -127,6 +129,30 @@ export class SessaoTurmaComponent implements OnInit {
             window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
             this.authService.removeToken()
             this.router.navigate(['/admin'])
+          }
+        }
+      })
+  }
+
+  private buscarTurmaPorNome() {
+    this.http
+      .get<Turma>(this.apiUrl + `turma/${this.nomeTurma}`, {
+        headers: {
+          Authorization: 'Bearer ' + this.token
+        }
+      })
+      .subscribe({
+        next: (data) => {
+          this.turmaEncontrada = data
+        },
+        error: (error) => {
+          if (error.status === 401) {
+            window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
+            this.authService.removeToken()
+            this.router.navigate(['/admin'])
+          }
+          if (error.status === 404) {
+            window.confirm(error['error']['message'])
           }
         }
       })

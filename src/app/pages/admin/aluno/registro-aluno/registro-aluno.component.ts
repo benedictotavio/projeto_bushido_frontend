@@ -141,7 +141,7 @@ export class RegistroAlunoComponent implements OnInit {
       })
   }
 
-  registrarAluno() {
+  protected registrarAluno() {
     this.aluno.dataNascimento = new Date(this.aluno.dataNascimento).getTime()
     this.http
       .post<{ id: string; message: string }>(this.ApiBushido, this.aluno, {
