@@ -11,10 +11,7 @@
     </div>
   </div>
   <h4 class="my-4 text-center">
-    {{ turmaEncontrada?.nome }}<br>
-    <sub class="text-muted">
-      {{turmaEncontrada?.tutor?.nome}}
-    </sub>
+    {{ nomeTurma }}<br>
   </h4>
   <table class="table table-striped" aria-describedby="tabela turma">
     <thead>
@@ -29,7 +26,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let aluno of alunosDaTurma; let i = index">
+      <tr *ngFor="let aluno of alunosDaTurma?.alunos; let i = index">
         <th scope="row">{{ i + 1 }}</th>
         <td class="text-capitalize text-primary">
           <a href="admin/{{ email }}/aluno/{{ aluno.rg }}" class="text-decoration-none">
