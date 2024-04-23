@@ -248,7 +248,6 @@ export class SessaoAlunoComponent implements OnInit {
       .subscribe({
         next: (data) => {
           window.confirm(data['message'])
-          window.location.reload()
         },
         error: (error) => {
           if (error.status === 401) {
@@ -276,7 +275,6 @@ export class SessaoAlunoComponent implements OnInit {
       .subscribe({
         next: (data) => {
           window.confirm(data.message)
-          window.location.reload()
         },
         error: (error) => {
           if (error.status === 401) {
