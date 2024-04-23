@@ -98,7 +98,7 @@ export class BuscarAlunoComponent {
   }
 
   private validarRG(rg: string) {
-    const rgPattern = /^\d{9}$/
+    const rgPattern = /^(\d{6,9})$/
     return rgPattern.test(rg)
   }
 
