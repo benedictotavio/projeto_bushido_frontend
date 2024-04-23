@@ -11,7 +11,10 @@
     </div>
   </div>
   <h4 class="my-4 text-center">
-    {{ nomeTurma }}
+    {{ turmaEncontrada?.nome }}<br>
+    <sub class="text-muted">
+      {{turmaEncontrada?.tutor?.nome}}
+    </sub>
   </h4>
   <table class="table table-striped" aria-describedby="tabela turma">
     <thead>

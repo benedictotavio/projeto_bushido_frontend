@@ -81,7 +81,7 @@ export class TurmasComponent implements OnInit {
       })
   }
 
-  handleTabClick(tabId: string) {
+  protected handleTabClick(tabId: string) {
     this.activeTab = tabId
   }
 
