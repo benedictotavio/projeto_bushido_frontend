@@ -9,10 +9,10 @@ export class LoadingInterceptor implements HttpInterceptor {
   constructor(private loadingService: LoadingService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.loadingService.show() // Exibir spinner quando a solicitação começar
+    this.loadingService.show()
     return next.handle(req).pipe(
       finalize(() => {
-        this.loadingService.hide() // Ocultar spinner quando a solicitação for concluída
+        this.loadingService.hide()
       })
     )
   }

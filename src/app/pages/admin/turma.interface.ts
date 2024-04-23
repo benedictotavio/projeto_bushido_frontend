@@ -7,9 +7,14 @@ export interface Turma {
   endereco: string
 }
 
-export interface AlunoTurma {
+interface AlunoTurma {
   nome: string
   rg: string
   genero: string
   dataNascimento: Date
+}
+
+export interface DadosDaTurmaProps {
+  email: string
+  alunos: AlunoTurma[]
 }
