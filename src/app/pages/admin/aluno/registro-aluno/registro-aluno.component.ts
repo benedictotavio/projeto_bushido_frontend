@@ -99,7 +99,7 @@ export class RegistroAlunoComponent implements OnInit {
   ngOnInit(): void {
     this.listarTurmas()
   }
-  
+
   private listarTurmas() {
     this.http
       .get<Turma[]>(environment.urlApi + 'turma', {

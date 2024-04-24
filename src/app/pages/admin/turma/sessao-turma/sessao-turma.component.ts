@@ -65,9 +65,7 @@ export class SessaoTurmaComponent implements OnInit {
   protected adicionarFaltaAoAluno(rg: string) {
     this.http
       .post<{ message: string }>(
-        this.apiUrl + `aluno/falta/${rg}/${new Date(
-          new Date().setHours(0, 0, 0, 0)
-        ).getTime()}`,
+        this.apiUrl + `aluno/falta/${rg}/${new Date(new Date().setHours(0, 0, 0, 0)).getTime()}`,
         {
           motivo: 'Nova Falta',
           observacao: 'Falta automatica'
