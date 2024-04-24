@@ -48,7 +48,8 @@
             <div class="form-group">
               <label for="kyu">Kyu</label>
               <select id="kyu" name="kyu" [(ngModel)]="aluno.graduacao.kyu" class="form-select">
-                <option value="1" selected>1</option>
+                <option value="0" selected>0</option>
+                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -59,7 +60,7 @@
             </div>
           </div>
           <div class="col-md-3">
-            <div class="form-group" *ngIf="aluno.graduacao.kyu <= 1">
+            <div class="form-group">
               <label for="dan">Dan</label>
               <input
                 type="number"
@@ -155,6 +156,19 @@
                 id="cidade"
                 class="form-control"
                 placeholder="Cidade"
+                required
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 p-2">
+              <input
+                type="text"
+                name="rua"
+                [(ngModel)]="aluno.endereco.logradouro"
+                id="rua"
+                class="form-control"
+                placeholder="Rua*"
                 required
               />
             </div>

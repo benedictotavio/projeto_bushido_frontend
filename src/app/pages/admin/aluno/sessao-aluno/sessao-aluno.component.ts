@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { environment } from 'src/environments/environment'
 import { AlunoEditado, AlunoResponse, Graduacao } from 'src/app/pages/admin/aluno.interface'
 import { AuthService } from 'src/app/services/services-admin/auth.service'
+import { Turma } from '../../turma.interface'
 
 @Component({
   selector: 'app-sessao-aluno',
@@ -27,9 +28,12 @@ export class SessaoAlunoComponent implements OnInit {
   acompanhamentoSaude = ''
   private readonly url = environment.urlApi + 'aluno'
   protected modoEdicao = false
+  protected modoEdicaoTurma = false
   protected readonly umaSemanaEmSegundos = 604800000
   protected readonly tresMesesEmSegundos = 7776000000
   protected readonly role = localStorage.getItem('role')
+  protected turmas: Turma[] = []
+  protected nota = 0
 
   graduacaoAtual: Graduacao = {
     kyu: 0,
@@ -45,11 +49,46 @@ export class SessaoAlunoComponent implements OnInit {
 
   ngOnInit(): void {
     this.buscarAlunoPorRg()
+    this.listarTurmas()
   }
 
-  protected vincularAlunoAUmaTurma() {
-    const nomeTurma = window.prompt('Digite o nome da turma')
-    this.adicionarAlunoATurma(nomeTurma as string)
+  protected aprovarAluno() {
+    this.nota = Number.parseInt(window.prompt('Insira a nota do Aluno') as string)
+    this.aprovacao(this.nota)
+  }
+
+  protected reprovarAluno() {
+    this.nota = Number.parseInt(window.prompt('Insira a nota do Aluno') as string)
+    this.reprovacao(this.nota)
+  }
+
+  protected setModoEdicao() {
+    this.modoEdicao = !this.modoEdicao
+  }
+
+  protected setModoEdicaoTurma() {
+    this.modoEdicaoTurma = !this.modoEdicaoTurma
+  }
+
+  private listarTurmas() {
+    this.http
+      .get<Turma[]>(environment.urlApi + 'turma', {
+        headers: {
+          Authorization: 'Bearer ' + this.token
+        }
+      })
+      .subscribe({
+        next: (data) => {
+          this.turmas = data
+        },
+        error: (error) => {
+          if (error.status === 401) {
+            window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
+            this.authService.removeToken()
+            this.router.navigate(['/admin'])
+          }
+        }
+      })
   }
 
   protected buscarAlunoPorRg() {
@@ -320,11 +359,7 @@ export class SessaoAlunoComponent implements OnInit {
       })
   }
 
-  protected setModoEdicao() {
-    this.modoEdicao = !this.modoEdicao
-  }
-
-  protected aprovarAluno() {
+  private aprovacao(nota: number) {
     const confirmar = window.confirm('Tem certeza que deseja aprovar este aluno?')
     if (!confirmar) {
       return
@@ -332,7 +367,7 @@ export class SessaoAlunoComponent implements OnInit {
 
     this.http
       .post<{ message: string }>(
-        this.url + `/graduacao/${this.rg_aluno}/aprovar`,
+        this.url + `/graduacao/${this.rg_aluno}/aprovar/${nota}`,
         {},
         {
           headers: {
@@ -365,7 +400,7 @@ export class SessaoAlunoComponent implements OnInit {
       })
   }
 
-  protected reprovarAluno() {
+  private reprovacao(nota: number) {
     const confirmar = window.confirm('Tem certeza que deseja reprovar este aluno?')
     if (!confirmar) {
       return
@@ -373,7 +408,7 @@ export class SessaoAlunoComponent implements OnInit {
 
     this.http
       .post<{ message: string }>(
-        this.url + `/graduacao/${this.rg_aluno}/reprovar`,
+        this.url + `/graduacao/${this.rg_aluno}/reprovar/${nota}`,
         {},
         {
           headers: {
@@ -404,52 +439,6 @@ export class SessaoAlunoComponent implements OnInit {
           }
         }
       })
-  }
-
-  private adicionarAlunoATurma(nomeTurma: string) {
-    this.http
-      .post<{ message: string }>(
-        `${environment.urlApi}turma/${nomeTurma}/aluno`,
-        {
-          nome: this.aluno?.nome,
-          genero: this.aluno?.genero,
-          dataNascimento: this.dateToLocalDateString(this.aluno?.dataNascimento as string),
-          rg: this.aluno?.rg
-        },
-        {
-          headers: {
-            Authorization: 'Bearer ' + this.token
-          }
-        }
-      )
-      .subscribe({
-        next: (data) => {
-          window.confirm(data.message)
-          window.location.reload()
-        },
-        error: (error) => {
-          if (error.status === 401) {
-            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            this.authService.removeToken()
-            this.router.navigate(['/admin'])
-          }
-          if (
-            error.status === 400 ||
-            error.status === 403 ||
-            error.status === 404 ||
-            error.status === 409 ||
-            error.status === 411
-          ) {
-            window.confirm(error['error']['message'])
-          }
-        }
-      })
-  }
-
-  private dateToLocalDateString(dateString: string): string {
-    const parts = dateString.split('/')
-    const formattedDate = parts[2] + '-' + parts[1].padStart(2, '0') + '-' + parts[0].padStart(2, '0')
-    return formattedDate
   }
 
   private adapterAlunoParaAlunoEditado(aluno: AlunoResponse): AlunoEditado {

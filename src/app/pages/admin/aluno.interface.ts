@@ -3,6 +3,7 @@ interface Endereco {
   estado: string
   cep: string
   numero: string
+  logradouro: string
 }
 
 interface Responsavel {

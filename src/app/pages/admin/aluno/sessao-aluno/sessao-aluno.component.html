@@ -54,6 +54,9 @@
             <label for="estado" class="labels">Estado</label>
             <input type="text" name="estado" id="estado" class="form-control" placeholder="Estado"
               [(ngModel)]="aluno.endereco.estado" />
+            <label for="estado" class="labels">Logradouro</label>
+            <input type="text" name="estado" id="estado" class="form-control" placeholder="Estado"
+              [(ngModel)]="aluno.endereco.logradouro" />
           </div>
           <div class="col-md-9">
             <label for="cep" class="labels">CEP</label>
@@ -281,30 +284,55 @@
       <div class="row">
         <div class="col-md-12">
           <div class="card mt-3">
-            <div class="card-header d-flex justify-content-end align-items-center">
-              <button class="btn btn-primary" (click)="vincularAlunoAUmaTurma()" *ngIf="!aluno.turma">
-                + Turma
-              </button>
-              <span class="badge bg-info py-2 px-4" *ngIf="aluno.turma">{{ aluno.turma }}</span>
+            <div class="card-header d-flex justify-content-between wrap">
+              <div>
+                <h4 class="my-2">Graduação Atual</h4>
+                <div>
+                  <h6 class="card-subtitle text-muted badge"
+                    *ngIf="graduacaoAtual.dan >= 1; else noDan">
+                    {{ graduacaoAtual.dan }}º dan
+                  </h6>
+
+                  <ng-template #noDan>
+                    <h6 class="card-subtitle text-muted badge">
+                      {{ graduacaoAtual.kyu }}° Kyu
+                    </h6>
+                  </ng-template>
+                </div>
+              </div>
+              
+              <div *ngIf="modoEdicaoTurma">
+                <select id="kyu" name="kyu" [(ngModel)]="aluno.turma" class="form-select" required>
+                  <option *ngFor="let turma of turmas; let i = index" [value]="turma.nome" selected>
+                    {{ turma.nome }}
+                  </option>
+                </select>
+                <div class="d-flex justify-content-between align-items-center">
+                  <button class="btn btn-primary text-right my-2" (click)="setModoEdicaoTurma()">
+                    Salvar
+                  </button>
+                  <button class="btn btn-close" (click)="setModoEdicaoTurma()">
+                  </button>
+                </div>
+              </div>
+              <div *ngIf="!modoEdicaoTurma" class="d-flex align-items-center gap-2">
+                <span class="badge bg-info">
+                  {{aluno.turma}}
+                </span>
+                <div class="p-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-pencil-square text-info" viewBox="0 0 16 16" (click)="setModoEdicaoTurma()">
+                    <path
+                      d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                    <path fill-rule="evenodd"
+                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                  </svg>
+                </div>
+              </div>
             </div>
             <div class="card-body">
               <div class="d-flex justify-content-between">
                 <div>
-                  <div class="card-title d-flex align-items-center mb-2">
-                    <div>
-                      <h3 class="mb-0">Graduação Atual</h3>
-                    </div>
-
-                    <div>
-                      <h6 class="card-subtitle text-muted badge" *ngIf="graduacaoAtual.kyu > 1">
-                        {{ graduacaoAtual.kyu }}º Kyu
-                      </h6>
-                      <h6 class="card-subtitle text-muted badge" *ngIf="graduacaoAtual.dan > 0">
-                        {{ graduacaoAtual.dan }} Dan
-                      </h6>
-                    </div>
-                  </div>
-
                   <h6 class="card-subtitle mb-4 text-muted">
                     <b>Inicio:</b> {{ graduacaoAtual.inicioGraduacao }}
                     <small class="my-2"><br />
