@@ -90,13 +90,15 @@
       <nav class="navbar navbar-expand px-3 border-bottom d-flex justify-content-end">
         <button class="btn" type="button">
 
-          <span class="navbar-toggler-icon" aria-label="Toggle navigation" *ngIf="!showDropDown; else menuToggleClose"
-            (click)="setShowDropDown()" (keyup.enter)="setShowDropDown()" (keyup.space)="setShowDropDown()"
-            role="button" tabindex="0"></span>
+          <button class="bg-white border-0 p-0" aria-label="Toggle navigation"
+            *ngIf="!showDropDown; else menuToggleClose" (click)="setShowDropDown()" (keyup.enter)="setShowDropDown()"
+            (keyup.space)="setShowDropDown()" tabindex="0">
+            <i class="bi bi-list text-black fs-1"></i>
+          </button>
 
           <ng-template #menuToggleClose>
-            <span class="btn btn-close" aria-label="Close toggle navigation" (click)="setShowDropDown()"
-              (keyup.enter)="setShowDropDown()" (keyup.space)="setShowDropDown()" role="button" tabindex="0"></span>
+            <button class="btn btn-close" aria-label="Close toggle navigation" (click)="setShowDropDown()"
+              (keyup.enter)="setShowDropDown()" (keyup.space)="setShowDropDown()" tabindex="0"></button>
           </ng-template>
 
         </button>
@@ -187,15 +189,125 @@
   </aside>
 
   <div id="dashboard" class="container-fluid">
-    <div class="card">
-      <div class="card-header">
-        Featured
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Dashboard</h1>
+      <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+          <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+        </div>
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+          <span data-feather="calendar"></span>
+          This week
+        </button>
       </div>
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    </div>
+
+    <div class="card row m-0 mt-2">
+      <div class="col-md-12">
+        <div class="card-header text-center text-md-start">
+          <h4>Dados Gerais</h4>
+        </div>
+        <div class="card-body d-md-flex justify-content-evenly py-2 py-md-5 flex-wrap">
+          <div class="d-flex justify-content-evenly py-3">
+            <div>
+              <i class="bi bi-mortarboard text-white fs-1 text-center bg-danger p-3 rounded-circle mx-1"
+                aria-hidden="true"></i>
+            </div>
+            <div>
+              <h6>Total alunos</h6>
+              <span>201</span>
+            </div>
+          </div>
+          <div class="d-flex justify-content-evenly py-3">
+            <div>
+              <i class="bi bi-mortarboard text-white fs-1 text-center bg-danger p-3 rounded-circle mx-1"
+                aria-hidden="true"></i>
+            </div>
+            <div>
+              <h6>Total admins</h6>
+              <span>3</span>
+            </div>
+          </div>
+          <div class="d-flex justify-content-evenly py-3">
+            <div>
+              <i class="bi bi-mortarboard text-white fs-1 text-center bg-danger p-3 rounded-circle mx-1"
+                aria-hidden="true"></i>
+            </div>
+            <div>
+              <h6>Total turmas</h6>
+              <span>4</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer d-flex justify-content-center">
+          <a href="/admin/{{email}}/turmas"><button class="btn btn-primary">Ver turmas</button></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row m-0 mt-5">
+      <div class="col-md-12">
+        <table class="table table-striped text-center" aria-describedby="tabela dos admins">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Qtd turmas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card row m-0 mt-5">
+      <div class="col-md-12 p-0">
+        <div class="card-header">
+          <h4>Alunos por genero</h4>
+        </div>
+        <div>
+          <canvas id="alunosGenero">
+          </canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="card row m-0 mt-5">
+      <div class="card-header">
+        <h5>Alunos por idade</h5>
+      </div>
+      <div class="card-body p-0 mt-3">
+        <canvas id="alunosIdade"></canvas>
+      </div>
+    </div>
+
+    <div class="card row m-0 mt-5">
+      <div class="col-md-12">
+        <div class="card-header">
+          <h5>Alunos por turma</h5>
+        </div>
+        <div class="card-body p-0 mt-3">
+          <canvas id="alunosRenda"></canvas>
+        </div>
       </div>
     </div>
   </div>
-
 </div>

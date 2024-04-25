@@ -44,7 +44,8 @@ export class SessaoAlunoComponent implements OnInit {
     frequencia: 0,
     aprovado: false,
     cargaHoraria: 0,
-    dan: 0
+    dan: 0,
+    nota: 0
   }
 
   ngOnInit(): void {

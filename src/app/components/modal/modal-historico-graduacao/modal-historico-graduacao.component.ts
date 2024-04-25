@@ -3,8 +3,7 @@ import { Graduacao } from 'src/app/pages/admin/aluno.interface'
 
 @Component({
   selector: 'app-modal-historico-graduacao',
-  templateUrl: './modal-historico-graduacao.component.html',
-  styleUrls: ['./modal-historico-graduacao.component.css']
+  templateUrl: './modal-historico-graduacao.component.html'
 })
 export class ModalHistoricoGraduacaoComponent {
   @Input()

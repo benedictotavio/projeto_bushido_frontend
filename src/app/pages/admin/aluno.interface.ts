@@ -30,6 +30,7 @@ export interface Graduacao {
   aprovado: boolean
   cargaHoraria: number
   dan: number
+  nota: number
 }
 
 interface UsoMedicamento {
@@ -103,8 +104,6 @@ interface HistoricoSaudeEditado {
 
 export interface AlunoEditado {
   nome: string
-  // TODO: colocar tipo long na data
-  //dataNascimento: string
   genero: string
   turma: string
   dadosSociais: DadosSociais
