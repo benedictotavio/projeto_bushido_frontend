@@ -31,7 +31,7 @@ li {
 
 @media (min-width: 768px) {
   #sidebar {
-    min-height: 100vh;
+    min-height: 100%;
   }
 }
 
@@ -97,3 +97,4 @@ a.sidebar-link {
     width: auto;
   }
 }
+

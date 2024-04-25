@@ -58,7 +58,8 @@ export class RegistroAlunoComponent implements OnInit {
     estado: '',
     cidade: '',
     cep: '',
-    numero: ''
+    numero: '',
+    logradouro: ''
   }
 
   dadosSociais: DadosSociaisProps = {
@@ -82,8 +83,8 @@ export class RegistroAlunoComponent implements OnInit {
     rg: '',
     responsaveis: this.responsavel,
     graduacao: {
-      kyu: 7,
-      dan: 1
+      kyu: 0,
+      dan: 0
     },
     historicoSaude: this.historicoSaude
   }
@@ -97,27 +98,6 @@ export class RegistroAlunoComponent implements OnInit {
 
   ngOnInit(): void {
     this.listarTurmas()
-  }
-
-  private buscarTurmaPorNome() {
-    this.http
-      .get<Turma>(environment.urlApi + `turma/${this.aluno.turma}`, {
-        headers: {
-          Authorization: 'Bearer ' + this.token
-        }
-      })
-      .subscribe({
-        next: (data) => {
-          this.turmas.push(data)
-        },
-        error: (error) => {
-          if (error.status === 401) {
-            window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
-            this.authService.removeToken()
-            this.router.navigate(['/admin'])
-          }
-        }
-      })
   }
 
   private listarTurmas() {
@@ -202,10 +182,6 @@ export class RegistroAlunoComponent implements OnInit {
     }
   }
 
-  private valorNoArray(arrStrings: string[], valor: string) {
-    return arrStrings.includes(valor)
-  }
-
   protected buscarEnderecoPeloCep() {
     if (this.removeSpecialCharacters(this.endereco.cep).length !== 8) {
       return
@@ -219,6 +195,7 @@ export class RegistroAlunoComponent implements OnInit {
             this.endereco.cep = data.cep
             this.endereco.cidade = data.localidade
             this.endereco.estado = data.uf
+            this.endereco.logradouro = data.logradouro
           }
         },
         error: (error) => {
@@ -232,6 +209,10 @@ export class RegistroAlunoComponent implements OnInit {
           }
         }
       })
+  }
+
+  private valorNoArray(arrStrings: string[], valor: string) {
+    return arrStrings.includes(valor)
   }
 
   private removeSpecialCharacters(inputString: string): string {

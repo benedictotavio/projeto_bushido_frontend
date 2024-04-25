@@ -7,8 +7,7 @@ import { AuthService } from 'src/app/services/services-admin/auth.service'
 
 @Component({
   selector: 'app-buscar-aluno',
-  templateUrl: './buscar-aluno.component.html',
-  styleUrls: ['./buscar-aluno.component.css']
+  templateUrl: './buscar-aluno.component.html'
 })
 export class BuscarAlunoComponent {
   protected alunos: AlunoResponse[] = []

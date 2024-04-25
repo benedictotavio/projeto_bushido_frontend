@@ -74,6 +74,7 @@ interface EnderecoProps {
   estado: string
   cep: string
   numero: string
+  logradouro: string
 }
 
 interface EnderecoViaCepResponse {
