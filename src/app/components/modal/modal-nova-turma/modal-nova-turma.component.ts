@@ -25,7 +25,6 @@ export class ModalNovaTurmaComponent {
   protected nomeTurma = this.route.snapshot.paramMap.get('nomeTurma')
   private readonly rg = this.route.snapshot.paramMap.get('rg')
   protected selectedAdmin = false
-
   protected novaTurma: Turma = {
     nome: '',
     tutor: {
@@ -34,10 +33,10 @@ export class ModalNovaTurmaComponent {
     },
     endereco: ''
   }
-
   protected adminsEncontrados: AdminResponse[] | undefined
+
   protected buscarAdminPorNome(nome: string) {
-    if (nome === '') {
+    if (nome.trim() === '') {
       return
     }
 
@@ -69,6 +68,7 @@ export class ModalNovaTurmaComponent {
   }
 
   protected adicionarTurma() {
+    this.novaTurma.nome = this.novaTurma.nome.trim()
     this.http
       .post<{ message: string }>(this.url + `turma`, this.novaTurma, {
         headers: {
