@@ -14,14 +14,14 @@
   <div *ngIf="!turmaEncontrada">
     <ul class="nav nav-tabs my-2 justify-content-end" *ngIf="isAdmin()">
       <li class="nav-item" style="cursor: pointer;">
-        <a class="nav-link" [class.active]="activeTab === '#tab1'" (click)="handleTabClick('#tab1')"
-          (keyup.enter)="handleTabClick('#tab1')" (keyup.space)="handleTabClick('#tab1')" role="tab"
+        <a class="nav-link" [class.active]="activeTab === '#tab1'" (click)="mudarTabs('#tab1')"
+          (keyup.enter)="mudarTabs('#tab1')" (keyup.space)="mudarTabs('#tab1')" role="tab"
           tabindex="0">Turmas</a>
       </li>
 
       <li class="nav-item" style="cursor: pointer;">
-        <a class="nav-link" [class.active]="activeTab === '#tab2'" (click)="handleTabClick('#tab2')"
-          (keyup.enter)="handleTabClick('#tab2')" (keyup.space)="handleTabClick('#tab2')" role="tab" tabindex="0">Minhas
+        <a class="nav-link" [class.active]="activeTab === '#tab2'" (click)="mudarTabs('#tab2')"
+          (keyup.enter)="mudarTabs('#tab2')" (keyup.space)="mudarTabs('#tab2')" role="tab" tabindex="0">Minhas
           Turmas</a>
       </li>
 

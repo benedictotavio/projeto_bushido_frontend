@@ -21,7 +21,7 @@
         <form>
           <div>
             <input type="text" name="nome" [(ngModel)]="novaTurma.nome" id="nome" class="form-control mb-2"
-              placeholder="Nome" required />
+              placeholder="Nome da turma" required />
           </div>
           <div>
             <input type="text" name="endereco" [(ngModel)]="novaTurma.endereco" id="tutor" class="form-control mb-2"
@@ -46,7 +46,7 @@
           </div>
           <ul class="list-group my-3" *ngFor="let admin of adminsEncontrados">
             <li class="list-group-item card-tutor-selected" [class.active]="selectedAdmin"
-              (click)="selecionarAdmin(admin)">
+              (click)="selecionarAdmin(admin)" (keydown.enter)="selecionarAdmin(admin)">
               <i>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                   class="bi bi-person-circle text-dark" viewBox="0 0 16 16">
