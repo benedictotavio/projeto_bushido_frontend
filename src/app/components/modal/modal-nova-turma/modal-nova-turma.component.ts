@@ -41,7 +41,7 @@ export class ModalNovaTurmaComponent {
     }
 
     this.http
-      .get<AdminResponse[]>(environment.urlApi + `admin/users?nome=${nome}`, {
+      .get<AdminResponse[]>(environment.urlApi + `admin/buscar?nome=${nome}`, {
         headers: {
           Authorization: `Bearer ${this.token}`
         }
