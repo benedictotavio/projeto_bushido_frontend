@@ -1,0 +1,498 @@
+<div class="container rounded bg-white mt-5 mb-5"> 
+  <div class="row">
+    <div class="col-md-2 border-right">
+      <a class="text-white text-decoration-none placeholder-glow" href="#">
+        <button class="btn ms-2 mt-2 placeholder">Dashboard</button>
+      </a>
+      <div class="d-flex flex-column align-items-center text-center p-3">
+          <div class=" placeholder-glow">
+              <span class="rounded-circle mt-5 p-5 placeholder" alt="user profile"></span>
+          </div>
+        
+        <span class="placeholder-glow">
+          <span class="placeholder"> Aluno.nome</span>
+        
+        </span>
+        <span class=" placeholder-glow">
+          <span class="placeholder">Inscrição:</span>
+          <span class="placeholder">
+              <b class="placeholder-grow">
+                  aluno.dataPreenchimento
+               </b>
+          </span>
+          
+        </span>
+        <span class="placeholder-glow mt-2">
+          <span class="placeholder">aluno.rg </span> 
+        </span>
+      </div>
+    </div>
+
+    <div class="col-md-6 border-right">
+      <div class="py-2">
+        <div class="row mt-2">
+          <div class="col-md-6">
+              <span class="placeholder-glow">
+                  <label for="nome" class="labels placeholder">Nome</label>
+              </span>
+              <span class="placeholder-glow">
+                  <input  name="nome" id="nome" type="text" class="form-control placeholder" placeholder="Nome" />
+              </span>
+           
+            
+          </div>
+          <div class="col-md-3">
+
+              <span class="placeholder-glow">
+               <label for="dataNascimento" class="labels placeholder">Data nasc</label>
+              </span>
+
+            <span class="placeholder-glow">
+              <input type="text" name="dataNascimento" class="form-control placeholder" placeholder="Data de Nascimento"
+               readonly />
+            </span>
+            
+          </div>
+          <div class="col-md-3">
+              <span class="placeholder-glow">
+                  <label for="genero" class="labels placeholder">Genero</label>
+              </span>
+              <span class="placeholder-glow">
+                <select type="text" name="genero" class="form-control placeholder" placeholder="Data de Nascimento">
+                  <option value="M">Masculino</option>
+                  <option value="F">Feminino</option>
+                  <option value="OUTRO">Outro</option>
+                </select>
+              </span>
+              
+           
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-12">
+              <span class="placeholder-glow">
+                  <label for="cidade" class="labels placeholder">Cidade</label>
+              </span>
+
+           <span class="placeholder-glow">
+              <input type="text" name="cidade" id="cidade" class="form-control placeholder" placeholder="Cidade"
+              />
+           </span>
+            
+          </div>
+          <div class="col-md-12">
+              <span class="placeholder-glow">
+                  <label for="estado" class="labels placeholder">Estado</label>
+              </span>
+           
+              <span class="placeholder-glow">
+                  <input type="text" name="estado" id="estado" class="form-control placeholder" placeholder="Estado"
+               />
+              </span>
+
+            <span class="placeholder-glow">
+              <label for="estado" class="labels placeholder">Logradouro</label>
+            </span>
+
+            <span class="placeholder-glow">
+              <input type="text" name="estado" id="estado" class="form-control placeholder" placeholder="Estado"
+              />
+            </span>
+            
+          </div>
+          <div class="col-md-9">
+              <span class="placeholder-glow">
+                  <label for="cep" class="labels placeholder">CEP</label>
+              </span>
+           <span class="placeholder-glow">
+              <input type="text" name="cep" id="cep" class="form-control placeholder" placeholder="CEP"
+              />
+           </span>
+          </div>
+          <div class="col-md-3">
+              <span class="placeholder-glow">
+                  <label for="numero" class="labels placeholder">Numero</label>
+              </span>
+            
+              <span class="placeholder-glow">
+                  <input type="text" name="numero" id="numero" class="form-control placeholder" placeholder="Nº"
+                  />
+              </span>
+           
+          </div>
+        </div>
+        <div class="row mt-4">
+          <span class="placeholder-glow">
+              <h4 class="placeholder">Dados Escolares</h4>
+          </span>
+          <div class="col-md-6">
+              <span class="placeholder-glow">
+                  <label for="serie" class="labels placeholder">Serie</label>
+              </span>
+            
+              <span class="placeholder-glow">
+                  <input type="number" name="serie" id="serie" class="form-control placeholder" placeholder="Serie"/>
+              </span>
+          </div>
+          <div class="col-md-6 d-flex align-items-end placeholder-glow">
+            <select class="turno w-100 my-3 rounded text-center placeholder" aria-label="turno" name="turno"
+               id="turno" required>
+              <option value="MANHA">Matutino</option>
+              <option value="TARDE">Tarde</option>
+              <option value="NOITE">Noturno</option>
+            </select>
+          </div>
+          <div class="col-md-12">
+              <span class="placeholder-glow">
+                  <label for="escola" class="labels placeholder">Escola</label></span>
+              <span class="placeholder-glow">
+                  <input type="text" name="escola" id="escola" class="form-control placeholder" placeholder="Escola"
+              />
+              </span>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <span class="placeholder-glow">
+              <h4 class="placeholder">Dados Sociais</h4>
+          </span>
+          <div class="col-md-12">
+              <span class="placeholder-glow">
+                  <h4 class="placeholder">Dados Sociais</h4>
+              </span>
+              <span class="placeholder-glow">
+                  <label for="imovel" class="form-label placeholder">Imovel</label>
+              </span>
+            <div class="col-md-12">
+              <span class="placeholder-glow">
+              <select class="imovel p-2 w-100 placeholder" aria-label="imovel" name="imovel" 
+                required>
+                <option value="CEDIDO">Cedido</option>
+                <option value="ALUGADO">Alugado</option>
+                <option value="PROPRIO">Proprio</option>
+              </select>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4 d-flex align-items-end">
+          <div class="col-md-3">
+              <span class="placeholder-glow">
+                  <label for="rendaFamiliar" class="form-label placeholder">Renda Familiar</label>
+              </span>
+              
+              <span class="placeholder-glow">
+                  <input name="rendaFamiliar" id="rendaFamiliar" type="text" class="form-control placeholder"
+                  />
+              </span>
+          </div>
+          <div class="col-md-6">
+              <span class="placeholder-glow">
+                  <label for="contribuintesDaRenda" class="form-label placeholder">Contribuintes da Renda</label>
+              </span>
+              <span class="placeholder-glow">
+                  <input name="contribuintesDaRenda" id="contribuintesDaRenda" type="text" class="form-control placeholder"
+                  />
+              </span>
+          </div>
+          <div class="col-md-3">
+              <span class="placeholder-glow">
+                  <label for="pessoasNaCasa" class="form-label placeholder">Pessoas na Casa</label>
+              </span>
+              <span class="placeholder-glow">
+                  <input name="pessoasNaCasa" id="pessoasNaCasa" type="text" class="form-control placeholder"
+               />
+              </span>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-12">
+              <span class="placeholder-glow">
+                  <h6 class="placeholder">Informações socias para dados do aluno</h6>
+              </span>
+            <div class="mt-4">
+              <div class="mb-3 form-check">
+                  <span class="placeholder-glow">
+                      <input type="checkbox" class="form-check-input placeholder" id="bolsaFamilia" name="bolsaFamilia"
+                  />
+                  </span>
+                  <span class="placeholder-glow">
+                      <label class="form-check-label placeholder" for="bolsaFamilia">Bolsa Família</label>
+                  </span>
+              </div>
+
+              <div class="mb-3 form-check">
+                  <span class="placeholder-glow">
+                      <input type="checkbox" class="form-check-input placeholder" id="auxilioBrasil" name="auxilioBrasil"
+                   />
+                  </span>
+                  <span class="placeholder-glow">
+                      <label class="form-check-label placeholder" for="auxilioBrasil">Auxílio Brasil</label>
+                  </span>
+              </div>
+
+              <div class="mb-3 form-check">
+                  <span class="placeholder-glow">
+                      <input type="checkbox" class="form-check-input placeholder" id="alunoContribuiParaRenda"
+                      name="alunoContribuiParaRenda"/>
+                  </span>
+                  <span class="placeholder-glow">
+                      <label class="form-check-label placeholder" for="alunoContribuiParaRenda">Aluno Contribui para Renda</label>
+                  </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+         <span class="placeholder-glow">
+          <h5 class="placeholder">Historico de Saude</h5>
+         </span>
+          <div class="row mt-4">
+            <div class="row my-3">
+              <div class="col-md-6">
+                  <span class="placeholder-glow">
+                      <label for="tipoSanguineo" class="form-label placeholder">Tipo Saguineo</label>
+                  </span>
+                  <span class="placeholder-glow">
+                      <select class="form-select placeholder" aria-label="Tipo sanguineo" id="tipoSanguineo" name="tipoSanguineo">
+                          <option selected disabled>Tipo sanguineo</option>
+                          <option value="A_POSITIVO">A+</option>
+                          <option value="A_NEGATIVO">A-</option>
+                          <option value="B_POSITIVO">B+</option>
+                          <option value="B_NEGATIVO">B-</option>
+                          <option value="AB_POSITIVO">AB+</option>
+                          <option value="AB_NEGATIVO">AB-</option>
+                          <option value="O_POSITIVO">O+</option>
+                          <option value="O_NEGATIVO">O-</option>
+                      </select>
+                  </span>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <span class="placeholder-glow">
+                  <label for="alergia" class="form-label placeholder">Alergias</label>
+              </span>
+              <span class="placeholder-glow">
+                  <input name="alergia" id="alergia" type="text" class="form-control placeholder"
+                />
+              </span>
+            </div>
+            <div class="col-md-12">
+              <span class="placeholder-glow">
+                  <label for="usoMedicamentoContinuo" class="form-label placeholder">Uso de Medicamento Continuo</label>
+              </span>
+              <span class="placeholder-glow">
+                  <input name="usoMedicamentoContinuo" id="usoMedicamentoContinuo" type="text" class="form-control placeholder"
+                />
+              </span>
+            </div>
+            <div class="col-md-12">
+              <span class="placeholder-glow">
+                <label for="cirurgia" class="form-label placeholder">Cirurgias</label>
+              </span>
+              
+              <span class="placeholder-glow">
+                <input name="cirurgia" id="cirurgia" type="text" class="form-control placeholder"
+                 />
+              </span>
+            </div>
+            <div class="col-md-12">
+              <span class="placeholder-glow">
+                <label for="doencaCronica" class="form-label placeholder">Doenca cronica</label>
+              </span>
+              <span class="placeholder-glow">
+                <input name="doencaCronica" id="doencaCronica" type="text" class="form-control placeholder"
+                />
+              </span>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div>
+              <div class="col-md-12 d-flex justify-content-end" >
+               <span class="placeholder-glow">
+                <button  class="btn placeholder  profile-button " type="button"
+                >
+                Editar
+              </button>
+               </span>
+                <div  class="d-flex justify-content-around align-items-center">
+                  <span class="placeholder-glow">
+                    <button class="btn placeholder profile-button " type="button">
+                      Cancelar
+                    </button>
+                  </span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-end my-5">
+                <div>
+                  <span class="placeholder-glow">
+                    <h5 class="placeholder">Insire as novas Informações:</h5>
+                  </span>
+                 
+                </div>
+              </div>
+              <div>
+
+                <div>
+                  <span class="placeholder-glow">
+                    <span class=" w-75 form-control placeholder">Adicionar Deficiencia</span>
+                  </span>
+                </div>
+                
+                <div class="d-flex justify-content-end">
+                  <span class="placeholder-glow">
+                    <button class="btn placeholder m-2">
+                      Adicionar
+                    </button>
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <div class="panel-heading">
+                  <span class="placeholder-glow">
+                    <h5 class="placeholder">Deficiencias</h5>
+                  </span>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <ul class="d-flex flex-wrap">
+                      <span class="placeholder-glow">
+                        <li class=" rounded m-2 py-2 px-3  placeholder">
+                          str 
+                       </li>
+                      </span>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-4">
+              <div>
+                <div class="placeholder-glow">
+                  <input class="w-75 m-1 form-control placeholder" type="text" name="acompanhamentoSaude" id="acompanhamentoSaude"/>
+                </div>
+               
+                  
+                
+                <div class="d-flex justify-content-end">
+                  <span class="placeholder-glow"></span>
+                  <button class="btn m-2 placeholder" >
+                    Adicionar
+                  </button>
+                </div>
+              </div>
+              <div>
+                <div class="panel-heading">
+                  <span class="placeholder-glow">
+                    <h5 class="placeholder">Acompanhamento de saúde</h5>
+                  </span>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="my-5 d-flex justify-content-center placeholder-glow">
+              <button class="btn placeholder profile-button w-75 h-100" type="button">
+                Salvar Aluno
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card mt-3">
+              <div class="placeholder-glow">
+                  <div class="card-header d-flex justify-content-between wrap placeholder">
+                      <div>
+                          <h4 class="my-2">Graduação Atual</h4>
+                          <div>
+                            <h6 class="card-subtitle text-muted badge">
+                              graduacaoAtual.dan º dan
+                            </h6>
+                            <ng-template #noDan>
+                              <h6 class="card-subtitle text-muted badge">
+                                 graduacaoAtual.kyu° Kyu
+                              </h6>
+                            </ng-template>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="placeholder-glow">
+                  <div class="card-body placeholder w-100">
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          <h6 class="card-subtitle mb-4 text-muted">
+                            <b>Inicio:</b>
+                            <small class="my-2"><br />
+                              <b>Frequência:</b> % </small><br />
+                            <small class="my-2">
+                              <b>Carga Horária:</b> h
+                            </small>
+                          </h6>
+                        </div>
+                      </div>
+                      <div class="card-text">
+                        <div class="d-flex justify-content-between container">
+                          <div>
+                            <h6>Faltas</h6>
+                          </div>
+                          <!---
+                          <app-modal-responsavel></app-modal-responsavel>
+                          <app-modal-falta></app-modal-falta>
+                          -->
+                          
+                        </div>
+                        <p class="text-muted text-center mt-2 mb-5">
+                          O aluno não possui faltas
+                        </p>
+                      </div>
+                    </div>
+              </div>
+
+              
+           
+          </div>
+          <div class="col-md-12 mt-4">
+            <div class="d-flex justify-content-between">
+              <div class="placeholder-glow">
+                <h5 class="placeholder">Responsaveis</h5>
+              </div>
+              <div>
+                
+              </div>
+            </div>
+            <div class="card placeholder-glow">
+              <div class="card-body d-lg-flex align-items-center justify-content-around text-lg-start d-block text-center placeholder">
+                <div class="ms-lg-4">
+                  <div>
+                    <span> responsavel.filiacao</span>
+                    <h5 class="card-title"> responsavel.nome</h5>
+                  </div>
+                  <div>
+                    <div>
+                      <span class="card-text"> responsavel.cpf</span>
+                    </div>
+                    <div>
+                      <span class="card-text"> responsavel.email </span>
+                    </div>
+                    <div>
+                      <span class="card-text">responsavel.telefone</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
