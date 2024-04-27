@@ -47,7 +47,7 @@ import { ModalAlunoTurmaComponent } from './components/modal/modal-aluno-turma/m
 import { ModalNovaTurmaComponent } from './components/modal/modal-nova-turma/modal-nova-turma.component'
 import { CardBuscaAlunoComponent } from './components/cards/card-busca-aluno/card-busca-aluno.component'
 import { ModalResponsavelComponent } from './components/modal/modal-responsavel/modal-responsavel.component'
-import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt'
 import { PlaceholderSessaoAlunoComponent } from './pages/admin/aluno/sessao-aluno/components/placeholder-sessao-aluno/placeholder-sessao-aluno.component'
 
 @NgModule({
