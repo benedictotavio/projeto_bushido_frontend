@@ -19,7 +19,7 @@ export class ModalFaltaComponent {
 
   private readonly url = environment.urlApi + 'aluno/falta'
   private readonly token = localStorage.getItem('token')
-  private readonly rg = this.route.snapshot.paramMap.get('rg')
+  private readonly cpf = this.route.snapshot.paramMap.get('cpf')
 
   novaFalta = {
     data: '',
@@ -30,7 +30,7 @@ export class ModalFaltaComponent {
   protected adicionarFalta() {
     this.novaFalta.data = this.dateToMilliseconds(this.novaFalta.data)
     this.http
-      .post<{ message: string }>(this.url + `/${this.rg}/${this.novaFalta.data}`, this.novaFalta, {
+      .post<{ message: string }>(this.url + `/${this.cpf}/${this.novaFalta.data}`, this.novaFalta, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + this.token

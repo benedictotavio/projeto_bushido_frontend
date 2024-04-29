@@ -27,8 +27,8 @@
                 class="form-control"
                 id="rg"
                 name="rg"
-                placeholder="Digite o RG do Aluno"
-                [(ngModel)]="rg"
+                placeholder="Digite o CPF do Aluno"
+                [(ngModel)]="cpf"
                 required
               />
             </div>
@@ -41,7 +41,7 @@
           <div (click)="adicionarAlunoATurma()" class="col-md-12 card card-aluno">
             <div class="card-body">
               <h5 class="card-title">{{ aluno.nome }}</h5>
-              <p class="card-text">RG: {{ aluno.rg }}</p>
+              <p class="card-text">RG: {{ aluno.cpf }}</p>
             </div>
           </div>
         </div>

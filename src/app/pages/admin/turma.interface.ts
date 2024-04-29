@@ -9,7 +9,7 @@ export interface Turma {
 
 interface AlunoTurma {
   nome: string
-  rg: string
+  cpf: string
   genero: string
   dataNascimento: Date
 }

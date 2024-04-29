@@ -32,8 +32,8 @@ export class BuscarAlunoComponent {
       return
     }
 
-    if (this.validarRG(this.pesquisarAluno.trim())) {
-      this.buscarAlunoPorRg()
+    if (this.validarCpf(this.pesquisarAluno.trim())) {
+      this.buscarAlunoPorCpf()
       this.searchBy = true
       return
     }
@@ -43,9 +43,9 @@ export class BuscarAlunoComponent {
     this.searchBy = true
   }
 
-  protected buscarAlunoPorRg() {
+  protected buscarAlunoPorCpf() {
     this.http
-      .get<AlunoResponse[]>(this.apiUrl + `?rg=${this.pesquisarAluno}`, {
+      .get<AlunoResponse[]>(this.apiUrl + `?cpf=${this.pesquisarAluno}`, {
         headers: {
           Authorization: 'Bearer ' + this.token
         }
@@ -96,8 +96,8 @@ export class BuscarAlunoComponent {
       })
   }
 
-  private validarRG(rg: string) {
-    const rgPattern = /^(\d{6,9})$/
+  private validarCpf(rg: string) {
+    const rgPattern = /^(\d{11})$/
     return rgPattern.test(rg)
   }
 

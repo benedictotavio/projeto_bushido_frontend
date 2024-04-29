@@ -23,7 +23,6 @@ export class ModalNovaTurmaComponent {
   private readonly url = environment.urlApi
   private readonly token = localStorage.getItem('token')
   protected nomeTurma = this.route.snapshot.paramMap.get('nomeTurma')
-  private readonly rg = this.route.snapshot.paramMap.get('rg')
   protected selectedAdmin = false
   protected novaTurma: Turma = {
     nome: '',

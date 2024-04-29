@@ -88,7 +88,7 @@ export interface AlunoResponse {
   dadosEscolares: DadosEscolares
   dataPreenchimento: string
   endereco: Endereco
-  rg: string
+  cpf: string
   responsaveis: Responsavel[]
   graduacao: Graduacao[]
   historicoSaude: HistoricoSaude

@@ -17,7 +17,7 @@
           </b>
         </span>
         <span class="text-black-50">
-          {{ aluno.rg }}
+          {{ aluno.cpf }}
         </span>
       </div>
     </div>
@@ -273,7 +273,7 @@
             </div>
           </div>
           <div class="my-5 d-flex justify-content-center" *ngIf="isAdmin()">
-            <button (click)="editarAlunoPorRg()" class="btn btn-primary profile-button w-75 h-100" type="button">
+            <button (click)="editarAlunoPorCpf()" class="btn btn-primary profile-button w-75 h-100" type="button">
               Salvar Aluno
             </button>
           </div>
