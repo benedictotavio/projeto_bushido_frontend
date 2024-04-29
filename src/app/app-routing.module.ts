@@ -49,7 +49,7 @@ const routes: Routes = [
     component: BuscarAlunoComponent
   },
   {
-    path: 'admin/:email/aluno/:rg',
+    path: 'admin/:email/aluno/:cpf',
     canActivate: [isAuthenticated],
     component: SessaoAlunoComponent
   },

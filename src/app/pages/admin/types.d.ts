@@ -1,4 +1,5 @@
 interface AlunoProps {
+  cpf: string
   nome: string
   turma: string
   genero: 'M' | 'F' | 'OUTRO'
@@ -6,7 +7,6 @@ interface AlunoProps {
   dadosSociais: DadosSociaisProps
   dadosEscolares: DadosEscolaresProps // Assuming date format is "yyyy-MM-ddTHH:mm:ss"
   endereco: EnderecoProps
-  rg: string
   responsaveis: ResponsavelProps
   graduacao: {
     kyu: number

@@ -73,14 +73,14 @@ export class RegistroAlunoComponent implements OnInit {
   }
 
   aluno: AlunoProps = {
+    cpf: '',
     nome: '',
     genero: 'OUTRO',
     turma: '',
-    dataNascimento: new Date().getTime(),
+    dataNascimento: 0,
     dadosSociais: this.dadosSociais,
     dadosEscolares: this.dadosEscolares,
     endereco: this.endereco,
-    rg: '',
     responsaveis: this.responsavel,
     graduacao: {
       kyu: 0,
@@ -122,7 +122,7 @@ export class RegistroAlunoComponent implements OnInit {
   }
 
   protected registrarAluno() {
-    this.aluno.dataNascimento = new Date(this.aluno.dataNascimento).getTime()
+    this.aluno.dataNascimento = new Date(this.aluno.dataNascimento + 'T00:00:00').getTime()
     this.http
       .post<{ id: string; message: string }>(this.ApiBushido, this.aluno, {
         headers: {
