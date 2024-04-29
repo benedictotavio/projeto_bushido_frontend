@@ -32,7 +32,7 @@ export class BuscarAlunoComponent {
       return
     }
 
-    if (this.validarRG(this.pesquisarAluno.trim())) {
+    if (this.validarCpf(this.pesquisarAluno.trim())) {
       this.buscarAlunoPorCpf()
       this.searchBy = true
       return
@@ -96,8 +96,8 @@ export class BuscarAlunoComponent {
       })
   }
 
-  private validarRG(rg: string) {
-    const rgPattern = /^(\d{6,9})$/
+  private validarCpf(rg: string) {
+    const rgPattern = /^(\d{11})$/
     return rgPattern.test(rg)
   }
 

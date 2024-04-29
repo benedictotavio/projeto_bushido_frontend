@@ -4,6 +4,15 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { environment } from 'src/environments/environment'
 import { Turma } from '../../turma.interface'
 import { AuthService } from 'src/app/services/services-admin/auth.service'
+import {
+  AlunoProps,
+  DadosEscolaresProps,
+  DadosSociaisProps,
+  EnderecoProps,
+  EnderecoViaCepResponse,
+  ResponsavelProps,
+  historicoSaudeProps
+} from '../../types'
 
 @Component({
   selector: 'app-registro-aluno',

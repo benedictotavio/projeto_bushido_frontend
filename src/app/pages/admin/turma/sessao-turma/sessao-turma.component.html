@@ -29,15 +29,15 @@
       <tr *ngFor="let aluno of alunosDaTurma?.alunos; let i = index">
         <th scope="row">{{ i + 1 }}</th>
         <td class="text-capitalize text-primary">
-          <a href="admin/{{ email }}/aluno/{{ aluno.rg }}" class="text-decoration-none">
+          <a href="admin/{{ email }}/aluno/{{ aluno.cpf }}" class="text-decoration-none">
             {{ aluno.nome }}
           </a>
         </td>
         <td>{{ definirIdadePorDataNascimento(aluno.dataNascimento) }}</td>
         <td>{{ aluno.genero }}</td>
-        <td>{{ aluno.rg }}</td>
+        <td>{{ aluno.cpf }}</td>
         <td>
-          <button class="btn btn-warning" (click)="adicionarFaltaAoAluno(aluno.rg)">+</button>
+          <button class="btn btn-warning" (click)="adicionarFaltaAoAluno(aluno.cpf)">+</button>
         </td>
       </tr>
     </tbody>

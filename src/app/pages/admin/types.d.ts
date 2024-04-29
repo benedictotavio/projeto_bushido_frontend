@@ -55,7 +55,7 @@ interface historicoSaudeProps {
   acompanhamentoSaude: string[]
 }
 
-interface ResponsavelProps {
+export interface ResponsavelProps {
   nome: string
   cpf: string
   telefone: string
