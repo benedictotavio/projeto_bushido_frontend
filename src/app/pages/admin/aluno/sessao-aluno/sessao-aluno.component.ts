@@ -445,7 +445,6 @@ export class SessaoAlunoComponent implements OnInit {
   private adapterAlunoParaAlunoEditado(aluno: AlunoResponse): AlunoEditado {
     return {
       nome: aluno.nome,
-      // dataNascimento: aluno.dataNascimento,
       genero: aluno.genero,
       turma: aluno.turma,
       dadosSociais: aluno.dadosSociais,
