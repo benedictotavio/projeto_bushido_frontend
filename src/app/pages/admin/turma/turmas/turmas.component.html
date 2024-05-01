@@ -7,6 +7,17 @@
     <input type="submit" class="btn btn-primary mx-2" value="Buscar" (click)="buscarTurmaPorNome(nomeTurma)" />
   </div>
 
+  <div class="justify-content-center mb-5">
+    <h1 class="fs-2">Buscar turma por data </h1>
+    <label for="dataInicial" class="mt-2">Data Inicial</label>
+    <input type="date" class="form-control mt-2" name="dataInicial" id="dataInicial" placeholder="Digite a data inicial" [(ngModel)]="dataInicial" required>
+
+    <label for="dataInicial" class="mt-2">Data Final</label>
+    <input type="date" class="form-control mt-2" name="dataFinal" id="dataFinal" placeholder="Digite a data Final" [(ngModel)]="DataFinal" required>
+    <input type="submit" class="btn btn-primary mt-2" value="Buscar" (click)="buscarPorData()">
+    
+  </div>
+
   <div *ngIf="isAdmin()">
     <app-modal-nova-turma></app-modal-nova-turma>
   </div>
