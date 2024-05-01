@@ -1,0 +1,23 @@
+button#btnFiltrarAtivo {
+    background-color: #007bff;
+    color: #fff;
+    min-width: 130px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button#btnFiltrarAtivo:hover {
+    background-color: #0069d9;
+    color: #fff;
+}
+
+div#formFiltrar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: example 0.5s ease-in-out;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    color: #000;
+}

@@ -29,6 +29,7 @@ export class TurmasComponent implements OnInit {
   protected activeTab = '#tab1'
   protected dataInicial!: number
   protected DataFinal!: number
+  protected filtrarBuscaTurma = false
 
   ngOnInit(): void {
     if (this.role?.toUpperCase() !== 'ADMIN') {
@@ -91,30 +92,30 @@ export class TurmasComponent implements OnInit {
     return this.role?.toUpperCase() === 'ADMIN'
   }
 
-  buscarPorData(): void{
-    const dataInicial =  new Date(this.dataInicial).getTime()
+  buscarPorData() {
+    const dataInicial = new Date(this.dataInicial).getTime()
     const DataFinal = new Date(this.DataFinal).getTime()
 
-    this.http.get(this.apiUrl + `{turma?dataInicial=${dataInicial}&dataFinal=${DataFinal}}`, {
-      headers: {
-        Authorization: 'Bearer ' + this.token
-      }
-    })
-    .subscribe({
-      next: (data)=>{
-        console.log(data) // buscando turma pela data
-        this.turmaEncontrada = data as Turma;
-      },
-      error: (error) => {
-        if (error.status === 401) {
-          window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
-          this.authService.removeToken()
-          this.router.navigate(['/admin'])
+    this.http
+      .get<Turma[]>(this.apiUrl + `?dataInicial=${dataInicial}&dataFinal=${DataFinal}`, {
+        headers: {
+          Authorization: 'Bearer ' + this.token
         }
-        if (error.status === 404) {
-          window.confirm('Turma não encontrada')
+      })
+      .subscribe({
+        next: (data) => {
+          this.turmas = data
+        },
+        error: (error) => {
+          if (error.status === 401) {
+            window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
+            this.authService.removeToken()
+            this.router.navigate(['/admin'])
+          }
+          if (error.status === 404) {
+            window.confirm('Turma não encontrada')
+          }
         }
-      }
-
-    })}
+      })
+  }
 }

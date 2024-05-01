@@ -1,21 +1,40 @@
 <div class="container mt-2">
   <a href="admin/{{ email }}"><button class="btn btn-primary ms-2 mb-4">Voltar</button></a>
-  <div class="d-flex justify-content-center mb-5">
+  <div class="d-flex justify-content-center mb-3">
     <label for="nomeTurma" class="visually-hidden">Nome da Turma</label>
     <input type="text" class="form-control" id="nomeTurma" name="nomeTurma" placeholder="Digite o nome da Turma"
       [(ngModel)]="nomeTurma" />
     <input type="submit" class="btn btn-primary mx-2" value="Buscar" (click)="buscarTurmaPorNome(nomeTurma)" />
   </div>
 
-  <div class="justify-content-center mb-5">
-    <h1 class="fs-2">Buscar turma por data </h1>
-    <label for="dataInicial" class="mt-2">Data Inicial</label>
-    <input type="date" class="form-control mt-2" name="dataInicial" id="dataInicial" placeholder="Digite a data inicial" [(ngModel)]="dataInicial" required>
+  <div class="d-flex justify-content-center" *ngIf="!filtrarBuscaTurma; else elseFecharFiltro">
+    <button id="btnFiltrarAtivo" (click)="filtrarBuscaTurma = !filtrarBuscaTurma">Filtrar</button>
+  </div>
 
-    <label for="dataInicial" class="mt-2">Data Final</label>
-    <input type="date" class="form-control mt-2" name="dataFinal" id="dataFinal" placeholder="Digite a data Final" [(ngModel)]="DataFinal" required>
-    <input type="submit" class="btn btn-primary mt-2" value="Buscar" (click)="buscarPorData()">
-    
+  <ng-template #elseFecharFiltro>
+    <div class="d-flex justify-content-end align-items-center">
+      <button id="btnFiltrarInativo" class="btn btn-secondary"
+        (click)="filtrarBuscaTurma = !filtrarBuscaTurma">Fechar</button>
+    </div>
+  </ng-template>
+
+
+  <div id="formFiltrar" class="row mb-5 justify-content-center" *ngIf="filtrarBuscaTurma">
+    <div class="col-md-3">
+      <label for="dataInicial">Data Inicial</label>
+      <input type="date" class="form-control mt-2" name="dataInicial" id="dataInicial"
+        placeholder="Digite a data inicial" [(ngModel)]="dataInicial" required>
+    </div>
+
+    <div class="col-md-3">
+      <label for="dataInicial">Data Final</label>
+      <input type="date" class="form-control mt-2" name="dataFinal" id="dataFinal" placeholder="Digite a data Final"
+        [(ngModel)]="DataFinal" required>
+    </div>
+
+    <div class="col-md-3 d-flex justify-content-center align-items-end">
+      <input type="submit" class="btn btn-primary mt-2" value="Buscar" (click)="buscarPorData()">
+    </div>
   </div>
 
   <div *ngIf="isAdmin()">
@@ -26,8 +45,7 @@
     <ul class="nav nav-tabs my-2 justify-content-end" *ngIf="isAdmin()">
       <li class="nav-item" style="cursor: pointer;">
         <a class="nav-link" [class.active]="activeTab === '#tab1'" (click)="mudarTabs('#tab1')"
-          (keyup.enter)="mudarTabs('#tab1')" (keyup.space)="mudarTabs('#tab1')" role="tab"
-          tabindex="0">Turmas</a>
+          (keyup.enter)="mudarTabs('#tab1')" (keyup.space)="mudarTabs('#tab1')" role="tab" tabindex="0">Turmas</a>
       </li>
 
       <li class="nav-item" style="cursor: pointer;">
