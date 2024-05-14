@@ -6,19 +6,30 @@
         <button class="btn btn-primary ms-2 mt-2">Dashboard</button>
       </a>
       <div class="d-flex flex-column align-items-center text-center p-3">
-        <img class="rounded-circle mt-5" src="../../../../../assets/aluno/karate_icon_124461.webp" alt="user profile" />
-        <span class="font-weight-bold">
-          {{ aluno.nome }}
-        </span>
-        <span class="font-weight-bold">
-          <span>Inscrição: </span>
-          <b>
-            {{ aluno.dataPreenchimento }}
-          </b>
-        </span>
-        <span class="text-black-50">
-          {{ aluno.cpf }}
-        </span>
+        <div *ngIf="aluno.imagemAluno.dadosImagem; else semImagem">
+          <img class="rounded-circle mt-5" [src]="aluno.imagemAluno.dadosImagem" alt="user profile" />
+        </div>
+        <ng-template #semImagem>
+          <img class="rounded-circle mt-5" src="../../../../../assets/aluno/karate_icon_124461.webp" alt="user profile" />
+        </ng-template>
+        <div>
+          <span class="font-weight-bold">
+            {{ aluno.nome }}
+          </span>
+        </div>
+        <div>
+          <span class="font-weight-bold">
+            <span>Inscrição: </span>
+              <b>
+                {{ aluno.dataPreenchimento }}
+              </b>
+          </span>
+        </div>
+        <div>
+          <span class="text-black-50">
+            {{ aluno.cpf }}
+          </span>
+      </div>
       </div>
     </div>
 

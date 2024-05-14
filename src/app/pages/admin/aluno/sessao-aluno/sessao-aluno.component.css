@@ -38,3 +38,8 @@
     cursor: pointer;
     border: solid 1px #BA68C8
 }
+
+img {
+    height: 150px;
+    width: 150px;
+}

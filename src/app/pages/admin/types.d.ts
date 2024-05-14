@@ -1,3 +1,5 @@
+import { ImagemHandle } from './aluno.interface'
+
 interface AlunoProps {
   cpf: string
   nome: string
@@ -13,6 +15,7 @@ interface AlunoProps {
     dan: number
   }
   historicoSaude: historicoSaudeProps
+  imagemAluno: ImagemHandle[]
 }
 
 interface DadosSociaisProps {

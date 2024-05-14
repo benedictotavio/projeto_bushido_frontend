@@ -13,6 +13,8 @@ import {
   ResponsavelProps,
   historicoSaudeProps
 } from '../../types'
+import { DomSanitizer } from '@angular/platform-browser'
+import { ImagemHandle } from '../../aluno.interface'
 
 @Component({
   selector: 'app-registro-aluno',
@@ -24,7 +26,8 @@ export class RegistroAlunoComponent implements OnInit {
     private readonly http: HttpClient,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private domSanitizer: DomSanitizer
   ) {}
 
   historicoSaude: historicoSaudeProps = {
@@ -95,7 +98,8 @@ export class RegistroAlunoComponent implements OnInit {
       kyu: 0,
       dan: 0
     },
-    historicoSaude: this.historicoSaude
+    historicoSaude: this.historicoSaude,
+    imagemAluno: []
   }
 
   protected turmas: Turma[] = []
@@ -132,10 +136,10 @@ export class RegistroAlunoComponent implements OnInit {
 
   protected registrarAluno() {
     this.aluno.dataNascimento = new Date(this.aluno.dataNascimento + 'T00:00:00').getTime()
+    const alunoFormData = this.prepareFormData(this.aluno)
     this.http
-      .post<{ id: string; message: string }>(this.ApiBushido, this.aluno, {
+      .post<{ id: string; message: string }>(this.ApiBushido, alunoFormData, {
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${this.token}`
         }
       })
@@ -226,5 +230,25 @@ export class RegistroAlunoComponent implements OnInit {
 
   private removeSpecialCharacters(inputString: string): string {
     return inputString.replace(/[-.]/g, '')
+  }
+
+  prepareFormData(aluno: AlunoProps): FormData {
+    const formData = new FormData()
+    formData.append('alunoDTORequest', new Blob([JSON.stringify(aluno)], { type: 'application/json' }))
+
+    formData.append('imagemAluno', aluno.imagemAluno[0].imagem, aluno.imagemAluno[0].imagem.name)
+
+    return formData
+  }
+
+  imagemSelecionada(event: any) {
+    if (event.target.files) {
+      const imagemAluno = event.target.files[0]
+      const imagemHandle: ImagemHandle = {
+        imagem: imagemAluno,
+        url: this.domSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(imagemAluno))
+      }
+      this.aluno.imagemAluno.push(imagemHandle)
+    }
   }
 }

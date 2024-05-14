@@ -13,6 +13,19 @@
         <div class="row mt-4">
           <div class="col-md-12">
             <div class="form-group">
+              <div *ngFor="let file of aluno.imagemAluno" class="d-flex justify-content-center">
+                <div class="circle-image  mb-4">
+                  <img class="rounded-circle" [src]="file.url" alt="Selecione a imagem">
+                </div>
+              </div>
+                <input type="file" name="imagemAluno" id="imagemAluno" class="form-control" (change)="imagemSelecionada($event)"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-md-12">
+            <div class="form-group">
               <label for="nome">Nome</label>
               <input type="text" name="nome" [(ngModel)]="aluno.nome" id="nome" class="form-control" placeholder="Nome"
                 required />
