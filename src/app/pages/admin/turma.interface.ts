@@ -5,6 +5,7 @@ export interface Turma {
     email: string
   }
   endereco: string
+  dataCriacao: string
 }
 
 interface AlunoTurma {
