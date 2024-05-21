@@ -11,10 +11,10 @@ export class CardTurmaComponent implements OnInit {
   @Input()
   turma!: Turma
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.turma['dataCriacao'] = new Date(this.turma['dataCriacao']).toLocaleDateString("pt-BR",{
+    this.turma['dataCriacao'] = new Date(this.turma['dataCriacao']).toLocaleDateString('pt-BR', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric'

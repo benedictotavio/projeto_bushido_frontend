@@ -25,7 +25,7 @@ export class RegistroAlunoComponent implements OnInit {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly authService: AuthService
-  ) { }
+  ) {}
 
   historicoSaude: historicoSaudeProps = {
     tipoSanguineo: 'A_POSITIVO',
@@ -134,9 +134,7 @@ export class RegistroAlunoComponent implements OnInit {
   protected registrarAluno() {
     const dataNasc = new Date(this.aluno.dataNascimento)
 
-    if (
-      dataNasc.getFullYear() > new Date().getFullYear() - 4
-    ) {
+    if (dataNasc.getFullYear() > new Date().getFullYear() - 4) {
       window.confirm('Data de nascimento inválida')
       return
     }
