@@ -19,7 +19,10 @@
       <p class="heading mb-0">Endereço<br /></p>
       <h3>{{ turma.endereco }}</h3>
     </div>
-    <div class="card-footer text-muted d-flex justify-content-end py-3">
+    <div class="card-footer text-muted d-flex align-items-center justify-content-between py-3">
+      <span class="text-primary">
+        {{ turma.dataCriacao }}
+      </span>
       <a href="/admin/{{ email }}/turmas/{{ turma.nome }}">
         <button class="btn btn-primary">Ver turma</button>
       </a>

@@ -108,6 +108,7 @@ export class RegistroAlunoComponent implements OnInit {
   private readonly ApiBushido = environment.urlApi + 'aluno'
   protected deficiencia = ''
   protected acompanhamentoSaude = ''
+  protected tresAnosEmMilisegundos = 1000 * 60 * 60 * 24 * 365 * 3
 
   ngOnInit(): void {
     this.listarTurmas()
@@ -135,7 +136,14 @@ export class RegistroAlunoComponent implements OnInit {
   }
 
   protected registrarAluno() {
-    this.aluno.dataNascimento = new Date(this.aluno.dataNascimento + 'T00:00:00').getTime()
+    const dataNasc = new Date(this.aluno.dataNascimento)
+
+    if (dataNasc.getFullYear() > new Date().getFullYear() - 4) {
+      window.confirm('Data de nascimento inválida')
+      return
+    }
+
+    this.aluno.dataNascimento = dataNasc.getTime()
     const alunoFormData = this.prepareFormData(this.aluno)
     this.http
       .post<{ id: string; message: string }>(this.ApiBushido, alunoFormData, {

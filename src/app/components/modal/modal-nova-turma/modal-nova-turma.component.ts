@@ -30,7 +30,8 @@ export class ModalNovaTurmaComponent {
       nome: '',
       email: ''
     },
-    endereco: ''
+    endereco: '',
+    dataCriacao: ''
   }
   protected adminsEncontrados: AdminResponse[] | undefined
 
@@ -103,7 +104,8 @@ export class ModalNovaTurmaComponent {
               nome: '',
               email: ''
             },
-            endereco: ''
+            endereco: '',
+            dataCriacao: ''
           }
         }
       })
@@ -116,7 +118,8 @@ export class ModalNovaTurmaComponent {
         nome: '',
         email: ''
       },
-      endereco: ''
+      endereco: '',
+      dataCriacao: ''
     }
   }
 
