@@ -13,8 +13,6 @@ import {
   ResponsavelProps,
   historicoSaudeProps
 } from '../../types'
-import { DomSanitizer } from '@angular/platform-browser'
-import { ImagemHandle } from '../../aluno.interface'
 
 @Component({
   selector: 'app-registro-aluno',
@@ -27,8 +25,10 @@ export class RegistroAlunoComponent implements OnInit {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly authService: AuthService,
-    private domSanitizer: DomSanitizer
   ) {}
+
+  imagemSelecionada!: File 
+  previewImagem!: string | ArrayBuffer | null
 
   historicoSaude: historicoSaudeProps = {
     tipoSanguineo: 'A_POSITIVO',
@@ -99,13 +99,13 @@ export class RegistroAlunoComponent implements OnInit {
       dan: 0
     },
     historicoSaude: this.historicoSaude,
-    imagemAluno: []
   }
 
   protected turmas: Turma[] = []
   private readonly token = localStorage.getItem('token')
   protected readonly email = this.route.snapshot.paramMap.get('email')
   private readonly ApiBushido = environment.urlApi + 'aluno'
+  private readonly ApiBushidoComImagem = environment.urlApi + 'aluno/comImagem'
   protected deficiencia = ''
   protected acompanhamentoSaude = ''
   protected tresAnosEmMilisegundos = 1000 * 60 * 60 * 24 * 365 * 3
@@ -145,6 +145,40 @@ export class RegistroAlunoComponent implements OnInit {
 
     this.aluno.dataNascimento = dataNasc.getTime()
     const alunoFormData = this.prepareFormData(this.aluno)
+    if(this.imagemSelecionada != null) {
+
+      this.http
+      .post<{ id: string; message: string }>(this.ApiBushidoComImagem, alunoFormData, {
+        headers: {
+          Authorization: `Bearer ${this.token}`
+        }
+      })
+      .subscribe({
+        next: (res) => {
+          window.alert(res.message)
+          this.router.navigate([`/admin/${this.email}/aluno`, res.id])
+        },
+        error: (error) => {
+          if (error.status === 401) {
+            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
+            this.authService.removeToken()
+            this.router.navigate(['/admin'])
+          }
+          if (
+            error.status === 400 ||
+            error.status === 403 ||
+            error.status === 404 ||
+            error.status === 406 ||
+            error.status === 409 ||
+            error.status === 411 ||
+            error.status === 422
+          ) {
+            window.confirm(error['error']['message'])
+          }
+        }
+      })
+
+    }
     this.http
       .post<{ id: string; message: string }>(this.ApiBushido, alunoFormData, {
         headers: {
@@ -244,19 +278,27 @@ export class RegistroAlunoComponent implements OnInit {
     const formData = new FormData()
     formData.append('alunoDTORequest', new Blob([JSON.stringify(aluno)], { type: 'application/json' }))
 
-    formData.append('imagemAluno', aluno.imagemAluno[0].imagem, aluno.imagemAluno[0].imagem.name)
+    if (this.imagemSelecionada != null) {
+      formData.append('imagemAluno', this.imagemSelecionada)
+    } 
 
     return formData
   }
 
-  imagemSelecionada(event: any) {
+  selecionarImagem(event: any) {
     if (event.target.files) {
-      const imagemAluno = event.target.files[0]
-      const imagemHandle: ImagemHandle = {
-        imagem: imagemAluno,
-        url: this.domSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(imagemAluno))
-      }
-      this.aluno.imagemAluno.push(imagemHandle)
-    }
+      this.imagemSelecionada = event.target.files[0]    
+      this.mostrarImagem()
+    } 
   }
+
+  mostrarImagem() {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.previewImagem = reader.result;
+    }
+
+    reader.readAsDataURL(this.imagemSelecionada);
+  }
+  
 }

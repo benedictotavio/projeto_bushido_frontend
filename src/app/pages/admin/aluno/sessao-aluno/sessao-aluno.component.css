@@ -43,3 +43,12 @@ img {
     height: 150px;
     width: 150px;
 }
+
+input[type="file"] {
+    display: none;
+}
+
+  .btn-remover-imagem {
+    cursor: pointer;
+  }
+  

@@ -1,17 +1,37 @@
 <div class="container rounded bg-white mt-5 mb-5">
   <app-placeholder-sessao-aluno *ngIf="!aluno"></app-placeholder-sessao-aluno>
   <div *ngIf="aluno" class="row">
-    <div class="col-md-2 border-right">
+    <div class="col-md-2 border-right d-flex flex-column align-items-center text-center p-3">
       <a class="text-white text-decoration-none" href="/admin/{{ email }}">
         <button class="btn btn-primary ms-2 mt-2">Dashboard</button>
       </a>
-      <div class="d-flex flex-column align-items-center text-center p-3">
-        <div *ngIf="aluno.imagemAluno.dadosImagem; else semImagem">
-          <img class="rounded-circle mt-5" [src]="aluno.imagemAluno.dadosImagem" alt="user profile" />
+      <div class="d-flex flex-column align-items-center text-center">
+        <div class="row mt-4">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div *ngIf="bloquearAlteracaoImagem ; else alerarImagem" class="d-flex justify-content-center">
+                <div class="circle-image  mb-4">
+                    <img class="rounded-circle" [src]="'data:image/png;base64,'+aluno.imagemAluno.dadosImagem" alt="user profile" />
+                </div>
+              </div>
+              <ng-template #alerarImagem>
+                <div *ngIf="imagemSelecionada" class="d-flex justify-content-center">
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle text-danger" viewBox="0 0 16 16" (click)="removerImagem()">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                    </svg>
+                  </span>
+                  <div class="mb-4">                   
+                    <img class="rounded-circle" [src]="previewImagem" alt="Imagem selecionada">
+                  </div>
+                </div>
+              </ng-template>
+                <label for="imagemAluno" class="btn btn-primary text-white">Alterar Foto</label>
+                <input type="file" name="imagemAluno" id="imagemAluno" class="form-control" (change)="selecionarImagem($event)" #limparInput/>
+            </div>
+          </div>
         </div>
-        <ng-template #semImagem>
-          <img class="rounded-circle mt-5" src="../../../../../assets/aluno/karate_icon_124461.webp" alt="user profile" />
-        </ng-template>
         <div>
           <span class="font-weight-bold">
             {{ aluno.nome }}

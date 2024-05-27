@@ -1,5 +1,3 @@
-import { SafeUrl } from '@angular/platform-browser'
-
 interface Endereco {
   cidade: string
   estado: string
@@ -115,11 +113,6 @@ export interface AlunoEditado {
   historicoDeSaude: HistoricoSaudeEditado
 }
 
-export interface ImagemHandle {
-  imagem: File
-  url: SafeUrl
-}
-
 interface ImagemAlunoResponse {
-  dadosImagem: string
+  dadosImagem: File
 }

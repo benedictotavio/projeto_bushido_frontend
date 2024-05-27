@@ -16,14 +16,8 @@
   justify-content: center;
 }
 
-.circle-image {
-  width: 150px;
-  height: 150px;
-  border-radius: 100%;
-  overflow: hidden;
-  position: relative;
-  background-color: lightgray;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+input[type="file"] {
+  display: none;
 }
 
 img {

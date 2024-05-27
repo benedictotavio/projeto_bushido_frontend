@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http'
-import { Component, OnInit } from '@angular/core'
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { environment } from 'src/environments/environment'
 import { AlunoEditado, AlunoResponse, Graduacao } from 'src/app/pages/admin/aluno.interface'
@@ -16,17 +16,20 @@ export class SessaoAlunoComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
+
+  @ViewChild('limparInput', { static: false }) limparInput!: ElementRef;
 
   private readonly token = localStorage.getItem('token')
   aluno: AlunoResponse | undefined
-  alunoEditado: AlunoEditado | undefined
+  alunoEditado!: AlunoEditado
   email = this.route.snapshot.paramMap.get('email')
   cpf_aluno = this.route.snapshot.paramMap.get('cpf')
   protected deficiencia = ''
   protected acompanhamentoSaude = ''
   private readonly url = environment.urlApi + 'aluno'
+  private readonly urlComImagem = environment.urlApi + 'aluno/comImagem'
   protected modoEdicao = false
   protected modoEdicaoTurma = false
   protected readonly umaSemanaEmSegundos = 604800000
@@ -34,6 +37,9 @@ export class SessaoAlunoComponent implements OnInit {
   protected readonly role = localStorage.getItem('role')
   protected turmas: Turma[] = []
   protected nota = 0
+  imagemSelecionada!: File 
+  previewImagem!: string | ArrayBuffer | null
+  bloquearAlteracaoImagem = true
 
   graduacaoAtual: Graduacao = {
     kyu: 0,
@@ -125,13 +131,51 @@ export class SessaoAlunoComponent implements OnInit {
   }
 
   protected editarAlunoPorCpf() {
+
+    if (this.imagemSelecionada != null) {
+
+      this.http
+      .put<{ id: string; message: string }>(
+        this.urlComImagem + '/' + this.cpf_aluno,
+        this.adapterAlunoParaAlunoEditado(this.aluno as AlunoResponse),
+        {
+          headers: {
+            Authorization: 'Bearer ' + this.token
+          }
+        }
+      )
+      .subscribe({
+        next: (data) => {
+          window.confirm(data.message)
+          window.location.reload()
+        },
+        error: (error) => {
+          if (error.status === 401) {
+            window.confirm('')
+            this.authService.removeToken()
+          }
+          if (error.status === 404) {
+            window.confirm('Aluno não encontrado')
+          }
+          if (
+            error.status === 400 ||
+            error.status === 403 ||
+            error.status === 404 ||
+            error.status === 409 ||
+            error.status === 411
+          ) {
+            window.confirm(error['error']['message'])
+          }
+        }
+      })
+
+    }
     this.http
       .put<{ id: string; message: string }>(
         this.url + '/' + this.cpf_aluno,
         this.adapterAlunoParaAlunoEditado(this.aluno as AlunoResponse),
         {
           headers: {
-            'Content-Type': 'application/json',
             Authorization: 'Bearer ' + this.token
           }
         }
@@ -442,8 +486,9 @@ export class SessaoAlunoComponent implements OnInit {
       })
   }
 
-  private adapterAlunoParaAlunoEditado(aluno: AlunoResponse): AlunoEditado {
-    return {
+  private adapterAlunoParaAlunoEditado(aluno: AlunoResponse): FormData {
+    const formData = new FormData()
+    this.alunoEditado = {
       nome: aluno.nome,
       genero: aluno.genero,
       turma: aluno.turma,
@@ -458,6 +503,14 @@ export class SessaoAlunoComponent implements OnInit {
         doencaCronica: aluno.historicoSaude.doencaCronica
       }
     }
+
+    formData.append('aluno', new Blob([JSON.stringify(this.alunoEditado)], { type: 'application/json' }))
+    
+    if (this.imagemSelecionada != null) {
+      formData.append('imagemAluno', this.imagemSelecionada)
+    } 
+
+    return formData
   }
 
   protected avaliacaoDisponive(): boolean {
@@ -472,5 +525,29 @@ export class SessaoAlunoComponent implements OnInit {
 
   protected isAdmin(): boolean {
     return this.role?.toUpperCase() === 'ADMIN'
+  }
+
+  selecionarImagem(event: any) {
+    this.bloquearAlteracaoImagem = false;
+    if (event.target.files) {
+      this.imagemSelecionada = event.target.files[0]  
+    } 
+      
+    this.mostrarImagem()  
+  }
+  
+  mostrarImagem() {
+    const reader = new FileReader();
+    console.log(reader)
+    reader.onload = () => {
+      this.previewImagem = reader.result;
+    }
+
+    reader.readAsDataURL(this.imagemSelecionada);
+  }
+
+  removerImagem(){
+    this.limparInput.nativeElement.value = "";
+    this.bloquearAlteracaoImagem = true;
   }
 }
