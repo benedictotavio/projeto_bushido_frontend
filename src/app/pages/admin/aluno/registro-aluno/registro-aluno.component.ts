@@ -24,10 +24,10 @@ export class RegistroAlunoComponent implements OnInit {
     private readonly http: HttpClient,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-    private readonly authService: AuthService,
+    private readonly authService: AuthService
   ) {}
 
-  imagemSelecionada!: File 
+  imagemSelecionada!: File
   previewImagem!: string | ArrayBuffer | null
 
   historicoSaude: historicoSaudeProps = {
@@ -98,7 +98,7 @@ export class RegistroAlunoComponent implements OnInit {
       kyu: 0,
       dan: 0
     },
-    historicoSaude: this.historicoSaude,
+    historicoSaude: this.historicoSaude
   }
 
   protected turmas: Turma[] = []
@@ -145,39 +145,37 @@ export class RegistroAlunoComponent implements OnInit {
 
     this.aluno.dataNascimento = dataNasc.getTime()
     const alunoFormData = this.prepareFormData(this.aluno)
-    if(this.imagemSelecionada != null) {
-
+    if (this.imagemSelecionada != null) {
       this.http
-      .post<{ id: string; message: string }>(this.ApiBushidoComImagem, alunoFormData, {
-        headers: {
-          Authorization: `Bearer ${this.token}`
-        }
-      })
-      .subscribe({
-        next: (res) => {
-          window.alert(res.message)
-          this.router.navigate([`/admin/${this.email}/aluno`, res.id])
-        },
-        error: (error) => {
-          if (error.status === 401) {
-            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            this.authService.removeToken()
-            this.router.navigate(['/admin'])
+        .post<{ id: string; message: string }>(this.ApiBushidoComImagem, alunoFormData, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
           }
-          if (
-            error.status === 400 ||
-            error.status === 403 ||
-            error.status === 404 ||
-            error.status === 406 ||
-            error.status === 409 ||
-            error.status === 411 ||
-            error.status === 422
-          ) {
-            window.confirm(error['error']['message'])
+        })
+        .subscribe({
+          next: (res) => {
+            window.alert(res.message)
+            this.router.navigate([`/admin/${this.email}/aluno`, res.id])
+          },
+          error: (error) => {
+            if (error.status === 401) {
+              window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
+              this.authService.removeToken()
+              this.router.navigate(['/admin'])
+            }
+            if (
+              error.status === 400 ||
+              error.status === 403 ||
+              error.status === 404 ||
+              error.status === 406 ||
+              error.status === 409 ||
+              error.status === 411 ||
+              error.status === 422
+            ) {
+              window.confirm(error['error']['message'])
+            }
           }
-        }
-      })
-
+        })
     }
     this.http
       .post<{ id: string; message: string }>(this.ApiBushido, alunoFormData, {
@@ -280,25 +278,24 @@ export class RegistroAlunoComponent implements OnInit {
 
     if (this.imagemSelecionada != null) {
       formData.append('imagemAluno', this.imagemSelecionada)
-    } 
+    }
 
     return formData
   }
 
   selecionarImagem(event: any) {
     if (event.target.files) {
-      this.imagemSelecionada = event.target.files[0]    
+      this.imagemSelecionada = event.target.files[0]
       this.mostrarImagem()
-    } 
+    }
   }
 
   mostrarImagem() {
-    const reader = new FileReader();
+    const reader = new FileReader()
     reader.onload = () => {
-      this.previewImagem = reader.result;
+      this.previewImagem = reader.result
     }
 
-    reader.readAsDataURL(this.imagemSelecionada);
+    reader.readAsDataURL(this.imagemSelecionada)
   }
-  
 }

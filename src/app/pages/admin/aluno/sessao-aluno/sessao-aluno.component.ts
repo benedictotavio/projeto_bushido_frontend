@@ -16,10 +16,10 @@ export class SessaoAlunoComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
-  @ViewChild('limparInput', { static: false }) limparInput!: ElementRef;
+  @ViewChild('limparInput', { static: false }) limparInput!: ElementRef
 
   private readonly token = localStorage.getItem('token')
   aluno: AlunoResponse | undefined
@@ -37,7 +37,7 @@ export class SessaoAlunoComponent implements OnInit {
   protected readonly role = localStorage.getItem('role')
   protected turmas: Turma[] = []
   protected nota = 0
-  imagemSelecionada!: File 
+  imagemSelecionada!: File
   previewImagem!: string | ArrayBuffer | null
   bloquearAlteracaoImagem = true
 
@@ -131,44 +131,41 @@ export class SessaoAlunoComponent implements OnInit {
   }
 
   protected editarAlunoPorCpf() {
-
     if (this.imagemSelecionada != null) {
-
       this.http
-      .put<{ id: string; message: string }>(
-        this.urlComImagem + '/' + this.cpf_aluno,
-        this.adapterAlunoParaAlunoEditado(this.aluno as AlunoResponse),
-        {
-          headers: {
-            Authorization: 'Bearer ' + this.token
+        .put<{ id: string; message: string }>(
+          this.urlComImagem + '/' + this.cpf_aluno,
+          this.adapterAlunoParaAlunoEditado(this.aluno as AlunoResponse),
+          {
+            headers: {
+              Authorization: 'Bearer ' + this.token
+            }
           }
-        }
-      )
-      .subscribe({
-        next: (data) => {
-          window.confirm(data.message)
-          window.location.reload()
-        },
-        error: (error) => {
-          if (error.status === 401) {
-            window.confirm('')
-            this.authService.removeToken()
+        )
+        .subscribe({
+          next: (data) => {
+            window.confirm(data.message)
+            window.location.reload()
+          },
+          error: (error) => {
+            if (error.status === 401) {
+              window.confirm('')
+              this.authService.removeToken()
+            }
+            if (error.status === 404) {
+              window.confirm('Aluno não encontrado')
+            }
+            if (
+              error.status === 400 ||
+              error.status === 403 ||
+              error.status === 404 ||
+              error.status === 409 ||
+              error.status === 411
+            ) {
+              window.confirm(error['error']['message'])
+            }
           }
-          if (error.status === 404) {
-            window.confirm('Aluno não encontrado')
-          }
-          if (
-            error.status === 400 ||
-            error.status === 403 ||
-            error.status === 404 ||
-            error.status === 409 ||
-            error.status === 411
-          ) {
-            window.confirm(error['error']['message'])
-          }
-        }
-      })
-
+        })
     }
     this.http
       .put<{ id: string; message: string }>(
@@ -505,10 +502,10 @@ export class SessaoAlunoComponent implements OnInit {
     }
 
     formData.append('aluno', new Blob([JSON.stringify(this.alunoEditado)], { type: 'application/json' }))
-    
+
     if (this.imagemSelecionada != null) {
       formData.append('imagemAluno', this.imagemSelecionada)
-    } 
+    }
 
     return formData
   }
@@ -528,26 +525,26 @@ export class SessaoAlunoComponent implements OnInit {
   }
 
   selecionarImagem(event: any) {
-    this.bloquearAlteracaoImagem = false;
+    this.bloquearAlteracaoImagem = false
     if (event.target.files) {
-      this.imagemSelecionada = event.target.files[0]  
-    } 
-      
-    this.mostrarImagem()  
-  }
-  
-  mostrarImagem() {
-    const reader = new FileReader();
-    console.log(reader)
-    reader.onload = () => {
-      this.previewImagem = reader.result;
+      this.imagemSelecionada = event.target.files[0]
     }
 
-    reader.readAsDataURL(this.imagemSelecionada);
+    this.mostrarImagem()
   }
 
-  removerImagem(){
-    this.limparInput.nativeElement.value = "";
-    this.bloquearAlteracaoImagem = true;
+  mostrarImagem() {
+    const reader = new FileReader()
+    console.log(reader)
+    reader.onload = () => {
+      this.previewImagem = reader.result
+    }
+
+    reader.readAsDataURL(this.imagemSelecionada)
+  }
+
+  removerImagem() {
+    this.limparInput.nativeElement.value = ''
+    this.bloquearAlteracaoImagem = true
   }
 }

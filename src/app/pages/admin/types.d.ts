@@ -1,4 +1,3 @@
-
 interface AlunoProps {
   cpf: string
   nome: string
