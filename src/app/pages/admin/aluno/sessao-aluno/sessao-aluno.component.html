@@ -19,13 +19,13 @@
     </button>
   </a>
   <div *ngIf="aluno" class="row">
-    <div class="col-md-2 border-right d-flex flex-column align-items-center text-center p-3">
+    <div class="col-md-2 border-right d-flex flex-column align-items-center text-center">
       <div class="d-flex flex-column align-items-center text-center">
         <div class="row mt-4">
           <div class="col-md-12">
             <div class="form-group">
               <div
-                *ngIf="bloquearAlteracaoImagem; else alerarImagem"
+                *ngIf="bloquearAlteracaoImagem; else alterarImagem"
                 class="d-flex justify-content-center"
               >
                 <div class="circle-image mb-4">
@@ -37,7 +37,7 @@
                   />
                 </div>
               </div>
-              <ng-template #alerarImagem>
+              <ng-template #alterarImagem>
                 <div *ngIf="imagemSelecionada" class="d-flex justify-content-center">
                   <span>
                     <svg
@@ -47,7 +47,8 @@
                       fill="currentColor"
                       class="bi bi-x-circle text-danger"
                       viewBox="0 0 16 16"
-                      (onclick)="removerImagem()"
+                      (click)="removerImagem()"
+                      (keydown.enter)="removerImagem()"
                     >
                       <path
                         d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
@@ -564,9 +565,13 @@
                   <button class="btn btn-primary text-right my-2" (click)="setModoEdicaoTurma()">
                     Salvar
                   </button>
-                  <button class="btn btn-close" (click)="setModoEdicaoTurma()">
-                    
-                  </button>
+                  <input
+                    type="button"
+                    name="btn-editar-turma"
+                    id="btn-editar-turma"
+                    class="btn btn-close"
+                    (click)="setModoEdicaoTurma()"
+                  />
                 </div>
               </div>
               <div *ngIf="!modoEdicaoTurma" class="d-flex align-items-center gap-2">
@@ -582,6 +587,7 @@
                     class="bi bi-pencil-square text-info"
                     viewBox="0 0 16 16"
                     (click)="setModoEdicaoTurma()"
+                    (keydown.enter)="setModoEdicaoTurma()"
                   >
                     <path
                       d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
