@@ -4,18 +4,85 @@
       <form class="form-group">
         <div class="mb-4">
           <a href="/admin/{{ email }}" class="text-white text-decoration-none">
-            <button type="button" class="btn btn-primary my-3">Voltar</button>
+            <button type="button" class="btn btn-primary my-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-arrow-return-left"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"
+                />
+              </svg>
+              Voltar
+            </button>
           </a>
           <h2 class="fw-bold">Registrar Aluno</h2>
           <p>Preencha os dados abaixo para registrar um novo aluno</p>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div
+                *ngIf="imagemSelecionada; else imageAdd"
+                class="d-flex justify-content-center align-items-center"
+              >
+                <div class="mb-4">
+                  <img class="rounded-circle" [src]="previewImagem" alt="adicionar foto do aluno" />
+                </div>
+              </div>
+
+              <ng-template #imageAdd>
+                <div class="d-flex justify-content-center">
+                <label
+                  for="imagemAluno"
+                  class="text-white m-2 p-4 rounded-circle border border-black d-flex align-items-center"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    fill="currentColor"
+                    class="bi bi-images text-black"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" />
+                    <path
+                      d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2M14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1M2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1z"
+                    />
+                  </svg>
+                </label>
+                <input
+                  type="file"
+                  name="imagemAluno"
+                  id="imagemAluno"
+                  class="form-control"
+                  (change)="selecionarImagem($event)"
+                />
+              </div>
+              </ng-template>
+              
+            </div>
+          </div>
         </div>
 
         <div class="row mt-4">
           <div class="col-md-12">
             <div class="form-group">
               <label for="nome">Nome</label>
-              <input type="text" name="nome" [(ngModel)]="aluno.nome" id="nome" class="form-control" placeholder="Nome"
-                required />
+              <input
+                type="text"
+                name="nome"
+                [(ngModel)]="aluno.nome"
+                id="nome"
+                class="form-control"
+                placeholder="Nome"
+                required
+              />
             </div>
           </div>
         </div>
@@ -49,8 +116,17 @@
           <div class="col-md-3">
             <div class="form-group mb-3">
               <label for="dan">Dan</label>
-              <input type="number" min="1" max="20" name="dan" id="dan" class="form-control"
-                [(ngModel)]="aluno.graduacao.dan" placeholder="Dan" required />
+              <input
+                type="number"
+                min="1"
+                max="20"
+                name="dan"
+                id="dan"
+                class="form-control"
+                [(ngModel)]="aluno.graduacao.dan"
+                placeholder="Dan"
+                required
+              />
             </div>
           </div>
         </div>
@@ -59,16 +135,32 @@
           <div class="col-md-4">
             <div class="form-group mb-3">
               <label for="dataNascimento">Data de Nascimento</label>
-              <input type="date" class="form-control" [(ngModel)]="aluno.dataNascimento" name="dataNascimento"
-                id="dataNascimento" min="1980-01-01" max="2024-12-31" pattern="\d{4}-\d{2}-\d{2}"
-                placeholder="dd-MM-yyyy" required />
+              <input
+                type="date"
+                class="form-control"
+                [(ngModel)]="aluno.dataNascimento"
+                name="dataNascimento"
+                id="dataNascimento"
+                min="1980-01-01"
+                max="2024-12-31"
+                pattern="\d{4}-\d{2}-\d{2}"
+                placeholder="dd-MM-yyyy"
+                required
+              />
             </div>
           </div>
           <div class="col-md-8">
             <div class="form-group">
               <label for="rg">CPF</label>
-              <input type="text" name="cpf" class="form-control" [(ngModel)]="aluno.cpf" id="rg" placeholder="CPF*"
-                required />
+              <input
+                type="text"
+                name="cpf"
+                class="form-control"
+                [(ngModel)]="aluno.cpf"
+                id="rg"
+                placeholder="CPF*"
+                required
+              />
             </div>
           </div>
         </div>
@@ -76,28 +168,63 @@
         <div class="mt-4">
           <div class="row mb-3">
             <div class="col-md-9">
-              <input type="text" [(ngModel)]="aluno.endereco.cep" name="cep" id="cep" class="form-control"
-                placeholder="CEP" (blur)="buscarEnderecoPeloCep()" />
+              <input
+                type="text"
+                [(ngModel)]="aluno.endereco.cep"
+                name="cep"
+                id="cep"
+                class="form-control"
+                placeholder="CEP"
+                (blur)="buscarEnderecoPeloCep()"
+              />
             </div>
             <div class="col-md-3">
-              <input type="number" name="numero" [(ngModel)]="aluno.endereco.numero" id="numero" class="form-control"
-                placeholder="Numero*" required />
+              <input
+                type="number"
+                name="numero"
+                [(ngModel)]="aluno.endereco.numero"
+                id="numero"
+                class="form-control"
+                placeholder="Numero*"
+                required
+              />
             </div>
           </div>
           <div class="row mb-3">
             <div class="col-md-6">
-              <input type="text" name="estado" [(ngModel)]="aluno.endereco.estado" id="estado" class="form-control"
-                placeholder="Estado" required />
+              <input
+                type="text"
+                name="estado"
+                [(ngModel)]="aluno.endereco.estado"
+                id="estado"
+                class="form-control"
+                placeholder="Estado"
+                required
+              />
             </div>
             <div class="col-md-6">
-              <input type="text" name="cidade" [(ngModel)]="aluno.endereco.cidade" id="cidade" class="form-control"
-                placeholder="Cidade" required />
+              <input
+                type="text"
+                name="cidade"
+                [(ngModel)]="aluno.endereco.cidade"
+                id="cidade"
+                class="form-control"
+                placeholder="Cidade"
+                required
+              />
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
-              <input type="text" name="rua" [(ngModel)]="aluno.endereco.logradouro" id="rua" class="form-control"
-                placeholder="Rua*" required />
+              <input
+                type="text"
+                name="rua"
+                [(ngModel)]="aluno.endereco.logradouro"
+                id="rua"
+                class="form-control"
+                placeholder="Rua*"
+                required
+              />
             </div>
           </div>
         </div>
@@ -124,17 +251,38 @@
             <h5>Dados Escolares</h5>
             <div class="col-md-7 p-2">
               <label for="escola" class="form-label">Escola*</label>
-              <input type="text" name="escola" [(ngModel)]="aluno.dadosEscolares.escola" id="escola"
-                class="form-control" placeholder="Escola*" required />
+              <input
+                type="text"
+                name="escola"
+                [(ngModel)]="aluno.dadosEscolares.escola"
+                id="escola"
+                class="form-control"
+                placeholder="Escola*"
+                required
+              />
             </div>
             <div class="col-md-2 p-2">
               <label for="serie" class="form-label">Serie*</label>
-              <input type="number" name="serie" [(ngModel)]="aluno.dadosEscolares.serie" id="serie" class="form-control"
-                min="1" max="9" required />
+              <input
+                type="number"
+                name="serie"
+                [(ngModel)]="aluno.dadosEscolares.serie"
+                id="serie"
+                class="form-control"
+                min="1"
+                max="9"
+                required
+              />
             </div>
             <div class="col-md-3 p-2">
               <label for="turno" class="form-label">Turno*</label>
-              <select name="turno" class="form-select" [(ngModel)]="aluno.dadosEscolares.turno" id="turno" required>
+              <select
+                name="turno"
+                class="form-select"
+                [(ngModel)]="aluno.dadosEscolares.turno"
+                id="turno"
+                required
+              >
                 <option value="MANHA">Matutino</option>
                 <option value="TARDE">Tarde</option>
                 <option value="NOITE">Noturno</option>
@@ -149,28 +297,56 @@
           <div class="row mt-3">
             <div class="col-md-3">
               <label for="form1" class="form-label">Renda Familiar</label>
-              <input type="number" id="form1" class="form-control" min="0" max="300000" placeholder="Renda" name="renda"
-                [(ngModel)]="aluno.dadosSociais.rendaFamiliar" required />
+              <input
+                type="number"
+                id="form1"
+                class="form-control"
+                min="0"
+                max="300000"
+                placeholder="Renda"
+                name="renda"
+                [(ngModel)]="aluno.dadosSociais.rendaFamiliar"
+                required
+              />
             </div>
             <div class="col-md-4">
               <label for="numerosDePessoasNaCasa" class="form-label">Pessoas na Casa</label>
-              <input type="number" name="numerosDePessoasNaCasa" id="numerosDePessoasNaCasa" class="form-control"
-                min="1" max="15" placeholder="Pessoas na Casa"
-                [(ngModel)]="aluno.dadosSociais.numerosDePessoasNaCasa" />
+              <input
+                type="number"
+                name="numerosDePessoasNaCasa"
+                id="numerosDePessoasNaCasa"
+                class="form-control"
+                min="1"
+                max="15"
+                placeholder="Pessoas na Casa"
+                [(ngModel)]="aluno.dadosSociais.numerosDePessoasNaCasa"
+              />
             </div>
             <div class="col-md-4">
               <label for="contribuintesDaRenda" class="form-label">Contribuintes da Renda</label>
-              <input type="number" name="contribuintesDaRenda" id="contribuintesDaRenda" min="1" max="15"
-                class="form-control" placeholder="Contribuintes da Renda"
-                [(ngModel)]="aluno.dadosSociais.contribuintesDaRendaFamiliar" />
+              <input
+                type="number"
+                name="contribuintesDaRenda"
+                id="contribuintesDaRenda"
+                min="1"
+                max="15"
+                class="form-control"
+                placeholder="Contribuintes da Renda"
+                [(ngModel)]="aluno.dadosSociais.contribuintesDaRendaFamiliar"
+              />
             </div>
           </div>
 
           <div class="row mt-3">
             <label for="imovel" class="form-label">Imovel</label>
             <div class="col-md-12">
-              <select class="imovel p-2 w-100" aria-label="imovel" name="imovel" [(ngModel)]="aluno.dadosSociais.imovel"
-                required>
+              <select
+                class="imovel p-2 w-100"
+                aria-label="imovel"
+                name="imovel"
+                [(ngModel)]="aluno.dadosSociais.imovel"
+                required
+              >
                 <option value="CEDIDO">Cedido</option>
                 <option value="ALUGADO">Alugado</option>
                 <option value="PROPRIO">Proprio</option>
@@ -181,21 +357,38 @@
           <div class="mt-4">
             <div class="mb-3 form-check">
               <h6 class="mb-4">Marque algumas informações do aluno</h6>
-              <input type="checkbox" class="form-check-input" id="bolsaFamilia" name="bolsaFamilia"
-                [(ngModel)]="aluno.dadosSociais.bolsaFamilia" />
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="bolsaFamilia"
+                name="bolsaFamilia"
+                [(ngModel)]="aluno.dadosSociais.bolsaFamilia"
+              />
               <label class="form-check-label" for="bolsaFamilia">Bolsa Família</label>
             </div>
 
             <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="auxilioBrasil" name="auxilioBrasil"
-                [(ngModel)]="aluno.dadosSociais.auxilioBrasil" />
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="auxilioBrasil"
+                name="auxilioBrasil"
+                [(ngModel)]="aluno.dadosSociais.auxilioBrasil"
+              />
               <label class="form-check-label" for="auxilioBrasil">Auxílio Brasil</label>
             </div>
 
             <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="alunoContribuiParaRenda"
-                name="alunoContribuiParaRenda" [(ngModel)]="aluno.dadosSociais.alunoContribuiParaRenda" />
-              <label class="form-check-label" for="alunoContribuiParaRenda">Aluno Contribui para Renda</label>
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="alunoContribuiParaRenda"
+                name="alunoContribuiParaRenda"
+                [(ngModel)]="aluno.dadosSociais.alunoContribuiParaRenda"
+              />
+              <label class="form-check-label" for="alunoContribuiParaRenda"
+                >Aluno Contribui para Renda</label
+              >
             </div>
           </div>
         </div>
@@ -204,28 +397,58 @@
           <h5>Responsavel</h5>
           <div class="row mt-2">
             <div class="col-md-6">
-              <input type="text" name="nomeResponsavel" id="nomeResponsavel" class="form-control" placeholder="Nome"
-                [(ngModel)]="responsavel.nome" />
+              <input
+                type="text"
+                name="nomeResponsavel"
+                id="nomeResponsavel"
+                class="form-control"
+                placeholder="Nome"
+                [(ngModel)]="responsavel.nome"
+              />
             </div>
             <div class="col-md-6">
-              <input type="text" name="cpfResponsavel" id="cpfResponsavel" class="form-control" placeholder="CPF*"
-                [(ngModel)]="responsavel.cpf" required />
+              <input
+                type="text"
+                name="cpfResponsavel"
+                id="cpfResponsavel"
+                class="form-control"
+                placeholder="CPF*"
+                [(ngModel)]="responsavel.cpf"
+                required
+              />
             </div>
           </div>
           <div class="row mt-2">
             <div class="col-md-6">
-              <input type="text" name="emailResponsavel" id="emailResponsavel" class="form-control" placeholder="Email"
-                [(ngModel)]="responsavel.email" />
+              <input
+                type="text"
+                name="emailResponsavel"
+                id="emailResponsavel"
+                class="form-control"
+                placeholder="Email"
+                [(ngModel)]="responsavel.email"
+              />
             </div>
             <div class="col-md-6">
-              <input type="tel" name="telefoneResponsavel" id="telefoneResponsavel" class="form-control"
-                placeholder="Telefone" [(ngModel)]="responsavel.telefone" />
+              <input
+                type="tel"
+                name="telefoneResponsavel"
+                id="telefoneResponsavel"
+                class="form-control"
+                placeholder="Telefone"
+                [(ngModel)]="responsavel.telefone"
+              />
             </div>
           </div>
 
           <div class="row mt-4">
-            <select class="form-select" aria-label="Filiação do responsável" [(ngModel)]="responsavel.filiacao"
-              name="filiacao" id="filiacao">
+            <select
+              class="form-select"
+              aria-label="Filiação do responsável"
+              [(ngModel)]="responsavel.filiacao"
+              name="filiacao"
+              id="filiacao"
+            >
               <option selected disabled>Filiação do responsável</option>
               <option value="OUTRO">Outro</option>
               <option value="PAI">Pai</option>
@@ -239,8 +462,13 @@
 
           <div class="row mt-3">
             <div class="col-md-6">
-              <select class="form-select" aria-label="Tipo sanguineo" id="tipoSanguineo" name="tipoSanguineo"
-                [(ngModel)]="historicoSaude.tipoSanguineo">
+              <select
+                class="form-select"
+                aria-label="Tipo sanguineo"
+                id="tipoSanguineo"
+                name="tipoSanguineo"
+                [(ngModel)]="historicoSaude.tipoSanguineo"
+              >
                 <option selected disabled>Tipo sanguineo</option>
                 <option value="A_POSITIVO">A+</option>
                 <option value="A_NEGATIVO">A-</option>
@@ -257,36 +485,62 @@
           <div class="row mt-4">
             <p>O Aluno faz uso de medicamentos?</p>
             <cite> Se não possuir, deixe em branco </cite>
-            <input type="text" name="usoMedicamentos" id="usoMedicamentos" class="form-control"
-              [(ngModel)]="aluno.historicoSaude.usoMedicamentoContinuo.tipo" />
+            <input
+              type="text"
+              name="usoMedicamentos"
+              id="usoMedicamentos"
+              class="form-control"
+              [(ngModel)]="aluno.historicoSaude.usoMedicamentoContinuo.tipo"
+            />
           </div>
 
           <div class="row mt-4">
             <p>O Aluno tem alergias?</p>
             <cite> Se não possuir, deixe em branco </cite>
-            <input type="text" name="alergia" id="alergia" class="form-control"
-              [(ngModel)]="aluno.historicoSaude.alergia.tipo" />
+            <input
+              type="text"
+              name="alergia"
+              id="alergia"
+              class="form-control"
+              [(ngModel)]="aluno.historicoSaude.alergia.tipo"
+            />
           </div>
 
           <div class="row mt-4">
             <p>O Aluno tem cirurgias?</p>
             <cite> Se não possuir, deixe em branco </cite>
-            <input type="text" name="cirurgias" id="cirurgias" class="form-control"
-              [(ngModel)]="aluno.historicoSaude.cirurgia.tipo" />
+            <input
+              type="text"
+              name="cirurgias"
+              id="cirurgias"
+              class="form-control"
+              [(ngModel)]="aluno.historicoSaude.cirurgia.tipo"
+            />
           </div>
 
           <div class="row mt-4">
             <p>O Aluno tem alguma doença cronica?</p>
             <cite> Se não possuir, deixe em branco</cite>
-            <input type="text" name="doencaCronica" id="doencaCronica" class="form-control"
-              [(ngModel)]="aluno.historicoSaude.doencaCronica.tipo" />
+            <input
+              type="text"
+              name="doencaCronica"
+              id="doencaCronica"
+              class="form-control"
+              [(ngModel)]="aluno.historicoSaude.doencaCronica.tipo"
+            />
           </div>
 
           <div class="row mt-4">
             <h5>O Aluno possui deficiencias?</h5>
             <div>
-              <input class="w-75 m-1" type="text" name="deficiencia" id="deficiencia" class="form-control"
-                [(ngModel)]="deficiencia" />
+              <input
+                class="w-75 m-1"
+                type="text"
+                name="deficiencia"
+                id="deficiencia"
+                class="form-control"
+                [(ngModel)]="deficiencia"
+              />
               <div class="d-flex justify-content-end">
                 <button class="btn btn-secondary m-2" (click)="adicionarDeficiencia()">
                   Adicionar
@@ -297,7 +551,10 @@
               <div class="panel panel-default">
                 <div class="panel-body">
                   <ul class="d-flex flex-wrap">
-                    <li class="bg-info rounded m-2 py-2 px-3 text-white" *ngFor="let str of historicoSaude.deficiencia">
+                    <li
+                      class="bg-info rounded m-2 py-2 px-3 text-white"
+                      *ngFor="let str of historicoSaude.deficiencia"
+                    >
                       {{ str }}
                     </li>
                   </ul>
@@ -309,8 +566,14 @@
           <div class="row mt-4">
             <h5>O Aluno possui algum acompanhamento de saude?</h5>
             <div>
-              <input class="w-75 m-1" type="text" name="acompanhamentoSaude" id="acompanhamentoSaude"
-                class="form-control" [(ngModel)]="acompanhamentoSaude" />
+              <input
+                class="w-75 m-1"
+                type="text"
+                name="acompanhamentoSaude"
+                id="acompanhamentoSaude"
+                class="form-control"
+                [(ngModel)]="acompanhamentoSaude"
+              />
               <div class="d-flex justify-content-end">
                 <button class="btn btn-secondary m-2" (click)="adicionarAcompanhamento()">
                   Adicionar
@@ -321,8 +584,10 @@
               <div class="panel panel-default">
                 <div class="panel-body">
                   <ul class="d-flex flex-wrap">
-                    <li class="bg-info rounded m-2 py-2 px-3 text-white"
-                      *ngFor="let str of historicoSaude.acompanhamentoSaude">
+                    <li
+                      class="bg-info rounded m-2 py-2 px-3 text-white"
+                      *ngFor="let str of historicoSaude.acompanhamentoSaude"
+                    >
                       {{ str }}
                     </li>
                   </ul>

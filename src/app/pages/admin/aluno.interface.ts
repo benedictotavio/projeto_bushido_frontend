@@ -92,6 +92,7 @@ export interface AlunoResponse {
   responsaveis: Responsavel[]
   graduacao: Graduacao[]
   historicoSaude: HistoricoSaude
+  imagemAluno: ImagemAlunoResponse
 }
 
 interface HistoricoSaudeEditado {
@@ -110,4 +111,8 @@ export interface AlunoEditado {
   dadosEscolares: DadosEscolares
   endereco: Endereco
   historicoDeSaude: HistoricoSaudeEditado
+}
+
+interface ImagemAlunoResponse {
+  dadosImagem: File
 }
