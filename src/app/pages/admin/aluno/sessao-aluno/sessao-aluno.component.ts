@@ -166,8 +166,8 @@ export class SessaoAlunoComponent implements OnInit {
             }
           }
         })
-    }
-    this.http
+    } else {
+      this.http
       .put<{ id: string; message: string }>(
         this.url + '/' + this.cpf_aluno,
         this.adapterAlunoParaAlunoEditado(this.aluno as AlunoResponse),
@@ -201,6 +201,7 @@ export class SessaoAlunoComponent implements OnInit {
           }
         }
       })
+    }
   }
 
   protected adicionarDeficiencia() {
