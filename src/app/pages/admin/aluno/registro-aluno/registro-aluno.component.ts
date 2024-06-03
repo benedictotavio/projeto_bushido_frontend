@@ -176,8 +176,8 @@ export class RegistroAlunoComponent implements OnInit {
             }
           }
         })
-    }
-    this.http
+    } else {
+      this.http
       .post<{ id: string; message: string }>(this.ApiBushido, alunoFormData, {
         headers: {
           Authorization: `Bearer ${this.token}`
@@ -207,6 +207,7 @@ export class RegistroAlunoComponent implements OnInit {
           }
         }
       })
+    }
   }
 
   adicionarAcompanhamento() {
