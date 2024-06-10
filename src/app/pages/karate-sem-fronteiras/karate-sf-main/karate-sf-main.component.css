@@ -1,11 +1,11 @@
 section#karate-sem-fronteiras-banner {
-  background-color: #000000;
+  background-color: #232323;
   color: white;
   padding: 5rem 0.8rem 3rem;
   gap: 0;
   display: block;
 }
-section#karate-sem-fronteiras-banner > p {
+section#karate-sem-fronteiras-banner > div > p {
   font-size: 1.6rem;
   font-weight: 600;
   padding: 0;
