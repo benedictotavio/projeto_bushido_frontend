@@ -4,17 +4,17 @@ section{
     flex-direction: column;
     gap: .4rem;
 }
-section>h1{
+section > div >h1{
     text-transform: uppercase;
     font-weight: 600;
     font-size: 2rem;
     padding-top: 3rem;
 }
-section>p{
+section > div > div >p{
     text-align: justify;
     font-size: 1.1rem;
 }
-section>a{
+section > div > div >a{
     text-transform: uppercase;
     font-style: italic;
     text-decoration: none;
