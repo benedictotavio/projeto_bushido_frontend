@@ -4,7 +4,7 @@ import { BlogPost } from 'src/app/models/blog-post'
 @Component({
   selector: 'app-blog-card',
   template: `
-    <article class="col">
+    <article class="col mt-5">
       <img src="{{ post?.capa?.url }}" alt="" class="img-fluid" />
 
       <h2 class="mt-5">{{ this.post?.titulo }}</h2>
