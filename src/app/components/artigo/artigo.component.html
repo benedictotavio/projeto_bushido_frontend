@@ -1,29 +1,34 @@
 <main class="container-fluid pt-2">
   <div class="row">
     <article class="col px-5 saude">
-      <img [src]="post?.capa?.url" alt="" class="img-fluid" />
+      <div class="text-center">
+        <img [src]="post?.capa?.url" alt="" class="img-fluid" />
 
-      <h1 class="mt-3">{{ post?.titulo }}</h1>
+        <h1 class="mt-3">{{ post?.titulo }}</h1>
+      </div>
+      
       <h2 class="mt-3 h6 text-primary">Deixe um comentário / Esporte / Por Marketing Bushido</h2>
       <h2 class="mt-3 h6">
         {{ post?.autor?.nome }} • {{ post?._firstPublishedAt?.substring(8, 10) }}/{{
           post?._firstPublishedAt?.substring(5, 7)
         }}/{{ post?._firstPublishedAt?.substring(0, 4) }}
       </h2>
-      <div class="fs-4" [innerHTML]="post?.corpo"></div>
+      <div class="fs-5 mt-4 justify-content-md-center" [innerHTML]="post?.corpo"></div>
       <hr />
-
-      <div>
-        <img
-          [src]="post?.autor?.avatar?.url"
-          alt="Ana Julia Ribeiro"
-          class="float-start px-3"
-          style="width: 150px"
-        />
-
-        <h1 class="h5">SOBRE A REDATORA:</h1>
-        <p class="">{{ post?.autor?.descricao }}</p>
+      <div class="row">
+        <div class="col-md-2">
+          <img
+            [src]="post?.autor?.avatar?.url"
+            alt="Ana Julia Ribeiro"
+            class="float-start px-3 rounded-circle imagemRedator"
+          />
+        </div>
+        <div class="col-md-10">
+          <h1 class="h5">SOBRE A REDATORA:</h1>
+          <p class="">{{ post?.autor?.descricao }}</p>
+        </div>
       </div>
+      
     </article>
 
     <aside class="px-5">
@@ -108,13 +113,15 @@
 
     <!-----Link para o artigo esporte-->
     <section class="container-fluid p-5">
-      <a class="btn btn-primary" routerLink="./participamos-da-etapa-classificatoria-em-goiania"
+      <a class="btn btn-primary" routerLink="/blog"
         >Post Anterior</a
       >
     </section>
 
     <!---Formulário-->
+    <div>
 
+    </div>
     <section class="container-fluid">
       <article class="col p-5">
         <h1 class="text-center mb-3">Deixa um Comentario</h1>
