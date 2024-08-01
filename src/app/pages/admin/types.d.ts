@@ -1,8 +1,13 @@
 interface AlunoProps {
   cpf: string
+  rg: string
   nome: string
   turma: string
+  cartaoSus: string
+  dataInicioPratica: number
+  statusAluno: ''
   genero: 'M' | 'F' | 'OUTRO'
+  corDePele: ''
   dataNascimento: number
   dadosSociais: DadosSociaisProps
   dadosEscolares: DadosEscolaresProps // Assuming date format is "yyyy-MM-ddTHH:mm:ss"

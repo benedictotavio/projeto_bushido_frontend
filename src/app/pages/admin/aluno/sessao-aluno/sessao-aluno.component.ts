@@ -25,7 +25,7 @@ export class SessaoAlunoComponent implements OnInit {
   aluno: AlunoResponse | undefined
   alunoEditado!: AlunoEditado
   email = this.route.snapshot.paramMap.get('email')
-  cpf_aluno = this.route.snapshot.paramMap.get('cpf')
+  matricula_aluno = this.route.snapshot.paramMap.get('matricula')
   protected deficiencia = ''
   protected acompanhamentoSaude = ''
   private readonly url = environment.urlApi + 'aluno'
@@ -55,7 +55,7 @@ export class SessaoAlunoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.buscarAlunoPorCpf()
+    this.buscarAlunoPorMatricula()
     this.listarTurmas()
   }
 
@@ -98,9 +98,9 @@ export class SessaoAlunoComponent implements OnInit {
       })
   }
 
-  protected buscarAlunoPorCpf() {
+  protected buscarAlunoPorMatricula() {
     this.http
-      .get<AlunoResponse[]>(this.url + `?cpf=${this.cpf_aluno}`, {
+      .get<AlunoResponse[]>(this.url + `?matricula=${this.matricula_aluno}`, {
         headers: {
           Authorization: 'Bearer ' + this.token
         }
@@ -130,11 +130,11 @@ export class SessaoAlunoComponent implements OnInit {
       })
   }
 
-  protected editarAlunoPorCpf() {
+  protected editarAlunoPorMatricula() {
     if (this.imagemSelecionada != null) {
       this.http
         .put<{ id: string; message: string }>(
-          this.urlComImagem + '/' + this.cpf_aluno,
+          this.urlComImagem + '/' + this.matricula_aluno,
           this.adapterAlunoParaAlunoEditado(this.aluno as AlunoResponse),
           {
             headers: {
@@ -169,7 +169,7 @@ export class SessaoAlunoComponent implements OnInit {
     } else {
       this.http
       .put<{ id: string; message: string }>(
-        this.url + '/' + this.cpf_aluno,
+        this.url + '/' + this.matricula_aluno,
         this.adapterAlunoParaAlunoEditado(this.aluno as AlunoResponse),
         {
           headers: {
@@ -208,7 +208,7 @@ export class SessaoAlunoComponent implements OnInit {
     if (this.deficiencia.trim() !== '') {
       this.http
         .post<{ id: string; message: string }>(
-          this.url + `/deficiencia/${this.cpf_aluno}?deficiencia=${this.deficiencia}`,
+          this.url + `/deficiencia/${this.matricula_aluno}?deficiencia=${this.deficiencia}`,
           {},
           {
             headers: {
@@ -250,7 +250,7 @@ export class SessaoAlunoComponent implements OnInit {
     if (this.acompanhamentoSaude.trim() !== '') {
       this.http
         .post<{ id: string; message: string }>(
-          this.url + `/acompanhamentoSaude/${this.cpf_aluno}?acompanhamento=${this.acompanhamentoSaude}`,
+          this.url + `/acompanhamentoSaude/${this.matricula_aluno}?acompanhamento=${this.acompanhamentoSaude}`,
           {},
           {
             headers: {
@@ -290,7 +290,7 @@ export class SessaoAlunoComponent implements OnInit {
 
   protected removerFalta(falta: string) {
     this.http
-      .delete<{ message: string }>(this.url + `/falta/${this.cpf_aluno}/${falta}`, {
+      .delete<{ message: string }>(this.url + `/falta/${this.matricula_aluno}/${falta}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + this.token
@@ -319,7 +319,7 @@ export class SessaoAlunoComponent implements OnInit {
   protected removerAcompanhamentoSaude(acompanhamento: string) {
     this.http
       .delete<{ message: string }>(
-        this.url + `/acompanhamentoSaude/${this.cpf_aluno}?acompanhamento=${acompanhamento}`,
+        this.url + `/acompanhamentoSaude/${this.matricula_aluno}?acompanhamento=${acompanhamento}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -348,7 +348,7 @@ export class SessaoAlunoComponent implements OnInit {
 
   protected removerDeficiencia(id: string) {
     this.http
-      .delete<{ message: string }>(this.url + `/deficiencia/${this.cpf_aluno}?deficiencia=${id}`, {
+      .delete<{ message: string }>(this.url + `/deficiencia/${this.matricula_aluno}?deficiencia=${id}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + this.token
@@ -375,7 +375,7 @@ export class SessaoAlunoComponent implements OnInit {
 
   protected removerResponsavel(cpf: string) {
     this.http
-      .delete<{ message: string }>(this.url + `/responsavel/${this.cpf_aluno}?cpf=${cpf}`, {
+      .delete<{ message: string }>(this.url + `/responsavel/${this.matricula_aluno}?cpf=${cpf}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + this.token
@@ -410,7 +410,7 @@ export class SessaoAlunoComponent implements OnInit {
 
     this.http
       .post<{ message: string }>(
-        this.url + `/graduacao/${this.cpf_aluno}/aprovar/${nota}`,
+        this.url + `/graduacao/${this.matricula_aluno}/aprovar/${nota}`,
         {},
         {
           headers: {
@@ -451,7 +451,7 @@ export class SessaoAlunoComponent implements OnInit {
 
     this.http
       .post<{ message: string }>(
-        this.url + `/graduacao/${this.cpf_aluno}/reprovar/${nota}`,
+        this.url + `/graduacao/${this.matricula_aluno}/reprovar/${nota}`,
         {},
         {
           headers: {

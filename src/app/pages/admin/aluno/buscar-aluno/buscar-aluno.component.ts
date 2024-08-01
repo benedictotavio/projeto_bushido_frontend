@@ -31,21 +31,17 @@ export class BuscarAlunoComponent {
       window.alert('Preencha o campo para realizar a busca')
       return
     }
-
-    if (this.validarCpf(this.pesquisarAluno.trim())) {
-      this.buscarAlunoPorCpf()
-      this.searchBy = true
-      return
-    }
+    this.buscarAlunoPorMatricula()
+    this.searchBy = true
 
     this.currentPage = 1
     this.buscarAlunoPorNome()
     this.searchBy = true
   }
 
-  protected buscarAlunoPorCpf() {
+  protected buscarAlunoPorMatricula() {
     this.http
-      .get<AlunoResponse[]>(this.apiUrl + `?cpf=${this.pesquisarAluno}`, {
+      .get<AlunoResponse[]>(this.apiUrl + `?matricula=${this.pesquisarAluno}`, {
         headers: {
           Authorization: 'Bearer ' + this.token
         }
