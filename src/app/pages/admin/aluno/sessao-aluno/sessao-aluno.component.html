@@ -83,9 +83,17 @@
             </b>
           </span>
         </div>
+        <div class="mt-2">
+          <span class="font-weight-bold">
+            <span>Início: </span>
+            <b>
+              {{ aluno.dataInicioPratica }}
+            </b>
+          </span>
+        </div>
         <div>
-          <span class="text-black-50">
-            {{ aluno.cpf }}
+          <span class="text-black-50 mt-2">
+            {{ aluno.matricula }}
           </span>
         </div>
       </div>
@@ -131,8 +139,85 @@
             </select>
           </div>
         </div>
+        <div class="row mt-2">
+          <div class="col-md-6">
+            <label for="cpf" class="labels">CPF</label>
+            <input
+              [(ngModel)]="aluno.cpf"
+              name="cpf"
+              id="cpf"
+              type="text"
+              class="form-control"
+              placeholder="Apenas números"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="rg" class="labels">RG</label>
+            <input
+              type="text"
+              name="rg"
+              class="form-control"
+              placeholder="Apenas números"
+              [(ngModel)]="aluno.rg"
+            />
+          </div>
+        </div>
+        
         <div class="row mt-3">
-          <div class="col-md-12">
+          <div class="col-md-6">
+            <label for="cartaoSus" class="labels">Cartão do SUS</label>
+            <input
+              type="text"
+              name="cartaoSus"
+              class="form-control"
+              placeholder="Apenas números"
+              [(ngModel)]="aluno.cartaoSus"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="corDePele" class="labels">Cor da Pele</label>
+            <select
+              type="text"
+              name="status"
+              class="form-control"
+              [(ngModel)]="aluno.corDePele"
+            >
+              <option value="AMARELO">Amarelo</option>
+              <option value="BRANCO">Branco</option>
+              <option value="INDIGENA">Indigena</option>
+              <option value="PARDO">Pardo</option>
+              <option value="PRETO">Preto</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="dataInicioPratica">Data de Início</label>
+              <input type="date" class="form-control" [(ngModel)]="aluno.dataInicioPratica" name="dataInicioPratica"
+                id="dataInicioPratica" pattern="\d{4}-\d{2}-\d{2}"
+                placeholder="dd-MM-yyyy" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="statusAluno" class="labels">Status</label>
+            <select
+              type="text"
+              name="statusAluno"
+              class="form-control"
+              [(ngModel)]="aluno.statusAluno"
+            >
+              <option value="ATIVO">Ativo</option>
+              <option value="INATIVO">Inativo</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <h4>Endereço</h4>
+          <div class="col-md-8">
             <label for="cidade" class="labels">Cidade</label>
             <input
               type="text"
@@ -143,7 +228,7 @@
               [(ngModel)]="aluno.endereco.cidade"
             />
           </div>
-          <div class="col-md-12">
+          <div class="col-md-4">
             <label for="estado" class="labels">Estado</label>
             <input
               type="text"
@@ -153,17 +238,11 @@
               placeholder="Estado"
               [(ngModel)]="aluno.endereco.estado"
             />
-            <label for="estado" class="labels">Logradouro</label>
-            <input
-              type="text"
-              name="estado"
-              id="estado"
-              class="form-control"
-              placeholder="Estado"
-              [(ngModel)]="aluno.endereco.logradouro"
-            />
-          </div>
-          <div class="col-md-9">
+          </div>         
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-md-4">
             <label for="cep" class="labels">CEP</label>
             <input
               type="text"
@@ -174,7 +253,18 @@
               [(ngModel)]="aluno.endereco.cep"
             />
           </div>
-          <div class="col-md-3">
+          <div class="col-md-6">
+            <label for="logradouro" class="labels">Logradouro</label>
+            <input
+              type="text"
+              name="logradouro"
+              id="Logradouro"
+              class="form-control"
+              placeholder="Estado"
+              [(ngModel)]="aluno.endereco.logradouro"
+            />
+          </div>
+          <div class="col-md-2">
             <label for="numero" class="labels">Numero</label>
             <input
               type="text"
@@ -186,9 +276,10 @@
             />
           </div>
         </div>
+
         <div class="row mt-4">
           <h4>Dados Escolares</h4>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label for="serie" class="labels">Serie</label>
             <input
               type="number"
@@ -199,6 +290,7 @@
               [(ngModel)]="aluno.dadosEscolares.serie"
             />
           </div>
+          <!--
           <div class="col-md-6 d-flex align-items-end">
             <select
               class="turno w-100 my-3 rounded text-center"
@@ -213,7 +305,8 @@
               <option value="NOITE">Noturno</option>
             </select>
           </div>
-          <div class="col-md-12">
+          -->
+          <div class="col-md-8">
             <label for="escola" class="labels">Escola</label>
             <input
               type="text"
@@ -524,7 +617,7 @@
           </div>
           <div class="my-5 d-flex justify-content-center" *ngIf="isAdmin()">
             <button
-              (click)="editarAlunoPorCpf()"
+              (click)="editarAlunoPorMatricula()"
               class="btn btn-primary profile-button w-75 h-100"
               type="button"
             >

@@ -86,10 +86,15 @@ export class RegistroAlunoComponent implements OnInit {
 
   aluno: AlunoProps = {
     cpf: '',
+    rg: '',
     nome: '',
     genero: 'OUTRO',
+    corDePele: '',
     turma: '',
+    cartaoSus: '',
+    statusAluno: '',
     dataNascimento: 0,
+    dataInicioPratica: 0,
     dadosSociais: this.dadosSociais,
     dadosEscolares: this.dadosEscolares,
     endereco: this.endereco,
