@@ -17,7 +17,7 @@ export class ModalResponsavelComponent {
   ) {}
 
   private readonly token = localStorage.getItem('token')
-  private readonly url = environment.urlApi + `aluno/responsavel/${this.route.snapshot.paramMap.get('cpf')}`
+  private readonly url = environment.urlApi + `aluno/responsavel/${this.route.snapshot.paramMap.get('matricula')}`
   responsavel = {
     nome: '',
     cpf: '',

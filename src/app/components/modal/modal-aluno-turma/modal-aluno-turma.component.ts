@@ -21,7 +21,7 @@ export class ModalAlunoTurmaComponent {
   private readonly url = environment.urlApi
   private readonly nomeTurma = this.route.snapshot.paramMap.get('nomeTurma')
   private readonly token = localStorage.getItem('token')
-  protected cpf = ''
+  protected matricula = ''
   protected aluno: AlunoResponse | undefined
 
   protected adicionarAlunoATurma() {
@@ -32,7 +32,7 @@ export class ModalAlunoTurmaComponent {
           nome: this.aluno?.nome,
           genero: this.aluno?.genero,
           dataNascimento: this.dateToLocalDateString(this.aluno?.dataNascimento as string),
-          cpf: this.aluno?.cpf
+          matricula: this.aluno?.matricula
         },
         {
           headers: {
@@ -65,9 +65,9 @@ export class ModalAlunoTurmaComponent {
       })
   }
 
-  protected buscarAlunoPorRg() {
+  protected buscarAlunoPorMatricula() {
     this.http
-      .get<AlunoResponse[]>(this.url + 'aluno' + `?cpf=${this.cpf}`, {
+      .get<AlunoResponse[]>(this.url + 'aluno' + `?matricula=${this.matricula}`, {
         headers: {
           Authorization: 'Bearer ' + this.token
         }
@@ -97,7 +97,7 @@ export class ModalAlunoTurmaComponent {
   }
 
   protected fecharModal() {
-    this.cpf = ''
+    this.matricula = ''
     this.aluno = undefined
   }
 

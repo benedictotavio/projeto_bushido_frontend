@@ -92,9 +92,8 @@ export class RegistroAlunoComponent implements OnInit {
     corDePele: '',
     turma: '',
     cartaoSus: '',
-    statusAluno: '',
     dataNascimento: 0,
-    dataInicioPratica: 0,
+   // dataInicioPratica: 0,
     dadosSociais: this.dadosSociais,
     dadosEscolares: this.dadosEscolares,
     endereco: this.endereco,
@@ -142,6 +141,7 @@ export class RegistroAlunoComponent implements OnInit {
 
   protected registrarAluno() {
     const dataNasc = new Date(this.aluno.dataNascimento)
+ //   const dataInicio = new Date(this.aluno.dataInicioPratica)
 
     if (dataNasc.getFullYear() > new Date().getFullYear() - 4) {
       window.confirm('Data de nascimento inválida')
@@ -149,6 +149,7 @@ export class RegistroAlunoComponent implements OnInit {
     }
 
     this.aluno.dataNascimento = dataNasc.getTime()
+  //  this.aluno.dataInicioPratica = dataInicio.getTime()
     const alunoFormData = this.prepareFormData(this.aluno)
     if (this.imagemSelecionada != null) {
       this.http

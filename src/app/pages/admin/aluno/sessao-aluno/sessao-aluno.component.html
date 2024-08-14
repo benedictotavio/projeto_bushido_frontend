@@ -83,14 +83,6 @@
             </b>
           </span>
         </div>
-        <div class="mt-2">
-          <span class="font-weight-bold">
-            <span>Início: </span>
-            <b>
-              {{ aluno.dataInicioPratica }}
-            </b>
-          </span>
-        </div>
         <div>
           <span class="text-black-50 mt-2">
             {{ aluno.matricula }}
@@ -191,8 +183,9 @@
             </select>
           </div>
         </div>
-
+<!--
         <div class="row mt-3">
+          
           <div class="col-md-6">
             <div class="form-group">
               <label for="dataInicioPratica">Data de Início</label>
@@ -201,6 +194,7 @@
                 placeholder="dd-MM-yyyy" />
             </div>
           </div>
+          
           <div class="col-md-6">
             <label for="statusAluno" class="labels">Status</label>
             <select
@@ -214,6 +208,7 @@
             </select>
           </div>
         </div>
+        -->
 
         <div class="row mt-3">
           <h4>Endereço</h4>
@@ -276,37 +271,11 @@
             />
           </div>
         </div>
-
+        
         <div class="row mt-4">
           <h4>Dados Escolares</h4>
-          <div class="col-md-4">
-            <label for="serie" class="labels">Serie</label>
-            <input
-              type="number"
-              name="serie"
-              id="serie"
-              class="form-control"
-              placeholder="Serie"
-              [(ngModel)]="aluno.dadosEscolares.serie"
-            />
-          </div>
-          <!--
-          <div class="col-md-6 d-flex align-items-end">
-            <select
-              class="turno w-100 my-3 rounded text-center"
-              aria-label="turno"
-              name="turno"
-              [(ngModel)]="aluno.dadosEscolares.turno"
-              id="turno"
-              required
-            >
-              <option value="MANHA">Matutino</option>
-              <option value="TARDE">Tarde</option>
-              <option value="NOITE">Noturno</option>
-            </select>
-          </div>
-          -->
-          <div class="col-md-8">
+
+          <div class="col-md-7">
             <label for="escola" class="labels">Escola</label>
             <input
               type="text"
@@ -317,6 +286,34 @@
               [(ngModel)]="aluno.dadosEscolares.escola"
             />
           </div>
+
+          <div class="col-md-2">
+            <label for="serie" class="labels">Serie</label>
+            <input
+              type="number"
+              name="serie"
+              id="serie"
+              class="form-control"
+              placeholder="Serie"
+              [(ngModel)]="aluno.dadosEscolares.serie"
+            />
+          </div>
+          
+          <div class="col-md-3 d-flex align-items-end">
+            <select
+              class="turno w-100 my-3 rounded text-center"
+              aria-label="turno"
+              name="turno"
+              [(ngModel)]="aluno.dadosEscolares.turno"
+              id="turno"
+              required
+            >
+              <option value="MANHA">Manhã</option>
+              <option value="TARDE">Tarde</option>
+              <option value="NOITE">Noite</option>
+            </select>
+          </div>
+
         </div>
         <div class="row mt-4">
           <h4>Dados Sociais</h4>
@@ -671,7 +668,7 @@
                 <span class="badge bg-info">
                   {{ aluno.turma }}
                 </span>
-                <div class="p-1">
+                <div class="p-1 cursor">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -763,9 +760,9 @@
                         width="16"
                         height="16"
                         fill="currentColor"
-                        class="bi bi-trash3 text-black me-3"
+                        class="bi bi-trash3 text-black me-3 cursor"
                         viewBox="0 0 16 16"
-                        (onclick)="removerFalta(falta.data)"
+                        (click)="removerFalta(falta.data)"
                       >
                         <path
                           d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"

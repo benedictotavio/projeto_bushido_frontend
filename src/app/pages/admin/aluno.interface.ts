@@ -92,8 +92,6 @@ export interface AlunoResponse {
   rg: string
   matricula: string
   cartaoSus: string
-  dataInicioPratica: string
-  statusAluno: string
   corDePele: string
   responsaveis: Responsavel[]
   graduacao: Graduacao[]

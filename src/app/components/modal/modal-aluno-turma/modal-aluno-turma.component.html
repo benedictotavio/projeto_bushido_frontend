@@ -18,17 +18,17 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="buscarAlunoPorRg()">
+        <form (ngSubmit)="buscarAlunoPorMatricula()">
           <div class="row">
             <div class="col-md-8">
-              <label for="rg" class="visually-hidden">RG</label>
+              <label for="matricula" class="visually-hidden">Matricula</label>
               <input
                 type="text"
                 class="form-control"
-                id="rg"
-                name="rg"
-                placeholder="Digite o CPF do Aluno"
-                [(ngModel)]="cpf"
+                id="matricula"
+                name="matricula"
+                placeholder="Digite a matricula do Aluno"
+                [(ngModel)]="matricula"
                 required
               />
             </div>
@@ -41,7 +41,7 @@
           <div (click)="adicionarAlunoATurma()" class="col-md-12 card card-aluno">
             <div class="card-body">
               <h5 class="card-title">{{ aluno.nome }}</h5>
-              <p class="card-text">RG: {{ aluno.cpf }}</p>
+              <p class="card-text">Matricula: {{ aluno.matricula }}</p>
             </div>
           </div>
         </div>
