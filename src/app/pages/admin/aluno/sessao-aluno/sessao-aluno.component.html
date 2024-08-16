@@ -117,6 +117,19 @@
         </div>
 
         <div class="row mt-3">
+          <div class="col-md-6">
+            <label for="telefone" class="labels">Telefone</label>
+            <input type="text" name="telefone" class="form-control" placeholder="Apenas números"
+              [(ngModel)]="aluno.telefone" />
+          </div>
+            <div class="col-md-6">
+              <label for="email" class="labels">E-mail</label>
+              <input type="text" name="email" class="form-control" placeholder="email@email.com"
+                [(ngModel)]="aluno.email" />
+            </div>
+        </div>
+
+        <div class="row mt-3">
           <h4>Endereço</h4>
           <div class="col-md-8">
             <label for="cidade" class="labels">Cidade</label>

@@ -88,6 +88,8 @@ export class RegistroAlunoComponent implements OnInit {
     cpf: '',
     rg: '',
     nome: '',
+    telefone: '',
+    email: '',
     genero: 'OUTRO',
     corDePele: '',
     turma: '',
