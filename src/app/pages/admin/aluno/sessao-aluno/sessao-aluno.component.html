@@ -2,18 +2,10 @@
   <app-placeholder-sessao-aluno *ngIf="!aluno"></app-placeholder-sessao-aluno>
   <a class="text-white text-decoration-none" href="/admin/{{ email }}">
     <button class="btn btn-primary ms-2 mt-2">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-arrow-return-left"
-        viewBox="0 0 16 16"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"
-        />
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5" />
       </svg>
       Dashboard
     </button>
@@ -24,38 +16,21 @@
         <div class="row mt-4">
           <div class="col-md-12">
             <div class="form-group">
-              <div
-                *ngIf="bloquearAlteracaoImagem; else alterarImagem"
-                class="d-flex justify-content-center"
-              >
+              <div *ngIf="bloquearAlteracaoImagem; else alterarImagem" class="d-flex justify-content-center">
                 <div class="circle-image mb-4">
-                  <img
-                    class="rounded-circle"
-                    [src]="'data:image/png;base64,' + aluno.imagemAluno.dadosImagem"
-                    alt="user profile"
-                    id="img-aluno-profile"
-                  />
+                  <img class="rounded-circle" [src]="'data:image/png;base64,' + aluno.imagemAluno.dadosImagem"
+                    alt="user profile" id="img-aluno-profile" />
                 </div>
               </div>
               <ng-template #alterarImagem>
                 <div *ngIf="imagemSelecionada" class="d-flex justify-content-center">
                   <span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-x-circle text-danger"
-                      viewBox="0 0 16 16"
-                      (click)="removerImagem()"
-                      (keydown.enter)="removerImagem()"
-                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-x-circle text-danger" viewBox="0 0 16 16" (click)="removerImagem()"
+                      (keydown.enter)="removerImagem()">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                       <path
-                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
-                      />
-                      <path
-                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
-                      />
+                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                     </svg>
                   </span>
                   <div class="mb-4">
@@ -64,14 +39,8 @@
                 </div>
               </ng-template>
               <label for="imagemAluno" class="btn btn-secondary text-white">Alterar Foto</label>
-              <input
-                type="file"
-                name="imagemAluno"
-                id="imagemAluno"
-                class="form-control"
-                (change)="selecionarImagem($event)"
-                #limparInput
-              />
+              <input type="file" name="imagemAluno" id="imagemAluno" class="form-control"
+                (change)="selecionarImagem($event)" #limparInput />
             </div>
           </div>
         </div>
@@ -84,8 +53,11 @@
           </span>
         </div>
         <div>
-          <span class="text-black-50 mt-2">
-            {{ aluno.matricula }}
+          <span class="font-weight-bold mt-2">
+            <span>Matricula: </span>
+            <b>
+              {{ aluno.matricula }}
+            </b>
           </span>
         </div>
       </div>
@@ -96,35 +68,17 @@
         <div class="row mt-2">
           <div class="col-md-6">
             <label for="nome" class="labels">Nome</label>
-            <input
-              [(ngModel)]="aluno.nome"
-              name="nome"
-              id="nome"
-              type="text"
-              class="form-control"
-              placeholder="Nome"
-            />
+            <input [(ngModel)]="aluno.nome" name="nome" id="nome" type="text" class="form-control" placeholder="Nome" />
           </div>
           <div class="col-md-3">
             <label for="dataNascimento" class="labels">Data nascimento</label>
-            <input
-              type="text"
-              name="dataNascimento"
-              class="form-control"
-              placeholder="Data de Nascimento"
-              [(ngModel)]="aluno.dataNascimento"
-              readonly
-            />
+            <input type="text" name="dataNascimento" class="form-control" placeholder="Data de Nascimento"
+              [(ngModel)]="aluno.dataNascimento" readonly />
           </div>
           <div class="col-md-3">
             <label for="genero" class="labels">Genero</label>
-            <select
-              type="text"
-              name="genero"
-              class="form-control"
-              placeholder="Data de Nascimento"
-              [(ngModel)]="aluno.genero"
-            >
+            <select type="text" name="genero" class="form-control" placeholder="Data de Nascimento"
+              [(ngModel)]="aluno.genero">
               <option value="M">Masculino</option>
               <option value="F">Feminino</option>
               <option value="OUTRO">Outro</option>
@@ -134,47 +88,25 @@
         <div class="row mt-2">
           <div class="col-md-6">
             <label for="cpf" class="labels">CPF</label>
-            <input
-              [(ngModel)]="aluno.cpf"
-              name="cpf"
-              id="cpf"
-              type="text"
-              class="form-control"
-              placeholder="Apenas números"
-            />
+            <input [(ngModel)]="aluno.cpf" name="cpf" id="cpf" type="text" class="form-control"
+              placeholder="Apenas números" />
           </div>
           <div class="col-md-6">
             <label for="rg" class="labels">RG</label>
-            <input
-              type="text"
-              name="rg"
-              class="form-control"
-              placeholder="Apenas números"
-              [(ngModel)]="aluno.rg"
-            />
+            <input type="text" name="rg" class="form-control" placeholder="Apenas números" [(ngModel)]="aluno.rg" />
           </div>
         </div>
-        
+
         <div class="row mt-3">
           <div class="col-md-6">
             <label for="cartaoSus" class="labels">Cartão do SUS</label>
-            <input
-              type="text"
-              name="cartaoSus"
-              class="form-control"
-              placeholder="Apenas números"
-              [(ngModel)]="aluno.cartaoSus"
-            />
+            <input type="text" name="cartaoSus" class="form-control" placeholder="Apenas números"
+              [(ngModel)]="aluno.cartaoSus" />
           </div>
 
           <div class="col-md-6">
             <label for="corDePele" class="labels">Cor da Pele</label>
-            <select
-              type="text"
-              name="status"
-              class="form-control"
-              [(ngModel)]="aluno.corDePele"
-            >
+            <select type="text" name="status" class="form-control" [(ngModel)]="aluno.corDePele">
               <option value="AMARELO">Amarelo</option>
               <option value="BRANCO">Branco</option>
               <option value="INDIGENA">Indigena</option>
@@ -183,131 +115,57 @@
             </select>
           </div>
         </div>
-<!--
-        <div class="row mt-3">
-          
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="dataInicioPratica">Data de Início</label>
-              <input type="date" class="form-control" [(ngModel)]="aluno.dataInicioPratica" name="dataInicioPratica"
-                id="dataInicioPratica" pattern="\d{4}-\d{2}-\d{2}"
-                placeholder="dd-MM-yyyy" />
-            </div>
-          </div>
-          
-          <div class="col-md-6">
-            <label for="statusAluno" class="labels">Status</label>
-            <select
-              type="text"
-              name="statusAluno"
-              class="form-control"
-              [(ngModel)]="aluno.statusAluno"
-            >
-              <option value="ATIVO">Ativo</option>
-              <option value="INATIVO">Inativo</option>
-            </select>
-          </div>
-        </div>
-        -->
 
         <div class="row mt-3">
           <h4>Endereço</h4>
           <div class="col-md-8">
             <label for="cidade" class="labels">Cidade</label>
-            <input
-              type="text"
-              name="cidade"
-              id="cidade"
-              class="form-control"
-              placeholder="Cidade"
-              [(ngModel)]="aluno.endereco.cidade"
-            />
+            <input type="text" name="cidade" id="cidade" class="form-control" placeholder="Cidade"
+              [(ngModel)]="aluno.endereco.cidade" />
           </div>
           <div class="col-md-4">
             <label for="estado" class="labels">Estado</label>
-            <input
-              type="text"
-              name="estado"
-              id="estado"
-              class="form-control"
-              placeholder="Estado"
-              [(ngModel)]="aluno.endereco.estado"
-            />
-          </div>         
+            <input type="text" name="estado" id="estado" class="form-control" placeholder="Estado"
+              [(ngModel)]="aluno.endereco.estado" />
+          </div>
         </div>
 
         <div class="row mt-3">
           <div class="col-md-4">
             <label for="cep" class="labels">CEP</label>
-            <input
-              type="text"
-              name="cep"
-              id="cep"
-              class="form-control"
-              placeholder="CEP"
-              [(ngModel)]="aluno.endereco.cep"
-            />
+            <input type="text" name="cep" id="cep" class="form-control" placeholder="CEP"
+              [(ngModel)]="aluno.endereco.cep" />
           </div>
           <div class="col-md-6">
             <label for="logradouro" class="labels">Logradouro</label>
-            <input
-              type="text"
-              name="logradouro"
-              id="Logradouro"
-              class="form-control"
-              placeholder="Estado"
-              [(ngModel)]="aluno.endereco.logradouro"
-            />
+            <input type="text" name="logradouro" id="Logradouro" class="form-control" placeholder="Estado"
+              [(ngModel)]="aluno.endereco.logradouro" />
           </div>
           <div class="col-md-2">
             <label for="numero" class="labels">Numero</label>
-            <input
-              type="text"
-              name="numero"
-              id="numero"
-              class="form-control"
-              placeholder="Nº"
-              [(ngModel)]="aluno.endereco.numero"
-            />
+            <input type="text" name="numero" id="numero" class="form-control" placeholder="Nº"
+              [(ngModel)]="aluno.endereco.numero" />
           </div>
         </div>
-        
+
         <div class="row mt-4">
           <h4>Dados Escolares</h4>
 
           <div class="col-md-7">
             <label for="escola" class="labels">Escola</label>
-            <input
-              type="text"
-              name="escola"
-              id="escola"
-              class="form-control"
-              placeholder="Escola"
-              [(ngModel)]="aluno.dadosEscolares.escola"
-            />
+            <input type="text" name="escola" id="escola" class="form-control" placeholder="Escola"
+              [(ngModel)]="aluno.dadosEscolares.escola" />
           </div>
 
           <div class="col-md-2">
             <label for="serie" class="labels">Serie</label>
-            <input
-              type="number"
-              name="serie"
-              id="serie"
-              class="form-control"
-              placeholder="Serie"
-              [(ngModel)]="aluno.dadosEscolares.serie"
-            />
+            <input type="number" name="serie" id="serie" class="form-control" placeholder="Serie"
+              [(ngModel)]="aluno.dadosEscolares.serie" />
           </div>
-          
+
           <div class="col-md-3 d-flex align-items-end">
-            <select
-              class="turno w-100 my-3 rounded text-center"
-              aria-label="turno"
-              name="turno"
-              [(ngModel)]="aluno.dadosEscolares.turno"
-              id="turno"
-              required
-            >
+            <select class="turno w-100 my-3 rounded text-center" aria-label="turno" name="turno"
+              [(ngModel)]="aluno.dadosEscolares.turno" id="turno" required>
               <option value="MANHA">Manhã</option>
               <option value="TARDE">Tarde</option>
               <option value="NOITE">Noite</option>
@@ -320,13 +178,8 @@
           <div class="col-md-12">
             <label for="imovel" class="form-label">Imovel</label>
             <div class="col-md-12">
-              <select
-                class="imovel p-2 w-100"
-                aria-label="imovel"
-                name="imovel"
-                [(ngModel)]="aluno.dadosSociais.imovel"
-                required
-              >
+              <select class="imovel p-2 w-100" aria-label="imovel" name="imovel" [(ngModel)]="aluno.dadosSociais.imovel"
+                required>
                 <option value="CEDIDO">Cedido</option>
                 <option value="ALUGADO">Alugado</option>
                 <option value="PROPRIO">Proprio</option>
@@ -337,33 +190,18 @@
         <div class="row mt-4 d-flex align-items-end">
           <div class="col-md-3">
             <label for="rendaFamiliar" class="form-label">Renda Familiar</label>
-            <input
-              name="rendaFamiliar"
-              id="rendaFamiliar"
-              type="text"
-              class="form-control"
-              [(ngModel)]="aluno.dadosSociais.rendaFamiliar"
-            />
+            <input name="rendaFamiliar" id="rendaFamiliar" type="text" class="form-control"
+              [(ngModel)]="aluno.dadosSociais.rendaFamiliar" />
           </div>
           <div class="col-md-6">
             <label for="contribuintesDaRenda" class="form-label">Contribuintes da Renda</label>
-            <input
-              name="contribuintesDaRenda"
-              id="contribuintesDaRenda"
-              type="text"
-              class="form-control"
-              [(ngModel)]="aluno.dadosSociais.contribuintesDaRendaFamiliar"
-            />
+            <input name="contribuintesDaRenda" id="contribuintesDaRenda" type="text" class="form-control"
+              [(ngModel)]="aluno.dadosSociais.contribuintesDaRendaFamiliar" />
           </div>
           <div class="col-md-3">
             <label for="pessoasNaCasa" class="form-label">Pessoas na Casa</label>
-            <input
-              name="pessoasNaCasa"
-              id="pessoasNaCasa"
-              type="text"
-              class="form-control"
-              [(ngModel)]="aluno.dadosSociais.numerosDePessoasNaCasa"
-            />
+            <input name="pessoasNaCasa" id="pessoasNaCasa" type="text" class="form-control"
+              [(ngModel)]="aluno.dadosSociais.numerosDePessoasNaCasa" />
           </div>
         </div>
         <div class="row mt-4">
@@ -371,38 +209,21 @@
             <h6>Informações socias para dados do aluno</h6>
             <div class="mt-4">
               <div class="mb-3 form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="bolsaFamilia"
-                  name="bolsaFamilia"
-                  [(ngModel)]="aluno.dadosSociais.bolsaFamilia"
-                />
+                <input type="checkbox" class="form-check-input" id="bolsaFamilia" name="bolsaFamilia"
+                  [(ngModel)]="aluno.dadosSociais.bolsaFamilia" />
                 <label class="form-check-label" for="bolsaFamilia">Bolsa Família</label>
               </div>
 
               <div class="mb-3 form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="auxilioBrasil"
-                  name="auxilioBrasil"
-                  [(ngModel)]="aluno.dadosSociais.auxilioBrasil"
-                />
+                <input type="checkbox" class="form-check-input" id="auxilioBrasil" name="auxilioBrasil"
+                  [(ngModel)]="aluno.dadosSociais.auxilioBrasil" />
                 <label class="form-check-label" for="auxilioBrasil">Auxílio Brasil</label>
               </div>
 
               <div class="mb-3 form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="alunoContribuiParaRenda"
-                  name="alunoContribuiParaRenda"
-                  [(ngModel)]="aluno.dadosSociais.alunoContribuiParaRenda"
-                />
-                <label class="form-check-label" for="alunoContribuiParaRenda"
-                  >Aluno Contribui para Renda</label
-                >
+                <input type="checkbox" class="form-check-input" id="alunoContribuiParaRenda"
+                  name="alunoContribuiParaRenda" [(ngModel)]="aluno.dadosSociais.alunoContribuiParaRenda" />
+                <label class="form-check-label" for="alunoContribuiParaRenda">Aluno Contribui para Renda</label>
               </div>
             </div>
           </div>
@@ -413,13 +234,8 @@
             <div class="row my-3">
               <div class="col-md-6">
                 <label for="tipoSanguineo" class="form-label">Tipo Saguineo</label>
-                <select
-                  class="form-select"
-                  aria-label="Tipo sanguineo"
-                  id="tipoSanguineo"
-                  name="tipoSanguineo"
-                  [(ngModel)]="aluno.historicoSaude.tipoSanguineo"
-                >
+                <select class="form-select" aria-label="Tipo sanguineo" id="tipoSanguineo" name="tipoSanguineo"
+                  [(ngModel)]="aluno.historicoSaude.tipoSanguineo">
                   <option selected disabled>Tipo sanguineo</option>
                   <option value="A_POSITIVO">A+</option>
                   <option value="A_NEGATIVO">A-</option>
@@ -435,64 +251,34 @@
 
             <div class="col-md-12">
               <label for="alergia" class="form-label">Alergias</label>
-              <input
-                name="alergia"
-                id="alergia"
-                type="text"
-                class="form-control"
-                [(ngModel)]="aluno.historicoSaude.alergia.tipo"
-              />
+              <input name="alergia" id="alergia" type="text" class="form-control"
+                [(ngModel)]="aluno.historicoSaude.alergia.tipo" />
             </div>
             <div class="col-md-12">
-              <label for="usoMedicamentoContinuo" class="form-label"
-                >Uso de Medicamento Continuo</label
-              >
-              <input
-                name="usoMedicamentoContinuo"
-                id="usoMedicamentoContinuo"
-                type="text"
-                class="form-control"
-                [(ngModel)]="aluno.historicoSaude.usoMedicamentoContinuo.tipo"
-              />
+              <label for="usoMedicamentoContinuo" class="form-label">Uso de Medicamento Continuo</label>
+              <input name="usoMedicamentoContinuo" id="usoMedicamentoContinuo" type="text" class="form-control"
+                [(ngModel)]="aluno.historicoSaude.usoMedicamentoContinuo.tipo" />
             </div>
             <div class="col-md-12">
               <label for="cirurgia" class="form-label">Cirurgias</label>
-              <input
-                name="cirurgia"
-                id="cirurgia"
-                type="text"
-                class="form-control"
-                [(ngModel)]="aluno.historicoSaude.cirurgia.tipo"
-              />
+              <input name="cirurgia" id="cirurgia" type="text" class="form-control"
+                [(ngModel)]="aluno.historicoSaude.cirurgia.tipo" />
             </div>
             <div class="col-md-12">
               <label for="doencaCronica" class="form-label">Doenca cronica</label>
-              <input
-                name="doencaCronica"
-                id="doencaCronica"
-                type="text"
-                class="form-control"
-                [(ngModel)]="aluno.historicoSaude.doencaCronica.tipo"
-              />
+              <input name="doencaCronica" id="doencaCronica" type="text" class="form-control"
+                [(ngModel)]="aluno.historicoSaude.doencaCronica.tipo" />
             </div>
           </div>
           <div class="row mt-4">
             <div>
               <div class="col-md-12 d-flex justify-content-end" *ngIf="isAdmin()">
-                <button
-                  (click)="setModoEdicao()"
-                  class="btn btn-primary profile-button"
-                  type="button"
-                  *ngIf="!modoEdicao"
-                >
+                <button (click)="setModoEdicao()" class="btn btn-primary profile-button" type="button"
+                  *ngIf="!modoEdicao">
                   Editar
                 </button>
                 <div *ngIf="modoEdicao" class="d-flex justify-content-around align-items-center">
-                  <button
-                    (click)="setModoEdicao()"
-                    class="btn btn-primary profile-button"
-                    type="button"
-                  >
+                  <button (click)="setModoEdicao()" class="btn btn-primary profile-button" type="button">
                     Cancelar
                   </button>
                 </div>
@@ -503,15 +289,8 @@
                 </div>
               </div>
               <div *ngIf="modoEdicao">
-                <input
-                  class="w-75 m-1"
-                  type="text"
-                  name="deficiencia"
-                  id="deficiencia"
-                  class="form-control"
-                  [(ngModel)]="deficiencia"
-                  placeholder="Adicionar deficiencia"
-                />
+                <input class="w-75 m-1" type="text" name="deficiencia" id="deficiencia" class="form-control"
+                  [(ngModel)]="deficiencia" placeholder="Adicionar deficiencia" />
                 <div class="d-flex justify-content-end">
                   <button class="btn btn-secondary m-2" (click)="adicionarDeficiencia()">
                     Adicionar
@@ -523,31 +302,16 @@
                 <div class="panel-heading">
                   <h5>Deficiencias</h5>
                 </div>
-                <div
-                  class="panel panel-default"
-                  *ngIf="aluno.historicoSaude.deficiencias.length > 0"
-                >
+                <div class="panel panel-default" *ngIf="aluno.historicoSaude.deficiencias.length > 0">
                   <div class="panel-body">
                     <ul class="d-flex flex-wrap">
-                      <li
-                        class="bg-info rounded m-2 py-2 px-3 text-white"
-                        *ngFor="let str of aluno.historicoSaude.deficiencias"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          class="bi bi-x-circle text-white"
-                          viewBox="0 0 16 16"
-                          (onclick)="removerDeficiencia(str)"
-                        >
+                      <li class="bg-info rounded m-2 py-2 px-3 text-white"
+                        *ngFor="let str of aluno.historicoSaude.deficiencias">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                          class="bi bi-x-circle text-white" viewBox="0 0 16 16" (onclick)="removerDeficiencia(str)">
+                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                           <path
-                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
-                          />
-                          <path
-                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
-                          />
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                         </svg>
                         {{ str }}
                       </li>
@@ -559,15 +323,8 @@
 
             <div class="row mt-4">
               <div *ngIf="modoEdicao">
-                <input
-                  class="w-75 m-1"
-                  type="text"
-                  name="acompanhamentoSaude"
-                  id="acompanhamentoSaude"
-                  class="form-control"
-                  [(ngModel)]="acompanhamentoSaude"
-                  placeholder="Adicionar acompanhamento"
-                />
+                <input class="w-75 m-1" type="text" name="acompanhamentoSaude" id="acompanhamentoSaude"
+                  class="form-control" [(ngModel)]="acompanhamentoSaude" placeholder="Adicionar acompanhamento" />
                 <div class="d-flex justify-content-end">
                   <button class="btn btn-secondary m-2" (click)="adicionarAcompanhamentoSaude()">
                     Adicionar
@@ -578,31 +335,17 @@
                 <div class="panel-heading">
                   <h5>Acompanhamento de saúde</h5>
                 </div>
-                <div
-                  class="panel panel-default"
-                  *ngIf="aluno.historicoSaude.acompanhamentoSaude.length > 0"
-                >
+                <div class="panel panel-default" *ngIf="aluno.historicoSaude.acompanhamentoSaude.length > 0">
                   <div class="panel-body">
                     <ul class="d-flex flex-wrap">
-                      <li
-                        class="bg-info rounded m-2 py-2 px-3 text-white"
-                        *ngFor="let str of aluno.historicoSaude.acompanhamentoSaude"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          class="bi bi-x-circle text-white"
-                          viewBox="0 0 16 16"
-                          (onclick)="removerAcompanhamentoSaude(str)"
-                        >
+                      <li class="bg-info rounded m-2 py-2 px-3 text-white"
+                        *ngFor="let str of aluno.historicoSaude.acompanhamentoSaude">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                          class="bi bi-x-circle text-white" viewBox="0 0 16 16"
+                          (onclick)="removerAcompanhamentoSaude(str)">
+                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                           <path
-                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
-                          />
-                          <path
-                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
-                          />
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                         </svg>
                         {{ str }}
                       </li>
@@ -613,11 +356,7 @@
             </div>
           </div>
           <div class="my-5 d-flex justify-content-center" *ngIf="isAdmin()">
-            <button
-              (click)="editarAlunoPorMatricula()"
-              class="btn btn-primary profile-button w-75 h-100"
-              type="button"
-            >
+            <button (click)="editarAlunoPorMatricula()" class="btn btn-primary profile-button w-75 h-100" type="button">
               Salvar Aluno
             </button>
           </div>
@@ -632,10 +371,7 @@
               <div>
                 <h4 class="my-2">Graduação Atual</h4>
                 <div>
-                  <h6
-                    class="card-subtitle text-muted badge"
-                    *ngIf="graduacaoAtual.dan >= 1; else noDan"
-                  >
+                  <h6 class="card-subtitle text-muted badge" *ngIf="graduacaoAtual.dan >= 1; else noDan">
                     {{ graduacaoAtual.dan }}º dan
                   </h6>
 
@@ -655,13 +391,8 @@
                   <button class="btn btn-primary text-right my-2" (click)="setModoEdicaoTurma()">
                     Salvar
                   </button>
-                  <input
-                    type="button"
-                    name="btn-editar-turma"
-                    id="btn-editar-turma"
-                    class="btn btn-close"
-                    (click)="setModoEdicaoTurma()"
-                  />
+                  <input type="button" name="btn-editar-turma" id="btn-editar-turma" class="btn btn-close"
+                    (click)="setModoEdicaoTurma()" />
                 </div>
               </div>
               <div *ngIf="!modoEdicaoTurma" class="d-flex align-items-center gap-2">
@@ -669,41 +400,47 @@
                   {{ aluno.turma }}
                 </span>
                 <div class="p-1 cursor">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-pencil-square text-info"
-                    viewBox="0 0 16 16"
-                    (click)="setModoEdicaoTurma()"
-                    (keydown.enter)="setModoEdicaoTurma()"
-                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-pencil-square text-info" viewBox="0 0 16 16" (click)="setModoEdicaoTurma()"
+                    (keydown.enter)="setModoEdicaoTurma()">
                     <path
-                      d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                    />
-                    <path
-                      fill-rule="evenodd"
-                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
-                    />
+                      d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                    <path fill-rule="evenodd"
+                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
                   </svg>
                 </div>
               </div>
             </div>
             <div class="card-body">
               <div class="d-flex justify-content-between">
-                <div>
+                <div class="w-100">
                   <h6 class="card-subtitle mb-4 text-muted">
                     <b>Inicio:</b> {{ graduacaoAtual.inicioGraduacao }}
-                    <small class="my-2"
-                      ><br />
-                      <b>Frequência:</b> {{ graduacaoAtual.frequencia }} % </small
-                    ><br />
+                    <small class="my-2"><br />
+                      <b>Frequência:</b> {{ graduacaoAtual.frequencia }} % </small><br />
                     <small class="my-2">
                       <b>Carga Horária:</b> {{ graduacaoAtual.cargaHoraria }} h
                     </small>
+                    <br />
+
+                    <div class="row d-flex justify-content-between">
+                      <div class="col-md-6">
+                        <small class="my-2">
+                          <b>Status:</b> {{statusDoAluno}}
+                        </small>
+                      </div>
+
+                      <div class="col-md-6 d-flex justify-content-end">
+                        <label class="switch">
+                          <input [checked]="graduacaoAtual.status === true" type="checkbox"
+                            (change)="alterarStatusAluno($event)">
+                          <span class="slider round"></span>
+                        </label>
+                      </div>
+                    </div>
                   </h6>
                 </div>
+                <!--
                 <div *ngIf="graduacaoAtual.status">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -738,6 +475,7 @@
                     />
                   </svg>
                 </div>
+                -->
               </div>
               <div class="card-text">
                 <div class="d-flex justify-content-between container">
@@ -755,18 +493,11 @@
                         {{ falta.data }}
                       </h5>
 
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-trash3 text-black me-3 cursor"
-                        viewBox="0 0 16 16"
-                        (click)="removerFalta(falta.data)"
-                      >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-trash3 text-black me-3 cursor" viewBox="0 0 16 16"
+                        (click)="removerFalta(falta.data)">
                         <path
-                          d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"
-                        />
+                          d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
                       </svg>
                     </div>
 
@@ -780,15 +511,8 @@
                 <p class="text-muted text-center mt-2 mb-5" *ngIf="!graduacaoAtual.faltas.length">
                   O aluno não possui faltas
                 </p>
-                <div
-                  class="d-flex justify-content-between"
-                  *ngIf="graduacaoAtual.cargaHoraria > 25"
-                >
-                  <button
-                    (click)="aprovarAluno()"
-                    class="btn btn-success"
-                    *ngIf="graduacaoAtual.status"
-                  >
+                <div class="d-flex justify-content-between" *ngIf="graduacaoAtual.cargaHoraria > 25">
+                  <button (click)="aprovarAluno()" class="btn btn-success" *ngIf="graduacaoAtual.status">
                     Aprovar Aluno
                   </button>
                   <button (click)="reprovarAluno()" class="btn btn-danger">Reprovar Aluno</button>
@@ -796,9 +520,7 @@
               </div>
             </div>
             <div class="card-footer">
-              <app-modal-historico-graduacao
-                [graduacao]="aluno.graduacao"
-              ></app-modal-historico-graduacao>
+              <app-modal-historico-graduacao [graduacao]="aluno.graduacao"></app-modal-historico-graduacao>
             </div>
           </div>
           <div class="col-md-12 mt-4">
@@ -812,42 +534,22 @@
             </div>
             <div *ngFor="let responsavel of aluno.responsaveis" class="card">
               <div *ngIf="aluno.responsaveis.length > 1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-trash3 text-black ms-2 mt-2"
-                  viewBox="0 0 16 16"
-                  (onclick)="removerResponsavel(responsavel.cpf)"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-trash3 text-black ms-2 mt-2" viewBox="0 0 16 16"
+                  (onclick)="removerResponsavel(responsavel.cpf)">
                   <path
-                    d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"
-                  />
+                    d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
                 </svg>
               </div>
               <div
-                class="card-body d-lg-flex align-items-center justify-content-around text-lg-start d-block text-center"
-              >
+                class="card-body d-lg-flex align-items-center justify-content-around text-lg-start d-block text-center">
                 <div>
-                  <img
-                    src="../../../../../assets/aluno/men_responsable.webp"
-                    class="img-radius"
-                    alt="User-Profile"
-                    *ngIf="responsavel.filiacao === 'PAI'"
-                  />
-                  <img
-                    src="../../../../../assets/aluno/woman_responsable.webp"
-                    class="img-radius"
-                    alt="User-Profile"
-                    *ngIf="responsavel.filiacao === 'MAE'"
-                  />
-                  <img
-                    src="../../../../../assets/aluno/other_responsable.png"
-                    class="img-radius"
-                    alt="User-Profile"
-                    *ngIf="responsavel.filiacao === 'OUTRO'"
-                  />
+                  <img src="../../../../../assets/aluno/men_responsable.webp" class="img-radius" alt="User-Profile"
+                    *ngIf="responsavel.filiacao === 'PAI'" />
+                  <img src="../../../../../assets/aluno/woman_responsable.webp" class="img-radius" alt="User-Profile"
+                    *ngIf="responsavel.filiacao === 'MAE'" />
+                  <img src="../../../../../assets/aluno/other_responsable.png" class="img-radius" alt="User-Profile"
+                    *ngIf="responsavel.filiacao === 'OUTRO'" />
                 </div>
                 <div class="ms-lg-4">
                   <div>

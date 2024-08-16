@@ -93,7 +93,7 @@ export class RegistroAlunoComponent implements OnInit {
     turma: '',
     cartaoSus: '',
     dataNascimento: 0,
-   // dataInicioPratica: 0,
+    // dataInicioPratica: 0,
     dadosSociais: this.dadosSociais,
     dadosEscolares: this.dadosEscolares,
     endereco: this.endereco,
@@ -141,7 +141,7 @@ export class RegistroAlunoComponent implements OnInit {
 
   protected registrarAluno() {
     const dataNasc = new Date(this.aluno.dataNascimento)
- //   const dataInicio = new Date(this.aluno.dataInicioPratica)
+    //   const dataInicio = new Date(this.aluno.dataInicioPratica)
 
     if (dataNasc.getFullYear() > new Date().getFullYear() - 4) {
       window.confirm('Data de nascimento inválida')
@@ -149,7 +149,7 @@ export class RegistroAlunoComponent implements OnInit {
     }
 
     this.aluno.dataNascimento = dataNasc.getTime()
-  //  this.aluno.dataInicioPratica = dataInicio.getTime()
+    //  this.aluno.dataInicioPratica = dataInicio.getTime()
     const alunoFormData = this.prepareFormData(this.aluno)
     if (this.imagemSelecionada != null) {
       this.http
@@ -184,35 +184,35 @@ export class RegistroAlunoComponent implements OnInit {
         })
     } else {
       this.http
-      .post<{ id: string; message: string }>(this.ApiBushido, alunoFormData, {
-        headers: {
-          Authorization: `Bearer ${this.token}`
-        }
-      })
-      .subscribe({
-        next: (res) => {
-          window.alert(res.message)
-          this.router.navigate([`/admin/${this.email}/aluno`, res.id])
-        },
-        error: (error) => {
-          if (error.status === 401) {
-            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            this.authService.removeToken()
-            this.router.navigate(['/admin'])
+        .post<{ id: string; message: string }>(this.ApiBushido, alunoFormData, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
           }
-          if (
-            error.status === 400 ||
-            error.status === 403 ||
-            error.status === 404 ||
-            error.status === 406 ||
-            error.status === 409 ||
-            error.status === 411 ||
-            error.status === 422
-          ) {
-            window.confirm(error['error']['message'])
+        })
+        .subscribe({
+          next: (res) => {
+            window.alert(res.message)
+            this.router.navigate([`/admin/${this.email}/aluno`, res.id])
+          },
+          error: (error) => {
+            if (error.status === 401) {
+              window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
+              this.authService.removeToken()
+              this.router.navigate(['/admin'])
+            }
+            if (
+              error.status === 400 ||
+              error.status === 403 ||
+              error.status === 404 ||
+              error.status === 406 ||
+              error.status === 409 ||
+              error.status === 411 ||
+              error.status === 422
+            ) {
+              window.confirm(error['error']['message'])
+            }
           }
-        }
-      })
+        })
     }
   }
 

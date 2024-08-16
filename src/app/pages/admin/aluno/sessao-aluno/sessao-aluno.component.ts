@@ -37,6 +37,7 @@ export class SessaoAlunoComponent implements OnInit {
   protected readonly role = localStorage.getItem('role')
   protected turmas: Turma[] = []
   protected nota = 0
+  statusDoAluno!: string;
   imagemSelecionada!: File
   previewImagem!: string | ArrayBuffer | null
   bloquearAlteracaoImagem = true
@@ -115,6 +116,7 @@ export class SessaoAlunoComponent implements OnInit {
           this.aluno.dataPreenchimento = new Date(this.aluno.dataPreenchimento).toLocaleDateString('pt-BR')
           this.aluno.dataNascimento = new Date(this.aluno.dataNascimento).toLocaleDateString('pt-BR')
           this.graduacaoAtual = this.aluno.graduacao[this.aluno.graduacao.length - 1]
+          this.verificaStatusAluno();
         },
         error: (error) => {
           if (error.status === 401) {
@@ -168,39 +170,39 @@ export class SessaoAlunoComponent implements OnInit {
         })
     } else {
       this.http
-      .put<{ id: string; message: string }>(
-        this.url + '/' + this.matricula_aluno,
-        this.adapterAlunoParaAlunoEditado(this.aluno as AlunoResponse),
-        {
-          headers: {
-            Authorization: 'Bearer ' + this.token
+        .put<{ id: string; message: string }>(
+          this.url + '/' + this.matricula_aluno,
+          this.adapterAlunoParaAlunoEditado(this.aluno as AlunoResponse),
+          {
+            headers: {
+              Authorization: 'Bearer ' + this.token
+            }
           }
-        }
-      )
-      .subscribe({
-        next: (data) => {
-          window.confirm(data.message)
-          window.location.reload()
-        },
-        error: (error) => {
-          if (error.status === 401) {
-            window.confirm('')
-            this.authService.removeToken()
+        )
+        .subscribe({
+          next: (data) => {
+            window.confirm(data.message)
+            window.location.reload()
+          },
+          error: (error) => {
+            if (error.status === 401) {
+              window.confirm('')
+              this.authService.removeToken()
+            }
+            if (error.status === 404) {
+              window.confirm('Aluno não encontrado')
+            }
+            if (
+              error.status === 400 ||
+              error.status === 403 ||
+              error.status === 404 ||
+              error.status === 409 ||
+              error.status === 411
+            ) {
+              window.confirm(error['error']['message'])
+            }
           }
-          if (error.status === 404) {
-            window.confirm('Aluno não encontrado')
-          }
-          if (
-            error.status === 400 ||
-            error.status === 403 ||
-            error.status === 404 ||
-            error.status === 409 ||
-            error.status === 411
-          ) {
-            window.confirm(error['error']['message'])
-          }
-        }
-      })
+        })
     }
   }
 
@@ -484,6 +486,48 @@ export class SessaoAlunoComponent implements OnInit {
       })
   }
 
+  protected editarStatusAluno(status: boolean) {
+    const confirmar = window.confirm('Tem certeza que deseja alterar o status do aluno?')
+    if (!confirmar) {
+      return window.location.reload()
+    }
+      this.http
+        .put<{ id: string; message: string }>(
+          this.url + `/graduacao/${this.matricula_aluno}/mudarStatus/${status}`,
+        {},
+          {
+            headers: {
+              Authorization: 'Bearer ' + this.token
+            }
+          }
+        )
+        .subscribe({
+          next: (data) => {
+            window.confirm(data.message)
+            window.location.reload()
+          },
+          error: (error) => {
+            if (error.status === 401) {
+              window.confirm('')
+              this.authService.removeToken()
+            }
+            if (error.status === 404) {
+              window.confirm('Aluno não encontrado')
+            }
+            if (
+              error.status === 400 ||
+              error.status === 403 ||
+              error.status === 404 ||
+              error.status === 409 ||
+              error.status === 411
+            ) {
+              window.confirm(error['error']['message'])
+            }
+          }
+        })
+    
+  }
+
   private adapterAlunoParaAlunoEditado(aluno: AlunoResponse): FormData {
     const formData = new FormData()
     this.alunoEditado = {
@@ -548,4 +592,22 @@ export class SessaoAlunoComponent implements OnInit {
     this.limparInput.nativeElement.value = ''
     this.bloquearAlteracaoImagem = true
   }
+
+  verificaStatusAluno() {
+    if(this.graduacaoAtual.status == true) {
+      this.statusDoAluno = "Ativo"
+    } else {
+      this.statusDoAluno = "Inativo"
+    } 
+  }
+
+  alterarStatusAluno(event: Event): void {  
+    const target = event.target as HTMLInputElement;  
+    if (target.checked) {  
+      this.graduacaoAtual.status = true
+    } else {  
+      this.graduacaoAtual.status = false
+    }  
+    this.editarStatusAluno(this.graduacaoAtual.status);
+  }  
 }
