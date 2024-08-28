@@ -37,6 +37,7 @@ export class SessaoAlunoComponent implements OnInit {
   protected readonly role = localStorage.getItem('role')
   protected turmas: Turma[] = []
   protected nota = 0
+  statusDoAluno!: string
   imagemSelecionada!: File
   previewImagem!: string | ArrayBuffer | null
   bloquearAlteracaoImagem = true
@@ -88,13 +89,7 @@ export class SessaoAlunoComponent implements OnInit {
         next: (data) => {
           this.turmas = data
         },
-        error: (error) => {
-          if (error.status === 401) {
-            window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
-            this.authService.removeToken()
-            this.router.navigate(['/admin'])
-          }
-        }
+        error: (error) => this.handleError(error),
       })
   }
 
@@ -115,94 +110,41 @@ export class SessaoAlunoComponent implements OnInit {
           this.aluno.dataPreenchimento = new Date(this.aluno.dataPreenchimento).toLocaleDateString('pt-BR')
           this.aluno.dataNascimento = new Date(this.aluno.dataNascimento).toLocaleDateString('pt-BR')
           this.graduacaoAtual = this.aluno.graduacao[this.aluno.graduacao.length - 1]
+          this.verificaStatusAluno()
         },
-        error: (error) => {
-          if (error.status === 401) {
-            window.confirm('O admin não esta mais autorizado. Faça o login para continuar a acessar o sistema')
-            this.authService.removeToken()
-            this.router.navigate(['/admin'])
-          }
-          if (error.status === 404) {
-            window.confirm('Aluno não encontrado')
-            this.router.navigate(['/admin', this.email, 'buscar'])
-          }
-        }
+        error: (error) => this.handleError(error),
       })
   }
 
-  protected editarAlunoPorMatricula() {
-    if (this.imagemSelecionada != null) {
-      this.http
-        .put<{ id: string; message: string }>(
-          this.urlComImagem + '/' + this.matricula_aluno,
-          this.adapterAlunoParaAlunoEditado(this.aluno as AlunoResponse),
-          {
-            headers: {
-              Authorization: 'Bearer ' + this.token
-            }
-          }
-        )
-        .subscribe({
-          next: (data) => {
-            window.confirm(data.message)
-            window.location.reload()
-          },
-          error: (error) => {
-            if (error.status === 401) {
-              window.confirm('')
-              this.authService.removeToken()
-            }
-            if (error.status === 404) {
-              window.confirm('Aluno não encontrado')
-            }
-            if (
-              error.status === 400 ||
-              error.status === 403 ||
-              error.status === 404 ||
-              error.status === 409 ||
-              error.status === 411
-            ) {
-              window.confirm(error['error']['message'])
-            }
-          }
-        })
-    } else {
-      this.http
-      .put<{ id: string; message: string }>(
-        this.url + '/' + this.matricula_aluno,
-        this.adapterAlunoParaAlunoEditado(this.aluno as AlunoResponse),
-        {
-          headers: {
-            Authorization: 'Bearer ' + this.token
-          }
-        }
-      )
-      .subscribe({
-        next: (data) => {
-          window.confirm(data.message)
-          window.location.reload()
-        },
-        error: (error) => {
-          if (error.status === 401) {
-            window.confirm('')
-            this.authService.removeToken()
-          }
-          if (error.status === 404) {
-            window.confirm('Aluno não encontrado')
-          }
-          if (
-            error.status === 400 ||
-            error.status === 403 ||
-            error.status === 404 ||
-            error.status === 409 ||
-            error.status === 411
-          ) {
-            window.confirm(error['error']['message'])
-          }
-        }
-      })
-    }
-  }
+  protected editarAlunoPorMatricula(): void {  
+    if (!this.aluno) {  
+        console.error('Aluno não encontrado.');  
+        return;  
+    }  
+
+    const url = this.imagemSelecionada ? this.urlComImagem : this.url;  
+    this.funcaoAuxiliarEditarAlunoPorMatricula(url, `${this.matricula_aluno}`, this.aluno);  
+}  
+
+private funcaoAuxiliarEditarAlunoPorMatricula(url: string, matricula: string, aluno: AlunoResponse): void {  
+    this.http.put<{ id: string; message: string }>(  
+        `${url}/${matricula}`,  
+        this.adapterAlunoParaAlunoEditado(aluno),  
+        {  
+            headers: {  
+                Authorization: `Bearer ${this.token}`,  
+            },  
+        }  
+    ).subscribe({  
+        next: (data) => {  
+            window.confirm(data.message);  
+            window.location.reload();  
+        },  
+        error: (error) => this.handleError(error),  
+    });  
+}  
+
+
 
   protected adicionarDeficiencia() {
     if (this.deficiencia.trim() !== '') {
@@ -221,26 +163,7 @@ export class SessaoAlunoComponent implements OnInit {
           next: (data) => {
             window.confirm(data.message)
           },
-          error: (error) => {
-            if (error.status === 401) {
-              window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-              setInterval(() => {
-                this.authService.removeToken()
-              }, 3000)
-            }
-            if (error.status === 404) {
-              window.confirm('Aluno não encontrado')
-            }
-            if (
-              error.status === 400 ||
-              error.status === 403 ||
-              error.status === 404 ||
-              error.status === 409 ||
-              error.status === 411
-            ) {
-              window.confirm(error['error']['message'])
-            }
-          }
+          error: (error) => this.handleError(error),
         })
       this.deficiencia = ''
     }
@@ -263,26 +186,7 @@ export class SessaoAlunoComponent implements OnInit {
           next: (data) => {
             window.confirm(data.message)
           },
-          error: (error) => {
-            if (error.status === 401) {
-              window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-              setInterval(() => {
-                this.authService.removeToken()
-              }, 3000)
-            }
-            if (error.status === 404) {
-              window.confirm('Aluno não encontrado')
-            }
-            if (
-              error.status === 400 ||
-              error.status === 403 ||
-              error.status === 404 ||
-              error.status === 409 ||
-              error.status === 411
-            ) {
-              window.confirm(error['error']['message'])
-            }
-          }
+          error: (error) => this.handleError(error),
         })
       this.acompanhamentoSaude = ''
     }
@@ -301,18 +205,7 @@ export class SessaoAlunoComponent implements OnInit {
           window.confirm(data['message'])
           window.location.reload()
         },
-        error: (error) => {
-          if (error.status === 401) {
-            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            this.authService.removeToken()
-          }
-          if (error.status === 404) {
-            window.confirm('Aluno não encontrado')
-          }
-          if (error.status === 403) {
-            window.confirm('Aluno não possui falta')
-          }
-        }
+        error: (error) => this.handleError(error),
       })
   }
 
@@ -331,18 +224,7 @@ export class SessaoAlunoComponent implements OnInit {
         next: (data) => {
           window.confirm(data['message'])
         },
-        error: (error) => {
-          if (error.status === 401) {
-            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            this.authService.removeToken()
-          }
-          if (error.status === 404) {
-            window.confirm('Aluno não encontrado')
-          }
-          if (error.status === 403) {
-            window.confirm('Aluno não possui acompanhamento')
-          }
-        }
+        error: (error) => this.handleError(error),
       })
   }
 
@@ -358,18 +240,7 @@ export class SessaoAlunoComponent implements OnInit {
         next: (data) => {
           window.confirm(data.message)
         },
-        error: (error) => {
-          if (error.status === 401) {
-            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            this.authService.removeToken()
-          }
-          if (error.status === 404) {
-            window.confirm('Aluno não encontrado')
-          }
-          if (error.status === 403) {
-            window.confirm('Aluno não possui deficiência')
-          }
-        }
+        error: (error) => this.handleError(error),
       })
   }
 
@@ -386,19 +257,7 @@ export class SessaoAlunoComponent implements OnInit {
           window.confirm(data.message)
           window.location.reload()
         },
-        error: (error) => {
-          if (error.status === 401) {
-            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            this.authService.removeToken()
-            this.router.navigate(['/admin'])
-          }
-          if (error.status === 404) {
-            window.confirm('Aluno não encontrado')
-          }
-          if (error.status === 403) {
-            window.confirm('Aluno não possui responsável')
-          }
-        }
+        error: (error) => this.handleError(error),
       })
   }
 
@@ -424,22 +283,7 @@ export class SessaoAlunoComponent implements OnInit {
           window.confirm(data.message)
           window.location.reload()
         },
-        error: (error) => {
-          if (error.status === 401) {
-            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            this.authService.removeToken()
-            this.router.navigate(['/admin'])
-          }
-          if (
-            error.status === 403 ||
-            error.status === 404 ||
-            error.status === 406 ||
-            error.status === 409 ||
-            error.status === 411
-          ) {
-            window.confirm(error.error.message)
-          }
-        }
+        error: (error) => this.handleError(error),
       })
   }
 
@@ -465,51 +309,65 @@ export class SessaoAlunoComponent implements OnInit {
           window.confirm(data.message)
           window.location.reload()
         },
-        error: (error) => {
-          if (error.status === 401) {
-            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            this.authService.removeToken()
-            this.router.navigate(['/admin'])
-          }
-          if (
-            error.status === 400 ||
-            error.status === 403 ||
-            error.status === 404 ||
-            error.status === 409 ||
-            error.status === 411
-          ) {
-            window.confirm(error.error.message)
-          }
-        }
+        error: (error) => this.handleError(error),
       })
   }
 
-  private adapterAlunoParaAlunoEditado(aluno: AlunoResponse): FormData {
-    const formData = new FormData()
-    this.alunoEditado = {
-      nome: aluno.nome,
-      genero: aluno.genero,
-      turma: aluno.turma,
-      dadosSociais: aluno.dadosSociais,
-      dadosEscolares: aluno.dadosEscolares,
-      endereco: aluno.endereco,
-      historicoDeSaude: {
-        tipoSanguineo: aluno.historicoSaude.tipoSanguineo,
-        usoMedicamentoContinuo: aluno.historicoSaude.usoMedicamentoContinuo,
-        alergia: aluno.historicoSaude.alergia,
-        cirurgia: aluno.historicoSaude.cirurgia,
-        doencaCronica: aluno.historicoSaude.doencaCronica
-      }
+  protected editarStatusAluno(status: boolean) {
+    const confirmar = window.confirm('Tem certeza que deseja alterar o status do aluno?')
+    if (!confirmar) {
+      return window.location.reload()
     }
-
-    formData.append('aluno', new Blob([JSON.stringify(this.alunoEditado)], { type: 'application/json' }))
-
-    if (this.imagemSelecionada != null) {
-      formData.append('imagemAluno', this.imagemSelecionada)
-    }
-
-    return formData
+    this.http
+      .put<{ id: string; message: string }>(
+        this.url + `/graduacao/${this.matricula_aluno}/mudarStatus/${status}`,
+        {},
+        {
+          headers: {
+            Authorization: 'Bearer ' + this.token
+          }
+        }
+      )
+      .subscribe({
+        next: (data) => {
+          window.confirm(data.message)
+          window.location.reload()
+        },
+        error: (error) => this.handleError(error),
+      })
   }
+
+  private adapterAlunoParaAlunoEditado(aluno: AlunoResponse): FormData {  
+    const formData = new FormData();  
+  
+    this.alunoEditado = {  
+        nome: aluno.nome,  
+        genero: aluno.genero,  
+        cpf: aluno.cpf,  
+        rg: aluno.rg,  
+        telefone: aluno.telefone,  
+        email: aluno.email,  
+        turma: aluno.turma,  
+        dadosSociais: aluno.dadosSociais,  
+        dadosEscolares: aluno.dadosEscolares,  
+        endereco: aluno.endereco,  
+        historicoDeSaude: {  
+            tipoSanguineo: aluno.historicoSaude.tipoSanguineo,  
+            usoMedicamentoContinuo: aluno.historicoSaude.usoMedicamentoContinuo,  
+            alergia: aluno.historicoSaude.alergia,  
+            cirurgia: aluno.historicoSaude.cirurgia,  
+            doencaCronica: aluno.historicoSaude.doencaCronica,  
+        },  
+    };  
+
+    formData.append('aluno', new Blob([JSON.stringify(this.alunoEditado)], { type: 'application/json' }));  
+
+    if (this.imagemSelecionada) {  
+        formData.append('imagemAluno', this.imagemSelecionada);  
+    }  
+
+    return formData;  
+}  
 
   protected avaliacaoDisponive(): boolean {
     return (
@@ -548,4 +406,44 @@ export class SessaoAlunoComponent implements OnInit {
     this.limparInput.nativeElement.value = ''
     this.bloquearAlteracaoImagem = true
   }
+
+  verificaStatusAluno() {
+    if (this.graduacaoAtual.status == true) {
+      this.statusDoAluno = 'Ativo'
+    } else {
+      this.statusDoAluno = 'Inativo'
+    }
+  }
+
+  alterarStatusAluno(event: Event): void {
+    const target = event.target as HTMLInputElement
+    if (target.checked) {
+      this.graduacaoAtual.status = true
+    } else {
+      this.graduacaoAtual.status = false
+    }
+    this.editarStatusAluno(this.graduacaoAtual.status)
+  }
+
+  private handleError(error: any): void {  
+    switch (error.status) {  
+        case 401:  
+        window.confirm('O admin não esta mais autorizado. Faça o login para continuar a acessar o sistema')
+        this.authService.removeToken()
+        this.router.navigate(['/admin'])
+            break;  
+        case 404:  
+        window.confirm('Aluno não encontrado')
+        this.router.navigate(['/admin', this.email, 'buscar']) 
+            break;  
+        case 400:  
+        case 403:  
+        case 409:  
+        case 411:  
+            window.confirm(error.error?.message || 'Erro desconhecido');  
+            break;  
+        default:  
+        window.confirm('Erro inesperado:');  
+    }  
+  }  
 }

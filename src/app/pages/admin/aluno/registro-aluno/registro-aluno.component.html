@@ -107,41 +107,13 @@
           </div>
         </div>
         <div class="row mt-4">
-          <div class="col-md-4">
-            <div class="form-group mb-3">
-              <label for="dataInicioPratica">Data de Início</label>
-              <input type="date" class="form-control" [(ngModel)]="aluno.dataInicioPratica" name="dataInicioPratica"
-                id="dataInicioPratica" pattern="\d{4}-\d{2}-\d{2}"
-                placeholder="dd-MM-yyyy" />
-            </div>
-          </div>
-          <div class="col-md-8">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="rg">RG</label>
               <input type="text" name="rg" class="form-control" [(ngModel)]="aluno.rg" id="rg" placeholder="Apenas números" />
             </div>
           </div>
-        </div>
-
-        <div class="row mt-4">
-          <div class="col-md-4">
-            <div class="form-group mb-3">
-              <span>Status do Aluno</span>
-              <div class="text-center border rounded">
-                <div class="gender-box-radio">
-                  <div>
-                    <input type="radio" name="statusAluno" value="ATIVO" [(ngModel)]="aluno.statusAluno" id="statusAtivo" />
-                    <label class="p-2" for="statusAtivo">Ativo</label><br />
-                  </div>
-                  <div>
-                    <input type="radio" name="statusAluno" value="INATIVO" [(ngModel)]="aluno.statusAluno" id="statusInativo"/>
-                    <label class="p-2" for="statusInativo">Inativo</label><br />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-8">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="cartaoSus">Cartão do SUS</label>
               <input
@@ -151,6 +123,35 @@
                 [(ngModel)]="aluno.cartaoSus"
                 id="cartaoSus"
                 placeholder="Apenas números"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">          
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="telefone">Telefone</label>
+              <input
+                type="text"
+                name="telefone"
+                class="form-control"
+                [(ngModel)]="aluno.telefone"
+                id="telefone"
+                placeholder="Apenas números"
+              />
+            </div>
+            
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input
+                type="email"
+                name="email"
+                class="form-control"
+                [(ngModel)]="aluno.email"
+                id="email"
+                placeholder="email@email.com"
               />
             </div>
           </div>
@@ -237,17 +238,18 @@
         <div>
           <div class="row mt-5">
             <h5>Dados Escolares</h5>
-            <div class="col-md-8 p-2">
+            <div class="col-md-5 p-2">
               <label for="escola" class="form-label">Escola*</label>
               <input type="text" name="escola" [(ngModel)]="aluno.dadosEscolares.escola" id="escola"
                 class="form-control" placeholder="Escola*" required />
-            </div>
+            </div> 
+
             <div class="col-md-4 p-2">
               <label for="serie" class="form-label">Serie*</label>
               <input type="number" name="serie" [(ngModel)]="aluno.dadosEscolares.serie" id="serie" class="form-control"
                 min="1" max="9" required />
             </div>
-            <!--
+            
               <div class="col-md-3 p-2">
               <label for="turno" class="form-label">Turno*</label>
               <select name="turno" class="form-select" [(ngModel)]="aluno.dadosEscolares.turno" id="turno" required>
@@ -256,7 +258,7 @@
                 <option value="NOITE">Noturno</option>
               </select>          
             </div>
-            -->
+
           </div>
         </div>
 

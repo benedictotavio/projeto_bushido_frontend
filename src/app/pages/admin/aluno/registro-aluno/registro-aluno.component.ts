@@ -88,13 +88,13 @@ export class RegistroAlunoComponent implements OnInit {
     cpf: '',
     rg: '',
     nome: '',
+    telefone: '',
+    email: '',
     genero: 'OUTRO',
     corDePele: '',
     turma: '',
     cartaoSus: '',
-    statusAluno: '',
     dataNascimento: 0,
-    dataInicioPratica: 0,
     dadosSociais: this.dadosSociais,
     dadosEscolares: this.dadosEscolares,
     endereco: this.endereco,
@@ -140,80 +140,34 @@ export class RegistroAlunoComponent implements OnInit {
       })
   }
 
-  protected registrarAluno() {
-    const dataNasc = new Date(this.aluno.dataNascimento)
+  protected registrarAluno() {  
+    const dataNasc = new Date(this.aluno.dataNascimento);  
 
-    if (dataNasc.getFullYear() > new Date().getFullYear() - 4) {
-      window.confirm('Data de nascimento inválida')
-      return
-    }
+    if (dataNasc.getFullYear() > new Date().getFullYear() - 4) {  
+        window.confirm('Data de nascimento inválida');  
+        return;  
+    }  
 
-    this.aluno.dataNascimento = dataNasc.getTime()
-    const alunoFormData = this.prepareFormData(this.aluno)
-    if (this.imagemSelecionada != null) {
-      this.http
-        .post<{ id: string; message: string }>(this.ApiBushidoComImagem, alunoFormData, {
-          headers: {
-            Authorization: `Bearer ${this.token}`
-          }
-        })
-        .subscribe({
-          next: (res) => {
-            window.alert(res.message)
-            this.router.navigate([`/admin/${this.email}/aluno`, res.id])
-          },
-          error: (error) => {
-            if (error.status === 401) {
-              window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-              this.authService.removeToken()
-              this.router.navigate(['/admin'])
-            }
-            if (
-              error.status === 400 ||
-              error.status === 403 ||
-              error.status === 404 ||
-              error.status === 406 ||
-              error.status === 409 ||
-              error.status === 411 ||
-              error.status === 422
-            ) {
-              window.confirm(error['error']['message'])
-            }
-          }
-        })
-    } else {
-      this.http
-      .post<{ id: string; message: string }>(this.ApiBushido, alunoFormData, {
-        headers: {
-          Authorization: `Bearer ${this.token}`
-        }
-      })
-      .subscribe({
-        next: (res) => {
-          window.alert(res.message)
-          this.router.navigate([`/admin/${this.email}/aluno`, res.id])
-        },
-        error: (error) => {
-          if (error.status === 401) {
-            window.confirm('O Admin não esta mais autorizado. refaça o login para continuar a acessar o sistema')
-            this.authService.removeToken()
-            this.router.navigate(['/admin'])
-          }
-          if (
-            error.status === 400 ||
-            error.status === 403 ||
-            error.status === 404 ||
-            error.status === 406 ||
-            error.status === 409 ||
-            error.status === 411 ||
-            error.status === 422
-          ) {
-            window.confirm(error['error']['message'])
-          }
-        }
-      })
-    }
-  }
+    this.aluno.dataNascimento = dataNasc.getTime();  
+    const alunoFormData = this.prepareFormData(this.aluno);  
+
+    const url = this.imagemSelecionada ? this.ApiBushidoComImagem : this.ApiBushido;  
+    this.funcaoAuxiliarRegistrarAluno(url, alunoFormData);  
+}  
+
+private funcaoAuxiliarRegistrarAluno(url: string, alunoFormData: FormData) {  
+    this.http.post<{ id: string; message: string }>(url, alunoFormData, {  
+        headers: {  
+            Authorization: `Bearer ${this.token}`,  
+        },  
+    }).subscribe({  
+        next: (res) => {  
+            window.alert(res.message);  
+            this.router.navigate([`/admin/${this.email}/aluno`, res.id]);  
+        },  
+        error: (error) => this.handleError(error),  
+    });  
+}  
 
   adicionarAcompanhamento() {
     if (this.valorNoArray(this.historicoSaude.acompanhamentoSaude, this.acompanhamentoSaude)) {
@@ -304,4 +258,16 @@ export class RegistroAlunoComponent implements OnInit {
 
     reader.readAsDataURL(this.imagemSelecionada)
   }
+
+  private handleError(error: any) {  
+    if (error.status === 401) {  
+        window.confirm('O Admin não está mais autorizado. Refaça o login para continuar a acessar o sistema');  
+        this.authService.removeToken();  
+        this.router.navigate(['/admin']);  
+    } else if (  
+        [400, 403, 404, 406, 409, 411, 422].includes(error.status)  
+    ) {  
+        window.confirm(error['error']['message']);  
+    }  
+  }  
 }

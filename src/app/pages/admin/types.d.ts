@@ -4,8 +4,8 @@ interface AlunoProps {
   nome: string
   turma: string
   cartaoSus: string
-  dataInicioPratica: number
-  statusAluno: ''
+  telefone: string
+  email: string
   genero: 'M' | 'F' | 'OUTRO'
   corDePele: ''
   dataNascimento: number

@@ -90,10 +90,10 @@ export interface AlunoResponse {
   endereco: Endereco
   cpf: string
   rg: string
+  telefone: string
+  email: string
   matricula: string
   cartaoSus: string
-  dataInicioPratica: string
-  statusAluno: string
   corDePele: string
   responsaveis: Responsavel[]
   graduacao: Graduacao[]
@@ -112,6 +112,10 @@ interface HistoricoSaudeEditado {
 export interface AlunoEditado {
   nome: string
   genero: string
+  cpf: string
+  rg: string
+  telefone: string
+  email: string
   turma: string
   dadosSociais: DadosSociais
   dadosEscolares: DadosEscolares
