@@ -49,6 +49,11 @@ import { CardBuscaAlunoComponent } from './components/cards/card-busca-aluno/car
 import { ModalResponsavelComponent } from './components/modal/modal-responsavel/modal-responsavel.component'
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt'
 import { PlaceholderSessaoAlunoComponent } from './pages/admin/aluno/sessao-aluno/components/placeholder-sessao-aluno/placeholder-sessao-aluno.component'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { ConfirmDialogComponent } from './pages/admin/aluno/dialog/confirm-dialog/confirm-dialog.component'
+import { NotaAlunoDialogComponent } from './pages/admin/aluno/dialog/nota-aluno-dialog/nota-aluno-dialog.component'
 
 @NgModule({
   declarations: [
@@ -94,9 +99,19 @@ import { PlaceholderSessaoAlunoComponent } from './pages/admin/aluno/sessao-alun
     ModalNovaTurmaComponent,
     CardBuscaAlunoComponent,
     ModalResponsavelComponent,
-    PlaceholderSessaoAlunoComponent
+    PlaceholderSessaoAlunoComponent,
+    ConfirmDialogComponent,
+    NotaAlunoDialogComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
+    MatDialogModule
+  ],
   providers: [
     LoadingService,
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

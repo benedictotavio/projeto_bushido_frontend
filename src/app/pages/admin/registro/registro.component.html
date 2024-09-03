@@ -3,7 +3,7 @@
     <article class="col-md-6 mt-5">
       <h3 class="text-center">Registro</h3>
 
-      <form class="form-group" (ngSubmit)="registrarNovoAdmin()">
+      <form class="form-group" #form="ngForm" (ngSubmit)="registrarNovoAdmin(form)">
         <div class="input-text-register col-sm-10">
           <input
             type="text"
@@ -13,20 +13,42 @@
             class="form-control"
             placeholder="Nome"
             required
+            #nomeInput="ngModel"
+            [ngClass]="{
+              'is-invalid': nomeInput.invalid && (nomeInput.dirty || nomeInput.touched),
+              'is-valid': nomeInput.valid && (nomeInput.dirty || nomeInput.touched)
+            }"
           />
+          <div
+            *ngIf="nomeInput.invalid && (nomeInput.dirty || nomeInput.touched)"
+            class="invalid-feedback"
+          >
+            O nome é um campo obrigatório.
+          </div>
         </div>
 
-        <div class="input-text-register col-sm-10">
-          <input
-            type="email"
-            autocomplete="email"
-            id="email"
-            [(ngModel)]="user.email"
-            name="email"
-            class="form-control"
-            placeholder="Email"
-            required
-          />
+        <div class="input-text-register col-sm-10">  
+          <input  
+            type="email"  
+            autocomplete="email"  
+            id="email"  
+            [(ngModel)]="user.email"  
+            name="email"  
+            class="form-control"  
+            placeholder="Email"  
+            required  
+            #emailInput="ngModel"  
+            [ngClass]="{  
+              'is-invalid': (!isEmailValid(user.email) && emailInput.value && (emailInput.dirty || emailInput.touched)) || (emailInput.invalid && emailInput.touched),  
+              'is-valid': isEmailValid(user.email) && emailInput.value  
+            }"  
+          />  
+          <div *ngIf="emailInput.invalid && emailInput.touched" class="invalid-feedback">  
+            O campo de email é obrigatório.  
+          </div>  
+          <div *ngIf="!isEmailValid(user.email) && emailInput.value && (emailInput.dirty || emailInput.touched)" class="invalid-feedback">  
+            Email inválido.  
+          </div>  
         </div>
 
         <div class="input-text-register col-sm-10">
@@ -38,7 +60,18 @@
             class="form-control"
             placeholder="Cargo"
             required
+            #cargoInput="ngModel"
+            [ngClass]="{
+              'is-invalid': cargoInput.invalid && (cargoInput.dirty || cargoInput.touched),
+              'is-valid': cargoInput.valid && (cargoInput.dirty || cargoInput.touched)
+            }"
           />
+          <div
+            *ngIf="cargoInput.invalid && (cargoInput.dirty || cargoInput.touched)"
+            class="invalid-feedback"
+          >
+            O cargo é um campo obrigatório.
+          </div>
         </div>
 
         <div class="input-text-register col-sm-10">
@@ -50,7 +83,18 @@
             class="form-control"
             placeholder="Senha"
             required
+            #senhaInput="ngModel"
+            [ngClass]="{
+              'is-invalid': senhaInput.invalid && (senhaInput.dirty || senhaInput.touched),
+              'is-valid': senhaInput.valid && (senhaInput.dirty || senhaInput.touched)
+            }"
           />
+          <div
+            *ngIf="senhaInput.invalid && (senhaInput.dirty || senhaInput.touched)"
+            class="invalid-feedback"
+          >
+            O senha é um campo obrigatório.
+          </div>
         </div>
 
         <div class="role-box-radio col-sm-10 d-flex justify-content-around p-4">
@@ -68,7 +112,7 @@
           <button
             type="submit"
             class="btn btn-primary"
-            [disabled]="!user.email || !user.cargo || !user.nome || !user.role || !user.senha"
+           
             Login
           >
             Registrar

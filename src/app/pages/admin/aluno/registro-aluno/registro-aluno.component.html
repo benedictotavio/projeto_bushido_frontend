@@ -1,14 +1,22 @@
 <div class="container-fluid">
   <div class="row d-flex justify-content-center">
     <div class="col-md-6">
-      <form class="form-group">
+      <form class="form-group" #form="ngForm">
         <div class="mb-4">
           <a href="/admin/{{ email }}" class="text-white text-decoration-none">
             <button type="button" class="btn btn-primary my-3">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-arrow-return-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                  d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-arrow-return-left"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"
+                />
               </svg>
               Voltar
             </button>
@@ -19,7 +27,10 @@
         <div class="row mt-4">
           <div class="col-md-12">
             <div class="form-group">
-              <div *ngIf="imagemSelecionada; else imageAdd" class="d-flex justify-content-center align-items-center">
+              <div
+                *ngIf="imagemSelecionada; else imageAdd"
+                class="d-flex justify-content-center align-items-center"
+              >
                 <div class="mb-4">
                   <img class="rounded-circle" [src]="previewImagem" alt="adicionar foto do aluno" />
                 </div>
@@ -27,20 +38,33 @@
 
               <ng-template #imageAdd>
                 <div class="d-flex justify-content-center">
-                  <label for="imagemAluno"
-                    class="text-white m-2 p-4 rounded-circle border border-black d-flex align-items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                      class="bi bi-images text-black" viewBox="0 0 16 16">
+                  <label
+                    for="imagemAluno"
+                    class="text-white m-2 p-4 rounded-circle border border-black d-flex align-items-center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="currentColor"
+                      class="bi bi-images text-black"
+                      viewBox="0 0 16 16"
+                    >
                       <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" />
                       <path
-                        d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2M14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1M2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1z" />
+                        d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2M14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1M2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1z"
+                      />
                     </svg>
                   </label>
-                  <input type="file" name="imagemAluno" id="imagemAluno" class="form-control"
-                    (change)="selecionarImagem($event)" />
+                  <input
+                    type="file"
+                    name="imagemAluno"
+                    id="imagemAluno"
+                    class="form-control"
+                    (change)="selecionarImagem($event)"
+                  />
                 </div>
               </ng-template>
-
             </div>
           </div>
         </div>
@@ -49,85 +73,183 @@
           <div class="col-md-12">
             <div class="form-group">
               <label for="nome">Nome</label>
-              <input type="text" name="nome" [(ngModel)]="aluno.nome" id="nome" class="form-control" placeholder="Nome"
-                required />
-            </div>
-          </div>
-        </div>
-
-        <div class="row mt-4">
-          <div class="col-md-6">
-            <div class="form-group mb-3">
-              <label for="turma">Turma</label>
-              <select id="kyu" name="kyu" [(ngModel)]="aluno.turma" class="form-select" required>
-                <option *ngFor="let turma of turmas; let i = index" [value]="turma.nome" selected>
-                  {{ turma.nome }}
-                </option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group mb-3">
-              <label for="kyu">Kyu</label>
-              <select id="kyu" name="kyu" [(ngModel)]="aluno.graduacao.kyu" class="form-select">
-                <option value="0" selected>0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group mb-3">
-              <label for="dan">Dan</label>
-              <input type="number" min="1" max="20" name="dan" id="dan" class="form-control"
-                [(ngModel)]="aluno.graduacao.dan" placeholder="Dan" required />
-            </div>
-          </div>
-        </div>
-
-        <div class="row mt-4">
-          <div class="col-md-4">
-            <div class="form-group mb-3">
-              <label for="dataNascimento">Data de Nascimento</label>
-              <input type="date" class="form-control" [(ngModel)]="aluno.dataNascimento" name="dataNascimento"
-                id="dataNascimento" min="1980-01-01" max="2024-12-31" pattern="\d{4}-\d{2}-\d{2}"
-                placeholder="dd-MM-yyyy" required />
-            </div>
-          </div>
-          <div class="col-md-8">
-            <div class="form-group">
-              <label for="cpf">CPF</label>
-              <input type="text" name="cpf" class="form-control" [(ngModel)]="aluno.cpf" id="cpf" placeholder="Apenas números" />
-            </div>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="rg">RG</label>
-              <input type="text" name="rg" class="form-control" [(ngModel)]="aluno.rg" id="rg" placeholder="Apenas números" />
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="cartaoSus">Cartão do SUS</label>
               <input
                 type="text"
-                name="cartaoSus"
+                name="nome"
+                [(ngModel)]="aluno.nome"
+                id="nome"
                 class="form-control"
-                [(ngModel)]="aluno.cartaoSus"
-                id="cartaoSus"
-                placeholder="Apenas números"
+                placeholder="Nome"
+                required
+                #nomeInput="ngModel"
+                [ngClass]="{
+                  'is-invalid': nomeInput.invalid && (nomeInput.dirty || nomeInput.touched),
+                  'is-valid': nomeInput.valid && (nomeInput.dirty || nomeInput.touched)
+                }"
               />
+              <div
+                *ngIf="nomeInput.invalid && (nomeInput.dirty || nomeInput.touched)"
+                class="invalid-feedback"
+              >
+                O nome é um campo obrigatório.
+              </div>
+              <div
+                *ngIf="nomeInput.valid && (nomeInput.dirty || nomeInput.touched)"
+                class="valid-feedback"
+              ></div>
             </div>
           </div>
         </div>
-        <div class="row mt-4">          
+
+        <div class="row mt-4">  
+          <div class="col-md-6">  
+            <div class="form-group mb-3">  
+              <label for="turma">Turma</label>  
+              <select  
+                id="turma"  
+                name="turma"  
+                [(ngModel)]="aluno.turma"  
+                class="form-select"  
+                required  
+                #turmaSelect="ngModel"  
+                [ngClass]="{  
+                  'is-invalid': turmaSelect.invalid && (turmaSelect.dirty || turmaSelect.touched),  
+                  'is-valid': turmaSelect.valid && (turmaSelect.dirty || turmaSelect.touched)  
+                }"  
+              >  
+                <option value="" disabled selected>Selecione uma turma</option>  
+                <option *ngFor="let turma of turmas; let i = index" [value]="turma.nome">  
+                  {{ turma.nome }}  
+                </option>  
+              </select>  
+              <div  
+                *ngIf="turmaSelect.invalid && (turmaSelect.dirty || turmaSelect.touched)"  
+                class="invalid-feedback"  
+              >  
+                O campo Turma é obrigatório.  
+              </div>  
+            </div>  
+          </div>  
+          <div class="col-md-3">  
+            <div class="form-group mb-3">  
+              <label for="kyu">Kyu</label>  
+              <select  
+                id="kyu"  
+                name="kyu"  
+                [(ngModel)]="aluno.graduacao.kyu"  
+                class="form-select"  
+                required  
+                #kyuSelect="ngModel"  
+                [ngClass]="{  
+                  'is-invalid': kyuSelect.invalid && (kyuSelect.dirty || kyuSelect.touched),  
+                  'is-valid': kyuSelect.valid && (kyuSelect.dirty || kyuSelect.touched)  
+                }"  
+                (change)="onKyuChange()"  
+              >  
+                <option value="" disabled selected></option>  
+                <option *ngFor="let i of [1, 2, 3, 4, 5, 6, 7]" [value]="i">{{ i }}</option>  
+              </select>  
+              <div  
+                *ngIf="kyuSelect.invalid && (kyuSelect.dirty || kyuSelect.touched)"  
+                class="invalid-feedback"  
+              >  
+                O campo Kyu é obrigatório.  
+              </div>  
+            </div>  
+          </div>  
+          <div class="col-md-3" *ngIf="aluno.graduacao.kyu === 1">  
+            <div class="form-group mb-3">  
+              <label for="dan">Dan</label>  
+              <input  
+                type="number"  
+                min="1"  
+                max="20"  
+                name="dan"  
+                id="dan"  
+                class="form-control"  
+                [(ngModel)]="aluno.graduacao.dan"  
+                placeholder="Dan"  
+                required  
+                #danInput="ngModel"  
+                [ngClass]="{  
+                  'is-invalid': danInput.invalid && (danInput.dirty || danInput.touched),  
+                  'is-valid': danInput.valid && (danInput.dirty || danInput.touched)  
+                }"  
+              />  
+              <div  
+                *ngIf="danInput.invalid && (danInput.dirty || danInput.touched)"  
+                class="invalid-feedback"  
+              >  
+                O campo Dan é obrigatório e deve estar entre 1 e 20.  
+              </div>  
+            </div>  
+          </div>  
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="dataNascimento">Data de Nascimento</label>
+              <input
+                type="date"
+                name="dataNascimento"
+                class="form-control"
+                [(ngModel)]="aluno.dataNascimento"
+                id="dataNascimento"
+                required
+                #dataNascimentoInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    (dataNascimentoInput.invalid &&
+                      (dataNascimentoInput.dirty || dataNascimentoInput.touched)) ||
+                    (!isDataNascValid() &&
+                      (dataNascimentoInput.dirty || dataNascimentoInput.touched)),
+                  'is-valid': isDataNascValid() && dataNascimentoInput.value
+                }"
+              />
+              <div
+                *ngIf="
+                  (dataNascimentoInput.invalid &&
+                    (dataNascimentoInput.dirty || dataNascimentoInput.touched)) ||
+                  (!isDataNascValid() && (dataNascimentoInput.dirty || dataNascimentoInput.touched))
+                "
+                class="invalid-feedback"
+              >
+                O aluno deve ter no mínimo 5 anos de idade.
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="cpf">CPF</label>
+              <input
+                type="text"
+                name="cpf"
+                class="form-control"
+                [(ngModel)]="aluno.cpf"
+                id="cpf"
+                placeholder="Apenas números"
+                #cpfInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    !isCpfValid(aluno.cpf) &&
+                    cpfInput.value &&
+                    (cpfInput.dirty || cpfInput.touched),
+                  'is-valid': isCpfValid(aluno.cpf) && cpfInput.value
+                }"
+              />
+              <div
+                *ngIf="
+                  !isCpfValid(aluno.cpf) && cpfInput.value && (cpfInput.dirty || cpfInput.touched)
+                "
+                class="invalid-feedback"
+              >
+                CPF inválido!
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
           <div class="col-md-6">
             <div class="form-group">
               <label for="telefone">Telefone</label>
@@ -138,9 +260,88 @@
                 [(ngModel)]="aluno.telefone"
                 id="telefone"
                 placeholder="Apenas números"
+                required
+                #telefoneInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    !isTelefoneValid(aluno.telefone) &&
+                    telefoneInput.invalid &&
+                    (telefoneInput.dirty || telefoneInput.touched),
+                  'is-valid':
+                    isTelefoneValid(aluno.telefone) &&
+                    telefoneInput.valid &&
+                    (telefoneInput.dirty || telefoneInput.touched)
+                }"
               />
+              <div
+                *ngIf="
+                  !isTelefoneValid(aluno.telefone) &&
+                  telefoneInput.invalid &&
+                  (telefoneInput.dirty || telefoneInput.touched)
+                "
+                class="invalid-feedback"
+              >
+                O telefone é um campo obrigatório.
+              </div>
             </div>
-            
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="rg">RG</label>
+              <input
+                type="text"
+                name="rg"
+                class="form-control"
+                [(ngModel)]="aluno.rg"
+                id="rg"
+                placeholder="Apenas números"
+                #rgInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    !isRgValid(aluno.rg) && rgInput.value && (rgInput.dirty || rgInput.touched),
+                  'is-valid': isRgValid(aluno.rg) && rgInput.value
+                }"
+              />
+              <div
+                *ngIf="!isRgValid(aluno.rg) && rgInput.value && (rgInput.dirty || rgInput.touched)"
+                class="invalid-feedback"
+              >
+                RG inválido.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="cartaoSus">Cartão do SUS</label>
+              <input
+                type="text"
+                name="cartaoSus"
+                class="form-control"
+                [(ngModel)]="aluno.cartaoSus"
+                id="cartaoSus"
+                placeholder="Apenas números"
+                #cartaoSusInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    !isCartaoSusValid(aluno.cartaoSus) &&
+                    cartaoSusInput.value &&
+                    (cartaoSusInput.dirty || cartaoSusInput.touched),
+                  'is-valid': isCartaoSusValid(aluno.cartaoSus) && cartaoSusInput.value
+                }"
+              />
+              <div
+                *ngIf="
+                  !isCartaoSusValid(aluno.cartaoSus) &&
+                  cartaoSusInput.value &&
+                  (cartaoSusInput.dirty || cartaoSusInput.touched)
+                "
+                class="invalid-feedback"
+              >
+                Cartão do SUS inválido.
+              </div>
+            </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
@@ -152,55 +353,84 @@
                 [(ngModel)]="aluno.email"
                 id="email"
                 placeholder="email@email.com"
+                #emailInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    !isEmailValid(aluno.email) &&
+                    emailInput.value &&
+                    (emailInput.dirty || emailInput.touched),
+                  'is-valid': isEmailValid(aluno.email) && emailInput.value
+                }"
               />
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-3">
-          <span>Gênero</span>
-          <div class="text-center border rounded">
-            <div class="gender-box-radio">
-              <div>
-                <input type="radio" name="genero" value="OUTRO" [(ngModel)]="aluno.genero" />
-                <label class="p-2" for="genero">Outro</label><br />
-              </div>
-              <div>
-                <input type="radio" name="genero" value="M" [(ngModel)]="aluno.genero" />
-                <label class="p-2" for="genero">Masculino</label><br />
-              </div>
-              <div>
-                <input type="radio" name="genero" value="F" [(ngModel)]="aluno.genero" />
-                <label class="p-2" for="genero">Feminino</label><br />
+              <div
+                *ngIf="
+                  !isEmailValid(aluno.email) &&
+                  emailInput.value &&
+                  (emailInput.dirty || emailInput.touched)
+                "
+                class="invalid-feedback"
+              >
+                Email inválido.
               </div>
             </div>
           </div>
         </div>
 
-        <div class="mt-3">
-          <span>Cor da Pele</span>
-          <div class="text-center border rounded">
-            <div class="gender-box-radio">
-              <div>
-                <input type="radio" name="corDePele" value="AMARELO" [(ngModel)]="aluno.corDePele" id="amarelo"/>
-                <label class="p-2" for="amarelo">Amarelo</label><br />
-              </div>
-              <div>
-                <input type="radio" name="corDePele" value="BRANCO" [(ngModel)]="aluno.corDePele" id="branco"/>
-                <label class="p-2" for="branco">Branco</label><br />
-              </div>
-              <div>
-                <input type="radio" name="corDePele" value="INDIGENA" [(ngModel)]="aluno.corDePele" id="indigena"/>
-                <label class="p-2" for="indigena">Indigena</label><br />
-              </div>
-              <div>
-                <input type="radio" name="corDePele" value="PARDO" [(ngModel)]="aluno.corDePele" id="pardo"/>
-                <label class="p-2" for="pardo">Pardo</label><br />
-              </div>
-              <div>
-                <input type="radio" name="corDePele" value="PRETO" [(ngModel)]="aluno.corDePele" id="preto"/>
-                <label class="p-2" for="preto">Preto</label><br />
-              </div>
+        <div class="row mt-4">
+          <div class="col-md-6 p-2">
+            <label for="genero" class="form-label">Genero</label>
+            <select
+              name="genero"
+              class="form-select"
+              [(ngModel)]="aluno.genero"
+              id="genero"
+              required
+              #generoSelect="ngModel"
+              [ngClass]="{
+                'is-invalid': generoSelect.invalid && (generoSelect.dirty || generoSelect.touched),
+                'is-valid': generoSelect.valid && (generoSelect.dirty || generoSelect.touched)
+              }"
+            >
+              <option value="" disabled selected>Selecione</option>
+              <option value="OUTRO">Outro</option>
+              <option value="M">Masculino</option>
+              <option value="F">Feminino</option>
+            </select>
+            <div
+              *ngIf="generoSelect.invalid && (generoSelect.dirty || generoSelect.touched)"
+              class="invalid-feedback"
+            >
+              O campo genero é obrigatório.
+            </div>
+          </div>
+
+          <div class="col-md-6 p-2">
+            <label for="corDePele" class="form-label">Cor da Pele</label>
+            <select
+              name="corDePele"
+              class="form-select"
+              [(ngModel)]="aluno.corDePele"
+              id="corDePele"
+              required
+              #corPeleSelect="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  corPeleSelect.invalid && (corPeleSelect.dirty || corPeleSelect.touched),
+                'is-valid': corPeleSelect.valid && (corPeleSelect.dirty || corPeleSelect.touched)
+              }"
+            >
+              <option value="" disabled selected>Selecione</option>
+              <option value="AMARELO">Amarelo</option>
+              <option value="BRANCO">Branco</option>
+              <option value="INDIGENA">Indígena</option>
+              <option value="PARDO">Pardo</option>
+              <option value="PRETO">Preto</option>
+            </select>
+            <div
+              *ngIf="corPeleSelect.invalid && (corPeleSelect.dirty || corPeleSelect.touched)"
+              class="invalid-feedback"
+            >
+              O campo cor de pele é obrigatório.
             </div>
           </div>
         </div>
@@ -208,57 +438,185 @@
         <div class="mt-5">
           <h5>Endereço</h5>
           <div class="row mb-3">
-            <div class="col-md-9">
-              <input type="text" [(ngModel)]="aluno.endereco.cep" name="cep" id="cep" class="form-control"
-                placeholder="CEP" (blur)="buscarEnderecoPeloCep()" />
-            </div>
-            <div class="col-md-3">
-              <input type="number" name="numero" [(ngModel)]="aluno.endereco.numero" id="numero" class="form-control"
-                placeholder="Numero*" required />
+            <div class="col-md-4">
+              <input
+                type="text"
+                [(ngModel)]="aluno.endereco.cep"
+                name="cep"
+                id="cep"
+                class="form-control"
+                placeholder="CEP"
+                (blur)="buscarEnderecoPeloCep()"
+                #cepInput="ngModel"
+                [ngClass]="{
+                  'is-invalid': !isCepValid(aluno.endereco.cep) && cepInput.dirty,
+                  'is-valid': isCepValid(aluno.endereco.cep) && cepInput.value
+                }"
+              />
+              <div
+                *ngIf="!isCepValid(aluno.endereco.cep) && cepInput.dirty"
+                class="invalid-feedback"
+              >
+                CEP inválido.
+              </div>
             </div>
           </div>
+
           <div class="row mb-3">
             <div class="col-md-6">
-              <input type="text" name="estado" [(ngModel)]="aluno.endereco.estado" id="estado" class="form-control"
-                placeholder="Estado*" required />
+              <input
+                type="text"
+                name="estado"
+                [(ngModel)]="aluno.endereco.estado"
+                id="estado"
+                class="form-control"
+                placeholder="Estado"
+                #estadoInput="ngModel"
+                [ngClass]="{
+                  'is-invalid': (estadoInput.dirty || estadoInput.touched) && estadoInput.invalid,
+                  'is-valid': estadoInput.value && (estadoInput.dirty || estadoInput.touched)
+                }"
+              />
+              <div
+                *ngIf="(estadoInput.dirty || estadoInput.touched) && estadoInput.invalid"
+                class="invalid-feedback"
+              ></div>
             </div>
             <div class="col-md-6">
-              <input type="text" name="cidade" [(ngModel)]="aluno.endereco.cidade" id="cidade" class="form-control"
-                placeholder="Cidade*" required />
+              <input
+                type="text"
+                name="cidade"
+                [(ngModel)]="aluno.endereco.cidade"
+                id="cidade"
+                class="form-control"
+                placeholder="Cidade"
+                #cidadeInput="ngModel"
+                [ngClass]="{
+                  'is-invalid': (cidadeInput.dirty || cidadeInput.touched) && cidadeInput.invalid,
+                  'is-valid': cidadeInput.value && (cidadeInput.dirty || cidadeInput.touched)
+                }"
+              />
+              <div
+                *ngIf="(cidadeInput.dirty || cidadeInput.touched) && cidadeInput.invalid"
+                class="invalid-feedback"
+              ></div>
             </div>
           </div>
+
           <div class="row">
-            <div class="col-md-12">
-              <input type="text" name="rua" [(ngModel)]="aluno.endereco.logradouro" id="rua" class="form-control"
-                placeholder="Rua*" required />
+            <div class="col-md-9">
+              <input
+                type="text"
+                name="rua"
+                [(ngModel)]="aluno.endereco.logradouro"
+                id="rua"
+                class="form-control"
+                placeholder="Rua"
+                #ruaInput="ngModel"
+                [ngClass]="{
+                  'is-invalid': (ruaInput.dirty || ruaInput.touched) && ruaInput.invalid,
+                  'is-valid': ruaInput.value && (ruaInput.dirty || ruaInput.touched)
+                }"
+              />
+              <div
+                *ngIf="(ruaInput.dirty || ruaInput.touched) && ruaInput.invalid"
+                class="invalid-feedback"
+              ></div>
+            </div>
+            <div class="col-md-3">
+              <input
+                type="number"
+                name="numero"
+                [(ngModel)]="aluno.endereco.numero"
+                id="numero"
+                class="form-control"
+                placeholder="Número"
+                #numeroInput="ngModel"
+                [ngClass]="{
+                  'is-invalid': (numeroInput.dirty || numeroInput.touched) && numeroInput.invalid,
+                  'is-valid': numeroInput.value && (numeroInput.dirty || numeroInput.touched)
+                }"
+              />
+              <div
+                *ngIf="(numeroInput.dirty || numeroInput.touched) && numeroInput.invalid"
+                class="invalid-feedback"
+              ></div>
             </div>
           </div>
         </div>
 
-        <div>
-          <div class="row mt-5">
-            <h5>Dados Escolares</h5>
-            <div class="col-md-5 p-2">
-              <label for="escola" class="form-label">Escola*</label>
-              <input type="text" name="escola" [(ngModel)]="aluno.dadosEscolares.escola" id="escola"
-                class="form-control" placeholder="Escola*" required />
-            </div> 
+        <div class="row mt-5">
+          <h5>Dados Escolares</h5>
 
-            <div class="col-md-4 p-2">
-              <label for="serie" class="form-label">Serie*</label>
-              <input type="number" name="serie" [(ngModel)]="aluno.dadosEscolares.serie" id="serie" class="form-control"
-                min="1" max="9" required />
-            </div>
-            
-              <div class="col-md-3 p-2">
-              <label for="turno" class="form-label">Turno*</label>
-              <select name="turno" class="form-select" [(ngModel)]="aluno.dadosEscolares.turno" id="turno" required>
-                <option value="MANHA">Matutino</option>
-                <option value="TARDE">Tarde</option>
-                <option value="NOITE">Noturno</option>
-              </select>          
-            </div>
+          <div class="col-md-5 p-2">
+            <label for="escola" class="form-label">Escola</label>
+            <input
+              type="text"
+              name="escola"
+              [(ngModel)]="aluno.dadosEscolares.escola"
+              id="escola"
+              class="form-control"
+              placeholder="Escola"
+              #escolaInput="ngModel"
+              [ngClass]="{
+                'is-invalid': (escolaInput.dirty || escolaInput.touched) && !escolaInput.valid,
+                'is-valid': escolaInput.value && (escolaInput.dirty || escolaInput.touched)
+              }"
+            />
+            <div
+              *ngIf="(escolaInput.dirty || escolaInput.touched) && !escolaInput.valid"
+              class="invalid-feedback"
+            ></div>
+          </div>
 
+          <div class="col-md-3 p-2">
+            <label for="serie" class="form-label">Série</label>
+            <input
+              type="number"
+              name="serie"
+              [(ngModel)]="aluno.dadosEscolares.serie"
+              id="serie"
+              class="form-control"
+              min="1"
+              max="9"
+              #serieInput="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  (serieInput.dirty || serieInput.touched) &&
+                  !isSerieValid(aluno.dadosEscolares.serie),
+                'is-valid': serieInput.value !== null && (serieInput.dirty || serieInput.touched)
+              }"
+            />
+            <div
+              *ngIf="
+                (serieInput.dirty || serieInput.touched) &&
+                !isSerieValid(aluno.dadosEscolares.serie)
+              "
+              class="invalid-feedback"
+            >
+              A série deve estar entre 1 e 9, se informado.
+            </div>
+          </div>
+
+          <div class="col-md-4 p-2">
+            <label for="turno" class="form-label">Turno</label>
+            <select
+              name="turno"
+              class="form-select"
+              [(ngModel)]="aluno.dadosEscolares.turno"
+              id="turno"
+              #turnoInput="ngModel"
+              [ngClass]="{
+                'is-invalid': turnoInput.dirty && !turnoInput.value,
+                'is-valid': turnoInput.value && turnoInput.dirty
+              }"
+            >
+              <option value="" disabled selected>Selecione</option>
+              <option value="MANHA">Manhã</option>
+              <option value="TARDE">Tarde</option>
+              <option value="NOITE">Noite</option>
+            </select>
+            <div *ngIf="turnoInput.dirty && !turnoInput.value" class="invalid-feedback"></div>
           </div>
         </div>
 
@@ -268,53 +626,155 @@
           <div class="row mt-3">
             <div class="col-md-4">
               <label for="form1" class="form-label">Renda Familiar</label>
-              <input type="number" id="form1" class="form-control" min="0" max="300000" placeholder="Renda" name="renda"
-                [(ngModel)]="aluno.dadosSociais.rendaFamiliar" required />
+              <input
+                type="number"
+                id="form1"
+                class="form-control"
+                min="0"
+                max="300000"
+                placeholder="Renda"
+                name="renda"
+                [(ngModel)]="aluno.dadosSociais.rendaFamiliar"
+                #rendaInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    (rendaInput.dirty || rendaInput.touched) &&
+                    !isRendaValid(aluno.dadosSociais.rendaFamiliar),
+                  'is-valid': rendaInput.value !== null && (rendaInput.dirty || rendaInput.touched)
+                }"
+              />
+              <div
+                *ngIf="
+                  (rendaInput.dirty || rendaInput.touched) &&
+                  !isRendaValid(aluno.dadosSociais.rendaFamiliar)
+                "
+                class="invalid-feedback"
+              >
+                A renda deve ser um valor válido se informada.
+              </div>
             </div>
+
             <div class="col-md-4">
               <label for="numerosDePessoasNaCasa" class="form-label">Pessoas na Casa</label>
-              <input type="number" name="numerosDePessoasNaCasa" id="numerosDePessoasNaCasa" class="form-control"
-                min="1" max="15" placeholder="Pessoas na Casa"
-                [(ngModel)]="aluno.dadosSociais.numerosDePessoasNaCasa" />
+              <input
+                type="number"
+                name="numerosDePessoasNaCasa"
+                id="numerosDePessoasNaCasa"
+                class="form-control"
+                min="1"
+                max="15"
+                placeholder="Pessoas na Casa"
+                [(ngModel)]="aluno.dadosSociais.numerosDePessoasNaCasa"
+                #pessoasInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    (pessoasInput.dirty || pessoasInput.touched) &&
+                    !isPessoasNaCasaValid(aluno.dadosSociais.numerosDePessoasNaCasa),
+                  'is-valid':
+                    pessoasInput.value !== null && (pessoasInput.dirty || pessoasInput.touched)
+                }"
+              />
+              <div
+                *ngIf="
+                  (pessoasInput.dirty || pessoasInput.touched) &&
+                  !isPessoasNaCasaValid(aluno.dadosSociais.numerosDePessoasNaCasa)
+                "
+                class="invalid-feedback"
+              >
+                Se informado, deve ser entre 1 e 15.
+              </div>
             </div>
+
             <div class="col-md-4">
-              <label for="contribuintesDaRenda" class="form-label">Contríbuintes da Renda</label>
-              <input type="number" name="contribuintesDaRenda" id="contribuintesDaRenda" min="1" max="15"
-                class="form-control" placeholder="Contribuintes da Renda"
-                [(ngModel)]="aluno.dadosSociais.contribuintesDaRendaFamiliar" />
+              <label for="contribuintesDaRenda" class="form-label">Contribuintes da Renda</label>
+              <input
+                type="number"
+                name="contribuintesDaRenda"
+                id="contribuintesDaRenda"
+                min="1"
+                max="15"
+                class="form-control"
+                placeholder="Contribuintes da Renda"
+                [(ngModel)]="aluno.dadosSociais.contribuintesDaRendaFamiliar"
+                #contribuintesInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    (contribuintesInput.dirty || contribuintesInput.touched) &&
+                    !isContribuintesDaRendaValid(aluno.dadosSociais.contribuintesDaRendaFamiliar),
+                  'is-valid':
+                    contribuintesInput.value !== null &&
+                    (contribuintesInput.dirty || contribuintesInput.touched)
+                }"
+              />
+              <div
+                *ngIf="
+                  (contribuintesInput.dirty || contribuintesInput.touched) &&
+                  !isContribuintesDaRendaValid(aluno.dadosSociais.contribuintesDaRendaFamiliar)
+                "
+                class="invalid-feedback"
+              >
+                Se informado, deve ser entre 1 e 15.
+              </div>
             </div>
           </div>
 
           <div class="row mt-3">
             <label for="imovel" class="form-label">Imóvel</label>
             <div class="col-md-12">
-              <select class="imovel p-2 w-100" aria-label="imovel" name="imovel" [(ngModel)]="aluno.dadosSociais.imovel"
-                required>
+              <select
+                class="form-select"
+                name="imovel"
+                [(ngModel)]="aluno.dadosSociais.imovel"
+                #imovelInput="ngModel"
+                [ngClass]="{
+                  'is-invalid': imovelInput.dirty && !imovelInput.value,
+                  'is-valid': imovelInput.value && imovelInput.dirty
+                }"
+              >
+                <option value="" disabled selected>Selecione o tipo Imóvel</option>
                 <option value="CEDIDO">Cedido</option>
                 <option value="ALUGADO">Alugado</option>
                 <option value="PROPRIO">Próprio</option>
               </select>
+              <div *ngIf="imovelInput.dirty && !imovelInput.value" class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="mt-4">
             <div class="mb-3 form-check">
               <h6 class="mb-4">Marque algumas informações do aluno</h6>
-              <input type="checkbox" class="form-check-input" id="bolsaFamilia" name="bolsaFamilia"
-                [(ngModel)]="aluno.dadosSociais.bolsaFamilia" />
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="bolsaFamilia"
+                name="bolsaFamilia"
+                [(ngModel)]="aluno.dadosSociais.bolsaFamilia"
+              />
               <label class="form-check-label" for="bolsaFamilia">Bolsa Família</label>
             </div>
 
             <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="auxilioBrasil" name="auxilioBrasil"
-                [(ngModel)]="aluno.dadosSociais.auxilioBrasil" />
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="auxilioBrasil"
+                name="auxilioBrasil"
+                [(ngModel)]="aluno.dadosSociais.auxilioBrasil"
+              />
               <label class="form-check-label" for="auxilioBrasil">Auxílio Brasil</label>
             </div>
 
             <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="alunoContribuiParaRenda"
-                name="alunoContribuiParaRenda" [(ngModel)]="aluno.dadosSociais.alunoContribuiParaRenda" />
-              <label class="form-check-label" for="alunoContribuiParaRenda">Aluno Contribui para Renda</label>
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="alunoContribuiParaRenda"
+                name="alunoContribuiParaRenda"
+                [(ngModel)]="aluno.dadosSociais.alunoContribuiParaRenda"
+              />
+              <label class="form-check-label" for="alunoContribuiParaRenda"
+                >Aluno Contribui para Renda</label
+              >
             </div>
           </div>
         </div>
@@ -323,34 +783,145 @@
           <h5>Responsável</h5>
           <div class="row mt-2">
             <div class="col-md-6">
-              <input type="text" name="nomeResponsavel" id="nomeResponsavel" class="form-control" placeholder="Nome"
-                [(ngModel)]="responsavel.nome" />
+              <input
+                type="text"
+                name="nomeResponsavel"
+                id="nomeResponsavel"
+                class="form-control"
+                placeholder="Nome"
+                [(ngModel)]="responsavel.nome"
+                required
+                #nomeResponsavelInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    nomeResponsavelInput.invalid &&
+                    (nomeResponsavelInput.dirty || nomeResponsavelInput.touched),
+                  'is-valid':
+                    nomeResponsavelInput.valid &&
+                    (nomeResponsavelInput.dirty || nomeResponsavelInput.touched)
+                }"
+              />
+              <div
+                *ngIf="
+                  nomeResponsavelInput.invalid &&
+                  (nomeResponsavelInput.dirty || nomeResponsavelInput.touched)
+                "
+                class="invalid-feedback"
+              >
+                O nome do responável é um campo obrigatório.
+              </div>
             </div>
             <div class="col-md-6">
-              <input type="text" name="cpfResponsavel" id="cpfResponsavel" class="form-control" placeholder="CPF*"
-                [(ngModel)]="responsavel.cpf" required />
+              <input
+                type="text"
+                name="cpfResponsavel"
+                id="cpfResponsavel"
+                class="form-control"
+                placeholder="CPF"
+                [(ngModel)]="responsavel.cpf"
+                #cpfResponavelInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    !isCpfValid(responsavel.cpf) &&
+                    cpfResponavelInput.value &&
+                    (cpfResponavelInput.dirty || cpfResponavelInput.touched),
+                  'is-valid': isCpfValid(responsavel.cpf) && cpfResponavelInput.value
+                }"
+              />
+              <div
+                *ngIf="
+                  !isCpfValid(responsavel.cpf) &&
+                  cpfResponavelInput.value &&
+                  (cpfResponavelInput.dirty || cpfResponavelInput.touched)
+                "
+                class="invalid-feedback"
+              >
+                CPF inválido!
+              </div>
             </div>
           </div>
           <div class="row mt-2">
             <div class="col-md-6">
-              <input type="text" name="emailResponsavel" id="emailResponsavel" class="form-control" placeholder="Email"
-                [(ngModel)]="responsavel.email" />
+              <input
+                type="tel"
+                name="telefoneResponsavel"
+                id="telefoneResponsavel"
+                class="form-control"
+                placeholder="Telefone"
+                [(ngModel)]="responsavel.telefone"
+                #telefoneResponsavelInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    !isTelefoneValid(responsavel.telefone) &&
+                    telefoneResponsavelInput.invalid &&
+                    (telefoneResponsavelInput.dirty || telefoneResponsavelInput.touched),
+                  'is-valid':
+                    isTelefoneValid(responsavel.telefone) &&
+                    telefoneResponsavelInput.valid &&
+                    (telefoneResponsavelInput.dirty || telefoneResponsavelInput.touched)
+                }"
+              />
+              <div
+                *ngIf="
+                  !isTelefoneValid(responsavel.telefone) &&
+                  telefoneResponsavelInput.invalid &&
+                  (telefoneResponsavelInput.dirty || telefoneResponsavelInput.touched)
+                "
+                class="invalid-feedback"
+              >
+                O telefone é um campo obrigatório.
+              </div>
             </div>
             <div class="col-md-6">
-              <input type="tel" name="telefoneResponsavel" id="telefoneResponsavel" class="form-control"
-                placeholder="Telefone" [(ngModel)]="responsavel.telefone" />
+              <select
+                class="form-select"
+                aria-label="Filiação do responsável"
+                [(ngModel)]="responsavel.filiacao"
+                name="filiacao"
+                id="filiacao"
+                #filiacaoInput="ngModel"
+                [ngClass]="{
+                  'is-invalid': filiacaoInput.dirty && !filiacaoInput.value,
+                  'is-valid': filiacaoInput.value && filiacaoInput.dirty
+                }"
+              >
+                <option value="" disabled selected>Selecione a filiação</option>
+                <option value="OUTRO">Outro</option>
+                <option value="PAI">Pai</option>
+                <option value="MAE">Mãe</option>
+              </select>
+              <div *ngIf="turnoInput.dirty && !turnoInput.value" class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="row mt-4">
             <div class="col-md-12">
-              <select class="form-select" aria-label="Filiação do responsável" [(ngModel)]="responsavel.filiacao"
-              name="filiacao" id="filiacao">
-              <option selected disabled>Filiação do responsável</option>
-              <option value="OUTRO">Outro</option>
-              <option value="PAI">Pai</option>
-              <option value="MAE">Mãe</option>
-            </select>
+              <input
+                type="text"
+                name="emailResponsavel"
+                id="emailResponsavel"
+                class="form-control"
+                placeholder="Email"
+                [(ngModel)]="responsavel.email"
+                #emailResponsavelInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    !isEmailValid(responsavel.email) &&
+                    emailResponsavelInput.value &&
+                    (emailResponsavelInput.dirty || emailResponsavelInput.touched),
+                  'is-valid': isEmailValid(responsavel.email) && emailResponsavelInput.value
+                }"
+              />
+              <div
+                *ngIf="
+                  !isEmailValid(responsavel.email) &&
+                  emailResponsavelInput.value &&
+                  (emailResponsavelInput.dirty || emailResponsavelInput.touched)
+                "
+                class="invalid-feedback"
+              >
+                Email inválido.
+              </div>
             </div>
           </div>
         </div>
@@ -360,9 +931,19 @@
 
           <div class="row mt-3">
             <div class="col-md-6">
-              <select class="form-select" aria-label="Tipo sanguineo" id="tipoSanguineo" name="tipoSanguineo"
-                [(ngModel)]="historicoSaude.tipoSanguineo">
-                <option selected disabled>Tipo sanguineo</option>
+              <select
+                class="form-select"
+                aria-label="Tipo sanguineo"
+                id="tipoSanguineo"
+                name="tipoSanguineo"
+                [(ngModel)]="historicoSaude.tipoSanguineo"
+                #tipoSanguineoInput="ngModel"
+                [ngClass]="{
+                  'is-invalid': tipoSanguineoInput.dirty && !tipoSanguineoInput.value,
+                  'is-valid': tipoSanguineoInput.value && tipoSanguineoInput.dirty
+                }"
+              >
+                <option value="" selected disabled>Tipo sanguineo</option>
                 <option value="A_POSITIVO">A+</option>
                 <option value="A_NEGATIVO">A-</option>
                 <option value="B_POSITIVO">B+</option>
@@ -372,53 +953,158 @@
                 <option value="O_POSITIVO">O+</option>
                 <option value="O_NEGATIVO">O-</option>
               </select>
+              <div
+                *ngIf="tipoSanguineoInput.dirty && !tipoSanguineoInput.value"
+                class="invalid-feedback"
+              ></div>
             </div>
           </div>
 
           <div class="row mt-4">
             <p>O Aluno faz uso de medicamentos?</p>
             <cite> Se não possuir, deixe em branco </cite>
-            <input type="text" name="usoMedicamentos" id="usoMedicamentos" class="form-control"
-              [(ngModel)]="aluno.historicoSaude.usoMedicamentoContinuo.tipo" />
+            <input
+              type="text"
+              name="usoMedicamentos"
+              id="usoMedicamentos"
+              class="form-control"
+              [(ngModel)]="aluno.historicoSaude.usoMedicamentoContinuo.tipo"
+              #usoMedicamentosInput="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  (usoMedicamentosInput.dirty || usoMedicamentosInput.touched) &&
+                  !isUsoMedicamentosValid(aluno.historicoSaude.usoMedicamentoContinuo.tipo),
+                'is-valid': usoMedicamentosInput.dirty && usoMedicamentosInput.value
+              }"
+            />
+            <div
+              *ngIf="
+                (usoMedicamentosInput.dirty || usoMedicamentosInput.touched) &&
+                !isUsoMedicamentosValid(aluno.historicoSaude.usoMedicamentoContinuo.tipo)
+              "
+              class="invalid-feedback"
+            ></div>
           </div>
 
           <div class="row mt-4">
             <p>O Aluno tem alergias?</p>
             <cite> Se não possuir, deixe em branco </cite>
-            <input type="text" name="alergia" id="alergia" class="form-control"
-              [(ngModel)]="aluno.historicoSaude.alergia.tipo" />
+            <input
+              type="text"
+              name="alergia"
+              id="alergia"
+              class="form-control"
+              [(ngModel)]="aluno.historicoSaude.alergia.tipo"
+              #alergiaInput="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  (alergiaInput.dirty || alergiaInput.touched) &&
+                  !isAlergiaValid(aluno.historicoSaude.alergia.tipo),
+                'is-valid': alergiaInput.dirty && alergiaInput.value
+              }"
+            />
+            <div
+              *ngIf="
+                (alergiaInput.dirty || alergiaInput.touched) &&
+                !isAlergiaValid(aluno.historicoSaude.alergia.tipo)
+              "
+              class="invalid-feedback"
+            ></div>
           </div>
 
           <div class="row mt-4">
             <p>O Aluno tem cirurgias?</p>
             <cite> Se não possuir, deixe em branco </cite>
-            <input type="text" name="cirurgias" id="cirurgias" class="form-control"
-              [(ngModel)]="aluno.historicoSaude.cirurgia.tipo" />
+            <input
+              type="text"
+              name="cirurgias"
+              id="cirurgias"
+              class="form-control"
+              [(ngModel)]="aluno.historicoSaude.cirurgia.tipo"
+              #cirurgiasInput="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  (cirurgiasInput.dirty || cirurgiasInput.touched) &&
+                  !isCirurgiasValid(aluno.historicoSaude.cirurgia.tipo),
+                'is-valid': cirurgiasInput.dirty && cirurgiasInput.value
+              }"
+            />
+            <div
+              *ngIf="
+                (cirurgiasInput.dirty || cirurgiasInput.touched) &&
+                !isCirurgiasValid(aluno.historicoSaude.cirurgia.tipo)
+              "
+              class="invalid-feedback"
+            ></div>
           </div>
 
           <div class="row mt-4">
-            <p>O Aluno tem alguma doença cronica?</p>
+            <p>O Aluno tem alguma doença crônica?</p>
             <cite> Se não possuir, deixe em branco</cite>
-            <input type="text" name="doencaCronica" id="doencaCronica" class="form-control"
-              [(ngModel)]="aluno.historicoSaude.doencaCronica.tipo" />
+            <input
+              type="text"
+              name="doencaCronica"
+              id="doencaCronica"
+              class="form-control"
+              [(ngModel)]="aluno.historicoSaude.doencaCronica.tipo"
+              #doencaCronicaInput="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  (doencaCronicaInput.dirty || doencaCronicaInput.touched) &&
+                  !isDoencaCronicaValid(aluno.historicoSaude.doencaCronica.tipo),
+                'is-valid': doencaCronicaInput.dirty && doencaCronicaInput.value
+              }"
+            />
+            <div
+              *ngIf="
+                (doencaCronicaInput.dirty || doencaCronicaInput.touched) &&
+                !isDoencaCronicaValid(aluno.historicoSaude.doencaCronica.tipo)
+              "
+              class="invalid-feedback"
+            ></div>
           </div>
 
           <div class="row mt-4">
-            <h5>O Aluno possui deficiencias?</h5>
+            <h5>O Aluno possui deficiências?</h5>
             <div>
-              <input class="w-75 m-1" type="text" name="deficiencia" id="deficiencia" class="form-control"
-                [(ngModel)]="deficiencia" />
+              <input
+                class="w-75 m-1"
+                type="text"
+                name="deficiencia"
+                id="deficiencia"
+                class="form-control"
+                [(ngModel)]="deficiencia"
+                #deficienciaInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    (deficienciaInput.dirty || deficienciaInput.touched) &&
+                    !isDeficienciaValid(deficiencia),
+                  'is-valid': deficienciaInput.dirty && deficienciaInput.value
+                }"
+              />
               <div class="d-flex justify-content-end">
-                <button class="btn btn-secondary m-2" (click)="adicionarDeficiencia()">
+                <button class="btn btn-secondary m-2" (click)="addDeficiencia(deficiencia)">
                   Adicionar
                 </button>
+              </div>
+              <div
+                *ngIf="
+                  (deficienciaInput.dirty || deficienciaInput.touched) &&
+                  !isDeficienciaValid(deficiencia)
+                "
+                class="invalid-feedback"
+              >
+                Se informado, deve conter um valor.
               </div>
             </div>
             <div *ngIf="historicoSaude.deficiencia.length > 0">
               <div class="panel panel-default">
                 <div class="panel-body">
                   <ul class="d-flex flex-wrap">
-                    <li class="bg-info rounded m-2 py-2 px-3 text-white" *ngFor="let str of historicoSaude.deficiencia">
+                    <li
+                      class="bg-info rounded m-2 py-2 px-3 text-white"
+                      *ngFor="let str of historicoSaude.deficiencia"
+                    >
                       {{ str }}
                     </li>
                   </ul>
@@ -428,22 +1114,49 @@
           </div>
 
           <div class="row mt-4">
-            <h5>O Aluno possui algum acompanhamento de saude?</h5>
+            <h5>O Aluno possui algum acompanhamento de saúde?</h5>
             <div>
-              <input class="w-75 m-1" type="text" name="acompanhamentoSaude" id="acompanhamentoSaude"
-                class="form-control" [(ngModel)]="acompanhamentoSaude" />
+              <input
+                class="w-75 m-1"
+                type="text"
+                name="acompanhamentoSaude"
+                id="acompanhamentoSaude"
+                class="form-control"
+                [(ngModel)]="acompanhamentoSaude"
+                #acompanhamentoSaudeInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    (acompanhamentoSaudeInput.dirty || acompanhamentoSaudeInput.touched) &&
+                    !isAcompanhamentoSaudeValid(acompanhamentoSaude),
+                  'is-valid': acompanhamentoSaudeInput.dirty && acompanhamentoSaudeInput.value
+                }"
+              />
               <div class="d-flex justify-content-end">
-                <button class="btn btn-secondary m-2" (click)="adicionarAcompanhamento()">
+                <button
+                  class="btn btn-secondary m-2"
+                  (click)="addAcompanhamento(acompanhamentoSaude)"
+                >
                   Adicionar
                 </button>
+              </div>
+              <div
+                *ngIf="
+                  (acompanhamentoSaudeInput.dirty || acompanhamentoSaudeInput.touched) &&
+                  !isAcompanhamentoSaudeValid(acompanhamentoSaude)
+                "
+                class="invalid-feedback"
+              >
+                Se informado, deve conter um valor.
               </div>
             </div>
             <div *ngIf="historicoSaude.acompanhamentoSaude.length > 0">
               <div class="panel panel-default">
                 <div class="panel-body">
                   <ul class="d-flex flex-wrap">
-                    <li class="bg-info rounded m-2 py-2 px-3 text-white"
-                      *ngFor="let str of historicoSaude.acompanhamentoSaude">
+                    <li
+                      class="bg-info rounded m-2 py-2 px-3 text-white"
+                      *ngFor="let str of historicoSaude.acompanhamentoSaude"
+                    >
                       {{ str }}
                     </li>
                   </ul>
@@ -454,7 +1167,9 @@
         </div>
 
         <div class="register-box-button m-3">
-          <button class="btn btn-primary w-50 h-100" (click)="registrarAluno()">Registrar</button>
+          <button class="btn btn-primary w-50 h-100" (click)="registrarAluno(form)">
+            Registrar
+          </button>
         </div>
       </form>
     </div>

@@ -80,7 +80,7 @@ input[type='file'] {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #fb0303f8;
+  background-color: #dc3545;
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -98,7 +98,7 @@ input[type='file'] {
 }
 
 input:checked + .slider {
-  background-color: #21f34b;
+  background-color: #28a745;
 }
 
 input:checked + .slider:before {
@@ -114,3 +114,27 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.is-valid {  
+  border-color: #28a745;
+}  
+
+.is-invalid {  
+  border-color: #dc3545;
+} 
+
+::ng-deep .success-snackbar {
+  --mdc-snackbar-container-color: #28a745;
+  --mdc-snackbar-supporting-text-color: #fff;
+}
+
+::ng-deep .error-snackbar {
+--mdc-snackbar-container-color: #dc3545 !important;
+--mdc-snackbar-supporting-text-color: #fff;
+}
+
+::ng-deep .warning-snackbar {
+  --mdc-snackbar-container-color: #ffc107 !important;
+  --mdc-snackbar-supporting-text-color: #fff;
+}
+ 

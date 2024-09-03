@@ -35,3 +35,27 @@ article > form .register-box-button {
   justify-content: center;
   align-items: center;
 }
+
+.is-invalid {  
+  border: 2px solid red;  
+}  
+
+.is-valid {  
+  border: 2px solid green;  
+}  
+
+::ng-deep .success-snackbar {
+  --mdc-snackbar-container-color: #28a745;
+  --mdc-snackbar-supporting-text-color: #fff;
+}
+
+::ng-deep .error-snackbar {
+--mdc-snackbar-container-color: #dc3545 !important;
+--mdc-snackbar-supporting-text-color: #fff;
+}
+
+::ng-deep .warning-snackbar {
+  --mdc-snackbar-container-color: #ffc107 !important;
+  --mdc-snackbar-supporting-text-color: #fff;
+}
+  
