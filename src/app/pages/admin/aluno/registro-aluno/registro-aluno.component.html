@@ -144,7 +144,7 @@
                   'is-invalid': kyuSelect.invalid && (kyuSelect.dirty || kyuSelect.touched),  
                   'is-valid': kyuSelect.valid && (kyuSelect.dirty || kyuSelect.touched)  
                 }"  
-                (change)="onKyuChange()"  
+                (change)="onKyuChange($event)"  
               >  
                 <option value="" disabled selected></option>  
                 <option *ngFor="let i of [1, 2, 3, 4, 5, 6, 7]" [value]="i">{{ i }}</option>  

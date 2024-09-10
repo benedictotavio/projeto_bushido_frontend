@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { environment } from 'src/environments/environment'
 import { Turma } from '../../turma.interface'
-import { AuthService } from 'src/app/services/services-admin/auth.service'
 import {
   AlunoProps,
   DadosEscolaresProps,
@@ -318,7 +317,8 @@ export class RegistroAlunoComponent implements OnInit {
     return !doencaCronica || doencaCronica.trim().length > 0
   }
 
-  onKyuChange() {
+  onKyuChange(event: any) {
+    this.aluno.graduacao.kyu = parseInt(event.target.value)
     if (this.aluno.graduacao.kyu !== 1) {
       this.aluno.graduacao.dan = null
     }

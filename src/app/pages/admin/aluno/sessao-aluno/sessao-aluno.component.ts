@@ -3,10 +3,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { environment } from 'src/environments/environment'
 import { AlunoEditado, AlunoResponse, Graduacao } from 'src/app/pages/admin/aluno.interface'
-import { AuthService } from 'src/app/services/services-admin/auth.service'
 import { Turma } from '../../turma.interface'
 import { validarCartaoSus, validarCep, validarCPF, validarEmail, validarRG, validarTelefone } from '../../validator'
-import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { NotaAlunoDialogComponent } from '../dialog/nota-aluno-dialog/nota-aluno-dialog.component'
 import { ConfirmDialogComponent } from '../dialog/confirm-dialog/confirm-dialog.component'
@@ -275,7 +273,7 @@ export class SessaoAlunoComponent implements OnInit {
         this.editarStatusAluno(novoStatus)
       } else {
         // eslint-disable-next-line
-        (event.target as HTMLInputElement).checked = this.estadoOriginalToggle
+        ;(event.target as HTMLInputElement).checked = this.estadoOriginalToggle
       }
     })
   }
