@@ -6,16 +6,16 @@ interface AlunoProps {
   cartaoSus: string
   telefone: string
   email: string
-  genero: 'M' | 'F' | 'OUTRO'
+  genero: 'M' | 'F' | 'OUTRO' | ''
   corDePele: ''
-  dataNascimento: number
+  dataNascimento: number | null
   dadosSociais: DadosSociaisProps
   dadosEscolares: DadosEscolaresProps // Assuming date format is "yyyy-MM-ddTHH:mm:ss"
   endereco: EnderecoProps
   responsaveis: ResponsavelProps
   graduacao: {
-    kyu: number
-    dan: number
+    kyu: number | null
+    dan: number | null
   }
   historicoSaude: historicoSaudeProps
 }
@@ -23,15 +23,16 @@ interface AlunoProps {
 interface DadosSociaisProps {
   bolsaFamilia: boolean
   auxilioBrasil: boolean
-  imovel: 'CEDIDO' | 'ALUGADO' | 'PROPRIO' // Enum for imovel
-  numerosDePessoasNaCasa: number
-  contribuintesDaRendaFamiliar: number
+  imovel: 'CEDIDO' | 'ALUGADO' | 'PROPRIO' | '' // Enum for imovel
+  numerosDePessoasNaCasa: number | null
+  contribuintesDaRendaFamiliar: number | null
   alunoContribuiParaRenda: boolean
-  rendaFamiliar: number
+  rendaFamiliar: number | null
 }
 
 interface historicoSaudeProps {
   tipoSanguineo:
+    | ''
     | 'A_POSITIVO'
     | 'A_NEGATIVO'
     | 'B_POSITIVO'
@@ -65,13 +66,13 @@ export interface ResponsavelProps {
   cpf: string
   telefone: string
   email: string
-  filiacao: 'PAI' | 'MÃE' | 'OUTRO'
+  filiacao: 'PAI' | 'MÃE' | 'OUTRO' | ''
 }
 
 interface DadosEscolaresProps {
-  turno: 'MANHA' | 'TARDE' | 'NOITE'
+  turno: 'MANHA' | 'TARDE' | 'NOITE' | ''
   escola: string
-  serie: number
+  serie: number | null
 }
 
 interface EnderecoProps {

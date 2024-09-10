@@ -1,9 +1,7 @@
-import { HttpClient } from '@angular/common/http'
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { environment } from 'src/environments/environment'
 import { Turma } from '../../turma.interface'
-import { AuthService } from 'src/app/services/services-admin/auth.service'
 import {
   AlunoProps,
   DadosEscolaresProps,
@@ -13,6 +11,18 @@ import {
   ResponsavelProps,
   historicoSaudeProps
 } from '../../types'
+import {
+  validarCartaoSus,
+  validarCep,
+  validarCPF,
+  validarEmail,
+  validarIdadeAluno,
+  validarRG,
+  validarTelefone
+} from '../../validator'
+import { NgForm } from '@angular/forms'
+import { MatSnackBar } from '@angular/material/snack-bar'
+import { AlunoService } from 'src/app/services/services-admin/aluno.service'
 
 @Component({
   selector: 'app-registro-aluno',
@@ -20,158 +30,128 @@ import {
   styleUrls: ['./registro-aluno.component.css']
 })
 export class RegistroAlunoComponent implements OnInit {
-  constructor(
-    private readonly http: HttpClient,
-    private readonly router: Router,
-    private readonly route: ActivatedRoute,
-    private readonly authService: AuthService
-  ) {}
-
   imagemSelecionada!: File
   previewImagem!: string | ArrayBuffer | null
 
-  historicoSaude: historicoSaudeProps = {
-    tipoSanguineo: 'A_POSITIVO',
-    usoMedicamentoContinuo: {
-      resposta: '',
-      tipo: ''
-    },
-    cirurgia: {
-      resposta: false,
-      tipo: ''
-    },
-    alergia: {
-      resposta: false,
-      tipo: ''
-    },
-    doencaCronica: {
-      resposta: false,
-      tipo: ''
-    },
-    deficiencia: [],
-    acompanhamentoSaude: []
-  }
-
-  responsavel: ResponsavelProps = {
-    nome: '',
-    cpf: '',
-    telefone: '',
-    email: '',
-    filiacao: 'OUTRO'
-  }
-
-  dadosEscolares: DadosEscolaresProps = {
-    turno: 'MANHA',
-    escola: '',
-    serie: 0
-  }
-
-  endereco: EnderecoProps = {
-    estado: '',
-    cidade: '',
-    cep: '',
-    numero: '',
-    logradouro: ''
-  }
-
-  dadosSociais: DadosSociaisProps = {
-    bolsaFamilia: false,
-    auxilioBrasil: false,
-    imovel: 'PROPRIO',
-    numerosDePessoasNaCasa: 0,
-    contribuintesDaRendaFamiliar: 0,
-    alunoContribuiParaRenda: false,
-    rendaFamiliar: 0
-  }
-
-  aluno: AlunoProps = {
-    cpf: '',
-    rg: '',
-    nome: '',
-    telefone: '',
-    email: '',
-    genero: 'OUTRO',
-    corDePele: '',
-    turma: '',
-    cartaoSus: '',
-    dataNascimento: 0,
-    dadosSociais: this.dadosSociais,
-    dadosEscolares: this.dadosEscolares,
-    endereco: this.endereco,
-    responsaveis: this.responsavel,
-    graduacao: {
-      kyu: 0,
-      dan: 0
-    },
-    historicoSaude: this.historicoSaude
-  }
+  historicoSaude: historicoSaudeProps = this.inicializarHistoricoSaude()
+  responsavel: ResponsavelProps = this.inicializarResponsavel()
+  dadosEscolares: DadosEscolaresProps = this.inicializarDadosEscolares()
+  endereco: EnderecoProps = this.inicializarEndereco()
+  dadosSociais: DadosSociaisProps = this.inicializarDadosSociais()
+  aluno: AlunoProps = this.inicializarAluno()
 
   protected turmas: Turma[] = []
-  private readonly token = localStorage.getItem('token')
   protected readonly email = this.route.snapshot.paramMap.get('email')
-  private readonly ApiBushido = environment.urlApi + 'aluno'
-  private readonly ApiBushidoComImagem = environment.urlApi + 'aluno/comImagem'
+  private readonly ApiBushido = `${environment.urlApi}aluno`
+  private readonly ApiBushidoComImagem = `${environment.urlApi}aluno/comImagem`
   protected deficiencia = ''
   protected acompanhamentoSaude = ''
   protected tresAnosEmMilisegundos = 1000 * 60 * 60 * 24 * 365 * 3
+
+  constructor(
+    private readonly alunoService: AlunoService,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.listarTurmas()
   }
 
-  private listarTurmas() {
-    this.http
-      .get<Turma[]>(environment.urlApi + 'turma', {
-        headers: {
-          Authorization: 'Bearer ' + this.token
-        }
-      })
-      .subscribe({
-        next: (data) => {
-          this.turmas = data
-        },
-        error: (error) => {
-          if (error.status === 401) {
-            window.confirm('O Admin não está mais autorizado. refaça o login para continuar a acessar o sistema')
-            this.authService.removeToken()
-            this.router.navigate(['/admin'])
-          }
-        }
-      })
+  private inicializarHistoricoSaude(): historicoSaudeProps {
+    return {
+      tipoSanguineo: '',
+      usoMedicamentoContinuo: { resposta: '', tipo: '' },
+      cirurgia: { resposta: false, tipo: '' },
+      alergia: { resposta: false, tipo: '' },
+      doencaCronica: { resposta: false, tipo: '' },
+      deficiencia: [],
+      acompanhamentoSaude: []
+    }
   }
 
-  protected registrarAluno() {  
-    const dataNasc = new Date(this.aluno.dataNascimento);  
+  private inicializarResponsavel(): ResponsavelProps {
+    return { nome: '', cpf: '', telefone: '', email: '', filiacao: '' }
+  }
 
-    if (dataNasc.getFullYear() > new Date().getFullYear() - 4) {  
-        window.confirm('Data de nascimento inválida');  
-        return;  
-    }  
+  private inicializarDadosEscolares(): DadosEscolaresProps {
+    return { turno: '', escola: '', serie: null }
+  }
 
-    this.aluno.dataNascimento = dataNasc.getTime();  
-    const alunoFormData = this.prepareFormData(this.aluno);  
+  private inicializarEndereco(): EnderecoProps {
+    return { estado: '', cidade: '', cep: '', numero: '', logradouro: '' }
+  }
 
-    const url = this.imagemSelecionada ? this.ApiBushidoComImagem : this.ApiBushido;  
-    this.funcaoAuxiliarRegistrarAluno(url, alunoFormData);  
-}  
+  private inicializarDadosSociais(): DadosSociaisProps {
+    return {
+      bolsaFamilia: false,
+      auxilioBrasil: false,
+      imovel: '',
+      numerosDePessoasNaCasa: null,
+      contribuintesDaRendaFamiliar: null,
+      alunoContribuiParaRenda: false,
+      rendaFamiliar: null
+    }
+  }
 
-private funcaoAuxiliarRegistrarAluno(url: string, alunoFormData: FormData) {  
-    this.http.post<{ id: string; message: string }>(url, alunoFormData, {  
-        headers: {  
-            Authorization: `Bearer ${this.token}`,  
-        },  
-    }).subscribe({  
-        next: (res) => {  
-            window.alert(res.message);  
-            this.router.navigate([`/admin/${this.email}/aluno`, res.id]);  
-        },  
-        error: (error) => this.handleError(error),  
-    });  
-}  
+  private inicializarAluno(): AlunoProps {
+    return {
+      cpf: '',
+      rg: '',
+      nome: '',
+      telefone: '',
+      email: '',
+      genero: '',
+      corDePele: '',
+      turma: '',
+      cartaoSus: '',
+      dataNascimento: null,
+      dadosSociais: this.dadosSociais,
+      dadosEscolares: this.dadosEscolares,
+      endereco: this.endereco,
+      responsaveis: this.responsavel,
+      graduacao: { kyu: null, dan: null },
+      historicoSaude: this.historicoSaude
+    }
+  }
+
+  private listarTurmas() {
+    this.alunoService.listarTurmas().subscribe({
+      next: (data) => (this.turmas = data),
+      error: (error) => this.alunoService.handleError(error, 'Turma')
+    })
+  }
+
+  registrarAluno(form: NgForm) {
+    if (form.invalid) {
+      this.markAllFieldsAsTouched(form)
+      this.alunoService.showSnackbar('Preencha os campos obrigatórios e submeta o formulário', 'error-snackbar')
+      return
+    }
+
+    this.aluno.dataNascimento = new Date(this.aluno.dataNascimento!).getTime()
+    const alunoFormData = this.prepareFormData(this.aluno)
+    const url = this.imagemSelecionada ? this.ApiBushidoComImagem : this.ApiBushido
+
+    this.alunoService.registrarAluno(url, alunoFormData).subscribe({
+      next: (res) => {
+        this.alunoService.showSnackbar(res.message, 'success-snackbar')
+        this.router.navigate([`/admin/${this.email}/aluno`, res.id])
+      },
+      error: (error) => this.alunoService.handleError(error, 'Aluno')
+    })
+  }
+
+  markAllFieldsAsTouched(form: NgForm) {
+    Object.keys(form.controls).forEach((field) => {
+      const control = form.controls[field]
+      control.markAsTouched({ onlySelf: true })
+    })
+  }
 
   adicionarAcompanhamento() {
     if (this.valorNoArray(this.historicoSaude.acompanhamentoSaude, this.acompanhamentoSaude)) {
-      window.confirm('Acompanhamento ja adicionado')
+      this.alunoService.showSnackbar('Acompanhamento já adicionado', 'error-snackbar')
       this.acompanhamentoSaude = ''
       return
     }
@@ -182,9 +162,18 @@ private funcaoAuxiliarRegistrarAluno(url: string, alunoFormData: FormData) {
     }
   }
 
+  public addDeficiencia(deficiencia: string): void {
+    this.deficiencia = deficiencia
+    this.adicionarDeficiencia()
+  }
+  public addAcompanhamento(acompanhamento: string): void {
+    this.acompanhamentoSaude = acompanhamento
+    this.adicionarAcompanhamento()
+  }
+
   adicionarDeficiencia() {
     if (this.valorNoArray(this.historicoSaude.deficiencia, this.deficiencia)) {
-      window.confirm('Deficiência ja adicionada')
+      this.alunoService.showSnackbar('Deficiência já adicionada', 'error-snackbar')
       this.deficiencia = ''
       return
     }
@@ -195,33 +184,31 @@ private funcaoAuxiliarRegistrarAluno(url: string, alunoFormData: FormData) {
     }
   }
 
-  protected buscarEnderecoPeloCep() {
+  buscarEnderecoPeloCep() {
     if (this.removeSpecialCharacters(this.endereco.cep).length !== 8) {
       return
     }
 
-    this.http
-      .get<EnderecoViaCepResponse>(`https://viacep.com.br/ws/${this.removeSpecialCharacters(this.endereco.cep)}/json/`)
-      .subscribe({
-        next: (data) => {
-          if (data.cep) {
-            this.endereco.cep = data.cep
-            this.endereco.cidade = data.localidade
-            this.endereco.estado = data.uf
-            this.endereco.logradouro = data.logradouro
-          }
-        },
-        error: (error) => {
-          if (error.status === 400) {
-            window.confirm('CEP inválido')
-            this.aluno.endereco.cep = ''
-          }
-          if (error.status === 404) {
-            window.confirm('CEP inválido')
-            this.aluno.endereco.cep = ''
-          }
-        }
-      })
+    this.alunoService.buscarEnderecoPeloCep(this.endereco.cep).subscribe({
+      next: (data) => this.updateEndereco(data),
+      error: (error) => this.handleCepError(error)
+    })
+  }
+
+  private updateEndereco(data: EnderecoViaCepResponse) {
+    if (data.cep) {
+      this.endereco.cep = data.cep
+      this.endereco.cidade = data.localidade
+      this.endereco.estado = data.uf
+      this.endereco.logradouro = data.logradouro
+    }
+  }
+
+  handleCepError(error: any) {
+    if (error.status === 400 || error.status === 404) {
+      this.alunoService.showSnackbar('CEP inválido', 'error-snackbar')
+      this.aluno.endereco.cep = ''
+    }
   }
 
   private valorNoArray(arrStrings: string[], valor: string) {
@@ -255,19 +242,85 @@ private funcaoAuxiliarRegistrarAluno(url: string, alunoFormData: FormData) {
     reader.onload = () => {
       this.previewImagem = reader.result
     }
-
     reader.readAsDataURL(this.imagemSelecionada)
   }
 
-  private handleError(error: any) {  
-    if (error.status === 401) {  
-        window.confirm('O Admin não está mais autorizado. Refaça o login para continuar a acessar o sistema');  
-        this.authService.removeToken();  
-        this.router.navigate(['/admin']);  
-    } else if (  
-        [400, 403, 404, 406, 409, 411, 422].includes(error.status)  
-    ) {  
-        window.confirm(error['error']['message']);  
-    }  
-  }  
+  isDataNascValid(): boolean {
+    if (!this.aluno.dataNascimento) {
+      return false
+    }
+    const dateTimestamp = new Date(this.aluno.dataNascimento).getTime()
+    return validarIdadeAluno(dateTimestamp)
+  }
+
+  isCpfValid(cpf: string): boolean {
+    return validarCPF(cpf)
+  }
+
+  isRgValid(rg: string | null): boolean {
+    return validarRG(rg)
+  }
+
+  isCartaoSusValid(cartaoSus: string | null): boolean {
+    return validarCartaoSus(cartaoSus)
+  }
+
+  isEmailValid(email: string | null): boolean {
+    return validarEmail(email)
+  }
+
+  isTelefoneValid(telefone: string | null): boolean {
+    return validarTelefone(telefone)
+  }
+
+  isCepValid(cep: string | null): boolean {
+    return validarCep(cep)
+  }
+
+  isRendaValid(renda: number | null): boolean {
+    return renda === null || (renda > 0 && renda <= 300000)
+  }
+
+  isSerieValid(serie: number | null): boolean {
+    return serie === null || (Number(serie) > 0 && Number(serie) <= 9)
+  }
+
+  isPessoasNaCasaValid(pessoas: number | null): boolean {
+    return pessoas === null || (pessoas > 0 && pessoas <= 15)
+  }
+
+  isContribuintesDaRendaValid(contribuintes: number | null): boolean {
+    return contribuintes === null || (contribuintes > 0 && contribuintes <= 15)
+  }
+
+  isDeficienciaValid(deficiencia: string | null): boolean {
+    return !deficiencia || deficiencia.trim().length > 0
+  }
+
+  isAcompanhamentoSaudeValid(acompanhamentoSaude: string | null): boolean {
+    return !acompanhamentoSaude || acompanhamentoSaude.trim().length > 0
+  }
+
+  isAlergiaValid(alergia: string | null): boolean {
+    return !alergia || alergia.trim().length > 0
+  }
+
+  isUsoMedicamentosValid(usoMedicamentos: string | null): boolean {
+    return !usoMedicamentos || usoMedicamentos.trim().length > 0
+  }
+
+  isCirurgiasValid(cirurgias: string | null): boolean {
+    return !cirurgias || cirurgias.trim().length > 0
+  }
+
+  isDoencaCronicaValid(doencaCronica: string | null): boolean {
+    return !doencaCronica || doencaCronica.trim().length > 0
+  }
+
+  onKyuChange(event: any) {
+    this.aluno.graduacao.kyu = parseInt(event.target.value)
+    if (this.aluno.graduacao.kyu !== 1) {
+      this.aluno.graduacao.dan = null
+    }
+  }
 }

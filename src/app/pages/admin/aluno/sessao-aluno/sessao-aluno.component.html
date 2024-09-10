@@ -2,35 +2,60 @@
   <app-placeholder-sessao-aluno *ngIf="!aluno"></app-placeholder-sessao-aluno>
   <a class="text-white text-decoration-none" href="/admin/{{ email }}">
     <button class="btn btn-primary ms-2 mt-2">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left"
-        viewBox="0 0 16 16">
-        <path fill-rule="evenodd"
-          d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-arrow-return-left"
+        viewBox="0 0 16 16"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"
+        />
       </svg>
       Dashboard
     </button>
   </a>
-  <div *ngIf="aluno" class="row">
+  <form *ngIf="aluno" class="row" #form="ngForm">
     <div class="col-md-2 border-right d-flex flex-column align-items-center text-center">
       <div class="d-flex flex-column align-items-center text-center">
         <div class="row mt-4">
           <div class="col-md-12">
             <div class="form-group">
-              <div *ngIf="bloquearAlteracaoImagem; else alterarImagem" class="d-flex justify-content-center">
+              <div
+                *ngIf="bloquearAlteracaoImagem; else alterarImagem"
+                class="d-flex justify-content-center"
+              >
                 <div class="circle-image mb-4">
-                  <img class="rounded-circle" [src]="'data:image/png;base64,' + aluno.imagemAluno.dadosImagem"
-                    alt="user profile" id="img-aluno-profile" />
+                  <img
+                    class="rounded-circle"
+                    [src]="'data:image/png;base64,' + aluno.imagemAluno.dadosImagem"
+                    alt="user profile"
+                    id="img-aluno-profile"
+                  />
                 </div>
               </div>
               <ng-template #alterarImagem>
                 <div *ngIf="imagemSelecionada" class="d-flex justify-content-center">
                   <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                      class="bi bi-x-circle text-danger" viewBox="0 0 16 16" (click)="removerImagem()"
-                      (keydown.enter)="removerImagem()">
-                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-x-circle text-danger"
+                      viewBox="0 0 16 16"
+                      (click)="removerImagem()"
+                      (keydown.enter)="removerImagem()"
+                    >
                       <path
-                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
+                      />
+                      <path
+                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
+                      />
                     </svg>
                   </span>
                   <div class="mb-4">
@@ -39,8 +64,14 @@
                 </div>
               </ng-template>
               <label for="imagemAluno" class="btn btn-secondary text-white">Alterar Foto</label>
-              <input type="file" name="imagemAluno" id="imagemAluno" class="form-control"
-                (change)="selecionarImagem($event)" #limparInput />
+              <input
+                type="file"
+                name="imagemAluno"
+                id="imagemAluno"
+                class="form-control"
+                (change)="selecionarImagem($event)"
+                #limparInput
+              />
             </div>
           </div>
         </div>
@@ -68,96 +99,350 @@
         <div class="row mt-2">
           <div class="col-md-6">
             <label for="nome" class="labels">Nome</label>
-            <input [(ngModel)]="aluno.nome" name="nome" id="nome" type="text" class="form-control" placeholder="Nome" />
+            <input
+              type="text"
+              name="nome"
+              [(ngModel)]="aluno.nome"
+              id="nome"
+              class="form-control"
+              placeholder="Nome"
+              required
+              #nomeInput="ngModel"
+              [ngClass]="{
+                'is-invalid': nomeInput.invalid && (nomeInput.dirty || nomeInput.touched),
+                'is-valid': nomeInput.valid && (nomeInput.dirty || nomeInput.touched)
+              }"
+            />
+            <div
+              *ngIf="nomeInput.invalid && (nomeInput.dirty || nomeInput.touched)"
+              class="invalid-feedback"
+            >
+              O nome é um campo obrigatório.
+            </div>
+            <div
+              *ngIf="nomeInput.valid && (nomeInput.dirty || nomeInput.touched)"
+              class="valid-feedback"
+            ></div>
           </div>
           <div class="col-md-3">
             <label for="dataNascimento" class="labels">Data nascimento</label>
-            <input type="text" name="dataNascimento" class="form-control" placeholder="Data de Nascimento"
-              [(ngModel)]="aluno.dataNascimento" readonly />
+            <input
+              type="text"
+              name="dataNascimento"
+              class="form-control"
+              placeholder="Data de Nascimento"
+              [(ngModel)]="aluno.dataNascimento"
+              readonly
+            />
           </div>
           <div class="col-md-3">
             <label for="genero" class="labels">Genero</label>
-            <select type="text" name="genero" class="form-control" placeholder="Data de Nascimento"
-              [(ngModel)]="aluno.genero">
+            <select
+              name="genero"
+              class="form-select"
+              [(ngModel)]="aluno.genero"
+              id="genero"
+              required
+              #generoSelect="ngModel"
+              [ngClass]="{
+                'is-invalid': generoSelect.invalid && (generoSelect.dirty || generoSelect.touched),
+                'is-valid': generoSelect.valid && (generoSelect.dirty || generoSelect.touched)
+              }"
+            >
               <option value="M">Masculino</option>
               <option value="F">Feminino</option>
               <option value="OUTRO">Outro</option>
             </select>
+            <div
+              *ngIf="generoSelect.invalid && (generoSelect.dirty || generoSelect.touched)"
+              class="invalid-feedback"
+            >
+              O campo genero é obrigatório.
+            </div>
           </div>
         </div>
         <div class="row mt-2">
           <div class="col-md-6">
             <label for="cpf" class="labels">CPF</label>
-            <input [(ngModel)]="aluno.cpf" name="cpf" id="cpf" type="text" class="form-control"
-              placeholder="Apenas números" />
+            <input
+              type="text"
+              name="cpf"
+              id="cpf"
+              class="form-control"
+              placeholder="Apenas números"
+              [(ngModel)]="aluno.cpf"
+              #cpfInput="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  !isCpfValid(aluno.cpf) && cpfInput.value && (cpfInput.dirty || cpfInput.touched),
+                'is-valid': isCpfValid(aluno.cpf) && cpfInput.value
+              }"
+            />
+            <div
+              *ngIf="
+                !isCpfValid(aluno.cpf) && cpfInput.value && (cpfInput.dirty || cpfInput.touched)
+              "
+              class="invalid-feedback"
+            >
+              CPF inválido!
+            </div>
           </div>
           <div class="col-md-6">
-            <label for="rg" class="labels">RG</label>
-            <input type="text" name="rg" class="form-control" placeholder="Apenas números" [(ngModel)]="aluno.rg" />
+            <div class="form-group">
+              <label for="rg">RG</label>
+              <input
+                type="text"
+                name="rg"
+                class="form-control"
+                [(ngModel)]="aluno.rg"
+                id="rg"
+                placeholder="Apenas números"
+                #rgInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    !isRgValid(aluno.rg) && rgInput.value && (rgInput.dirty || rgInput.touched),
+                  'is-valid': isRgValid(aluno.rg) && rgInput.value
+                }"
+              />
+              <div
+                *ngIf="!isRgValid(aluno.rg) && rgInput.value && (rgInput.dirty || rgInput.touched)"
+                class="invalid-feedback"
+              >
+                RG inválido.
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="row mt-3">
           <div class="col-md-6">
             <label for="cartaoSus" class="labels">Cartão do SUS</label>
-            <input type="text" name="cartaoSus" class="form-control" placeholder="Apenas números"
-              [(ngModel)]="aluno.cartaoSus" />
+            <input
+              type="text"
+              name="cartaoSus"
+              class="form-control"
+              [(ngModel)]="aluno.cartaoSus"
+              id="cartaoSus"
+              placeholder="Apenas números"
+              #cartaoSusInput="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  !isCartaoSusValid(aluno.cartaoSus) &&
+                  cartaoSusInput.value &&
+                  (cartaoSusInput.dirty || cartaoSusInput.touched),
+                'is-valid': isCartaoSusValid(aluno.cartaoSus) && cartaoSusInput.value
+              }"
+            />
+            <div
+              *ngIf="
+                !isCartaoSusValid(aluno.cartaoSus) &&
+                cartaoSusInput.value &&
+                (cartaoSusInput.dirty || cartaoSusInput.touched)
+              "
+              class="invalid-feedback"
+            >
+              Cartão do SUS inválido.
+            </div>
           </div>
 
           <div class="col-md-6">
             <label for="corDePele" class="labels">Cor da Pele</label>
-            <select type="text" name="status" class="form-control" [(ngModel)]="aluno.corDePele">
+            <select
+              name="corDePele"
+              class="form-select"
+              [(ngModel)]="aluno.corDePele"
+              id="corDePele"
+              required
+              #corPeleSelect="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  corPeleSelect.invalid && (corPeleSelect.dirty || corPeleSelect.touched),
+                'is-valid': corPeleSelect.valid && (corPeleSelect.dirty || corPeleSelect.touched)
+              }"
+            >
               <option value="AMARELO">Amarelo</option>
               <option value="BRANCO">Branco</option>
               <option value="INDIGENA">Indigena</option>
               <option value="PARDO">Pardo</option>
               <option value="PRETO">Preto</option>
             </select>
+            <div
+              *ngIf="corPeleSelect.invalid && (corPeleSelect.dirty || corPeleSelect.touched)"
+              class="invalid-feedback"
+            >
+              O campo cor de pele é obrigatório.
+            </div>
           </div>
         </div>
 
         <div class="row mt-3">
           <div class="col-md-6">
             <label for="telefone" class="labels">Telefone</label>
-            <input type="text" name="telefone" class="form-control" placeholder="Apenas números"
-              [(ngModel)]="aluno.telefone" />
-          </div>
-            <div class="col-md-6">
-              <label for="email" class="labels">E-mail</label>
-              <input type="text" name="email" class="form-control" placeholder="email@email.com"
-                [(ngModel)]="aluno.email" />
+            <input
+              type="text"
+              name="telefone"
+              class="form-control"
+              [(ngModel)]="aluno.telefone"
+              id="telefone"
+              placeholder="Apenas números"
+              required
+              #telefoneInput="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  !isTelefoneValid(aluno.telefone) &&
+                  telefoneInput.invalid &&
+                  (telefoneInput.dirty || telefoneInput.touched),
+                'is-valid':
+                  isTelefoneValid(aluno.telefone) &&
+                  telefoneInput.valid &&
+                  (telefoneInput.dirty || telefoneInput.touched)
+              }"
+            />
+            <div
+              *ngIf="
+                !isTelefoneValid(aluno.telefone) &&
+                telefoneInput.invalid &&
+                (telefoneInput.dirty || telefoneInput.touched)
+              "
+              class="invalid-feedback"
+            >
+              O telefone é um campo obrigatório.
             </div>
+          </div>
+          <div class="col-md-6">
+            <label for="email" class="labels">E-mail</label>
+            <input
+              type="email"
+              name="email"
+              class="form-control"
+              [(ngModel)]="aluno.email"
+              id="email"
+              placeholder="email@email.com"
+              #emailInput="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  !isEmailValid(aluno.email) &&
+                  emailInput.value &&
+                  (emailInput.dirty || emailInput.touched),
+                'is-valid': isEmailValid(aluno.email) && emailInput.value
+              }"
+            />
+            <div
+              *ngIf="
+                !isEmailValid(aluno.email) &&
+                emailInput.value &&
+                (emailInput.dirty || emailInput.touched)
+              "
+              class="invalid-feedback"
+            >
+              Email inválido.
+            </div>
+          </div>
         </div>
 
         <div class="row mt-3">
           <h4>Endereço</h4>
           <div class="col-md-8">
             <label for="cidade" class="labels">Cidade</label>
-            <input type="text" name="cidade" id="cidade" class="form-control" placeholder="Cidade"
-              [(ngModel)]="aluno.endereco.cidade" />
+            <input
+              type="text"
+              name="cidade"
+              [(ngModel)]="aluno.endereco.cidade"
+              id="cidade"
+              class="form-control"
+              placeholder="Cidade"
+              #cidadeInput="ngModel"
+              [ngClass]="{
+                'is-invalid': (cidadeInput.dirty || cidadeInput.touched) && cidadeInput.invalid,
+                'is-valid': cidadeInput.value && (cidadeInput.dirty || cidadeInput.touched)
+              }"
+            />
+            <div
+              *ngIf="(cidadeInput.dirty || cidadeInput.touched) && cidadeInput.invalid"
+              class="invalid-feedback"
+            ></div>
           </div>
           <div class="col-md-4">
             <label for="estado" class="labels">Estado</label>
-            <input type="text" name="estado" id="estado" class="form-control" placeholder="Estado"
-              [(ngModel)]="aluno.endereco.estado" />
+            <input
+              type="text"
+              name="estado"
+              [(ngModel)]="aluno.endereco.estado"
+              id="estado"
+              class="form-control"
+              placeholder="Estado"
+              #estadoInput="ngModel"
+              [ngClass]="{
+                'is-invalid': (estadoInput.dirty || estadoInput.touched) && estadoInput.invalid,
+                'is-valid': estadoInput.value && (estadoInput.dirty || estadoInput.touched)
+              }"
+            />
+            <div
+              *ngIf="(estadoInput.dirty || estadoInput.touched) && estadoInput.invalid"
+              class="invalid-feedback"
+            ></div>
           </div>
         </div>
 
         <div class="row mt-3">
           <div class="col-md-4">
             <label for="cep" class="labels">CEP</label>
-            <input type="text" name="cep" id="cep" class="form-control" placeholder="CEP"
-              [(ngModel)]="aluno.endereco.cep" />
+            <input
+              type="text"
+              [(ngModel)]="aluno.endereco.cep"
+              name="cep"
+              id="cep"
+              class="form-control"
+              placeholder="CEP"
+              #cepInput="ngModel"
+              [ngClass]="{
+                'is-invalid': !isCepValid(aluno.endereco.cep) && cepInput.dirty,
+                'is-valid': isCepValid(aluno.endereco.cep) && cepInput.value
+              }"
+            />
+            <div *ngIf="!isCepValid(aluno.endereco.cep) && cepInput.dirty" class="invalid-feedback">
+              CEP inválido.
+            </div>
           </div>
           <div class="col-md-6">
             <label for="logradouro" class="labels">Logradouro</label>
-            <input type="text" name="logradouro" id="Logradouro" class="form-control" placeholder="Estado"
-              [(ngModel)]="aluno.endereco.logradouro" />
+            <input
+              type="text"
+              name="rua"
+              [(ngModel)]="aluno.endereco.logradouro"
+              id="rua"
+              class="form-control"
+              placeholder="Rua"
+              #ruaInput="ngModel"
+              [ngClass]="{
+                'is-invalid': (ruaInput.dirty || ruaInput.touched) && ruaInput.invalid,
+                'is-valid': ruaInput.value && (ruaInput.dirty || ruaInput.touched)
+              }"
+            />
+            <div
+              *ngIf="(ruaInput.dirty || ruaInput.touched) && ruaInput.invalid"
+              class="invalid-feedback"
+            ></div>
           </div>
           <div class="col-md-2">
             <label for="numero" class="labels">Numero</label>
-            <input type="text" name="numero" id="numero" class="form-control" placeholder="Nº"
-              [(ngModel)]="aluno.endereco.numero" />
+            <input
+              type="number"
+              name="numero"
+              [(ngModel)]="aluno.endereco.numero"
+              id="numero"
+              class="form-control"
+              placeholder="Número"
+              #numeroInput="ngModel"
+              [ngClass]="{
+                'is-invalid': (numeroInput.dirty || numeroInput.touched) && numeroInput.invalid,
+                'is-valid': numeroInput.value && (numeroInput.dirty || numeroInput.touched)
+              }"
+            />
+            <div
+              *ngIf="(numeroInput.dirty || numeroInput.touched) && numeroInput.invalid"
+              class="invalid-feedback"
+            ></div>
           </div>
         </div>
 
@@ -166,55 +451,187 @@
 
           <div class="col-md-7">
             <label for="escola" class="labels">Escola</label>
-            <input type="text" name="escola" id="escola" class="form-control" placeholder="Escola"
-              [(ngModel)]="aluno.dadosEscolares.escola" />
+            <input
+              type="text"
+              name="escola"
+              [(ngModel)]="aluno.dadosEscolares.escola"
+              id="escola"
+              class="form-control"
+              placeholder="Escola"
+              #escolaInput="ngModel"
+              [ngClass]="{
+                'is-invalid': (escolaInput.dirty || escolaInput.touched) && !escolaInput.valid,
+                'is-valid': escolaInput.value && (escolaInput.dirty || escolaInput.touched)
+              }"
+            />
+            <div
+              *ngIf="(escolaInput.dirty || escolaInput.touched) && !escolaInput.valid"
+              class="invalid-feedback"
+            ></div>
           </div>
 
           <div class="col-md-2">
             <label for="serie" class="labels">Serie</label>
-            <input type="number" name="serie" id="serie" class="form-control" placeholder="Serie"
-              [(ngModel)]="aluno.dadosEscolares.serie" />
+            <input
+              type="number"
+              name="serie"
+              [(ngModel)]="aluno.dadosEscolares.serie"
+              id="serie"
+              class="form-control"
+              min="1"
+              max="9"
+              #serieInput="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  (serieInput.dirty || serieInput.touched) &&
+                  !isSerieValid(aluno.dadosEscolares.serie),
+                'is-valid': serieInput.value !== null && (serieInput.dirty || serieInput.touched)
+              }"
+            />
+            <div
+              *ngIf="
+                (serieInput.dirty || serieInput.touched) &&
+                !isSerieValid(aluno.dadosEscolares.serie)
+              "
+              class="invalid-feedback"
+            >
+              A série deve estar entre 1 e 9, se informado.
+            </div>
           </div>
 
-          <div class="col-md-3 d-flex align-items-end">
-            <select class="turno w-100 my-3 rounded text-center" aria-label="turno" name="turno"
-              [(ngModel)]="aluno.dadosEscolares.turno" id="turno" required>
+          <div class="col-md-3">
+            <label for="turno" class="labels">Turno</label>
+            <select
+              name="turno"
+              class="form-select"
+              [(ngModel)]="aluno.dadosEscolares.turno"
+              id="turno"
+              #turnoInput="ngModel"
+              [ngClass]="{
+                'is-invalid': turnoInput.dirty && !turnoInput.value,
+                'is-valid': turnoInput.value && turnoInput.dirty
+              }"
+            >
               <option value="MANHA">Manhã</option>
               <option value="TARDE">Tarde</option>
               <option value="NOITE">Noite</option>
             </select>
+            <div *ngIf="turnoInput.dirty && !turnoInput.value" class="invalid-feedback"></div>
           </div>
-
         </div>
         <div class="row mt-4">
           <h4>Dados Sociais</h4>
           <div class="col-md-12">
             <label for="imovel" class="form-label">Imovel</label>
             <div class="col-md-12">
-              <select class="imovel p-2 w-100" aria-label="imovel" name="imovel" [(ngModel)]="aluno.dadosSociais.imovel"
-                required>
+              <select
+                class="form-select"
+                name="imovel"
+                [(ngModel)]="aluno.dadosSociais.imovel"
+                #imovelInput="ngModel"
+                [ngClass]="{
+                  'is-invalid': imovelInput.dirty && !imovelInput.value,
+                  'is-valid': imovelInput.value && imovelInput.dirty
+                }"
+              >
                 <option value="CEDIDO">Cedido</option>
                 <option value="ALUGADO">Alugado</option>
                 <option value="PROPRIO">Proprio</option>
               </select>
+              <div *ngIf="imovelInput.dirty && !imovelInput.value" class="invalid-feedback"></div>
             </div>
           </div>
         </div>
         <div class="row mt-4 d-flex align-items-end">
           <div class="col-md-3">
             <label for="rendaFamiliar" class="form-label">Renda Familiar</label>
-            <input name="rendaFamiliar" id="rendaFamiliar" type="text" class="form-control"
-              [(ngModel)]="aluno.dadosSociais.rendaFamiliar" />
+            <input
+              type="number"
+              id="form1"
+              class="form-control"
+              min="0"
+              max="300000"
+              placeholder="Renda"
+              name="renda"
+              [(ngModel)]="aluno.dadosSociais.rendaFamiliar"
+              #rendaInput="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  (rendaInput.dirty || rendaInput.touched) &&
+                  !isRendaValid(aluno.dadosSociais.rendaFamiliar),
+                'is-valid': rendaInput.value !== null && (rendaInput.dirty || rendaInput.touched)
+              }"
+            />
+            <div
+              *ngIf="
+                (rendaInput.dirty || rendaInput.touched) &&
+                !isRendaValid(aluno.dadosSociais.rendaFamiliar)
+              "
+              class="invalid-feedback"
+            >
+              A renda deve ser um valor válido se informada.
+            </div>
           </div>
           <div class="col-md-6">
             <label for="contribuintesDaRenda" class="form-label">Contribuintes da Renda</label>
-            <input name="contribuintesDaRenda" id="contribuintesDaRenda" type="text" class="form-control"
-              [(ngModel)]="aluno.dadosSociais.contribuintesDaRendaFamiliar" />
+            <input
+              type="number"
+              name="contribuintesDaRenda"
+              id="contribuintesDaRenda"
+              min="1"
+              max="15"
+              class="form-control"
+              placeholder="Contribuintes da Renda"
+              [(ngModel)]="aluno.dadosSociais.contribuintesDaRendaFamiliar"
+              #contribuintesInput="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  (contribuintesInput.dirty || contribuintesInput.touched) &&
+                  !isContribuintesDaRendaValid(aluno.dadosSociais.contribuintesDaRendaFamiliar),
+                'is-valid':
+                  contribuintesInput.value !== null &&
+                  (contribuintesInput.dirty || contribuintesInput.touched)
+              }"
+            />
+            <div
+              *ngIf="
+                (contribuintesInput.dirty || contribuintesInput.touched) &&
+                !isContribuintesDaRendaValid(aluno.dadosSociais.contribuintesDaRendaFamiliar)
+              "
+              class="invalid-feedback"
+            >
+              Se informado, deve ser entre 1 e 15.
+            </div>
           </div>
           <div class="col-md-3">
-            <label for="pessoasNaCasa" class="form-label">Pessoas na Casa</label>
-            <input name="pessoasNaCasa" id="pessoasNaCasa" type="text" class="form-control"
-              [(ngModel)]="aluno.dadosSociais.numerosDePessoasNaCasa" />
+            <label for="numerosDePessoasNaCasa" class="form-label">Pessoas na Casa</label>
+            <input
+              type="number"
+              name="numerosDePessoasNaCasa"
+              id="numerosDePessoasNaCasa"
+              class="form-control"
+              min="1"
+              max="15"
+              placeholder="Pessoas na Casa"
+              [(ngModel)]="aluno.dadosSociais.numerosDePessoasNaCasa"
+              #pessoasInput="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  (pessoasInput.dirty || pessoasInput.touched) &&
+                  !isPessoasNaCasaValid(aluno.dadosSociais.numerosDePessoasNaCasa),
+                'is-valid':
+                  pessoasInput.value !== null && (pessoasInput.dirty || pessoasInput.touched)
+              }"
+            />
+            <div
+              *ngIf="
+                (pessoasInput.dirty || pessoasInput.touched) &&
+                !isPessoasNaCasaValid(aluno.dadosSociais.numerosDePessoasNaCasa)
+              "
+              class="invalid-feedback"
+            >
+              Se informado, deve ser entre 1 e 15.
+            </div>
           </div>
         </div>
         <div class="row mt-4">
@@ -222,21 +639,38 @@
             <h6>Informações socias para dados do aluno</h6>
             <div class="mt-4">
               <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="bolsaFamilia" name="bolsaFamilia"
-                  [(ngModel)]="aluno.dadosSociais.bolsaFamilia" />
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="bolsaFamilia"
+                  name="bolsaFamilia"
+                  [(ngModel)]="aluno.dadosSociais.bolsaFamilia"
+                />
                 <label class="form-check-label" for="bolsaFamilia">Bolsa Família</label>
               </div>
 
               <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="auxilioBrasil" name="auxilioBrasil"
-                  [(ngModel)]="aluno.dadosSociais.auxilioBrasil" />
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="auxilioBrasil"
+                  name="auxilioBrasil"
+                  [(ngModel)]="aluno.dadosSociais.auxilioBrasil"
+                />
                 <label class="form-check-label" for="auxilioBrasil">Auxílio Brasil</label>
               </div>
 
               <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="alunoContribuiParaRenda"
-                  name="alunoContribuiParaRenda" [(ngModel)]="aluno.dadosSociais.alunoContribuiParaRenda" />
-                <label class="form-check-label" for="alunoContribuiParaRenda">Aluno Contribui para Renda</label>
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="alunoContribuiParaRenda"
+                  name="alunoContribuiParaRenda"
+                  [(ngModel)]="aluno.dadosSociais.alunoContribuiParaRenda"
+                />
+                <label class="form-check-label" for="alunoContribuiParaRenda"
+                  >Aluno Contribui para Renda</label
+                >
               </div>
             </div>
           </div>
@@ -247,8 +681,18 @@
             <div class="row my-3">
               <div class="col-md-6">
                 <label for="tipoSanguineo" class="form-label">Tipo Saguineo</label>
-                <select class="form-select" aria-label="Tipo sanguineo" id="tipoSanguineo" name="tipoSanguineo"
-                  [(ngModel)]="aluno.historicoSaude.tipoSanguineo">
+                <select
+                  class="form-select"
+                  aria-label="Tipo sanguineo"
+                  id="tipoSanguineo"
+                  name="tipoSanguineo"
+                  [(ngModel)]="aluno.historicoSaude.tipoSanguineo"
+                  #tipoSanguineoSelect="ngModel"
+                  [ngClass]="{
+                    'is-invalid': tipoSanguineoSelect.dirty && !tipoSanguineoSelect.value,
+                    'is-valid': tipoSanguineoSelect.value && tipoSanguineoSelect.dirty
+                  }"
+                >
                   <option selected disabled>Tipo sanguineo</option>
                   <option value="A_POSITIVO">A+</option>
                   <option value="A_NEGATIVO">A-</option>
@@ -259,39 +703,129 @@
                   <option value="O_POSITIVO">O+</option>
                   <option value="O_NEGATIVO">O-</option>
                 </select>
+                <div
+                  *ngIf="tipoSanguineoSelect.dirty && !tipoSanguineoSelect.value"
+                  class="invalid-feedback"
+                ></div>
               </div>
             </div>
 
             <div class="col-md-12">
               <label for="alergia" class="form-label">Alergias</label>
-              <input name="alergia" id="alergia" type="text" class="form-control"
-                [(ngModel)]="aluno.historicoSaude.alergia.tipo" />
+              <input
+                type="text"
+                name="alergia"
+                id="alergia"
+                class="form-control"
+                [(ngModel)]="aluno.historicoSaude.alergia.tipo"
+                #alergiaInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    (alergiaInput.dirty || alergiaInput.touched) &&
+                    !isAlergiaValid(aluno.historicoSaude.alergia.tipo),
+                  'is-valid': alergiaInput.dirty && alergiaInput.value
+                }"
+              />
+              <div
+                *ngIf="
+                  (alergiaInput.dirty || alergiaInput.touched) &&
+                  !isAlergiaValid(aluno.historicoSaude.alergia.tipo)
+                "
+                class="invalid-feedback"
+              ></div>
             </div>
             <div class="col-md-12">
-              <label for="usoMedicamentoContinuo" class="form-label">Uso de Medicamento Continuo</label>
-              <input name="usoMedicamentoContinuo" id="usoMedicamentoContinuo" type="text" class="form-control"
-                [(ngModel)]="aluno.historicoSaude.usoMedicamentoContinuo.tipo" />
+              <label for="usoMedicamentoContinuo" class="form-label"
+                >Uso de Medicamento Continuo</label
+              >
+              <input
+                type="text"
+                name="usoMedicamentos"
+                id="usoMedicamentos"
+                class="form-control"
+                [(ngModel)]="aluno.historicoSaude.usoMedicamentoContinuo.tipo"
+                #usoMedicamentosInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    (usoMedicamentosInput.dirty || usoMedicamentosInput.touched) &&
+                    !isUsoMedicamentosValid(aluno.historicoSaude.usoMedicamentoContinuo.tipo),
+                  'is-valid': usoMedicamentosInput.dirty && usoMedicamentosInput.value
+                }"
+              />
+              <div
+                *ngIf="
+                  (usoMedicamentosInput.dirty || usoMedicamentosInput.touched) &&
+                  !isUsoMedicamentosValid(aluno.historicoSaude.usoMedicamentoContinuo.tipo)
+                "
+                class="invalid-feedback"
+              ></div>
             </div>
             <div class="col-md-12">
-              <label for="cirurgia" class="form-label">Cirurgias</label>
-              <input name="cirurgia" id="cirurgia" type="text" class="form-control"
-                [(ngModel)]="aluno.historicoSaude.cirurgia.tipo" />
+              <label for="cirurgias" class="form-label">Cirurgias</label>
+              <input
+                type="text"
+                name="cirurgias"
+                id="cirurgias"
+                class="form-control"
+                [(ngModel)]="aluno.historicoSaude.cirurgia.tipo"
+                #cirurgiasInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    (cirurgiasInput.dirty || cirurgiasInput.touched) &&
+                    !isCirurgiasValid(aluno.historicoSaude.cirurgia.tipo),
+                  'is-valid': cirurgiasInput.dirty && cirurgiasInput.value
+                }"
+              />
+              <div
+                *ngIf="
+                  (cirurgiasInput.dirty || cirurgiasInput.touched) &&
+                  !isCirurgiasValid(aluno.historicoSaude.cirurgia.tipo)
+                "
+                class="invalid-feedback"
+              ></div>
             </div>
             <div class="col-md-12">
               <label for="doencaCronica" class="form-label">Doenca cronica</label>
-              <input name="doencaCronica" id="doencaCronica" type="text" class="form-control"
-                [(ngModel)]="aluno.historicoSaude.doencaCronica.tipo" />
+              <input
+                type="text"
+                name="doencaCronica"
+                id="doencaCronica"
+                class="form-control"
+                [(ngModel)]="aluno.historicoSaude.doencaCronica.tipo"
+                #doencaCronicaInput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    (doencaCronicaInput.dirty || doencaCronicaInput.touched) &&
+                    !isDoencaCronicaValid(aluno.historicoSaude.doencaCronica.tipo),
+                  'is-valid': doencaCronicaInput.dirty && doencaCronicaInput.value
+                }"
+              />
+              <div
+                *ngIf="
+                  (doencaCronicaInput.dirty || doencaCronicaInput.touched) &&
+                  !isDoencaCronicaValid(aluno.historicoSaude.doencaCronica.tipo)
+                "
+                class="invalid-feedback"
+              ></div>
             </div>
           </div>
           <div class="row mt-4">
             <div>
               <div class="col-md-12 d-flex justify-content-end" *ngIf="isAdmin()">
-                <button (click)="setModoEdicao()" class="btn btn-primary profile-button" type="button"
-                  *ngIf="!modoEdicao">
+                <button
+                  (click)="setModoEdicao()"
+                  class="btn btn-primary profile-button"
+                  type="button"
+                  *ngIf="!modoEdicao"
+                >
                   Editar
                 </button>
                 <div *ngIf="modoEdicao" class="d-flex justify-content-around align-items-center">
-                  <button (click)="setModoEdicao()" class="btn btn-primary profile-button" type="button">
+                  <button
+                    (click)="setModoEdicao()"
+                    class="btn btn-primary profile-button"
+                    type="button"
+                  >
                     Cancelar
                   </button>
                 </div>
@@ -302,8 +836,31 @@
                 </div>
               </div>
               <div *ngIf="modoEdicao">
-                <input class="w-75 m-1" type="text" name="deficiencia" id="deficiencia" class="form-control"
-                  [(ngModel)]="deficiencia" placeholder="Adicionar deficiencia" />
+                <input
+                  class="w-75 m-1"
+                  class="w-75 m-1"
+                  type="text"
+                  name="deficiencia"
+                  id="deficiencia"
+                  class="form-control"
+                  [(ngModel)]="deficiencia"
+                  #deficienciaInput="ngModel"
+                  [ngClass]="{
+                    'is-invalid':
+                      (deficienciaInput.dirty || deficienciaInput.touched) &&
+                      !isDeficienciaValid(deficiencia),
+                    'is-valid': deficienciaInput.dirty && deficienciaInput.value
+                  }"
+                />
+                <div
+                  *ngIf="
+                    (deficienciaInput.dirty || deficienciaInput.touched) &&
+                    !isDeficienciaValid(deficiencia)
+                  "
+                  class="invalid-feedback"
+                >
+                  Se informado, deve conter um valor.
+                </div>
                 <div class="d-flex justify-content-end">
                   <button class="btn btn-secondary m-2" (click)="adicionarDeficiencia()">
                     Adicionar
@@ -315,16 +872,31 @@
                 <div class="panel-heading">
                   <h5>Deficiencias</h5>
                 </div>
-                <div class="panel panel-default" *ngIf="aluno.historicoSaude.deficiencias.length > 0">
+                <div
+                  class="panel panel-default"
+                  *ngIf="aluno.historicoSaude.deficiencias.length > 0"
+                >
                   <div class="panel-body">
                     <ul class="d-flex flex-wrap">
-                      <li class="bg-info rounded m-2 py-2 px-3 text-white"
-                        *ngFor="let str of aluno.historicoSaude.deficiencias">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                          class="bi bi-x-circle text-white" viewBox="0 0 16 16" (onclick)="removerDeficiencia(str)">
-                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                      <li
+                        class="bg-info rounded m-2 py-2 px-3 text-white"
+                        *ngFor="let str of aluno.historicoSaude.deficiencias"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-x-circle text-white"
+                          viewBox="0 0 16 16"
+                          (click)="removerDeficiencia(str)"
+                        >
                           <path
-                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
+                          />
+                          <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
+                          />
                         </svg>
                         {{ str }}
                       </li>
@@ -336,8 +908,15 @@
 
             <div class="row mt-4">
               <div *ngIf="modoEdicao">
-                <input class="w-75 m-1" type="text" name="acompanhamentoSaude" id="acompanhamentoSaude"
-                  class="form-control" [(ngModel)]="acompanhamentoSaude" placeholder="Adicionar acompanhamento" />
+                <input
+                  class="w-75 m-1"
+                  type="text"
+                  name="acompanhamentoSaude"
+                  id="acompanhamentoSaude"
+                  class="form-control"
+                  [(ngModel)]="acompanhamentoSaude"
+                  placeholder="Adicionar acompanhamento"
+                />
                 <div class="d-flex justify-content-end">
                   <button class="btn btn-secondary m-2" (click)="adicionarAcompanhamentoSaude()">
                     Adicionar
@@ -348,17 +927,31 @@
                 <div class="panel-heading">
                   <h5>Acompanhamento de saúde</h5>
                 </div>
-                <div class="panel panel-default" *ngIf="aluno.historicoSaude.acompanhamentoSaude.length > 0">
+                <div
+                  class="panel panel-default"
+                  *ngIf="aluno.historicoSaude.acompanhamentoSaude.length > 0"
+                >
                   <div class="panel-body">
                     <ul class="d-flex flex-wrap">
-                      <li class="bg-info rounded m-2 py-2 px-3 text-white"
-                        *ngFor="let str of aluno.historicoSaude.acompanhamentoSaude">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                          class="bi bi-x-circle text-white" viewBox="0 0 16 16"
-                          (onclick)="removerAcompanhamentoSaude(str)">
-                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                      <li
+                        class="bg-info rounded m-2 py-2 px-3 text-white"
+                        *ngFor="let str of aluno.historicoSaude.acompanhamentoSaude"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-x-circle text-white"
+                          viewBox="0 0 16 16"
+                          (click)="removerAcompanhamentoSaude(str)"
+                        >
                           <path
-                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
+                          />
+                          <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
+                          />
                         </svg>
                         {{ str }}
                       </li>
@@ -369,7 +962,11 @@
             </div>
           </div>
           <div class="my-5 d-flex justify-content-center" *ngIf="isAdmin()">
-            <button (click)="editarAlunoPorMatricula()" class="btn btn-primary profile-button w-75 h-100" type="button">
+            <button
+              (click)="editarAlunoPorMatricula(form)"
+              class="btn btn-primary profile-button w-75 h-100"
+              type="button"
+            >
               Salvar Aluno
             </button>
           </div>
@@ -384,7 +981,10 @@
               <div>
                 <h4 class="my-2">Graduação Atual</h4>
                 <div>
-                  <h6 class="card-subtitle text-muted badge" *ngIf="graduacaoAtual.dan >= 1; else noDan">
+                  <h6
+                    class="card-subtitle text-muted badge"
+                    *ngIf="graduacaoAtual.dan >= 1; else noDan"
+                  >
                     {{ graduacaoAtual.dan }}º dan
                   </h6>
 
@@ -404,8 +1004,13 @@
                   <button class="btn btn-primary text-right my-2" (click)="setModoEdicaoTurma()">
                     Salvar
                   </button>
-                  <input type="button" name="btn-editar-turma" id="btn-editar-turma" class="btn btn-close"
-                    (click)="setModoEdicaoTurma()" />
+                  <input
+                    type="button"
+                    name="btn-editar-turma"
+                    id="btn-editar-turma"
+                    class="btn btn-close"
+                    (click)="setModoEdicaoTurma()"
+                  />
                 </div>
               </div>
               <div *ngIf="!modoEdicaoTurma" class="d-flex align-items-center gap-2">
@@ -413,13 +1018,23 @@
                   {{ aluno.turma }}
                 </span>
                 <div class="p-1 cursor">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-pencil-square text-info" viewBox="0 0 16 16" (click)="setModoEdicaoTurma()"
-                    (keydown.enter)="setModoEdicaoTurma()">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-pencil-square text-info"
+                    viewBox="0 0 16 16"
+                    (click)="setModoEdicaoTurma()"
+                    (keydown.enter)="setModoEdicaoTurma()"
+                  >
                     <path
-                      d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                    <path fill-rule="evenodd"
-                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                      d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
+                    />
                   </svg>
                 </div>
               </div>
@@ -429,66 +1044,33 @@
                 <div class="w-100">
                   <h6 class="card-subtitle mb-4 text-muted">
                     <b>Inicio:</b> {{ graduacaoAtual.inicioGraduacao }}
-                    <small class="my-2"><br />
-                      <b>Frequência:</b> {{ graduacaoAtual.frequencia }} % </small><br />
+                    <small class="my-2"
+                      ><br />
+                      <b>Frequência:</b> {{ graduacaoAtual.frequencia }} % </small
+                    ><br />
                     <small class="my-2">
                       <b>Carga Horária:</b> {{ graduacaoAtual.cargaHoraria }} h
                     </small>
                     <br />
 
-                    <div class="row d-flex justify-content-between">
-                      <div class="col-md-6">
-                        <small class="my-2">
-                          <b>Status:</b> {{statusDoAluno}}
-                        </small>
-                      </div>
-
-                      <div class="col-md-6 d-flex justify-content-end">
-                        <label class="switch">
-                          <input [checked]="graduacaoAtual.status === true" type="checkbox"
-                            (change)="alterarStatusAluno($event)">
-                          <span class="slider round"></span>
-                        </label>
-                      </div>
+                    <div class="row d-flex justify-content-between">  
+                      <div class="col-md-6">  
+                        <small class="my-2"> <b>Status:</b> {{ statusDoAluno }} </small>  
+                      </div>  
+                    
+                      <div class="col-md-6 d-flex justify-content-end">  
+                        <label class="switch">  
+                          <input  
+                            [checked]="graduacaoAtual.status === true"  
+                            type="checkbox"  
+                            (change)="confirmarAlterarStatusAluno($event)"  
+                          />  
+                          <span class="slider round"></span>  
+                        </label>  
+                      </div>  
                     </div>
                   </h6>
                 </div>
-                <!--
-                <div *ngIf="graduacaoAtual.status">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-person-check text-success"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4"
-                    />
-                    <path
-                      d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"
-                    />
-                  </svg>
-                </div>
-                <div *ngIf="!graduacaoAtual.status">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-person-x text-danger"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"
-                    />
-                    <path
-                      d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708"
-                    />
-                  </svg>
-                </div>
-                -->
               </div>
               <div class="card-text">
                 <div class="d-flex justify-content-between container">
@@ -506,11 +1088,18 @@
                         {{ falta.data }}
                       </h5>
 
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-trash3 text-black me-3 cursor" viewBox="0 0 16 16"
-                        (click)="removerFalta(falta.data)">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-trash3 text-black me-3 cursor"
+                        viewBox="0 0 16 16"
+                        (click)="removerFalta(falta.data)"
+                      >
                         <path
-                          d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                          d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"
+                        />
                       </svg>
                     </div>
 
@@ -524,8 +1113,15 @@
                 <p class="text-muted text-center mt-2 mb-5" *ngIf="!graduacaoAtual.faltas.length">
                   O aluno não possui faltas
                 </p>
-                <div class="d-flex justify-content-between" *ngIf="graduacaoAtual.cargaHoraria > 25">
-                  <button (click)="aprovarAluno()" class="btn btn-success" *ngIf="graduacaoAtual.status">
+                <div
+                  class="d-flex justify-content-between"
+                  *ngIf="graduacaoAtual.cargaHoraria > 25"
+                >
+                  <button
+                    (click)="aprovarAluno()"
+                    class="btn btn-success"
+                    *ngIf="graduacaoAtual.status"
+                  >
                     Aprovar Aluno
                   </button>
                   <button (click)="reprovarAluno()" class="btn btn-danger">Reprovar Aluno</button>
@@ -533,7 +1129,9 @@
               </div>
             </div>
             <div class="card-footer">
-              <app-modal-historico-graduacao [graduacao]="aluno.graduacao"></app-modal-historico-graduacao>
+              <app-modal-historico-graduacao
+                [graduacao]="aluno.graduacao"
+              ></app-modal-historico-graduacao>
             </div>
           </div>
           <div class="col-md-12 mt-4">
@@ -547,22 +1145,42 @@
             </div>
             <div *ngFor="let responsavel of aluno.responsaveis" class="card">
               <div *ngIf="aluno.responsaveis.length > 1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                  class="bi bi-trash3 text-black ms-2 mt-2" viewBox="0 0 16 16"
-                  (onclick)="removerResponsavel(responsavel.cpf)">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-trash3 text-black ms-2 mt-2"
+                  viewBox="0 0 16 16"
+                  (onclick)="removerResponsavel(responsavel.cpf)"
+                >
                   <path
-                    d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                    d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"
+                  />
                 </svg>
               </div>
               <div
-                class="card-body d-lg-flex align-items-center justify-content-around text-lg-start d-block text-center">
+                class="card-body d-lg-flex align-items-center justify-content-around text-lg-start d-block text-center"
+              >
                 <div>
-                  <img src="../../../../../assets/aluno/men_responsable.webp" class="img-radius" alt="User-Profile"
-                    *ngIf="responsavel.filiacao === 'PAI'" />
-                  <img src="../../../../../assets/aluno/woman_responsable.webp" class="img-radius" alt="User-Profile"
-                    *ngIf="responsavel.filiacao === 'MAE'" />
-                  <img src="../../../../../assets/aluno/other_responsable.png" class="img-radius" alt="User-Profile"
-                    *ngIf="responsavel.filiacao === 'OUTRO'" />
+                  <img
+                    src="../../../../../assets/aluno/men_responsable.webp"
+                    class="img-radius"
+                    alt="User-Profile"
+                    *ngIf="responsavel.filiacao === 'PAI'"
+                  />
+                  <img
+                    src="../../../../../assets/aluno/woman_responsable.webp"
+                    class="img-radius"
+                    alt="User-Profile"
+                    *ngIf="responsavel.filiacao === 'MAE'"
+                  />
+                  <img
+                    src="../../../../../assets/aluno/other_responsable.png"
+                    class="img-radius"
+                    alt="User-Profile"
+                    *ngIf="responsavel.filiacao === 'OUTRO'"
+                  />
                 </div>
                 <div class="ms-lg-4">
                   <div>
@@ -587,5 +1205,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </form>
 </div>
